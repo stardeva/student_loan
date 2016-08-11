@@ -1,6 +1,10 @@
 body {
-  max-width: 768px;
+  max-width: 1024px;
   margin: 0 auto;
+}
+
+.header {
+  padding-top: 60px;
 }
 
 .header .topnav {
@@ -10,35 +14,46 @@ body {
   padding: 0 20px;
   align-items: center;
   height: 60px;
+  text-decoration: none;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  background-color: #fff;
+  top: 0;
+  max-width: 1024px;
 }
 
 .header .topnav .nav {
   font-size: 20px;
   color: #000;
+  flex-basis: 30%;
 }
 
 .header .topnav .nav:hover {
   color: #000;
+  text-decoration: none;
 }
 
 .header .topnav .nav.title {
   font-size: 30px;
+  text-align: center;
 }
 
-.header .topnav .nav.mail {
-  font-size: 28px;
+.header .topnav .nav.notification {
+  font-size: 32px;
   color: #000;
+  text-align: right;
 }
 
 .header #banner_slider .carousel-inner .item {
-  max-height: 500px;
-  height: 500px;
+  max-height: 60vw;
+  height: 60vw;
 }
 
 .header #banner_slider .carousel-inner .item a {
   display: block;
   position: relative;
-  height: 500px;
+  height: 60vw;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -60,7 +75,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 16px 0;
+  padding: 32px 0;
 }
 
 .toolbar .tool {
@@ -79,16 +94,37 @@ body {
 }
 
 .toolbar .tool span {
-  font-size: 16px;
+  font-size: 24px;
+  margin-top: 16px;
 }
 
 .credit {
-  padding: 0 16px;
+  position: relative;
+  text-align: center;
+  margin: 0 0 32px;
+  display: block;
 }
 
 .credit img {
-  margin: 16px auto;
   border-radius: 16px;
+  width: 80%;
+}
+
+.credit .credit-number {
+  position: absolute;
+  background-color: #fff;
+  color: #e97466;
+  bottom: 8px;
+  border-radius: 50px;
+  text-align: center;
+  width: 46%;
+  left: 36%;
+  font-size: 10vw;
+  line-height: 1;
+}
+
+.footer {
+  padding-bottom: 20vw;
 }
 
 .footer .bottomnav {
@@ -97,8 +133,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 110px;
+  height: 20vw;
   border-top: 2px solid #6a6a6a;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 1024px;
 }
 
 .footer .bottomnav .nav {
@@ -124,65 +164,93 @@ body {
 }
 
 .footer .bottomnav .nav img {
-  width: 40%;
+  width: 60%;
+}
+
+.footer .bottomnav .nav span {
+  font-size: 24px;
+}
+
+@media screen and (min-width: 1024px) {
+  .header #banner_slider .carousel-inner .item {
+    max-height: 600px;
+    height: 600px;
+  }
+
+  .header #banner_slider .carousel-inner .item a {
+    height: 600px;
+  }
+
+  .credit .credit-number {
+    font-size: 102.4px;
+  }
+
+  .footer {
+    padding-bottom: 204.8px;
+  }
+
+  .footer .bottomnav {
+    height: 204.8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .toolbar .tool span {
+    font-size: 18px;
+    margin-top: 12px;
+  }
+
+  .footer .bottomnav .nav span {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 640px) {
-  .header #banner_slider .carousel-inner .item {
-    max-height: 400px;
-    height: 400px;
-  }
-
-  .header #banner_slider .carousel-inner .item a {
-    height: 400px;
-  }
-
-  .footer .bottomnav {
-    height: 90px;
-  }
 }
 
 @media screen and (max-width: 480px) {
-  .header #banner_slider .carousel-inner .item {
-    max-height: 360px;
-    height: 360px;
+  .header .topnav .nav {
+    font-size: 18px;
   }
 
-  .header #banner_slider .carousel-inner .item a {
-    height: 360px;
+  .header .topnav .nav.title {
+    font-size: 24px;
   }
 
-  .footer .bottomnav {
-    height: 80px;
+  .header .topnav .nav.notification {
+    font-size: 28px;
+  }
+
+  .toolbar .tool span {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .footer .bottomnav .nav span {
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 360px) {
-  .header #banner_slider .carousel-inner .item {
-    max-height: 300px;
-    height: 300px;
+  .header .topnav .nav {
+    font-size: 14px;
   }
 
-  .header #banner_slider .carousel-inner .item a {
-    height: 300px;
+  .header .topnav .nav.title {
+    font-size: 20px;
   }
 
-  .footer .bottomnav {
-    height: 60px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .header #banner_slider .carousel-inner .item {
-    max-height: 280px;
-    height: 280px;
+  .header .topnav .nav.notification {
+    font-size: 24px;
   }
 
-  .header #banner_slider .carousel-inner .item a {
-    height: 280px;
+  .toolbar .tool span {
+    font-size: 12px;
+    margin-top: 8px;
   }
 
-  .footer .bottomnav {
-    height: 60px;
+  .footer .bottomnav .nav span {
+    font-size: 12px;
   }
+
 }
