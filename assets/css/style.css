@@ -3,6 +3,25 @@ body {
   margin: 0 auto;
 }
 
+.image {
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
 .header .topnav {
   display: flex;
   font-size: 20px;
@@ -29,6 +48,27 @@ body {
   font-size: 28px;
   color: #000;
 }
+
+.header .topnav .nav.house {
+  position: relative;
+  width: 30px;
+  height: 28px;
+  color: #000;
+}
+
+.header .topnav .nav.house .house-image {
+  position: absolute;
+  background-image: url('../images/house.png');  
+  z-index: 1;
+}
+
+.header .topnav .nav.house .house-mask-image {
+  position: absolute;
+  background-image: url('../images/house-mask.png');  
+  background-position: 1px -2px;
+  z-index: 2;
+}
+
 
 .header #banner_slider .carousel-inner .item {
   max-height: 500px;
@@ -89,6 +129,119 @@ body {
 .credit img {
   margin: 16px auto;
   border-radius: 16px;
+}
+
+#loan_modal .modal-body {
+  font-size: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+#loan_modal .modal-footer {
+  padding: 0;
+}
+
+#loan_modal .request-loan {
+  border-right: 1px solid #ccc;
+}
+
+#loan_modal .loan-modal-button {
+  padding: 15px 0;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex1 {
+  flex: 1;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.topnav .back {
+  display: table;
+}
+
+.back .back-icon {
+  vertical-align: middle;
+  font-size: 28px;
+}
+
+.loan-price {
+  color: #ec8558;
+}
+
+.loan-time {
+  font-size: 12px;
+}
+
+.process {
+  display: flex;
+  font-size: 20px;
+  color: #888;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+  height: 60px;
+  border-bottom: 2px solid #333;
+}
+
+.process .active {
+  color: #ec8558;
+}
+
+.result {
+  padding: 20px 10px;
+  color: #888;
+  font-size: 20px;
+}
+
+.loan-kind {
+    background-color: #f2f3eb;
+    border-bottom: 1px solid #888;
+    padding: 20px 10px;
+    color: #888;
+}
+
+.loan-kind .kind-body {
+  margin-top: 50px;
+}
+
+.loan-kind .kind-body select {
+  width: 100px;
+}
+
+.start-loan {
+  border-top: 1px solid #888;
+  color: #888;
+  background-color: #f0f0f0;
+}
+
+.start-loan .loan-button {
+  margin-top: 10px;
+  display: block;
+  background-color: #fee841;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  background-image: url('../images/usd.png');  
+  background-repeat: no-repeat;
+  font-size: 30px;
+  line-height: 220%;
+  background-size: 35px;
+  background-position: calc( 50% - 100px );
+}
+
+.descripton .title p {
+  font-size: 20px;
+  color: #333;
+  padding: 20px 0;
+}
+
+.descripton .content p {
+  font-size: 16px;
 }
 
 .footer .bottomnav {
