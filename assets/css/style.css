@@ -42,7 +42,16 @@ body {
 .header .topnav .nav.notification {
   font-size: 32px;
   color: #000;
-  text-align: right;
+}
+
+.header .topnav .nav.back {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.header .topnav .nav.home img {
+  height: 32px;
+  width: auto;
 }
 
 .header #banner_slider .carousel-inner .item {
@@ -171,6 +180,153 @@ body {
   font-size: 24px;
 }
 
+/* credit section */
+.my-credits {
+  background-color: #333;
+  padding: 32px;
+}
+
+.my-credits .my-credits-label {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+.my-credits-data {
+  margin: 20px 10px;
+}
+
+.my-credits-data .msg {
+  font-size: 18px;
+  color: #999;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.my-credits-data .credits-medals {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-credits-data .credits-medals .medal {
+  margin: 0 5px;
+  width: 25%;
+  position: relative;
+  text-align: center;
+}
+
+.my-credits-data .credits-medals .medal .medal-icon{
+  position: absolute;
+  top: 17%;
+  width: 40%;
+  left: 30%;
+}
+
+.my-credits-data .credits-medals .medal .medal-text {
+  position: absolute;
+  bottom: 12%;
+  width: 100%;
+  color: #a6a6a6;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.my-credits-data .credits-medals .medal.active .medal-text{
+  color: #ff4c03;
+}
+
+.my-credits-data .credits-heart {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.my-credits-data .credits-heart img {
+  width: 70%;
+}
+
+.my-credits-bar {
+  position: relative;
+  margin: 30px 0 30px;
+}
+
+.credits-progress {
+  height: 4px;
+  border-radius: 2px;
+  background-image: linear-gradient(to bottom,#333 0,#000 100%);
+  background-color: #000;
+  margin: 0 auto;
+}
+.credits-progress .progress-bar-credit {
+  width: 10%;
+  background-image: linear-gradient(to bottom,#d24713 0,#ff4c03 100%);
+  background-color: #ff4c03;
+}
+
+.my-credits-bar .pin-bar .pin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #999;
+  position: absolute;
+  width: 31px;
+}
+
+.my-credits-bar .pin-bar .pin:before {
+  content: '';
+  border-left: 1px solid #999;
+  height: 5px;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.my-credits-bar .pin-bar .pin.pin0 {
+  left: -15px;
+}
+
+.my-credits-bar .pin-bar .pin.pin500 {
+  left: calc(10% - 15px);
+}
+
+.my-credits-bar .pin-bar .pin.pin1000 {
+  left: calc(20% - 15px);
+}
+
+.my-credits-bar .pin-bar .pin.pin3000 {
+  left: calc(60% - 15px);
+}
+
+.my-credits-bar .pin-bar .pin.pin5000 {
+  left: calc(100% - 15px);
+}
+
+.my-credits-bar .credits-tooltip {
+  opacity: 1;
+  position: relative;
+  display: inline-block;
+  margin-left: -20px;
+}
+
+.my-credits-bar .credits-tooltip .tooltip-arrow {
+  border-top-color: #fff;
+  bottom: 2px;
+  margin-left: -3px;
+  border-width: 3px 3px 0;
+}
+
+.my-credits-bar .credits-tooltip .tooltip-inner {
+  padding: 5px 3px;
+  color: #ff4c03;
+  background-color: #fff;
+  font-weight: 900;
+  width: 40px;
+  line-height: 1;
+}
+
+/* / credit section */
+
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {
     max-height: 600px;
@@ -203,9 +359,16 @@ body {
   .footer .bottomnav .nav span {
     font-size: 18px;
   }
+
+  .my-credits-data .credits-medals .medal .medal-text {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 640px) {
+  .my-credits-data .credits-medals .medal .medal-text {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -213,7 +376,7 @@ body {
     font-size: 18px;
   }
 
-  .header .topnav .nav.title {
+  .header .topnav .nav.title, .header .topnav .nav.back {
     font-size: 24px;
   }
 
@@ -221,9 +384,21 @@ body {
     font-size: 28px;
   }
 
+  .header .topnav .nav.home img {
+    height: 28px;
+  }
+
+  .my-credits .my-credits-label {
+    font-size: 18px;
+  }
+
   .toolbar .tool span {
     font-size: 14px;
     margin-top: 8px;
+  }
+
+  .my-credits-data .credits-medals .medal .medal-text {
+    font-size: 12px;
   }
 
   .footer .bottomnav .nav span {
@@ -236,7 +411,7 @@ body {
     font-size: 14px;
   }
 
-  .header .topnav .nav.title {
+  .header .topnav .nav.title, .header .topnav .nav.back {
     font-size: 20px;
   }
 
@@ -244,9 +419,21 @@ body {
     font-size: 24px;
   }
 
+  .header .topnav .nav.home img {
+    height: 24px;
+  }
+
+  .my-credits .my-credits-label {
+    font-size: 14px;
+  }
+
   .toolbar .tool span {
     font-size: 12px;
     margin-top: 8px;
+  }
+
+  .my-credits-data .credits-medals .medal .medal-text {
+    font-size: 10px;
   }
 
   .footer .bottomnav .nav span {
