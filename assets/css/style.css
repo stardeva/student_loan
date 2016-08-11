@@ -22,6 +22,15 @@ body {
   clear: both;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.cols {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 .header .topnav {
   display: flex;
   font-size: 20px;
@@ -131,21 +140,32 @@ body {
   border-radius: 16px;
 }
 
-#loan_modal .modal-body {
+/*borrow index*/
+.form-group .control-label {
+  padding-top: 11px;
+}
+
+.loan-highlight-text {
+  color: #ec8558;
+}
+
+.modal .modal-body {
   font-size: 20px;
   text-align: center;
   margin: 20px 0;
 }
 
-#loan_modal .modal-footer {
+.modal .modal-footer {
   padding: 0;
+  color: #5497da;
 }
 
-#loan_modal .request-loan {
-  border-right: 1px solid #ccc;
+.modal .request-loan {
+  border-left: 1px solid #ccc;
 }
 
-#loan_modal .loan-modal-button {
+.modal .loan-modal-button {
+  cursor: pointer;
   padding: 15px 0;
 }
 
@@ -166,7 +186,9 @@ body {
 
 .back .back-icon {
   vertical-align: middle;
-  font-size: 28px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/reg_black_left_arrow.png'); 
 }
 
 .loan-price {
@@ -180,7 +202,7 @@ body {
 .process {
   display: flex;
   font-size: 20px;
-  color: #888;
+  color: #aaa;
   justify-content: space-between;
   padding: 0 20px;
   align-items: center;
@@ -194,15 +216,15 @@ body {
 
 .result {
   padding: 20px 10px;
-  color: #888;
+  color: #aaa;
   font-size: 20px;
 }
 
 .loan-kind {
     background-color: #f2f3eb;
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #aaa;
     padding: 20px 10px;
-    color: #888;
+    color: #aaa;
 }
 
 .loan-kind .kind-body {
@@ -214,8 +236,8 @@ body {
 }
 
 .start-loan {
-  border-top: 1px solid #888;
-  color: #888;
+  border-top: 1px solid #aaa;
+  color: #aaa;
   background-color: #f0f0f0;
 }
 
@@ -243,7 +265,162 @@ body {
 .descripton .content p {
   font-size: 16px;
 }
+/*bank card*/
+form .reqire-icon {
+  color: red;
+}
 
+.main-loan-area {
+  background-color: #f0f0f0;
+}
+
+.loan-form {
+  font-size: 16px;
+  color: #aaa;
+}
+
+.loan-form .form-control, .loan-form .form-control:focus {
+  border: none;
+  border-color: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.loan-form .form-group {
+  background-color: #fff;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.loan-form .form-group .control-label {
+  color: #aaa;
+}
+
+.loan-form .submit-button {
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  border-radius: inherit;
+  background-color: #ec8558;
+  color: #fff;
+  background-image: none;
+}
+
+.loan-form .submit-button[disabled] {
+  background-color: #ccc;
+}
+
+.agree-checkbox input[type=checkbox] {
+  border: none;
+  border-radius: 0;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  -webkit-appearance: none;
+  outline: 0;
+}
+.agree-checkbox input[type=checkbox]:checked {
+    background-image: url('../images/reg_hook.png');
+}
+
+.agree-checkbox input[type=checkbox]:not(:checked) {
+    background-image: url('../images/reg_hook_blank.png');
+}
+
+#bank_card_form .form-group {  
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#bank_card_form .control-label {
+  padding-top: 11px;
+}
+
+#bank_card_form .form-group .arrow {
+  float: right;
+  margin-right: 10px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+  width: 15px;
+  height: 15px;
+  background-image: url('../images/profile_right_arrow.png'); 
+}
+
+.back-card-title {
+  color: #ec8558;
+  padding: 20px;
+}
+
+/*request*/
+form#request_loan_form {
+  margin: 10px;
+}
+
+#request_loan_form .checkbox-form-group {
+  background-color: #f0f0f0;
+}
+
+#request_loan_form .agree-checkbox {
+  display: table;
+  margin-top: 20px;
+}
+
+#request_loan_form .agree-checkbox input[type=checkbox] {
+  margin-top: 0;
+  vertical-align: middle;
+}
+
+#request_loan_form .checkbox-label {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.main-loan-area .loan-detail {
+  margin: 0 10px 20px;  
+  border-top: 2px solid #333;
+  font-size: 15px;
+  color: #aaa;  
+}
+
+.main-loan-area .loan-detail .loan-wrap {
+  margin: 0 10px;
+  background-color: #f2f3eb;
+  border-bottom: 2px solid #aaa;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.59);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.59);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.59);
+}
+
+.loan-detail .detail-row {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  padding: 10px 0;
+  justify-content: space-between;
+  border-bottom: 1px solid #aaa;
+}
+
+.loan-detail .detail-row:last-child {
+  border: 0;
+}
+
+.loan-detail .detail-row .detail-value {
+  margin-bottom: 0;
+}
+
+.loan-detail .detail-row .detail-unit {
+  color: #333;
+}
+
+.main-loan-area.request-success {
+  background-image: url('../images/request-success.png'); 
+}
+
+/*footer*/
 .footer .bottomnav {
   background-color: #787878;
   color: #FFF;
@@ -280,6 +457,27 @@ body {
   width: 40%;
 }
 
+/*modal*/
+.vertical-alignment-helper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  pointer-events: none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events: none;
+}
+.modal-content {
+  width: inherit;
+  height: inherit;
+  /* To center horizontally */
+  margin: 0 auto;
+  pointer-events: all;
+}
+
 @media screen and (max-width: 640px) {
   .header #banner_slider .carousel-inner .item {
     max-height: 400px;
@@ -292,6 +490,11 @@ body {
 
   .footer .bottomnav {
     height: 90px;
+  }
+
+  .modal.fade {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 

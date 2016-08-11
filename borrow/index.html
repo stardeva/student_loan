@@ -23,24 +23,25 @@
   <body>
     <!-- Modal -->
     <div id="loan_modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body">
-            <p>Some text in the modal.</p>
-          </div>
-          <div class="modal-footer flex-wrap">
-            <div class="flex1 loan-modal-button request-loan" data-dismiss="modal">Ok</div>
-            <div class="flex1 loan-modal-button" data-dismiss="modal">Close</div>
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-body">
+              <p class="bold">您还没有绑定银行卡</p>
+            </div>
+            <div class="modal-footer flex-wrap">
+              <div class="flex1 loan-modal-button request-loan" data-dismiss="modal">取消</div>
+              <div class="flex1 loan-modal-button" data-dismiss="modal">去绑定</div>
+            </div>
           </div>
         </div>
-
-      </div>
+      </div>      
     </div>
 
     <header class="header">
       <nav class="topnav">
-        <a href="#" class="nav back"><span class="back-icon glyphicon glyphicon-menu-left"></span></a>
+        <a href="#" class="nav back"><div class="back-icon image"></div></a>
         <span class="nav text title">贷款</span>
         <a href="#" class="nav link house">
           <div class="image house-image"></div>
@@ -113,7 +114,6 @@
     <script src="../assets/js/bootstrap.min.js"></script>
 
     <script src="../assets/js/main.js"></script>
-    </script>
 
   </body>
 </html>
