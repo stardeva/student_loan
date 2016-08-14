@@ -388,8 +388,6 @@ body {
   content: '*';
   color: #ff4c03;
   padding-left: 5px;
-  position: absolute;
-  top: 0;
 }
 
 .input-block .input-holder, .select-block .input-holder {
@@ -400,13 +398,14 @@ body {
 .file-block .input-holder {
   display: flex;
   flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .file-block .input-holder .file-input {
   border: 1px solid #999;
   background-color: #fefefe;
-  margin: 10px;
-  flex-basis: 50%;
+  margin: 5px;
+  width: calc(50% - 10px);
   position: relative;
   display: block;
   height: 20vw;
@@ -504,6 +503,14 @@ input[type=file] {
   padding-right: 37px;
 }
 
+.input-block .input-holder input.phone {
+  background-image: url('../images/reg_phone.png');
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 25px 28px;
+  padding-right: 30px;
+}
+
 .width-5pc {
   width: 5%;
 }
@@ -564,9 +571,11 @@ input[type=file] {
 .width-100pc {
   width: 100%;
 }
+
 .form-row:before, .form-row:after {
   display: table;
   content: ' ';
+  clear: both;
 }
 
 .form-element {
@@ -574,6 +583,13 @@ input[type=file] {
   position: relative;
   min-height: 1px;
 }
+
+form > h4 {
+  font-size: 14px;
+  color: #999;
+  font-weight: normal;
+}
+
 /* / form elements */
 
 @media screen and (min-width: 1024px) {

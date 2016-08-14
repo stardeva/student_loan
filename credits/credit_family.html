@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>学融宝 - 信用额度 - 基本信息 - 3</title>
+    <title>学融宝 - 信用额度 - 家庭资料</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -21,11 +21,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="credits-page credit-base-3-page form-page">
+  <body class="credits-page credit-family-page form-page">
     <header class="header">
       <nav class="topnav">
         <a href="#" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title">基本信息 ( 3/3 )</span>
+        <span class="nav text title">家庭资料</span>
         <a href="#" class="nav text next">完成</a>
       </nav>
     </header>
@@ -37,9 +37,9 @@
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
-              <label for="credit_base3_email" class="required">邮箱</label>
+              <label for="credit_family_father_name" class="required">父亲姓名</label>
               <div class="input-holder">
-                <input type="text" name="credit_base3[email]" id="credit_base3_email" required="true" class="email" value="哈" />
+                <input type="text" name="credit_family[father_name]" id="credit_family_father_name" required="true" value="哈" />
               </div>
             </div>
           </div>
@@ -47,9 +47,9 @@
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
-              <label for="credit_base3_wechat" class="required">微信</label>
+              <label for="credit_family_father_mobile" class="required">父亲手机</label>
               <div class="input-holder">
-                <input type="text" name="credit_base3[wechat]" id="credit_base3_wechat" required="true" class="wechat" value="哈" />
+                <input type="text" name="credit_family[father_mobile]" id="credit_family_father_mobile" required="true" class="phone" value="哈" />
               </div>
             </div>
           </div>
@@ -57,13 +57,24 @@
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
-              <label for="credit_base3_qq" class="required">QQ</label>
+              <label for="credit_family_mother_name" class="required">母亲姓名</label>
               <div class="input-holder">
-                <input type="text" name="credit_base3[qq]" id="credit_base3_qq" required="true" class="qq" value="哈" />
+                <input type="text" name="credit_family[mother_name]" id="credit_family_mother_name" required="true" value="哈" />
               </div>
             </div>
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-element width-100pc">
+            <div class="input-block">
+              <label for="credit_family_mother_mobile" class="required">母亲手机</label>
+              <div class="input-holder">
+                <input type="text" name="credit_family[mother_mobile]" id="credit_family_mother_mobile" required="true" class="phone" value="哈" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="../assets/images/family_info_page.png" class="img-responsive width-100pc" />
       </form>
     </section>
 
