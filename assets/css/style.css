@@ -569,7 +569,98 @@ form > h4 {
   font-weight: normal;
 }
 
+.checkbox {
+  margin: 10px 0 10px 15px;
+  color: #999;
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; 
+  top: 2px;
+  width: 17px; 
+  height: 17px;
+  background: #ec472c;
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  font-size: 18px;
+  line-height: 0.8;
+  transition: all .2s;
+  width: 5px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+.buttons {
+  margin: 30px 15px;
+}
+
+input.button {
+  background-color: #ccc;
+  display: block;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 10px 16px;
+  text-decoration: none;
+  border: none;
+  width: 100%;
+}
+
+input.button.success {
+  background-color: #ff4c03;
+}
 /* / form elements */
+
+a.link {
+  color: #fbb33f;
+}
 
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {
