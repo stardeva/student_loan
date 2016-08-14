@@ -49,91 +49,93 @@
     </header>
 
     <section class="main-loan-area">
-      <div class="loan-detail">
-        <div class="loan-wrap">
-          <div class="detail-row">
-            <div class="detail-label">借款金额</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">100</label>
-              <label class="detail-unit">元</label>
+      <div class="main-wrap">
+        <div class="loan-detail image">
+          <div class="loan-wrap">
+            <div class="detail-row">
+              <div class="detail-label">借款金额</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">100</label>
+                <label class="detail-unit">元</label>
+              </div>
             </div>
+
+            <div class="detail-row">
+              <div class="detail-label">借款时间</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">1</label>
+                <label class="detail-unit">天</label>
+              </div>
+            </div>  
+
+            <div class="detail-row">
+              <div class="detail-label">咨询服务费</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">0</label>
+                <label class="detail-unit">元</label>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">无逾期保证金</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">0</label>
+                <label class="detail-unit">元</label>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">到账金额</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">100</label>
+                <label class="detail-unit">元</label>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">还款金额</div>
+              <div class="detail-content">
+                <label class="detail-value highlight-text">100.07</label>
+                <label class="detail-unit">元</label>
+              </div>
+            </div>
+          </div> 
+        </div>      
+
+        <form id="request_loan_form" class="form-horizontal loan-form">
+          <div class="form-group">
+            <label class="col-xs-4 cols control-label">借款用途<span class="reqire-icon"> *</span></label>
+            <div class="col-xs-8 cols">
+                <input class="form-control input-lg" name="card" type="text" size="35" placeholder="请输入借款用途 ">
+            </div>
+            </input>
           </div>
 
-          <div class="detail-row">
-            <div class="detail-label">借款时间</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">1</label>
-              <label class="detail-unit">天</label>
+          <div class="form-group">
+            <label class="col-xs-4 cols control-label">还款来源<span class="reqire-icon"> *</span></label>
+            <div class="col-xs-8 cols">
+                <input class="form-control input-lg" name="number" type="text" size="35" placeholder="请输入还款来源"></input>
             </div>
-          </div>  
-
-          <div class="detail-row">
-            <div class="detail-label">咨询服务费</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">0</label>
-              <label class="detail-unit">元</label>
-            </div>
+            </input>
+          </div>
+          <div class="form-group checkbox-form-group">
+            <div class="agree-checkbox">
+              <input type="checkbox" name="agree" id="agree" />
+              <label class="checkbox-label" for="agree">
+                <span>&nbsp;同意</span>
+                <span class="highlight-text">&nbsp;<借款合同></span>
+                <span>&nbsp; 条款，电子邮箱接收 <借款合同> 回执</span>
+              </label>
+            </div>  
+          </div>
+          
+          <div>
+            <label class="highlight-text">资料审核过程中， 学融宝客服人员会通过微信或QQ与您取得联系， 并完成视频认证。</label>
           </div>
 
-          <div class="detail-row">
-            <div class="detail-label">无逾期保证金</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">0</label>
-              <label class="detail-unit">元</label>
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="detail-label">到账金额</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">100</label>
-              <label class="detail-unit">元</label>
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="detail-label">还款金额</div>
-            <div class="detail-content">
-              <label class="detail-value loan-highlight-text">100.07</label>
-              <label class="detail-unit">元</label>
-            </div>
-          </div>
-        </div> 
+          <a class="btn btn-lg btn-default submit-button" data-toggle="modal" data-target="#request_modal" value="" type="submit" disabled>确定</a>
+        </form>
       </div>      
-
-      <form id="request_loan_form" class="form-horizontal loan-form">
-        <div class="form-group">
-          <label class="col-xs-4 cols control-label">借款用途<span class="reqire-icon"> *</span></label>
-          <div class="col-xs-8 cols">
-              <input class="form-control input-lg" name="card" type="text" size="35" placeholder="请输入借款用途 ">
-          </div>
-          </input>
-        </div>
-
-        <div class="form-group">
-          <label class="col-xs-4 cols control-label">还款来源<span class="reqire-icon"> *</span></label>
-          <div class="col-xs-8 cols">
-              <input class="form-control input-lg" name="number" type="text" size="35" placeholder="请输入还款来源"></input>
-          </div>
-          </input>
-        </div>
-        <div class="form-group checkbox-form-group">
-          <div class="agree-checkbox">
-            <input type="checkbox" name="agree" id="agree" />
-            <label class="checkbox-label" for="agree">
-              <span>&nbsp;同意</span>
-              <span class="loan-highlight-text">&nbsp;<借款合同></span>
-              <span>&nbsp; 条款，电子邮箱接收 <借款合同> 回执</span>
-            </label>
-          </div>  
-        </div>
-        
-        <div>
-          <label class="loan-highlight-text">资料审核过程中， 学融宝客服人员会通过微信或QQ与您取得联系， 并完成视频认证。</label>
-        </div>
-
-        <a class="btn btn-lg btn-default submit-button" data-toggle="modal" data-target="#request_modal" value="" type="submit" disabled>确定</a>
-      </form>
     </section>
     
 
