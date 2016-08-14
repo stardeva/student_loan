@@ -63,4 +63,24 @@
     else
       $('#signup_submit').removeClass('success');
   });
+
+  /* my photo upload */
+  $('#my_photo').change(function() {
+    if(this.files && this.files[0]) {
+      var file = this.files[0];
+      var imageType = /image.*/;
+      if (!file.type.match(imageType)) {
+        return;
+      }
+      var preview = $(this).closest('.user-photo-upload').find('.user-photo-preview');
+      preview.file = file;
+      var reader = new FileReader();
+      reader.onload = (function(img) {
+        return function(e) {
+          $(img).prop('src', e.target.result);
+        }
+      })(preview);
+      reader.readAsDataURL(file);
+    }
+  });
 });
