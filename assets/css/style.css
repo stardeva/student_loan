@@ -17,7 +17,7 @@ body {
   text-decoration: none;
   position: fixed;
   width: 100%;
-  z-index: 9999;
+  z-index: 1000;
   background-color: #fff;
   top: 0;
   max-width: 1024px;
@@ -150,7 +150,7 @@ body {
 }
 
 .footer {
-  padding-bottom: 20vw;
+  padding-bottom: 12vw;
 }
 
 .footer .bottomnav {
@@ -159,25 +159,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 20vw;
+  height: 12vw;
   border-top: 2px solid #6a6a6a;
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: 1024px;
+  z-index: 1000;
+  min-height: 56px;
 }
 
 .footer .bottomnav .nav {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding-bottom: 16px;
   color: #FFF;
   text-decoration: none;
-  padding: 16px 0;
   width: calc( (100% - 9px) / 4);
+  position: relative;
+  height: 100%;
 }
 
 .footer .bottomnav .bar {
@@ -190,11 +191,15 @@ body {
 }
 
 .footer .bottomnav .nav img {
-  width: 60%;
+  width: 40%;
+  position: absolute;
+  top: -1vw;
 }
 
 .footer .bottomnav .nav span {
   font-size: 24px;
+  position: absolute;
+  bottom: 5px;
 }
 
 /* credit section */
@@ -981,6 +986,61 @@ a.link {
 
 /* / history page */
 
+/* custom dialog */
+.custom-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
+}
+
+.custom-dialog .modal-dialog {
+  width: 80%;
+  max-width: 600px;
+  font-size: 18px;
+}
+
+.custom-dialog .modal-dialog .modal-body {
+  padding: 32px;
+  text-align: center;
+}
+
+.custom-dialog .modal-dialog .modal-body h3 {
+  color: #000;
+}
+
+.custom-dialog .modal-dialog .modal-body div {
+  color: #999;
+}
+
+.custom-dialog .modal-dialog .modal-footer {
+  padding: 0;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-dialog .modal-dialog .modal-footer .btn {
+  background: transparent;
+  border: 0;
+  text-shadow: none;
+  flex-grow: 1;
+  height: 100%;
+  border-radius: 0;
+  color: #42a5f5;
+}
+
+.custom-dialog .modal-dialog .modal-footer .btn + .btn {
+  border-left: 1px solid #e5e5e5;
+}
+
+.custom-dialog .modal-dialog .modal-footer .btn.btn-intro {
+  color: #38b832;
+}
+
+/* / custom dialog */
+
 
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {
@@ -1001,11 +1061,11 @@ a.link {
   }
 
   .footer {
-    padding-bottom: 204.8px;
+    padding-bottom: 120px;
   }
 
   .footer .bottomnav {
-    height: 204.8px;
+    height: 120px;
   }
 }
 
