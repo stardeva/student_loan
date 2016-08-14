@@ -204,8 +204,7 @@ body {
 .my-credits-data .msg {
   font-size: 18px;
   color: #999;
-  margin-left: 30px;
-  margin-bottom: 10px;
+  margin: 0 20px 10px;
 }
 
 .my-credits-data .credits-medals {
@@ -219,26 +218,6 @@ body {
   width: 25%;
   position: relative;
   text-align: center;
-}
-
-.my-credits-data .credits-medals .medal .medal-icon{
-  position: absolute;
-  top: 17%;
-  width: 40%;
-  left: 30%;
-}
-
-.my-credits-data .credits-medals .medal .medal-text {
-  position: absolute;
-  bottom: 12%;
-  width: 100%;
-  color: #a6a6a6;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.my-credits-data .credits-medals .medal.active .medal-text{
-  color: #ff4c03;
 }
 
 .my-credits-data .credits-heart {
