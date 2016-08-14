@@ -254,6 +254,7 @@ body {
 .loan-kind {
   padding: 20px 10px;
   color: #aaa;
+  background-color: #f0f0f0;
   background-image: url('../images/loan_bg.png'); 
 }
 
@@ -269,6 +270,9 @@ body {
   border-top: 1px solid #aaa;
   color: #aaa;
   background-color: #f0f0f0;
+}
+
+.start-loan .description {
   padding: 20px;
 }
 
@@ -292,10 +296,6 @@ body {
 .start-loan  .description .title p {
   font-size: 20px;
   color: #333;
-}
-
-.start-loan  .description:last-child {
-  margin-top: 40px;
 }
 
 .description .content p {
