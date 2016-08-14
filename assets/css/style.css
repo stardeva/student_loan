@@ -51,6 +51,18 @@ body {
   border: 0;
 }
 
+.loan-data-area .content  .user-head-image {
+  background-image: url('../images/user_head.png');
+  width: 100%;
+  height: 100%;
+}
+
+.loan-data-area .content .user-head{
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 3px;
+}
+
 .header .topnav {
   display: flex;
   font-size: 20px;
@@ -240,12 +252,9 @@ body {
 }
 
 .loan-kind {
-  background-color: #f2f3eb;
   padding: 20px 10px;
   color: #aaa;
   background-image: url('../images/loan_bg.png'); 
-  background-size: 105% 108%;
-  background-position: -15px 0px; 
 }
 
 .loan-kind .kind-body {
@@ -260,6 +269,7 @@ body {
   border-top: 1px solid #aaa;
   color: #aaa;
   background-color: #f0f0f0;
+  padding: 20px;
 }
 
 .start-loan .loan-button {
@@ -275,13 +285,20 @@ body {
   background-size: 100% 100%;
 }
 
-.descripton .title p {
-  font-size: 20px;
-  color: #333;
-  padding: 20px 0;
+.start-loan  .description .title.last {
+  margin-top: 40px;
 }
 
-.descripton .content p {
+.start-loan  .description .title p {
+  font-size: 20px;
+  color: #333;
+}
+
+.start-loan  .description:last-child {
+  margin-top: 40px;
+}
+
+.description .content p {
   font-size: 16px;
 }
 /*bank card*/
@@ -708,24 +725,62 @@ form#request_loan_form {
   margin-right: 10px; 
 }
 
-.personal-area .content .user-head {
-  background-color: #ccc;
-  border-radius: 50%;
+.personal-area .content .user-head {  
   width: 38px;
-  height: 38px;
-  padding: 4px;
-}
-
-.personal-area .content  .user-head-image {
-  background-image: url('../images/user_head.png');
-  width: 30px;
-  height: 30px;
+  height: 38px;  
 }
 
 .personal-area .content > .bean-image {
   background-image: url('../images/user_bean.png');
   width: 10px;
   height: 10px;
+}
+
+/*user estimate*/
+.loan-data-area .estimate-group {
+  background-color: #fff;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  padding: 20px;
+}
+
+.loan-data-area .estimate-group .user-name,
+.loan-data-area .estimate-group .active-money {
+  margin-bottom: 10px;
+}
+
+.user-estimate-area .estimate-group .user-mark {
+  flex-flow: column;
+  align-items: flex-end;
+  height: 55px;
+}
+
+.user-estimate-area .estimate-group .user-mark .date {
+  font-size: 12px;
+}
+
+.user-estimate-area .estimate-group .user-mark .mark-image {
+  background-image: url('../images/evaluate_star_empty.png');
+  width: 20px;
+  height: 20px;
+}
+
+.user-estimate-area .estimate-group .user-mark .mark-image.active{
+  background-image: url('../images/evaluate_star.png');
+}
+
+.user-estimate-area .estimate-group .user-head {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+
+.loan-data-area .estimate-group .power {
+  font-size: 12px;
+}
+
+.user-estimate-area .estimate-group .name {
+  margin: 0 auto;
 }
 
 /*modal*/
