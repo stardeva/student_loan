@@ -73,16 +73,28 @@ body {
   background-position: center;
 }
 
-.header #banner_slider .carousel-inner .item a.banner1 {
-  background-image: url('../images/banner1.jpg');
+.header #banner_slider .carousel-inner .item a.credits {
+  background-image: url('../images/credits.jpg');
 }
 
-.header #banner_slider .carousel-inner .item a.banner2 {
-  background-image: url('../images/banner2.jpg');
+.header #banner_slider .carousel-inner .item a.financial {
+  background-image: url('../images/financial.jpg');
 }
 
-.header #banner_slider .carousel-inner .item a.banner3 {
-  background-image: url('../images/banner3.jpg');
+.header #banner_slider .carousel-inner .item a.tips {
+  background-image: url('../images/tips.jpg');
+}
+
+.header #banner_slider .carousel-inner .item a.campus {
+  background-image: url('../images/campus.jpg');
+}
+
+.header #banner_slider .carousel-inner .item a.attendance {
+  background-image: url('../images/attendance.jpg');
+}
+
+.header #banner_slider .carousel-inner .item a.redwars {
+  background-image: url('../images/redwars.jpg');
 }
 
 .toolbar {
