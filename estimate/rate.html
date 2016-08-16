@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>学融宝</title>
+
+    <!-- Bootstrap -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Modal -->
+    <div id="loan_modal" class="modal fade" role="dialog">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-body">
+              <p><b>您还没有绑定银行卡</b></p>
+            </div>
+            <div class="modal-footer flex-wrap">
+              <div class="flex1 loan-modal-button" data-dismiss="modal">取消</div>
+              <div class="flex1 loan-modal-button request-loan" data-dismiss="modal">去绑定</div>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+
+    <header class="header">
+      <nav class="topnav">
+        <a href="#" class="nav back"><div class="back-icon image"></div></a>
+        <span class="nav text title">费率计算</span>
+        <div></div>
+      </nav>
+    </header>
+    <section class="process">
+      <span>福利货</span>
+      <span class="active">活利货</span>
+      <span>月利货</span>
+    </section>
+    
+    <section class="loan-kind image">
+      <div class="kind-head flex-wrap">
+        <span class="flex1">借款金额(元)</span>
+        <span class="flex1">借款期限(天)</span>
+      </div>
+      
+      <div class="kind-body flex-wrap">
+        <div class="flex1">
+          <select class="cost-selector">
+            <option value="1">50</option>
+            <option value="2">100</option>
+            <option value="3">150</option>
+            <option value="4">200</option>
+            <option value="5">250</option>
+          </select>
+        </div>
+
+        <div class="flex1">
+          <select class="during-selector">
+            <option value="1"></option>
+            <option value="2">1</option>
+            <option value="3">2</option>
+            <option value="4">3</option>
+            <option value="5">4</option>
+          </select>
+        </div>          
+      </div>
+    </section>
+
+    <section class="result">
+      <span class="pull-left">计划还款</span>
+      <div class="pull-right">
+        <span class="loan-price">100.07</span>
+        <span class="loan-time"> /1天</span>
+      </div>
+      <div class="clearfix"></div>
+    </section>
+
+    <section class="start-loan">
+      <div class="description">
+        <div class="title">
+          <p>产品及借款费用说明</p>          
+        </div>
+
+        <div class="content">
+          <p>新注册用户享有本产品， 超过30天未启用将实效； 本产品免息， 免服务费， 免无逾期保证金； 借款期间内自由归还数额； 无逾期按时还款一次增加一颗信用豆（1信用豆＝ 50元信用额度）， 信用豆可以累积， 发生一次逾期还款信用豆将归零， 需要重新累积； 任意两种产品不可以同时申请。</p>
+        </div>
+      </div>
+
+      <div class="description">
+        <div class="title">
+          <p>逾期费用说明</p>          
+        </div>
+
+        <div class="content">
+          <p>到期未还将产生违约金， 违约金为应还数额＊0.5%／日收取</p>
+        </div>
+      </div>
+
+      </div>      
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+    <script src="../assets/js/main.js"></script>
+
+  </body>
+</html>
