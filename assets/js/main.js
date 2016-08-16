@@ -37,7 +37,7 @@ function completeCard() {
       success: {
         label: "确定",
         callback: function() {
-          window.location ="index.html";
+          window.location ="request.html";
         }
       }                  
     }
