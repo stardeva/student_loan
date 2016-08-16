@@ -1101,12 +1101,20 @@ form#request_loan_form {
   background-size: cover;
   padding: 15px;
   display: flex;
+  color: #000;
+  text-decoration: none;
+}
+
+.personal-box:hover {
+  text-decoration: none;
+  color: #000;
 }
 
 .personal-box .user-head {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .personal-box .user-head img {
