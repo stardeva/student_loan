@@ -22,15 +22,11 @@
     <![endif]-->
   </head>
   <body>
-
     <header class="header">
       <nav class="topnav">
-        <a href="#" class="nav back"><div class="back-icon image"></div></a>
+        <a href="#" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">绑定银行卡</span>
-        <a href="#" class="nav link house">
-          <div class="image house-image"></div>
-          <div class="image house-mask-image"></div>
-        </a>
+        <a href="#" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
       </nav>
     </header>
 
@@ -64,17 +60,15 @@
           </input>
         </div>
 
-        <input class="btn btn-lg btn-default submit-button" value="确定" type="submit" disabled></input>
+        <a class="btn btn-lg btn-default submit-button" type="submit" disabled onclick="completeCard()">确定</a>
       </form>
     </section>
     
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/bootstrapValidator.min.js"></script>
-
     <script src="../assets/js/main.js"></script>
 
   </body>

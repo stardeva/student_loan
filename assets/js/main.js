@@ -1,4 +1,75 @@
-﻿$(document).ready(function() {
+﻿// go to card page in borrow index
+function goCardPage() {
+  bootbox.dialog({
+    className: 'custom-dialog dialog-confirm',
+    closeButton: false,
+    message: "<h3>您还没有绑定银行卡</h3>",
+    buttons: {
+      danger: {
+        label: "取消",
+        callback: function() {
+
+        }
+      },
+      success: {
+        label: "去绑定",
+        callback: function() {
+          window.location ="card.html";
+        }
+      }                  
+    }
+  });
+}
+
+// decide to complete card page in card index
+function completeCard() {
+  bootbox.dialog({
+    className: 'custom-dialog dialog-confirm',
+    closeButton: false,
+    message: "<h3>确认提交</h3>",
+    buttons: {
+      danger: {
+        label: "取消",
+        callback: function() {
+
+        }
+      },
+      success: {
+        label: "确定",
+        callback: function() {
+          window.location ="index.html";
+        }
+      }                  
+    }
+  });
+}
+
+// decide to send loan request in request page
+function decideLoan() {
+  bootbox.dialog({
+    className: 'custom-dialog dialog-confirm',
+    closeButton: false,
+    message: "<h3>确认提交</h3>",
+    buttons: {
+      danger: {
+        label: "取消",
+        callback: function() {
+
+        }
+      },
+      success: {
+        label: "确定",
+        callback: function(e) {          
+          //$('#request_loan_form').submit();
+          $('#request_modal').modal('hide');
+          window.location ="request_success.html";
+        }
+      }                  
+    }
+  });
+}
+
+$(document).ready(function() {
   /* show modal when page load */
   if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
     if(typeof bootbox !== 'undefined') {
@@ -132,34 +203,29 @@
   });
 
   if($("#detail_slider").length) {
-  	$("#detail_slider").slider({});
+    $("#detail_slider").slider({});
   }  
-
-  // go to the back card page
-  $(document).on('click', '#loan_modal .request-loan', function() {
-  	window.location ="card.html";
-  });
 
   // set main form width as windows one in back card page
   function setMainDocumentHeight() {
-  	var footer_height = 0, 
-  		main_height = 0,
-  		window_height = $(window).height(),
-  		wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
-  		header_height = parseInt( $('header.header').height() );
+    var footer_height = 0, 
+      main_height = 0,
+      window_height = $(window).height(),
+      wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
+      header_height = 60;
 
-  	if($('.main-loan-area .footer').length > 0) {
-  		footer_height = parseInt( $('.main-loan-area .footer').height() );
-  	}
+    if($('.main-loan-area .footer').length > 0) {
+      footer_height = parseInt( $('.main-loan-area .footer').height() );
+    }
 
-  	var main_height = wrap_height + header_height + footer_height + 40;
+    var main_height = wrap_height + header_height + footer_height + 40;
 
 
-  	if(window_height >= main_height ) {
-  		$('.main-loan-area').height(window_height - header_height);
-  	} else {
-  		$('.main-loan-area').height(main_height);
-  	}
+    if(window_height >= main_height ) {console.log(window_height, header_height)
+      $('.main-loan-area').height(window_height - header_height);
+    } else {
+      $('.main-loan-area').height(main_height);
+    }
   }
   
   setMainDocumentHeight();
@@ -171,122 +237,115 @@
   // card page form validation
   if($('#bank_card_form').length) {
     $('#bank_card_form').bootstrapValidator({
-	    fields: {
-	      card: {
-	        validators: {
-	          notEmpty: {
-	            message: 'The card is required.'
-	          }
-	        }
-	      },
-	      bank: {
-	        validators: {
-	          callback: {
-	            message: 'The bank is required.',
-	            callback: function (value, validator, $field) {
-	              // Determine the numbers which are generated in captchaOperation                                
-	              if(value) {
-	                $('#bank_card_form .arrow').hide();
-	                  return true;
-	              }
-	              else {
-	                $('#bank_card_form .arrow').show();
-	                return false;
-	              }
-	            }
-	          }
-	        }
-	      },
-	      number: {
-	        validators: {
-	          notEmpty: {
-	            message: 'The number is required.'
-	          },
-	          stringLength: {
-	            min: 5,
-	            message: 'Your number must be at least 5 characters.'
-	          }
-	        }
-	      }
-	    }
-	  });
+      fields: {
+        card: {
+          validators: {
+            notEmpty: {
+              message: 'The card is required.'
+            }
+          }
+        },
+        bank: {
+          validators: {
+            callback: {
+              message: 'The bank is required.',
+              callback: function (value, validator, $field) {
+                // Determine the numbers which are generated in captchaOperation                                
+                if(value) {
+                  $('#bank_card_form .arrow').hide();
+                    return true;
+                }
+                else {
+                  $('#bank_card_form .arrow').show();
+                  return false;
+                }
+              }
+            }
+          }
+        },
+        number: {
+          validators: {
+            notEmpty: {
+              message: 'The number is required.'
+            },
+            stringLength: {
+              min: 5,
+              message: 'Your number must be at least 5 characters.'
+            }
+          }
+        }
+      }
+    });
 
 
-	  $('#bank_card_form').on('status.field.bv', function(e, data) {
-	    formIsValid = true;
+    $('#bank_card_form').on('status.field.bv', function(e, data) {
+      formIsValid = true;
 
-	    $('.form-group',$(this)).each( function() {
-	      formIsValid = formIsValid && $(this).hasClass('has-success');
-	    });
-	    
-	    if(formIsValid) {
-	      $('.submit-button', $(this)).attr('disabled', false);
-	    } else {
-	      $('.submit-button', $(this)).attr('disabled', true);
-	    }
-	  });
+      $('.form-group',$(this)).each( function() {
+        formIsValid = formIsValid && $(this).hasClass('has-success');
+      });
+      
+      if(formIsValid) {
+        $('.submit-button', $(this)).attr('disabled', false);
+      } else {
+        $('.submit-button', $(this)).attr('disabled', true);
+      }
+    });
   }
 
   // request page validation
   if($('#request_loan_form').length) {
-  	$('#request_loan_form').bootstrapValidator({
-	    fields: {
-	      card: {
-	        validators: {
-	          notEmpty: {
-	            message: 'The card is required.'
-	          }
-	        }
-	      },
-	    number: {
-	      validators: {
-	        notEmpty: {
-	          message: 'The number is required.'
-	        },
-	        stringLength: {
-	          min: 5,
-	          message: 'Your number must be at least 5 characters.'
-	        }
-	      }
-	    },
-	    agree: {
-	      validators: {
-	        choice: {
-	          min: 1,
-	          max: 1,
-	          message: "Please accept the agreement."
-	        }
-	      }
-	    }
-	      }
-	  });
+    $('#request_loan_form').bootstrapValidator({
+      fields: {
+        card: {
+          validators: {
+            notEmpty: {
+              message: 'The card is required.'
+            }
+          }
+        },
+      number: {
+        validators: {
+          notEmpty: {
+            message: 'The number is required.'
+          },
+          stringLength: {
+            min: 5,
+            message: 'Your number must be at least 5 characters.'
+          }
+        }
+      },
+      agree: {
+        validators: {
+          choice: {
+            min: 1,
+            max: 1,
+            message: "Please accept the agreement."
+          }
+        }
+      }
+        }
+    });
 
-	  $('#request_loan_form').on('status.field.bv', function(e, data) {
-	    formIsValid = true;
+    $('#request_loan_form').on('status.field.bv', function(e, data) {
+      formIsValid = true;
 
-	    $('.form-group',$(this)).each( function() {
-	      formIsValid = formIsValid && $(this).hasClass('has-success');
-	    });
-	      
-	    if(formIsValid) {
-	        $('.submit-button', $(this)).attr('disabled', false);                  
-	    } else {
-	        $('.submit-button', $(this)).attr('disabled', true);
-	    }
-	  });
-	  
-	  // if user decide to send loan request
-	  $('body').on('click', '.request-loan', function (e) {
-	    //$('#request_loan_form').submit();
-	    $('#request_modal').modal('hide');
-	    window.location ="request_success.html";
-	  });
+      $('.form-group',$(this)).each( function() {
+        formIsValid = formIsValid && $(this).hasClass('has-success');
+      });
+        
+      if(formIsValid) {
+          $('.submit-button', $(this)).attr('disabled', false);                  
+      } else {
+          $('.submit-button', $(this)).attr('disabled', true);
+      }
+    });
 
-	  // check if the button is disabled when clicking the submit button
-	  $('#request_loan_form').on('click', '.submit-button', function (e) {
-	    if($(this).attr("disabled")) {
-	      e.stopPropagation()
-	    }
-	  });
+    // check if the button is disabled when clicking the submit button
+    $('#request_loan_form').on('click', '.submit-button', function (e) {
+      if($(this).attr("disabled")) {
+        e.stopPropagation()
+      }
+    });
   }
 });
