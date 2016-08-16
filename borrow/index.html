@@ -21,32 +21,11 @@
     <![endif]-->
   </head>
   <body>
-    <!-- Modal -->
-    <div id="loan_modal" class="modal fade" role="dialog">
-      <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-body">
-              <p><b>您还没有绑定银行卡</b></p>
-            </div>
-            <div class="modal-footer flex-wrap">
-              <div class="flex1 loan-modal-button" data-dismiss="modal">取消</div>
-              <div class="flex1 loan-modal-button request-loan" data-dismiss="modal">去绑定</div>
-            </div>
-          </div>
-        </div>
-      </div>      
-    </div>
-
     <header class="header">
       <nav class="topnav">
-        <a href="#" class="nav back"><div class="back-icon image"></div></a>
+        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款</span>
-        <a href="#" class="nav link house">
-          <div class="image house-image"></div>
-          <div class="image house-mask-image"></div>
-        </a>
+        <a href="../" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
       </nav>
     </header>
     <section class="process">
@@ -94,7 +73,7 @@
     </section>
 
     <section class="start-loan">
-      <a class="loan-button" href="#" data-toggle="modal" data-target="#loan_modal"></a>
+      <a class="loan-button" href="#" onclick="goCardPage()"></a>
       <div class="description">
         <div class="title">
           <p>产品及借款费用说明</p>          
@@ -106,11 +85,10 @@
       </div>
     </section>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-
+    <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/main.js"></script>
 
   </body>

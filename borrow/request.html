@@ -22,29 +22,11 @@
     <![endif]-->
   </head>
   <body>
-    <!-- Modal -->
-    <div id="request_modal" class="modal fade" role="dialog">
-      <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-body">
-              <p><b>确认提交</b></p>
-            </div>
-            <div class="modal-footer flex-wrap">
-              <div class="flex1 loan-modal-button" data-dismiss="modal">取消</div>
-              <div class="flex1 loan-modal-button request-loan" data-dismiss="modal">确定</div>
-            </div>
-          </div>
-        </div>
-      </div>      
-    </div>
-
     <header class="header">
       <nav class="topnav">
-        <a href="#" class="nav back"><div class="back-icon image"></div></a>
+        <a href="card.html" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款申请</span>
-        <div></div>
+        <div class="nav"></div>
       </nav>
     </header>
 
@@ -133,18 +115,17 @@
             <label class="highlight-text">资料审核过程中， 学融宝客服人员会通过微信或QQ与您取得联系， 并完成视频认证。</label>
           </div>
 
-          <a class="btn btn-lg btn-default submit-button" data-toggle="modal" data-target="#request_modal" value="" type="submit" disabled>确定</a>
+          <a class="btn btn-lg btn-default submit-button" type="submit" disabled onclick="decideLoan()">确定</a>
         </form>
       </div>      
     </section>
-    
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/bootstrapValidator.min.js"></script>
-
     <script src="../assets/js/main.js"></script>
+
   </body>
 </html>
