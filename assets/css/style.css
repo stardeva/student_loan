@@ -301,7 +301,17 @@ form > h4 {
 }
 
 /* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left:0; 
+  top: 2px;
+  width: 17px; 
+  height: 17px;
+  background: #fff;
+  border: 1px solid #ec472c;
+}
+
 [type="checkbox"]:checked + label:before {
   content: '';
   position: absolute;
@@ -312,7 +322,7 @@ form > h4 {
   background: #ec472c;
 }
 /* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
+
 [type="checkbox"]:checked + label:after {
   content: '';
   position: absolute;
@@ -326,6 +336,7 @@ form > h4 {
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  background: #ec472c;
 }
 [type="checkbox"]:not(:checked) + label:after {
   opacity: 0;
@@ -349,7 +360,7 @@ form > h4 {
 /* accessibility */
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted blue;
+  border: 1px solid #ec472c;
 }
 
 .buttons {
