@@ -1,6 +1,6 @@
 ﻿$(document).ready(function() {
   /* show modal when page load */
-  if(Cookies.get('intro_dialog') === undefined) {
+  /*if(Cookies.get('intro_dialog') === undefined) {
     if(bootbox) {
       bootbox.dialog({
         className: 'custom-dialog dialog-alert',
@@ -44,7 +44,7 @@
         }
       });
     }
-  }
+  }*/
 
   $('.carousel').carousel({
     interval: 2000

@@ -193,7 +193,7 @@ body {
 .footer .bottomnav .nav img {
   width: 40%;
   position: absolute;
-  top: -1vw;
+  top: -0.5vw;
 }
 
 .footer .bottomnav .nav span {
