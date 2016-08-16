@@ -606,7 +606,6 @@ body {
   color: #e97466;
   bottom: 3vw;
   border-radius: 50px;
-  text-align: center;
   width: 46%;
   left: 36%;
   font-size: 10vw;
@@ -614,6 +613,8 @@ body {
   font-family: 'FZKaTong';
   padding-bottom: 2vw;
   letter-spacing: 1vw;
+  padding-left: 12%;
+  text-align: left;
 }
 
 .footer {
@@ -918,6 +919,8 @@ form#request_loan_form {
   width: calc( (100% - 9px) / 4);
   position: relative;
   height: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 .footer .bottomnav .bar {
@@ -931,14 +934,11 @@ form#request_loan_form {
 
 .footer .bottomnav .nav img {
   width: 40%;
-  position: absolute;
-  top: -0.5vw;
 }
 
 .footer .bottomnav .nav span {
   font-size: 24px;
-  position: absolute;
-  bottom: 5px;
+  margin-bottom: 5px;
 }
 
 /* credit section */
@@ -1800,10 +1800,6 @@ form#request_loan_form {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 14px;
   }
-
-  .footer .bottomnav .nav span {
-    bottom: 0;
-  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1865,6 +1861,5 @@ form#request_loan_form {
 
   .footer .bottomnav .nav span {
     font-size: 12px;
-    bottom: 5px;
   }
 }
