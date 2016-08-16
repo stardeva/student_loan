@@ -71,7 +71,7 @@ function decideLoan() {
 
 $(document).ready(function() {
   /* show modal when page load */
-  if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
+  /*if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
     if(typeof bootbox !== 'undefined') {
       bootbox.dialog({
         className: 'custom-dialog dialog-alert',
@@ -115,7 +115,7 @@ $(document).ready(function() {
         }
       });
     }
-  }
+  }*/
 
   $('.carousel').carousel({
     interval: 2000
