@@ -1,3 +1,18 @@
+/* Custom Fonts */
+@font-face {
+  font-family: 'FZKaTong';
+  src: url('../fonts/fzkatong.eot');
+  src: url('../fonts/fzkatong.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/fzkatong.woff2') format('woff2'),
+    url('../fonts/fzkatong.woff') format('woff'),
+    url('../fonts/fzkatong.ttf') format('truetype'),
+    url('../fonts/fzkatong.svg#fzkatong') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* / Custom Fonts */
+
 /* UI styles */
 .width-5pc {
   width: 5%;
@@ -590,13 +605,16 @@ body {
   position: absolute;
   background-color: #fff;
   color: #e97466;
-  bottom: 8px;
+  bottom: 3vw;
   border-radius: 50px;
   text-align: center;
   width: 46%;
   left: 36%;
   font-size: 10vw;
-  line-height: 1;
+  line-height: 0.8;
+  font-family: 'FZKaTong';
+  padding-bottom: 2vw;
+  letter-spacing: 1vw;
 }
 
 .footer {
@@ -1739,6 +1757,7 @@ form#request_loan_form {
 
   .credit .credit-number {
     font-size: 102.4px;
+    padding-bottom: 20.48px;
   }
 
   .file-block .input-holder .file-input {
