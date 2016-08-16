@@ -1441,7 +1441,7 @@ form#request_loan_form {
 
 /*refund*/
 .refund-nav {
-  color: #aaa;
+  color: #888;
   font-size: 16px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -1506,6 +1506,7 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-header {
+  font-size: 16px;
   padding: 10px 20px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -1525,7 +1526,7 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-body .detail-group .content {
-  flex: 3;
+  flex: 2;
 }
 
 .refund-detail .detail-slider {
