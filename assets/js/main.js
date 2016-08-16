@@ -1,7 +1,7 @@
 ﻿$(document).ready(function() {
   /* show modal when page load */
-  /*if(Cookies !== undefined && Cookies.get('intro_dialog') === undefined) {
-    if(bootbox) {
+  if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
+    if(typeof bootbox !== 'undefined') {
       bootbox.dialog({
         className: 'custom-dialog dialog-alert',
         closeButton: false,
@@ -43,7 +43,7 @@
         }
       });
     }
-  }*/
+  }
 
   $('.carousel').carousel({
     interval: 2000
