@@ -1803,6 +1803,10 @@ form#request_loan_form {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 14px;
   }
+
+  .footer .bottomnav .nav span {
+    bottom: 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1864,5 +1868,6 @@ form#request_loan_form {
 
   .footer .bottomnav .nav span {
     font-size: 12px;
+    bottom: 5px;
   }
 }
