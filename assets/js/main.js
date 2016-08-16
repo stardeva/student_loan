@@ -71,8 +71,8 @@ function decideLoan() {
 
 $(document).ready(function() {
   /* show modal when page load */
-  /*if(Cookies !== undefined && Cookies.get('intro_dialog') === undefined) {
-    if(bootbox) {
+  if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
+    if(typeof bootbox !== 'undefined') {
       bootbox.dialog({
         className: 'custom-dialog dialog-alert',
         closeButton: false,
@@ -90,6 +90,7 @@ $(document).ready(function() {
               else {
                 window.close();
               }
+              //Cookies.set('intro_dialog', true);
               bootbox.dialog({
                 className: 'custom-dialog dialog-confirm',
                 closeButton: false,
@@ -114,7 +115,7 @@ $(document).ready(function() {
         }
       });
     }
-  }*/
+  }
 
   $('.carousel').carousel({
     interval: 2000

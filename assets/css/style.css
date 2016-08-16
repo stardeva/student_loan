@@ -1,3 +1,18 @@
+/* Custom Fonts */
+@font-face {
+  font-family: 'FZKaTong';
+  src: url('../fonts/fzkatong.eot');
+  src: url('../fonts/fzkatong.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/fzkatong.woff2') format('woff2'),
+    url('../fonts/fzkatong.woff') format('woff'),
+    url('../fonts/fzkatong.ttf') format('truetype'),
+    url('../fonts/fzkatong.svg#fzkatong') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* / Custom Fonts */
+
 /* UI styles */
 .width-5pc {
   width: 5%;
@@ -286,7 +301,17 @@ form > h4 {
 }
 
 /* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left:0; 
+  top: 2px;
+  width: 17px; 
+  height: 17px;
+  background: #fff;
+  border: 1px solid #ec472c;
+}
+
 [type="checkbox"]:checked + label:before {
   content: '';
   position: absolute;
@@ -297,7 +322,7 @@ form > h4 {
   background: #ec472c;
 }
 /* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
+
 [type="checkbox"]:checked + label:after {
   content: '';
   position: absolute;
@@ -311,6 +336,7 @@ form > h4 {
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  background: #ec472c;
 }
 [type="checkbox"]:not(:checked) + label:after {
   opacity: 0;
@@ -334,7 +360,7 @@ form > h4 {
 /* accessibility */
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted blue;
+  border: 1px solid #ec472c;
 }
 
 .buttons {
@@ -371,6 +397,7 @@ a.link {
 body {
   max-width: 1024px;
   margin: 0 auto;
+  padding: 0 !important;
 }
 
 .header {
@@ -577,13 +604,16 @@ body {
   position: absolute;
   background-color: #fff;
   color: #e97466;
-  bottom: 8px;
+  bottom: 3vw;
   border-radius: 50px;
   text-align: center;
   width: 46%;
   left: 36%;
   font-size: 10vw;
-  line-height: 1;
+  line-height: 0.8;
+  font-family: 'FZKaTong';
+  padding-bottom: 2vw;
+  letter-spacing: 1vw;
 }
 
 .footer {
@@ -1058,12 +1088,20 @@ form#request_loan_form {
   background-size: cover;
   padding: 15px;
   display: flex;
+  color: #000;
+  text-decoration: none;
+}
+
+.personal-box:hover {
+  text-decoration: none;
+  color: #000;
 }
 
 .personal-box .user-head {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .personal-box .user-head img {
@@ -1726,6 +1764,7 @@ form#request_loan_form {
 
   .credit .credit-number {
     font-size: 102.4px;
+    padding-bottom: 20.48px;
   }
 
   .file-block .input-holder .file-input {
@@ -1759,6 +1798,10 @@ form#request_loan_form {
 @media screen and (max-width: 640px) {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 14px;
+  }
+
+  .footer .bottomnav .nav span {
+    bottom: 0;
   }
 }
 
@@ -1821,5 +1864,6 @@ form#request_loan_form {
 
   .footer .bottomnav .nav span {
     font-size: 12px;
+    bottom: 5px;
   }
 }
