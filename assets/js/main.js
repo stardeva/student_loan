@@ -19,7 +19,7 @@
               else {
                 window.close();
               }
-              Cookies.set('intro_dialog', true);
+              //Cookies.set('intro_dialog', true);
               bootbox.dialog({
                 className: 'custom-dialog dialog-confirm',
                 closeButton: false,
