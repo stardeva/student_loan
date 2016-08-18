@@ -101,6 +101,10 @@
 /* / UI styles */
 
 /* form elements */
+.title {
+  color: #888;
+}
+
 .input-block, .select-block {
   background-color: #fafafa;
   display: flex;
@@ -670,13 +674,42 @@ body {
 }
 
 .process {
-  display: flex;
   font-size: 20px;
   color: #aaa;
   justify-content: space-between;
-  padding: 0 20px;
   align-items: center;
-  height: 60px;
+}
+
+.process > .nav-tabs {
+  display: flex;
+  flex-flow: row;
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.process > .nav-tabs >li {
+  float: none;
+  text-align: center;
+  width: 33.3333%;
+}
+
+.process > .nav-tabs >li.active > a {
+  border: 0;
+  border-color: transparent;
+  color: #ec8558;
+}
+
+.process > .nav-tabs >li > a {
+  color: #888;
+  padding: 0;
+  font-size: 16px;
+}
+
+.process > .nav-tabs >li:hover,
+.process > .nav-tabs >li > a:hover {
+  background-color: transparent;
+  border: 0;
 }
 
 .process .active {
@@ -687,25 +720,34 @@ body {
   padding: 20px 10px;
   color: #aaa;
   font-size: 20px;
+  background-color: #fff;
 }
 
 .loan-kind {
-  padding: 20px 10px;
+  padding: 20px 0;
   color: #aaa;
   background-color: #f0f0f0;
   background-image: url('../images/loan_bg.png'); 
 }
 
 .loan-kind .kind-body {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
-.loan-kind .kind-body select {
-  width: 100px;
+.loan-kind .kind-body .ui-select {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.loan-kind .kind-body .ui-select select {
+  color: #aaa;
+}
+
+.kind-body .ui-select select option {
+  width: 90%;
 }
 
 .start-loan {
-  border-top: 1px solid #aaa;
   color: #aaa;
   background-color: #f0f0f0;
 }
@@ -1067,6 +1109,13 @@ form#request_loan_form {
 
 /* credit main info page */
 .form-page, .personal-page {
+  background-color: #f0f0f0;
+  margin: 0 auto;
+}
+
+.form-page.ui-mobile-viewport > .ui-page, 
+.personal-page.ui-mobile-viewport > .ui-page {
+  position: relative;
   background-color: #f0f0f0;
 }
 
@@ -1441,7 +1490,7 @@ form#request_loan_form {
 
 /*refund*/
 .refund-nav {
-  color: #aaa;
+  color: #888;
   font-size: 16px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -1506,6 +1555,7 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-header {
+  font-size: 16px;
   padding: 10px 20px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -1525,7 +1575,7 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-body .detail-group .content {
-  flex: 3;
+  flex: 2;
 }
 
 .refund-detail .detail-slider {

@@ -117,9 +117,20 @@ $(document).ready(function() {
     }
   }*/
 
-  $('.carousel').carousel({
-    interval: 2000
-  });
+  // $.post("http://api.wazxb.com/sys/init",
+  //   {
+  //     uid: '4dba7e89fa0ffb27ecfd3ab0',
+  //     deviceId: '00000000000000008:00:27:44:04:bb323ec7466101f399',
+  //     deviceOs: 'Android',
+  //     deviceType: 'Google Nexus S - 4.1.1 - API 16 - 480x800',
+  //     deviceOp: '4.1.1',
+  //     version: '1.0.1',
+  //     deviceToken: 'dd'
+  //   },
+  //   function(data, status){
+  //       alert("Data: " + data + "\nStatus: " + status);
+  //   });
+
 
   /* credit base 1 page datepicker */
   if($.fn.datepicker !== undefined) {
@@ -348,4 +359,29 @@ $(document).ready(function() {
       }
     });
   }
+
+  //select event in calculate page
+  $('#fuli').find('select.cost-selector').change(function() {
+    $('#fuli').find('.loan-price').html($(this).val());
+  });
+
+  $('#fuli').find('select.during-selector').change(function() {
+    $('#fuli').find('.loan-time .number').html($(this).val());
+  });
+
+  $('#fuoli').find('select.cost-selector').change(function() {
+    $('#fuoli').find('.loan-price').html($(this).val());
+  });
+
+  $('#fuoli').find('select.during-selector').change(function() {
+    $('#fuoli').find('.loan-time .number').html($(this).val());
+  });
+
+  $('#yueli').find('select.cost-selector').change(function() {
+    $('#yueli').find('.loan-price').html($(this).val());
+  });
+
+  $('#yueli').find('select.during-selector').change(function() {
+    $('#yueli').find('.loan-time .number').html($(this).val());
+  });
 });
