@@ -23,6 +23,28 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
+function getOptions(data, step, start_value) {
+  var html = '', option = '';
+
+  if(data > 1) {
+    for(var i = start_value; i <= data; i += step) {
+      option = '<option value="' + i + '">' + i + '</option>';
+      html += option;
+    }
+  }  
+
+  return html;
+}
+
+function createSelectBox(el, data) {
+  el.find('.start-loan .description .content > p').html(data.intro);
+  el.find('.start-loan .last-description .content > p').html(data.lateIntro);
+  var options = getOptions(data.maxMoney, 50, data.minMoney);
+  el.find('select.cost-selector').html(options);
+  options = getOptions(data.maxMonth, 1, data.minMonth);
+  el.find('select.during-selector').html(options);
+}
+
 setCookie('auth_token', 'dd', 1);
 
 // carousel section in home page
@@ -36,7 +58,7 @@ var data = {
   'deviceToken': 'dd'
 }
 
-Api.post(ENDPOINT.ADDRESS_SYS_INIT, data).then(function (res) {console.log(res)
+Api.post(ENDPOINT.ADDRESS_SYS_INIT, data).then(function (res) {
   if(res.error.errno == 200) {
     var html = carouselTemplate.render(res.ad.carousel);
     $('#banner_slider .carousel-inner').html(html);
@@ -45,3 +67,13 @@ Api.post(ENDPOINT.ADDRESS_SYS_INIT, data).then(function (res) {console.log(res)
     });
   }  
 })
+
+// calculator data
+Api.post(ENDPOINT.ADDRESS_LN_CALCULATOR, data).then(function (res) {
+  if(res.error.errno == 200) {
+    createSelectBox($('#fuli'), res.lnProdList.prod[0]);
+    createSelectBox($('#fuoli'), res.lnProdList.prod[1]);
+    createSelectBox($('#yueli'), res.lnProdList.prod[2]);
+  }  
+})
+

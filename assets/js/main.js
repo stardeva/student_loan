@@ -359,4 +359,29 @@ $(document).ready(function() {
       }
     });
   }
+
+  //select event in calculate page
+  $('#fuli').find('select.cost-selector').change(function() {
+    $('#fuli').find('.loan-price').html($(this).val());
+  });
+
+  $('#fuli').find('select.during-selector').change(function() {
+    $('#fuli').find('.loan-time .number').html($(this).val());
+  });
+
+  $('#fuoli').find('select.cost-selector').change(function() {
+    $('#fuoli').find('.loan-price').html($(this).val());
+  });
+
+  $('#fuoli').find('select.during-selector').change(function() {
+    $('#fuoli').find('.loan-time .number').html($(this).val());
+  });
+
+  $('#yueli').find('select.cost-selector').change(function() {
+    $('#yueli').find('.loan-price').html($(this).val());
+  });
+
+  $('#yueli').find('select.during-selector').change(function() {
+    $('#yueli').find('.loan-time .number').html($(this).val());
+  });
 });

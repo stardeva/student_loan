@@ -720,6 +720,7 @@ body {
   padding: 20px 10px;
   color: #aaa;
   font-size: 20px;
+  background-color: #fff;
 }
 
 .loan-kind {
@@ -747,7 +748,6 @@ body {
 }
 
 .start-loan {
-  border-top: 1px solid #aaa;
   color: #aaa;
   background-color: #f0f0f0;
 }
@@ -1116,6 +1116,7 @@ form#request_loan_form {
 .form-page.ui-mobile-viewport > .ui-page, 
 .personal-page.ui-mobile-viewport > .ui-page {
   position: relative;
+  background-color: #f0f0f0;
 }
 
 .main {
