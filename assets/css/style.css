@@ -527,42 +527,47 @@ body {
   color: #000;
 }
 
-.header #banner_slider .carousel-inner .item {
-  max-height: 60vw;
-  height: 60vw;
+.header #banner_slider .carousel-image {
+  max-width: 100%;
 }
 
-.header #banner_slider .carousel-inner .item a {
+.header #banner_slider .slick-dots {
+  position: absolute;
+  bottom: 0px;
   display: block;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  height: 20px;
+}
+
+.header #banner_slider .slick-dots li {
   position: relative;
-  height: 60vw;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
-.header #banner_slider .carousel-inner .item a.credits {
-  background-image: url('../images/credits.jpg');
+.header #banner_slider .slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  padding: 0;
+  background: rgba(0,0,0,.5);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
 }
 
-.header #banner_slider .carousel-inner .item a.financial {
-  background-image: url('../images/financial.jpg');
-}
-
-.header #banner_slider .carousel-inner .item a.tips {
-  background-image: url('../images/tips.jpg');
-}
-
-.header #banner_slider .carousel-inner .item a.campus {
-  background-image: url('../images/campus.jpg');
-}
-
-.header #banner_slider .carousel-inner .item a.attendance {
-  background-image: url('../images/attendance.jpg');
-}
-
-.header #banner_slider .carousel-inner .item a.redwars {
-  background-image: url('../images/redwars.jpg');
+.header #banner_slider .slick-dots li.slick-active button {
+  background: #fff;
 }
 
 .toolbar {
@@ -617,8 +622,7 @@ body {
   font-family: 'FZKaTong';
   padding-bottom: 2vw;
   letter-spacing: 1vw;
-  padding-left: 12%;
-  text-align: left;
+  text-align: center;
 }
 
 .footer {
@@ -1782,25 +1786,12 @@ form#request_loan_form {
   margin: 0 auto;
 }
 
-/*modal*/
-.vertical-alignment-helper {
-  display: table;
-  height: 100%;
-  width: 100%;
-  pointer-events: none; /* This makes sure that we can still click outside of the modal to close it */
-}
-.vertical-align-center {
-  /* To center vertically */
-  display: table-cell;
-  vertical-align: middle;
-  pointer-events: none;
-}
-.modal-content {
-  width: inherit;
-  height: inherit;
-  /* To center horizontally */
-  margin: 0 auto;
-  pointer-events: all;
+/* Notification Popup custom style */
+.notification-popup {
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 @media screen and (min-width: 1024px) {
