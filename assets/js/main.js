@@ -117,20 +117,16 @@ $(document).ready(function() {
     }
   }*/
 
-  // $.post("http://api.wazxb.com/sys/init",
-  //   {
-  //     uid: '4dba7e89fa0ffb27ecfd3ab0',
-  //     deviceId: '00000000000000008:00:27:44:04:bb323ec7466101f399',
-  //     deviceOs: 'Android',
-  //     deviceType: 'Google Nexus S - 4.1.1 - API 16 - 480x800',
-  //     deviceOp: '4.1.1',
-  //     version: '1.0.1',
-  //     deviceToken: 'dd'
-  //   },
-  //   function(data, status){
-  //       alert("Data: " + data + "\nStatus: " + status);
-  //   });
-
+  if($('#banner_slider').length > 0) {
+    $('#banner_slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      autoplay: true,
+      arrows: false,
+      mobileFirst: true
+    });
+  }
 
   /* credit base 1 page datepicker */
   if($.fn.datepicker !== undefined) {
@@ -156,7 +152,6 @@ $(document).ready(function() {
     });
   }
   
-
   $('.file-upload').change(function() {
     if(this.files && this.files[0]) {
       var file = this.files[0];
@@ -185,14 +180,6 @@ $(document).ready(function() {
     }
   });
 
-  /* sign up page */
-  $(document).on('keyup', '#signup_student_id', function() {
-    if($(this).val() != '')
-      $('#signup_submit').addClass('success');
-    else
-      $('#signup_submit').removeClass('success');
-  });
-
   /* my photo upload */
   $('#my_photo').change(function() {
     if(this.files && this.files[0]) {
@@ -212,6 +199,13 @@ $(document).ready(function() {
       reader.readAsDataURL(file);
     }
   });
+
+  if($('.swiper-container').length) {
+    var creditBaseSwiper = new Swiper('.swiper-container');
+    creditBaseSwiper.on('onSlideChangeEnd', function(swiper) {
+      console.log(swiper);
+    });
+  }
 
   if($("#detail_slider").length) {
     $("#detail_slider").slider({});
@@ -384,4 +378,24 @@ $(document).ready(function() {
   $('#yueli').find('select.during-selector').change(function() {
     $('#yueli').find('.loan-time .number').html($(this).val());
   });
+});
+
+
+/* sign up page */
+function validateSignup() {
+  if($('#signup_student_id').val() != '' && $('#signup_agree').is(':checked')) {
+    $('#signup_submit').removeAttr('disabled');
+    $('#signup_submit').addClass('success');
+  }
+  else{
+    $('#signup_submit').removeClass('success');
+    $('#signup_submit').attr('disabled', 'disabled');
+  }
+}
+$(document).on('keyup', '#signup_student_id', function() {
+  validateSignup();
+});
+
+$(document).on('click', '#signup_agree', function() {
+  validateSignup();
 });
