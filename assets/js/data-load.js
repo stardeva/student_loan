@@ -2,11 +2,7 @@
 //* TEMPLATE *
 //*-----------
 var carouselTemplate = $.templates(
-  '{{if #index==0}}\
-  <div class="item active">\
-  {{else}}\
-  <div class="item">\
-  {{/if}}\
+  '<div class="item">\
     <a href="{{:url}}">\
       <img src="{{:picUrl}}" class="carousel-image" />\
     </a>\
@@ -57,17 +53,22 @@ var data = {
   'version': '1.0.1',
   'deviceToken': 'dd'
 }
-
+/*
 Api.post(ENDPOINT.ADDRESS_SYS_INIT, data).then(function (res) {
   if(res.error.errno == 200) {
     var html = carouselTemplate.render(res.ad.carousel);
-    $('#banner_slider .carousel-inner').html(html);
-    $('.carousel').carousel({
-      interval: 2000
+    $('#banner_slider').html(html);
+    $('#banner_slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      autoplay: true,
+      arrows: false,
+      mobileFirst: true
     });
   }  
 })
-
+*/
 // calculator data
 Api.post(ENDPOINT.ADDRESS_LN_CALCULATOR, data).then(function (res) {
   if(res.error.errno == 200) {

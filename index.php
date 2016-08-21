@@ -1,3 +1,37 @@
+<?php
+session_start();
+require_once('api/curl.php');
+
+if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
+  $uId = $_COOKIE['uid'];
+  $login_temp = array(
+    'uid' => $uId,
+    'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
+    'deviceOs' => 'Android',
+    'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
+    'deviceOp' => '4.1.1',
+    'version' => '1.0.1',
+    'deviceToken' => 'dd'
+  );
+
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $login_temp);
+  $result = json_decode($result);
+
+  if($result->error->errno == '200') {
+    $carousel = $result->ad->carousel;
+  }
+
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
+  if($result->error->errno != '200') {
+    
+  } else {
+    $userAllData = $result;
+    $_SESSION['user_all_data'] = $userAllData;
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,11 +58,19 @@
   <body class="home-index-page">    
     <header class="header">
       <nav class="topnav">
-        <a href="signup.html" class="nav text unregistered">未登录</a>
+        <a href="signup.php" class="nav text unregistered">未登录</a>
         <span class="nav text title">学融宝</span>
         <a href="personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
       </nav>
-      <div id="banner_slider"></div>
+      <?php if(isset($carousel)): ?>
+      <div id="banner_slider">
+        <?php foreach($carousel as $item): ?>
+          <div class="item">
+            <a href="<?= $item->url ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
     </header>
 
     <section class="toolbar">
@@ -51,8 +93,12 @@
     </section>
 
     <a href="credits" class="credit">
-      <img src="assets/images/credit-banner.png" alt="" />
-      <span class="credit-number">5000</span>
+      <?php if(isset($userAllData)): ?>
+        <img src="assets/images/credit-banner.png" alt="" />
+        <span class="credit-number"><?= $userAllData->user->quotaTotal ?></span>
+      <?php else: ?>
+        <img src="assets/images/credit-default.png" alt="" />
+      <?php endif; ?>
     </a>
 
     <footer class="footer">
@@ -79,14 +125,13 @@
       </nav>
     </footer>
 
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/js.cookie.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootbox.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/jsrender.js"></script>
-    <script src="assets/js/data-load.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/js.cookie.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="assets/js/slick.min.js"></script>
+    <script type="text/javascript" src="assets/js/api.js"></script>
+
+    <script type="text/javascript" src="assets/js/main.js"></script>
   </body>
 </html>
