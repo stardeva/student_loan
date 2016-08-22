@@ -44,7 +44,7 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
       <div class="info-box">
         注: 填写全都必填信才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
       </div>
-      <form action="../api/functions.php" id="credit_base" name="credit_base" method="post">
+      <form action="../api/actions.php" id="credit_base" name="credit_base" method="post">
         <input type="hidden" name="uId" value="<?= $uId ?>" />
         <input type="hidden" name="page" value="credit_base" />
         <input type="hidden" name="backurl" value="../credits/credit_base.php" />
