@@ -153,6 +153,15 @@
   height: 100%;
 }
 
+.submit-btn {
+  width: 100%;
+  color: #fff;
+  border: none;
+  border-radius: initial;
+  font-weight: 700;
+  background-color: #ec8558;
+}
+
 .file-block .input-holder {
   display: flex;
   flex-grow: 1;
@@ -427,6 +436,14 @@ body {
   justify-content: space-between;
 }
 
+.flex-wrap-column {
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .arrow-right {
   width: 10px;
   height: 10px;
@@ -444,6 +461,7 @@ body {
   margin-left: 20px;
   padding: 16px 16px 16px 0;
   border-bottom: 1px solid #ccc;
+  text-decoration: none;
 }
 
 .loan-data-area .data-group .content {
@@ -818,7 +836,7 @@ form .reqire-icon {
   color: #aaa;
 }
 
-.loan-form .submit-button {
+.loan-form .submit-btn {
   margin-top: 20px;
   width: 100%;
   border: none;
@@ -828,7 +846,7 @@ form .reqire-icon {
   background-image: none;
 }
 
-.loan-form .submit-button[disabled] {
+.loan-form .submit-btn[disabled] {
   background-color: #ccc;
 }
 
@@ -1715,7 +1733,7 @@ form#request_loan_form {
   margin-top: 20px;
 }
 
-.personal-area .submit-button {
+.personal-area .submit-btn {
   margin-top: 40px;
   margin-bottom: 20px; 
   background-color: #fff;
@@ -1784,6 +1802,63 @@ form#request_loan_form {
 
 .user-estimate-area .estimate-group .name {
   margin: 0 auto;
+}
+
+/*contract*/
+.contract-area > embed {
+  width: 100%;
+}
+
+.contract-area #pdf_canvas {
+  width: 100%;
+}
+
+.about-us-area .logo {
+  width: 80px;
+  height: 80px;
+  margin: 20px 0;
+  background-image: url('../images/logo.png');
+}
+
+.about-us-area .barcode {
+  width: 130px;
+  height: 130px;
+  background-image: url('../images/barcode.png');
+}
+
+.about-us-area .wrap-content {
+  margin-top: 5px;
+}
+
+.about-us-area .company {
+  font-size: 12px;
+}
+
+.about-us-area .barcode {
+  margin-top: 10px;
+}
+
+.about-us-area {
+  padding: 0 10px;
+  color: #888;
+}
+
+.contact-us-area .info-item .item-title {
+  color: #333;
+}
+
+.contact-us-area .info-item .item-desc {
+  color: #888;
+}
+
+.feedback-area form .edit-area {
+  margin: 10px;
+}
+
+.feedback-area form textarea {
+  width: 100%;
+  border: none;
+  resize:none
 }
 
 /* Notification Popup custom style */

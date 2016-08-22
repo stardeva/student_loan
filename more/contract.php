@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
+  
+} else {
+  header("Location: ../../signup.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,50 +29,35 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title">用户评价</span>
+        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <span class="nav text title"><?php echo $_GET['title'] ?></span>
         <div class="nav"></div>
       </nav>
     </header>
 
-    <section class="loan-data-area main-loan-area">
-      <div class="main-wrap user-estimate-area">
-        <div class="estimate-group flex-wrap-space">
-          <div class="content">
-            <div class="user-name flex-wrap-space">
-              <div class="user-head emoticon">
-                <div class="user-head-image image"></div>
-              </div>
-              <div class="name"><b>匿名</b></div>
-            </div>
-            <div class="active-money">
-              <span><b>活力货 100元</b></span>
-            </div>
-            <div class="power text-center">很给力</div>
-          </div>
-
-          <div class="user-mark flex-wrap-space">
-            <div class="date">2016-04-24</div>
-            <div class="mark-wrap">
-              <div class="mark-image active image"></div>
-              <div class="mark-image active image"></div>
-              <div class="mark-image active image"></div>
-              <div class="mark-image image"></div>
-              <div class="mark-image image"></div>
-            </div>
-          </div>
-        </div>
-      </div>      
+    <section class="contract-area">
+      <?php
+        if($_GET['type'] != 'pdf') {
+          echo "<embed src=".$_GET['url'].">";
+        } else {
+          echo "<canvas id='pdf_canvas'></canvas>";
+        }
+      ?>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/pdf.js"></script>
     <script src="../assets/js/main.js"></script>
-
+    <?php
+      if($_GET['type'] == 'pdf') {
+        echo "<script>generatePdf('".$_GET['url']."')</script>";
+      }
+    ?>
   </body>
 </html>

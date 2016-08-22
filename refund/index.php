@@ -1,3 +1,27 @@
+<?php
+session_start();
+require_once('../api/curl.php');
+
+if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
+  $uId = $_COOKIE['uid'];
+  $login_temp = array(
+    'uid' => $uId
+  );
+
+  if(isset($_SESSION["initData"])) {
+    $userAllData = $_SESSION["initData"];
+  }
+
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_RETURN'], $login_temp);
+  $result = json_decode($result);
+
+  $output = '<script>console.log('.json_encode($result).')</script>';
+  echo $output;
+
+} else {
+  header("Location: ../signup.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,8 +62,17 @@
               <div class="image"></div>
             </div>
             <div class="nav-detail">
-              <div class="title"><b>招商银行辽宁省分行</b></div>
-              <div class="content">6226 1234 1234 1234 分行</div>
+              <div class="title">
+                <b>
+                  <?php if(isset($userAllData)): ?>
+                    <?= $userAllData->returnWay->bankBranch ?>
+                  <?php endif; ?>
+                </b></div>
+              <div class="content">
+                <?php if(isset($userAllData)): ?>
+                  <?= $userAllData->returnWay->bankCard ?> 分行
+                <?php endif; ?>
+              </div>
             </div>  
           </div>
 
@@ -49,7 +82,11 @@
             </div>
             <div class="nav-detail">
               <div class="title"><b>支付宝</b></div>
-              <div class="content">waix@163.com</div>
+              <div class="content">
+                <?php if(isset($userAllData)): ?>
+                  <?= $userAllData->returnWay->aliPay ?>
+                <?php endif; ?>
+              </div>
             </div>  
           </div>
 
@@ -59,7 +96,11 @@
             </div>
             <div class="nav-detail">
               <div class="title"><b>微信</b></div>
-              <div class="content">12345678</div>
+              <div class="content">
+                <?php if(isset($userAllData)): ?>
+                  <?= $userAllData->returnWay->weixinPay ?>
+                <?php endif; ?>
+              </div>
             </div>  
           </div>        
         </div>
