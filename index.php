@@ -83,11 +83,11 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
         <img src="assets/images/home_icon_repay.png" alt="还款" />
         <span>还&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</span>
       </a>
-      <a href="estimate/rate.html" class="tool">
+      <a href="calculate/index.php" class="tool">
         <img src="assets/images/home_icon_rates.png" alt="费率计算" />
         <span>费&nbsp;率&nbsp;计&nbsp;算</span>
       </a>
-      <a href="estimate/user.html" class="tool">
+      <a href="estimate/user.php" class="tool">
         <img src="assets/images/home_icon_feedback.png" alt="评价" />
         <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
       </a>

@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once('../api/curl.php');
+
+if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
+  if(isset($_SESSION["initData"])) {
+    $userAllData = $_SESSION["initData"];
+  }
+
+} else {
+  header("Location: ../signup.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,31 +45,31 @@
     <section class="more-area loan-data-area">
       <div class="main-wrap">
         <div class="more-wrap ">
-          <div class="data-group flex-wrap-space">
+          <a href="about_us.php?title=关于我们" class="data-group flex-wrap-space">
             <div class="title"><b>关于我们</b></div>
             <div class="arrow-right image"></div>
-          </div>
+          </a>
 
-          <div class="data-group flex-wrap-space">
+          <a  href="feedback.php?title=意见反馈" class="data-group flex-wrap-space">
             <div class="title"><b>意见反馈</b></div>
             <div class="arrow-right image"></div>
-          </div>  
+          </a>  
 
-          <div class="data-group flex-wrap-space">
+          <a href="contact_us.php?title=联系客服" class="data-group flex-wrap-space">
             <div class="title"><b>联系客服</b></div>
             <div class="arrow-right image"></div>
-          </div>
+          </a>
         </div>
 
         <div class="helper">
-          <div class="data-group flex-wrap-space">
+          <a href="contract.php?url=<?= $userAllData->contract->guide?>&title=新手指南&type=jpg" class="data-group flex-wrap-space">
             <div class="title"><b>新手指南</b></div>
             <div class="arrow-right image"></div>
-          </div>
-          <div class="data-group flex-wrap-space">
+          </a>
+          <a href="contract.php?url=<?= $userAllData->contract->help?>&title=使用帮助&type=pdf" class="data-group flex-wrap-space">
             <div class="title"><b>使用帮助</b></div>
             <div class="arrow-right image"></div>
-          </div>
+          </a>
         </div>    
       </div>      
     </section>
