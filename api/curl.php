@@ -39,7 +39,9 @@ $API_ENDPOINTS = array(
   'ADDRESS_PW_FIND' =>   'pw/find',
   'ADDRESS_PW_MODIFY' => 'pw/modify',
   'ADDRESS_PW_VERIFY' => 'pw/verify',
-  'ADDRESS_SE_SCHOOL' => 'se/school'
+  'ADDRESS_SE_SCHOOL' => 'se/school',
+
+  'ADDRESS_UP_IMAGE' => 'sys/uppic'
 );
 
 function httpPost($url, $params) {
@@ -56,4 +58,43 @@ function httpPost($url, $params) {
   curl_close($ch);
   return $output;
 }
+
+$BANK_LIST = array(
+  "中国工商银行",
+  "中国农业银行",
+  "中国银行",
+  "中国建设银行",
+  "交通银行",
+  "中国邮政储蓄银行",
+  "招商银行",
+  "中信银行",
+  "中国光大银行",
+  "华夏银行",
+  "上海浦东发展银行",
+  "中国民生银行",
+  "广发银行",
+  "兴业银行",
+  "平安银行",
+  "浙商银行",
+  "渤海银行",
+  "东亚银行",
+  "大华银行",
+  "韩亚银行",
+  "吉林银行",
+  "盛京银行",
+  "锦州银行",
+  "葫芦岛银行",
+  "大连银行",
+  "鞍山银行",
+  "抚顺银行",
+  "丹东银行",
+  "营口银行",
+  "盘锦银行",
+  "阜新银行",
+  "辽阳银行",
+  "铁岭银行",
+  "朝阳银行",
+  "哈尔滨银行",
+  "沈阳农商银行"
+  );
 ?>

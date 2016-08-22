@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once('api/curl.php');
 if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
@@ -40,7 +40,7 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
   <body class="signup-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.html" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">登录</span>
         <a href="personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
       </nav>
@@ -60,7 +60,7 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
         </div>
         <div class="checkbox">
           <input type="checkbox" name="signgup_agree" id="signup_agree" checked />
-          <label for="signup_agree"> 我己阅读开同意 <a href="#" class="link">《隐私条》</a>, <a href="#" class="link">《注册协议》</a> 及 <a href="#" class="link">《注册协议》</a>.</label>
+          <label for="signup_agree"> 我己阅读开同意 <span class="link">《隐私条》</span>, <span class="link">《注册协议》</span> 及 <span class="link">《注册协议》</span>.</label>
         </div>
         <div class="buttons">
           <input type="submit" class="button" value="登录" id="signup_submit" disabled="disabled" />
@@ -94,22 +94,19 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
       </nav>
     </footer>
 
-    <?php if(isset($result) && $result->error->errno != '200'): ?>
-    <div class="notification-popup">
-      <?php echo $result->error->usermsg; ?>
-    </div>
-    <?php endif; ?>
+    <div class="notification-popup"></div>
 
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/js.cookie.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.popupoverlay.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/js.cookie.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>
 
     <script src="assets/js/main.js"></script>
 
     <?php if(isset($result) && $result->error->errno != '200') : ?>
     <script type="text/javascript">
       $(document).ready(function() {
+        $('.notification-popup').html("<?= $result->error->usermsg ?>");
         $('.notification-popup').popup({
           autoopen: true,
           blur: false,

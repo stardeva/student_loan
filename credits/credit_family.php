@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once('../api/curl.php');
+if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
+} else {
+  header("Location: ../signup.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,7 +21,6 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/bootstrap-datepicker3.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -33,13 +42,16 @@
       <div class="info-box">
         注: 填写全都必填信才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
       </div>
-      <form enctype="multipart/form-data">
+      <form action="../api/actions.php" id="credit_family" name="credit_family" method="post">
+        <input type="hidden" name="uId" value="<?= $uId ?>" />
+        <input type="hidden" name="page" value="credit_family" />
+        <input type="hidden" name="backurl" value="../credits/credit_family.php" />
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
               <label for="credit_family_father_name" class="required">父亲姓名</label>
               <div class="input-holder">
-                <input type="text" name="credit_family[father_name]" id="credit_family_father_name" required="true" value="哈" />
+                <input type="text" name="faName" id="credit_family_father_name" required="true" value="<?= $userAllData->cdHome->faName ?>" placeholder="请输入父亲姓名" />
               </div>
             </div>
           </div>
@@ -49,7 +61,7 @@
             <div class="input-block">
               <label for="credit_family_father_mobile" class="required">父亲手机</label>
               <div class="input-holder">
-                <input type="text" name="credit_family[father_mobile]" id="credit_family_father_mobile" required="true" class="phone" value="哈" />
+                <input type="tel" name="faPhone" id="credit_family_father_mobile" required="true" class="phone" value="<?= $userAllData->cdHome->faPhone ?>" placeholder="请输入父亲手机" />
               </div>
             </div>
           </div>
@@ -59,7 +71,7 @@
             <div class="input-block">
               <label for="credit_family_mother_name" class="required">母亲姓名</label>
               <div class="input-holder">
-                <input type="text" name="credit_family[mother_name]" id="credit_family_mother_name" required="true" value="哈" />
+                <input type="text" name="moName" id="credit_family_mother_name" required="true" value="<?= $userAllData->cdHome->moName ?>" placeholder="请输入母亲姓名" />
               </div>
             </div>
           </div>
@@ -69,7 +81,7 @@
             <div class="input-block">
               <label for="credit_family_mother_mobile" class="required">母亲手机</label>
               <div class="input-holder">
-                <input type="text" name="credit_family[mother_mobile]" id="credit_family_mother_mobile" required="true" class="phone" value="哈" />
+                <input type="text" name="moPhone" id="credit_family_mother_mobile" required="true" class="phone" value="<?= $userAllData->cdHome->moPhone ?>" placeholder="请输入母亲手机" />
               </div>
             </div>
           </div>
@@ -80,7 +92,26 @@
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
+
     <script type="text/javascript" src="../assets/js/main.js"></script>
+
+    <?php if(isset($_SESSION['flash']) && $_SESSION['flash'] != '') : ?>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.notification-popup').html("<?= $_SESSION['flash'] ?>");
+        $('.notification-popup').popup({
+          autoopen: true,
+          blur: false,
+          onopen: function() {
+            setTimeout(function() {
+              $('.notification-popup').popup('hide');
+            }, 1000);
+          }
+        });
+      });
+    </script>
+    <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
   </body>
 </html>

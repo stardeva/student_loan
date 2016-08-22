@@ -1,3 +1,15 @@
+<?php
+require_once('../api/curl.php');
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
+} else {
+  header("Location: ../signup.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,33 +41,33 @@
       </nav>
     </header>
     <section class="main no-padding">
-      <a href="personal_my_info.html" class="personal-box">
+      <a href="personal_my_info.php" class="personal-box">
         <div class="user-head">
-          <img src="../assets/images/user_head.png" class="user-photo-preview" />
+          <img src="<?php echo isset($userAllData->user->portrait) && $userAllData->user->portrait != '' ? $userAllData->user->portrait : '../assets/images/user_head.png'; ?>" class="user-photo-preview" />
         </div>
         <div class="user-body">
-          <div class="user-name">测试</div>
+          <div class="user-name"><?= $userAllData->user->name ?></div>
           <div class="user-info">
-            <div class="user-credit">额度 <span>5000</span> 元</div>
-            <div class="user-credit-beans">信用豆 <span>0</span></div>
-            <div class="user-total">总额度 <span>5000</span> 元</div>
+            <div class="user-credit">额度 <span><?= $userAllData->user->quota ?></span> 元</div>
+            <div class="user-credit-beans">信用豆 <span><?= $userAllData->user->beans ?></span></div>
+            <div class="user-total">总额度 <span><?= $userAllData->user->quotaTotal ?></span> 元</div>
           </div>
         </div>
       </a>
       <div class="personal-info-list">
-        <a href="#" class="info-item right-arrow">
+        <a href="<?php echo isset($userAllData->user->bank) && $userAllData->user->bank != '' ? 'personal_unbind_bank.php' : 'personal_bind_bank.php'; ?>" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_card.png" /></div>
           <div class="item-title">我的银行卡</div>
-          <div class="item-desc">盛京银行 (尾号3131)</div>
+          <div class="item-desc"><?php echo isset($userAllData->user->bank) && $userAllData->user->bank != '' ? $userAllData->user->bank.' (尾号'.substr($userAllData->user->bankCard, -4).')' : '绑定银行卡' ?></div>
         </a>
-        <a href="#" class="info-item right-arrow">
+        <a href="personal_coin_mall.php" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_coin.png" /></div>
           <div class="item-title">我的金币</div>
-          <div class="item-desc">3个</div>
+          <div class="item-desc"><?= $userAllData->user->coins ?>个</div>
         </a>
         <a href="personal_my_messages.html" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_msg.png" /></div>
-          <div class="item-title">我的消息 <span class="badge msg">1</span></div>
+          <div class="item-title">我的消息</div>
         </a>
         <a href="personal_my_history.html" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_history.png" /></div>

@@ -1,3 +1,15 @@
+<?php
+require_once('../api/curl.php');
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
+} else {
+  header("Location: ../signup.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,9 +35,9 @@
   <body class="personal-page personal-my-info">
     <header class="header">
       <nav class="topnav">
-        <a href="index.html" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">个人资料</span>
-        <a href="index.html" class="nav text next">完成</a>
+        <a href="" class="nav text next">完成</a>
       </nav>
     </header>
     <section class="main no-padding">
@@ -33,9 +45,14 @@
         <div class="info-item user-photo right-arrow">
           <div class="item-title">头像</div>
           <div class="user-photo-upload">
-            <img src="../assets/images/user_head.png" class="user-photo-preview" />
-            <input type="file" id="my_photo" name="user[my_photo]" />
+            <img src="<?php echo isset($userAllData->user->portrait) && $userAllData->user->portrait != '' ? $userAllData->user->portrait : '../assets/images/user_head.png'; ?>" class="user-photo-preview" />
+            <input type="file" id="my_photo" accept='image/*' class="file-upload" />
+            <input type="hidden" name="uId" value="<?= $uId ?>" id="uid" />
           </div>
+        </div>
+        <div class="info-item">
+          <div class="item-title">姓名</div>
+          <div class="item-desc"><?= $userAllData->user->name ?></div>
         </div>
         <div class="info-item">
           <div class="item-title">学号</div>
@@ -43,15 +60,15 @@
         </div>
         <div class="info-item">
           <div class="item-title">额度</div>
-          <div class="item-desc">5000 元</div>
+          <div class="item-desc"><?= $userAllData->user->quota ?> 元</div>
         </div>
         <div class="info-item">
           <div class="item-title">信用豆</div>
-          <div class="item-desc user-credit-beans">132</div>
+          <div class="item-desc user-credit-beans"><?= $userAllData->user->beans ?></div>
         </div>
         <div class="info-item">
           <div class="item-title">总额度</div>
-          <div class="item-desc">5050 元</div>
+          <div class="item-desc"><?= $userAllData->user->quotaTotal ?> 元</div>
         </div>
         <br />
         <br />
@@ -86,6 +103,8 @@
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../assets/js/api.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>
 </html>
