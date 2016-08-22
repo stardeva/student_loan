@@ -1,3 +1,25 @@
+<?php
+session_start();
+require_once('../api/curl.php');
+
+function setOption ($min, $max, $step) {
+  for ($i = $min; $i <= $max; $i+= $step) {
+    if ($i == $min)
+      echo "<option value=\"$i\" selected>$i</option>";
+    else
+      echo "<option value=\"$i\">$i</option>";
+  }
+}
+
+if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
+  $uId = $_COOKIE['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array('uId' => $uId));
+  $result = json_decode($result);
+} else {
+  header("Location: ../signup.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,7 +46,7 @@
   <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">费率计算</span>
         <div class="nav"></div>
       </nav>
@@ -46,14 +68,18 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
-                  <option value="0">0</option>
+                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[0]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[0]->minMoney, $result->lnProdList->prod[0]->maxMoney, 50);
+                  ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
-                  <option value="0">0</option>
+                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[0]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[0]->minDay, $result->lnProdList->prod[0]->maxDay, 1);
+                  ?>
                 </select>
               </div>          
             </div>
@@ -63,7 +89,7 @@
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number">1</span>天</span>
+              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[0]->minDay ?></span>天</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -74,15 +100,27 @@
                 <p>产品及借款费用说明</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[0]->intro;
+                  ?>
+                </p>
+              </div>
             </div>
 
             <div class="description last-description">
               <div class="title">
-                <p>逾期费用说明</p>          
+                <p>逾期费用说明.</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[0]->lateIntro;
+                  ?>
+                </p>
+            </div>
             </div>     
           </div>
         </div>
@@ -96,14 +134,18 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
-                  <option value="0">0</option>
+                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[1]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[1]->minMoney, $result->lnProdList->prod[1]->maxMoney, 50);
+                  ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
-                  <option value="0">0</option>
+                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[1]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[1]->minDay, $result->lnProdList->prod[1]->maxDay, 1);
+                  ?>
                 </select>
               </div>   
             </div>
@@ -113,7 +155,7 @@
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number">1</span>天</span>
+              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[1]->minDay ?></span>天</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -124,7 +166,13 @@
                 <p>产品及借款费用说明</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[1]->intro;
+                  ?>
+                </p>
+              </div>
             </div>
 
             <div class="description last-description">
@@ -132,7 +180,13 @@
                 <p>逾期费用说明</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[1]->lateIntro;
+                  ?>
+                </p>
+              </div>
             </div>     
           </div>
         </div>
@@ -146,14 +200,18 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
-                  <option value="0">0</option>
+                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[2]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[2]->minMoney, $result->lnProdList->prod[2]->maxMoney, 50);
+                  ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
-                  <option value="0">0</option>
+                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[2]->rateFlt ?>">
+                  <?php
+                    setOption($result->lnProdList->prod[2]->minMonth, $result->lnProdList->prod[2]->maxMonth, 1);
+                  ?>
                 </select>
               </div>          
             </div>
@@ -163,7 +221,7 @@
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number">1</span>月</span>
+              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[2]->minMonth ?></span>月</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -174,7 +232,13 @@
                 <p>产品及借款费用说明</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[2]->intro;
+                  ?>
+                </p>
+              </div>
             </div>
 
             <div class="description last-description">
@@ -182,7 +246,13 @@
                 <p>逾期费用说明</p>          
               </div>
 
-              <div class="content"><p></p></div>
+              <div class="content">
+                <p>
+                  <?php
+                    echo $result->lnProdList->prod[2]->lateIntro;
+                  ?>
+                </p>
+              </div>
             </div>     
           </div>
         </div>        

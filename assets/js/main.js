@@ -69,6 +69,39 @@ function decideLoan() {
   });
 }
 
+// generate pdf in more/contract.php
+function generatePdf(url) {
+  //var url = 'http://zxb-pic.img-cn-beijing.aliyuncs.com/1463534014_%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9.pdf';
+  PDFJS.workerSrc = '../assets/js/pdf.worker.js';
+
+  PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {
+    //
+    // Fetch the first page
+    //
+    pdf.getPage(1).then(function getPageHelloWorld(page) {
+      var scale = 2;
+      var viewport = page.getViewport(scale);
+
+      //
+      // Prepare canvas using PDF page dimensions
+      //
+      var canvas = document.getElementById('pdf_canvas');
+      var context = canvas.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      //
+      // Render PDF page into canvas context
+      //
+      var renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+      page.render(renderContext);
+    });
+  });
+}
+
 $(document).ready(function() {
   /* show modal when page load */
   /*if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
@@ -226,7 +259,7 @@ $(document).ready(function() {
     var main_height = wrap_height + header_height + footer_height + 40;
 
 
-    if(window_height >= main_height ) {console.log(window_height, header_height)
+    if(window_height >= main_height ) {
       $('.main-loan-area').height(window_height - header_height);
     } else {
       $('.main-loan-area').height(main_height);
@@ -243,6 +276,7 @@ $(document).ready(function() {
   if($('#bank_card_form').length) {
     $('#bank_card_form').bootstrapValidator({
       fields: {
+        container: '#messages',
         card: {
           validators: {
             notEmpty: {
@@ -283,7 +317,37 @@ $(document).ready(function() {
     });
 
 
-    $('#bank_card_form').on('status.field.bv', function(e, data) {
+    $('#bank_card_form').on('status.field.bv', function(e, data) {      
+      formIsValid = true;
+      $('.form-group',$(this)).each( function() {
+        formIsValid = formIsValid && $(this).hasClass('has-success');
+      });
+      
+      if(formIsValid) {
+        $('.submit-btn', $(this)).attr('disabled', false);
+      } else {
+        $('.submit-btn', $(this)).attr('disabled', true);
+      }
+    });
+  }
+
+  // feedback page form validation
+  if($('#feedback_form').length) {    
+
+    $('#feedback_form').bootstrapValidator({
+      message: '#messages',
+      fields: {
+        feedback: {
+          validators: {
+            notEmpty: {
+              message: 'The feedback is required.'
+            }
+          }
+        }
+      }
+    });
+
+    $('#feedback_form').on('status.field.bv', function(e, data) {
       formIsValid = true;
 
       $('.form-group',$(this)).each( function() {
@@ -291,10 +355,20 @@ $(document).ready(function() {
       });
       
       if(formIsValid) {
-        $('.submit-button', $(this)).attr('disabled', false);
+        $('.submit-btn', $(this)).attr('disabled', false);
+
       } else {
-        $('.submit-button', $(this)).attr('disabled', true);
+        $('.submit-btn', $(this)).attr('disabled', true);
       }
+    });
+
+    // Validate the form manually
+    $('#feedback_form .submit-btn').click(function() {
+      Api.post(ENDPOINT.ADDRESS_U_FEEDBACK, $(this).serialize()).then(function (res) {
+        if(res.error.errno == 200) {
+          window.location ="index.php";
+        }  
+      });
     });
   }
 
@@ -326,6 +400,7 @@ $(document).ready(function() {
             min: 1,
             max: 1,
             message: "Please accept the agreement."
+
           }
         }
       }
@@ -340,14 +415,14 @@ $(document).ready(function() {
       });
         
       if(formIsValid) {
-          $('.submit-button', $(this)).attr('disabled', false);                  
+          $('.submit-btn', $(this)).attr('disabled', false);                  
       } else {
-          $('.submit-button', $(this)).attr('disabled', true);
+          $('.submit-btn', $(this)).attr('disabled', true);
       }
     });
 
     // check if the button is disabled when clicking the submit button
-    $('#request_loan_form').on('click', '.submit-button', function (e) {
+    $('#request_loan_form').on('click', '.submit-btn', function (e) {
       if($(this).attr("disabled")) {
         e.stopPropagation()
       }
@@ -355,28 +430,66 @@ $(document).ready(function() {
   }
 
   //select event in calculate page
+  function setValue(id, rate) {
+    var price = $(id).find('select.cost-selector').val();
+    var date = $(id).find('select.during-selector').val();
+    price = calResult(id, price, rate, date);
+    $(id).find('.loan-price').html(price + '元');
+    if(id != '#yueli')
+      $(id).find('.loan-time .number').html(date);
+  }
+
+  function getDay(intPrincipal, floatRate, intLoanPeriod) {
+    var result = intPrincipal * Math.pow(1 + (floatRate * 12 / 365), intLoanPeriod);
+    return result;
+  }
+
+  function getMonth(intPrincipal, floatRate, intLoanPeriod) {
+    var result = intPrincipal * (floatRate * Math.pow(1 + parseFloat(floatRate), intLoanPeriod)) / (Math.pow(1 + parseFloat(floatRate), intLoanPeriod) - 1);
+    return result;
+  }
+
+  function calResult(mode, mAmount, mRate, mTime) {
+    var value = 0; 
+
+    switch(mode) {
+      case '#huoli':
+          value = getDay(mAmount, mRate, mTime);
+        break;
+      case '#fuli':
+          value = mAmount;
+        break;
+      case '#yueli':
+          value = getMonth(mAmount, mRate, mTime);
+        break;
+    }
+
+    return value.toFixed(2);
+
+  }
+
   $('#fuli').find('select.cost-selector').change(function() {
-    $('#fuli').find('.loan-price').html($(this).val());
+    setValue('#fuli', $(this).attr('rate'));
   });
 
   $('#fuli').find('select.during-selector').change(function() {
-    $('#fuli').find('.loan-time .number').html($(this).val());
+    setValue('#fuli', $(this).attr('rate'));
   });
 
   $('#fuoli').find('select.cost-selector').change(function() {
-    $('#fuoli').find('.loan-price').html($(this).val());
+    setValue('#fuoli', $(this).attr('rate'));
   });
 
   $('#fuoli').find('select.during-selector').change(function() {
-    $('#fuoli').find('.loan-time .number').html($(this).val());
+    setValue('#fuoli', $(this).attr('rate'));
   });
 
   $('#yueli').find('select.cost-selector').change(function() {
-    $('#yueli').find('.loan-price').html($(this).val());
+    setValue('#yueli', $(this).attr('rate'));
   });
 
   $('#yueli').find('select.during-selector').change(function() {
-    $('#yueli').find('.loan-time .number').html($(this).val());
+    setValue('#yueli', $(this).attr('rate'));
   });
 });
 
