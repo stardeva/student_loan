@@ -37,7 +37,9 @@ var ENDPOINT = {
 	ADDRESS_PW_FIND: 	 'pw/find',
 	ADDRESS_PW_MODIFY: 'pw/modify',
 	ADDRESS_PW_VERIFY: 'pw/verify',
-	ADDRESS_SE_SCHOOL: 'se/school'
+	ADDRESS_SE_SCHOOL: 'se/school',
+
+  ADDRESS_UP_IMAGE: 'sys/uppic'
 }
 
 var Api = {

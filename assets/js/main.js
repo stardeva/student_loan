@@ -192,24 +192,63 @@ $(document).ready(function() {
       var preview = container.find('.image-preview');
       var label = container.find('label');
       var imageType = /image.*/;
+      var key = container.find('.file-key');
       if (!file.type.match(imageType)) {
-        preview.hide();
-        label.show();
+        preview.addClass('hidden');
+        label.removeClass('hidden');
         container.css('background-position', 'center');
         return;
       }
-      preview.file = file;
+
+      // Image priview
+      /*preview.file = file;
       var reader = new FileReader();
       reader.onload = (function(img, l, c) {
         return function(e) {
           $(img).prop('src', e.target.result);
-          $(img).show();
-          $(l).hide();
+          $(img).removeClass('hidden');
+          $(l).addClass('hidden');
           $(c).css('background-position', '-9999px');
         }
       })(preview, label, container);
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file);*/
+
+      // Image upload
+      var formdata = new FormData();
+      formdata.append('file', file);
+      $.ajax({
+        url: ENDPOINT.HOST + ENDPOINT.ADDRESS_UP_IMAGE,
+        async: false,
+        type: 'post',
+        data: formdata,
+        contentType: false,
+        cache: false,
+        processData: false,
+        mimeType: 'multipart/form-data',
+        beforeSend: function() {
+
+        },
+        success: function(res) {
+          res = JSON.parse(res);
+          if(res.error.errno != 200) {
+            preview.addClass('hidden');
+            label.removeClass('hidden');
+            container.css('background-position', 'center');
+          } else {
+            key.val(res.picKey);
+            preview.attr('src', res.picUrl);
+            preview.removeClass('hidden');
+            label.addClass('hidden');
+            container.css('background-position', '-9999px');
+          }
+        },
+        error: function(xhr, status, error) {
+          preview.addClass('hidden');
+          label.removeClass('hidden');
+          container.css('background-position', 'center');
+        }
+      });
     }
   });
 
@@ -221,22 +260,79 @@ $(document).ready(function() {
       if (!file.type.match(imageType)) {
         return;
       }
-      var preview = $(this).closest('.user-photo-upload').find('.user-photo-preview');
-      preview.file = file;
-      var reader = new FileReader();
-      reader.onload = (function(img) {
-        return function(e) {
-          $(img).prop('src', e.target.result);
+      var formdata = new FormData();
+      formdata.append('file', file);
+      $.ajax({
+        url: ENDPOINT.HOST + ENDPOINT.ADDRESS_UP_IMAGE,
+        async: false,
+        type: 'post',
+        data: formdata,
+        contentType: false,
+        cache: false,
+        processData: false,
+        mimeType: 'multipart/form-data',
+        beforeSend: function() {
+
+        },
+        success: function(res) {
+          res = JSON.parse(res);
+          var postdata = {'uId': $('#uid').val(), picKey: res.picKey, 'page': 'personal_info'};
+          if(res.error.errno == 200) {
+            $.ajax({
+              url: '../api/actions.php',
+              type: 'post',
+              data: postdata,
+              success: function(res1) {
+                res1 = JSON.parse(res1);
+                if(res1['error']['errno'] == 200)
+                  $('.user-photo-upload .user-photo-preview').attr('src', res1['user']['portrait']);
+              }
+            });
+          }
         }
-      })(preview);
-      reader.readAsDataURL(file);
+      });
     }
   });
 
   if($('.swiper-container').length) {
     var creditBaseSwiper = new Swiper('.swiper-container');
     creditBaseSwiper.on('onSlideChangeEnd', function(swiper) {
-      console.log(swiper);
+      if($('body').hasClass('credit-base-page')) {
+        $('.header .topnav .title').html('基本信息 ( ' + (swiper.activeIndex + 1) + '/3 )');
+        if(swiper.isEnd) $('.header .topnav .next').html('完成');
+        else $('.header .topnav .next').html('下一步');
+      }
+    });
+
+    if($('body').hasClass('credit-base-page')) {
+      $('.header .topnav .next').on('click', function(e) {
+        e.preventDefault();
+        if(!creditBaseSwiper.isEnd) creditBaseSwiper.slideNext();
+        else {
+          $('#credit_base').submit();
+        }
+      });
+    }
+  }
+
+  if($('body').hasClass('credit-family-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_family').submit();
+    });
+  }
+
+  if($('body').hasClass('credit-contact-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_contact').submit();
+    });
+  }
+
+  if($('body').hasClass('credit-other-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_other').submit();
     });
   }
 
@@ -511,4 +607,149 @@ $(document).on('keyup', '#signup_student_id', function() {
 
 $(document).on('click', '#signup_agree', function() {
   validateSignup();
+});
+
+/* bind bank card page */
+function validateBankCard() {
+  if($('#personal_bank_card').val() !== '' && 
+      !!$('#personal_bank_name').val() && 
+      $('#personal_bank_branch').val() !== '') {
+    $('#bind_bank_submit').removeAttr('disabled');
+    $('#bind_bank_submit').addClass('success');
+  } else {
+    $('#bind_bank_submit').removeClass('success');
+    $('#bind_bank_submit').attr('disabled', 'disabled');
+  }
+}
+
+$(document).on('keyup', '#personal_bank_card, #personal_bank_branch', function() {
+  validateBankCard();
+});
+
+$(document).on('change', '#personal_bank_name', function() {
+  validateBankCard();
+});
+
+$(document).on('click', '#bind_bank_submit', function(e) {
+  e.preventDefault();
+  if($('#personal_bank_card').val().length < 15) {
+    $('.notification-popup').html("请输入银行卡号");
+    $('.notification-popup').popup({
+      autoopen: true,
+      blur: false,
+      onopen: function() {
+        setTimeout(function() {
+          $('.notification-popup').popup('hide');
+        }, 1000);
+      }
+    });
+    return;
+  }
+
+  var postdata = {
+    'uId': $('#uid').val(),
+    'page': 'personal_bind_card',
+    'bankCard': $('#personal_bank_card').val(), 
+    'bank': $('#personal_bank_name').val(), 
+    'bankBranch': $('#personal_bank_branch').val()
+  };
+
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res1) {
+      res1 = JSON.parse(res1);
+      if(res1['error']['errno'] === 200) {
+        $('.notification-popup').html("绑定成功");
+        $('.notification-popup').popup({
+          autoopen: true,
+          blur: false,
+          onopen: function() {
+            setTimeout(function() {
+              window.location = $('#backurl').val();
+              $('.notification-popup').popup('hide');
+            }, 1000);
+          }
+        });
+      }
+    }
+  });
+});
+
+/* unbind bank card page */
+$(document).on('click', '#bind_unbank_submit', function(e) {
+  e.preventDefault();
+  bootbox.dialog({
+    className: 'custom-dialog dialog-confirm',
+    closeButton: false,
+    message: "<h3>确定解绑吗</h3><div>申请贷款需要绑定银行卡</div>",
+    buttons: {
+      danger: {
+        label: "取消",
+        callback: function() {
+        }
+      },
+      success: {
+        label: "确定",
+        callback: function() {
+          var postdata = {
+            'uId': $('#uid').val(),
+            'page': 'personal_unbind_card',
+            'bankCard': $('#bankcard').val()
+          };
+          $.ajax({
+            url: '../api/actions.php',
+            type: 'post',
+            data: postdata,
+            success: function(res1) {
+              res1 = JSON.parse(res1);
+              if(res1['error']['errno'] === 200) {
+                $('.notification-popup').html("解绑成功");
+                $('.notification-popup').popup({
+                  autoopen: true,
+                  blur: false,
+                  onopen: function() {
+                    setTimeout(function() {
+                      window.location = $('#backurl').val();
+                      $('.notification-popup').popup('hide');
+                    }, 1000);
+                  }
+                });
+              }
+            }
+          });
+        }
+      }
+    }
+  });
+});
+
+/* unbind bank card page */
+$(document).ready(function() {
+  if($('body').hasClass('personal-coin-mall')) {
+    var postdata = {'uId': $('#uid').val()};
+    Api.post(ENDPOINT.ADDRESS_MALL_LIST, postdata).then(function (res) {
+      if(res.error.errno == 200) {
+        var mall_item_template = $.templates(
+          '<div class="mall-item" data-item-id="{{:itemId}}">\
+            <div class="item-image">\
+              <img src="{{:picUrl}}" />\
+            </div>\
+            <div class="item-detail">\
+              <div class="top">\
+                <div class="item-name">{{:name}}</div>\
+                <div class="item-content">{{:content}}</div>\
+              </div>\
+              <div class="bottom">\
+                <div class="item-coin-num"><span>{{:coinNum}}</span> 金币</div>\
+                <a href="#" class="item-buy">立即兑换</a>\
+              </div>\
+            </div>\
+          </div>');
+        var mall_list_html = mall_item_template.render(res.itemList.item);
+        $('.mall-item-list').html(mall_list_html);
+      }  
+    });
+  }
 });

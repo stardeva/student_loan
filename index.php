@@ -27,6 +27,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     
   } else {
     $userAllData = $result;
+    unset($userAllData->error);
     $_SESSION['user_all_data'] = $userAllData;
   }
 }

@@ -125,7 +125,7 @@
   margin: 0;
   padding: 0 10px;
   flex-basis: 30%;
-  color: #999;
+  color: #333;
   position: relative;
   min-width: 60px;
   font-weight: normal;
@@ -133,18 +133,18 @@
 
 .file-block .input-label label {
   font-weight: normal;
-  color: #999;
+  color: #333;
 }
 
 .file-block .input-label span {
   font-size: small;
-  color: #ff4c03;
+  color: #f3512c;
   margin-top: 10px;
   display: block;
 }
 .input-block label.required:after, .select-block label.required:after, .file-block label.required:after {
   content: '*';
-  color: #ff4c03;
+  color: #f3512c;
   padding-left: 5px;
 }
 
@@ -197,7 +197,6 @@
 
 .file-block .input-holder .file-input img {
   height: 100%;
-  display: none;
   max-width: 100%;
 }
 
@@ -223,7 +222,7 @@ input[type=file] {
   appearance: none;
   width: 100%;
   height: 100%;
-  color: #999;
+  color: #333;
 }
 
 .input-block .input-holder input:focus, .select-block .input-holder select:focus {
@@ -254,7 +253,7 @@ input[type=file] {
   padding-right: 37px;
 }
 
-.input-block .input-holder input.wechat {
+.input-block .input-holder input.weixin {
   background-image: url('../images/about_wx.png');
   background-repeat: no-repeat;
   background-position: right 5px center;
@@ -398,10 +397,10 @@ form > h4 {
 }
 
 .button.success {
-  background-color: #ff4c03;
+  background-color: #f3512c;
 }
 
-a.link {
+span.link {
   color: #fbb33f;
 }
 
@@ -1063,8 +1062,8 @@ form#request_loan_form {
 }
 .credits-progress .progress-bar-credit {
   width: 10%;
-  background-image: linear-gradient(to bottom,#d24713 0,#ff4c03 100%);
-  background-color: #ff4c03;
+  background-image: linear-gradient(to bottom,#d24713 0,#f3512c 100%);
+  background-color: #f3512c;
 }
 
 .my-credits-bar .pin-bar .pin {
@@ -1122,7 +1121,7 @@ form#request_loan_form {
 
 .my-credits-bar .credits-tooltip .tooltip-inner {
   padding: 5px 3px;
-  color: #ff4c03;
+  color: #f3512c;
   background-color: #fff;
   font-weight: 900;
   width: 40px;
@@ -1146,7 +1145,7 @@ form#request_loan_form {
 }
 
 .info-box {
-  color: #ff4c03;
+  color: #f3512c;
   font-size: 12px;
 }
 /* / credit section */
@@ -1214,7 +1213,7 @@ form#request_loan_form {
 }
 
 .personal-box .user-body .user-info span {
-  color: #ff4c03;
+  color: #f3512c;
 }
 
 .personal-box .user-body .user-info .user-credit-beans span, 
@@ -1315,6 +1314,120 @@ form#request_loan_form {
   border-top: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
   color: #999;
+}
+
+.bank-card {
+  background-image: url('../images/bank_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+  padding: 16px 20px;
+  border-radius: 5px;
+}
+
+.bank-card .bank-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bank-card .bank-save-label {
+  font-size: 12px;
+  color: #999;
+}
+
+.bank-card .bank-card-num {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  margin-top: 30px;
+}
+
+#personal_unbind_card .buttons {
+  margin: 20px 0;
+}
+
+.mall-coin-info {
+  padding: 10px 0;
+}
+
+.mall-coin-info span {
+  color: #f3512c;
+}
+
+/* mall */
+.mall-item-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.mall-item-list .mall-item {
+  display: flex;
+  padding: 5px 0;
+  border: 0 solid #e9e9e9;
+  border-top-width: 1px;
+}
+
+.mall-item-list .mall-item .item-image {
+  padding-right: 10px;
+}
+
+.mall-item-list .mall-item .item-image img {
+  width: 120px;
+  height: 120px;
+}
+
+.mall-item-list .mall-item .item-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mall-item-list .mall-item .item-detail .top {
+  display: flex;
+  flex-direction: column;
+}
+
+.mall-item-list .mall-item .item-detail .top .item-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.mall-item-list .mall-item .item-detail .top .item-content {
+  font-size: 12px;
+  color: #999;
+}
+
+.mall-item-list .mall-item .item-detail .bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mall-item-list .mall-item .item-detail .bottom .item-coin-num {
+  font-size: 12px;
+}
+
+.mall-item-list .mall-item .item-detail .bottom .item-coin-num span {
+  color: #f3512c;
+}
+
+.mall-item-list .mall-item .item-detail .bottom .item-buy {
+  color: #fff;
+  background-color: #f3512c;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+}
+
+.mall-item-list .mall-item .item-detail .bottom .item-buy:hover, 
+.mall-item-list .mall-item .item-detail .bottom .item-buy:focus,
+.mall-item-list .mall-item .item-detail .bottom .item-buy:active {
+  text-decoration: none;
 }
 
 /* / personal pages */
@@ -1446,11 +1559,11 @@ form#request_loan_form {
 }
 
 .history-list .history-block .history .history-date.overdue {
-  color: #ff4c03;
+  color: #f3512c;
 }
 
 .history-list .history-block .history.overdue {
-  color: #ff4c03;
+  color: #f3512c;
 }
 
 /* / history page */
@@ -1867,6 +1980,46 @@ form#request_loan_form {
   color: #fff;
   padding: 10px;
   border-radius: 8px;
+  display: none;
+}
+
+/* Loading Icon animation */
+@-wekbit-keyframes loading_icon_animation {
+  0% { background-image: url('../images/loading_audio.png'); }
+  20% { background-image: url('../images/loading_camera.png'); }
+  40% { background-image: url('../images/loading_contacts.png'); }
+  60% { background-image: url('../images/loading_edit.png'); }
+  80% { background-image: url('../images/loading_gamepad.png'); }
+  100% { background-image: url('../images/loading_phone.png'); }
+}
+
+@keyframes loading_icon_animation {
+  0% { background-image: url('../images/loading_audio.png'); }
+  20% { background-image: url('../images/loading_camera.png'); }
+  40% { background-image: url('../images/loading_contacts.png'); }
+  60% { background-image: url('../images/loading_edit.png'); }
+  80% { background-image: url('../images/loading_gamepad.png'); }
+  100% { background-image: url('../images/loading_phone.png'); }
+}
+
+.loading-icon {
+  background-color: transparent;
+  -webkit-animation-name: loading_icon_animation;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: loading_icon_animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Bank bind form */
+#personal_bind_card .buttons {
+  margin: 20px 0;
 }
 
 @media screen and (min-width: 1024px) {

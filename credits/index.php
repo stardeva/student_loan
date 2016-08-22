@@ -61,16 +61,16 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
       <div class="my-credits-data">
         <div class="msg">完善资料可以相应提升信用额度</div>
         <div class="credits-medals">
-          <a href="credit_base_1.html" class="medal base">
+          <a href="credit_base.php" class="medal base">
             <img src="../assets/images/<?php echo $userAllData->cdBase->audit != 0 ? 'basic_info.png' : 'basic_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_family.html" class="medal home">
+          <a href="credit_family.php" class="medal home">
             <img src="../assets/images/<?php echo $userAllData->cdHome->audit != 0 ? 'family_info.png' : 'family_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_contact.html" class="medal contacts">
+          <a href="credit_contact.php" class="medal contacts">
             <img src="../assets/images/<?php echo $userAllData->cdSchool->audit != 0 ? 'contact_info.png' : 'contact_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_other.html" class="medal consume">
+          <a href="credit_other.php" class="medal consume">
             <img src="../assets/images/<?php echo $userAllData->cdSchool->audit != 0 ? 'other_info.png' : 'other_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
         </div>
@@ -116,11 +116,31 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
       </nav>
     </footer>
 
+    <div class="notification-popup"></div>
+
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/api.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
 
     <script type="text/javascript" src="../assets/js/main.js"></script>
+
+    <?php if(isset($_SESSION['flash']) && $_SESSION['flash'] != '') : ?>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.notification-popup').html("<?= $_SESSION['flash'] ?>");
+        $('.notification-popup').popup({
+          autoopen: true,
+          blur: false,
+          onopen: function() {
+            setTimeout(function() {
+              $('.notification-popup').popup('hide');
+            }, 1000);
+          }
+        });
+      });
+    </script>
+    <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
   </body>
 </html>
