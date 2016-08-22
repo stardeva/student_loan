@@ -159,24 +159,63 @@ $(document).ready(function() {
       var preview = container.find('.image-preview');
       var label = container.find('label');
       var imageType = /image.*/;
+      var key = container.find('.file-key');
       if (!file.type.match(imageType)) {
-        preview.hide();
-        label.show();
+        preview.addClass('hidden');
+        label.removeClass('hidden');
         container.css('background-position', 'center');
         return;
       }
-      preview.file = file;
+
+      // Image priview
+      /*preview.file = file;
       var reader = new FileReader();
       reader.onload = (function(img, l, c) {
         return function(e) {
           $(img).prop('src', e.target.result);
-          $(img).show();
-          $(l).hide();
+          $(img).removeClass('hidden');
+          $(l).addClass('hidden');
           $(c).css('background-position', '-9999px');
         }
       })(preview, label, container);
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file);*/
+
+      // Image upload
+      var formdata = new FormData();
+      formdata.append('file', file);
+      $.ajax({
+        url: ENDPOINT.HOST + ENDPOINT.ADDRESS_UP_IMAGE,
+        async: false,
+        type: 'post',
+        data: formdata,
+        contentType: false,
+        cache: false,
+        processData: false,
+        mimeType: 'multipart/form-data',
+        beforeSend: function() {
+
+        },
+        success: function(res) {
+          res = JSON.parse(res);
+          if(res.error.errno != 200) {
+            preview.addClass('hidden');
+            label.removeClass('hidden');
+            container.css('background-position', 'center');
+          } else {
+            key.val(res.picKey);
+            preview.attr('src', res.picUrl);
+            preview.removeClass('hidden');
+            label.addClass('hidden');
+            container.css('background-position', '-9999px');
+          }
+        },
+        error: function(xhr, status, error) {
+          preview.addClass('hidden');
+          label.removeClass('hidden');
+          container.css('background-position', 'center');
+        }
+      });
     }
   });
 
@@ -203,7 +242,42 @@ $(document).ready(function() {
   if($('.swiper-container').length) {
     var creditBaseSwiper = new Swiper('.swiper-container');
     creditBaseSwiper.on('onSlideChangeEnd', function(swiper) {
-      console.log(swiper);
+      if($('body').hasClass('credit-base-page')) {
+        $('.header .topnav .title').html('基本信息 ( ' + (swiper.activeIndex + 1) + '/3 )');
+        if(swiper.isEnd) $('.header .topnav .next').html('完成');
+        else $('.header .topnav .next').html('下一步');
+      }
+    });
+
+    if($('body').hasClass('credit-base-page')) {
+      $('.header .topnav .next').on('click', function(e) {
+        e.preventDefault();
+        if(!creditBaseSwiper.isEnd) creditBaseSwiper.slideNext();
+        else {
+          $('#credit_base').submit();
+        }
+      });
+    }
+  }
+
+  if($('body').hasClass('credit-family-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_family').submit();
+    });
+  }
+
+  if($('body').hasClass('credit-contact-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_contact').submit();
+    });
+  }
+
+  if($('body').hasClass('credit-other-page')) {
+    $('.header .topnav .next').on('click', function(e) {
+      e.preventDefault();
+      $('#credit_other').submit();
     });
   }
 

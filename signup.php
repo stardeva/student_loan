@@ -94,22 +94,19 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
       </nav>
     </footer>
 
-    <?php if(isset($result) && $result->error->errno != '200'): ?>
-    <div class="notification-popup">
-      <?php echo $result->error->usermsg; ?>
-    </div>
-    <?php endif; ?>
+    <div class="notification-popup"></div>
 
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/js.cookie.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.popupoverlay.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/js.cookie.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>
 
     <script src="assets/js/main.js"></script>
 
     <?php if(isset($result) && $result->error->errno != '200') : ?>
     <script type="text/javascript">
       $(document).ready(function() {
+        $('.notification-popup').html("<?= $result->error->usermsg ?>");
         $('.notification-popup').popup({
           autoopen: true,
           blur: false,
