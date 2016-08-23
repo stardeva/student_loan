@@ -15,7 +15,7 @@ if(checkUserLogin()) {
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
     <title>学融宝 - 金币商城</title>
 
@@ -42,6 +42,7 @@ if(checkUserLogin()) {
     </header>
     <section class="main">
       <input type="hidden" name="uId" id="uid" value="<?= $uId ?>" />
+      <input type="hidden" name="page" id="page" value="personal_coin_mall" />
       <div class="mall-coin-info">您当前有<span><?= $userAllData->user->coins ?></span>个金币</div>
       <div class="mall-item-list"></div>
     </section>

@@ -124,4 +124,12 @@ if(isset($_POST['page']) && $_POST['page'] == 'personal_unbind_card') {
   }
   echo json_encode($result);
 }
+
+// Bind Band Card
+if(isset($_POST['page']) && $_POST['page'] == 'personal_coin_mall') {
+  $postdata = $_POST;
+  unset($postdata['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_MALL_LIST'], $postdata);
+  echo $result;
+}
 ?>
