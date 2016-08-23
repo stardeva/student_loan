@@ -728,9 +728,13 @@ $(document).on('click', '#bind_unbank_submit', function(e) {
 /* unbind bank card page */
 $(document).ready(function() {
   if($('body').hasClass('personal-coin-mall')) {
-    var postdata = {'uId': $('#uid').val()};
-    Api.post(ENDPOINT.ADDRESS_MALL_LIST, postdata).then(function (res) {
-      if(res.error.errno == 200) {
+    var postdata = {'uId': $('#uid').val(), 'page': 'personal_coin_mall'};
+    $.ajax({
+      url: '../api/actions.php',
+      type: 'post',
+      data: postdata,
+      success: function(res) {
+        res = JSON.parse(res);
         var mall_item_template = $.templates(
           '<div class="mall-item" data-item-id="{{:itemId}}">\
             <div class="item-image">\
@@ -749,7 +753,7 @@ $(document).ready(function() {
           </div>');
         var mall_list_html = mall_item_template.render(res.itemList.item);
         $('.mall-item-list').html(mall_list_html);
-      }  
+      }
     });
   }
 });
