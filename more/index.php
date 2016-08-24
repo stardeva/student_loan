@@ -47,7 +47,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <section class="more-area loan-data-area">
       <div class="main-wrap">
         <div class="more-wrap ">
-          <a href="about_us.php?title=关于我们" class="data-group flex-wrap-space">
+          <a href="about_us.php" class="data-group flex-wrap-space">
             <div class="title"><b>关于我们</b></div>
             <div class="arrow-right image"></div>
           </a>
