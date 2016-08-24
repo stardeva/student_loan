@@ -35,7 +35,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <header class="header">
       <nav class="topnav">
         <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title"><?php echo $_GET['title'] ?></span>
+        <span class="nav text title">关于我们</span>
         <div class="nav"></div>
       </nav>
     </header>
