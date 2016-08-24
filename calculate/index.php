@@ -264,9 +264,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/jquery.mobile-1.4.5.min.js"></script>
-    <script src="../assets/js/api.js"></script>
     <script src="../assets/js/jsrender.js"></script>
-    <script src="../assets/js/data-load.js"></script>
     <script src="../assets/js/main.js"></script>
 
   </body>

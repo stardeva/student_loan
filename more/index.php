@@ -5,6 +5,8 @@ require_once('../api/curl.php');
 if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
   if(isset($_SESSION["initData"])) {
     $userAllData = $_SESSION["initData"];
+    $output = '<script>console.log('.json_encode($userAllData).')</script>';
+  echo $output;
   }
 
 } else {
@@ -66,7 +68,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="title"><b>新手指南</b></div>
             <div class="arrow-right image"></div>
           </a>
-          <a href="contract.php?url=<?= $userAllData->contract->help?>&title=使用帮助&type=pdf" class="data-group flex-wrap-space">
+          <!-- <a href="contract.php?url=<?= $userAllData->contract->help?>&title=使用帮助&type=pdf" class="data-group flex-wrap-space"> -->
+          <a href="#" class="data-group flex-wrap-space">
             <div class="title"><b>使用帮助</b></div>
             <div class="arrow-right image"></div>
           </a>

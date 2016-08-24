@@ -65,11 +65,11 @@ if(checkUserLogin()) {
           <div class="item-title">我的金币</div>
           <div class="item-desc"><?= $userAllData->user->coins ?>个</div>
         </a>
-        <a href="personal_my_messages.html" class="info-item right-arrow">
+        <a href="personal_my_messages.php" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_msg.png" /></div>
           <div class="item-title">我的消息</div>
         </a>
-        <a href="personal_my_history.html" class="info-item right-arrow">
+        <a href="personal_my_history.php" class="info-item right-arrow">
           <div class="item-icon"><img src="../assets/images/user_history.png" /></div>
           <div class="item-title">历史记录</div>
         </a>
