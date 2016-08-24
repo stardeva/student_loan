@@ -19,6 +19,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
 
   if($result->error->errno == '200') {
     $carousel = $result->ad->carousel;
+    $_SESSION["initData"] = $result;
   }
 
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
@@ -83,7 +84,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
         <img src="assets/images/home_icon_repay.png" alt="还款" />
         <span>还&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</span>
       </a>
-      <a href="calculate/index.php" class="tool">
+      <a href="calculate/index.php" class="tool calculate-link">
         <img src="assets/images/home_icon_rates.png" alt="费率计算" />
         <span>费&nbsp;率&nbsp;计&nbsp;算</span>
       </a>
@@ -130,9 +131,6 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
-    <script type="text/javascript" src="assets/js/slick.min.js"></script>
-    <script type="text/javascript" src="assets/js/api.js"></script>
-
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/slick.min.js"></script><script type="text/javascript" src="assets/js/main.js"></script>
   </body>
 </html>

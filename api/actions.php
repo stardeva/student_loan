@@ -132,4 +132,20 @@ if(isset($_POST['page']) && $_POST['page'] == 'personal_coin_mall') {
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_MALL_LIST'], $postdata);
   echo $result;
 }
+
+// Get Calculator data
+if(isset($_POST['page']) && $_POST['page'] == 'calculator_base') {
+  $postdata = $_POST;
+  unset($postdata['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], $postdata);
+  echo $result;
+}
+
+// Set feedback
+if(isset($_POST['page']) && $_POST['page'] == 'feedback_data') {
+  $postdata = $_POST;
+  unset($postdata['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_FEEDBACK'], $postdata);
+  echo $result;
+}
 ?>
