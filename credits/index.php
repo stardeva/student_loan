@@ -1,11 +1,15 @@
 <?php
-session_start();
-if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
+require_once('../api/curl.php');
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
   $creditPercent = min($userAllData->user->quotaTotal, 5000) * 100 / 5000.0;
 } else {
   header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +63,7 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
         </div>
       </div>
       <div class="my-credits-data">
-        <div class="msg">完善资料可以相应提升信用额度</div>
+        <div class="msg">完善资料可以作为提升信用额度的依据</div>
         <div class="credits-medals">
           <a href="credit_base.php" class="medal base">
             <img src="../assets/images/<?php echo $userAllData->cdBase->audit != 0 ? 'basic_info.png' : 'basic_info_gray.png'; ?>" class="img-responsive center-block" />

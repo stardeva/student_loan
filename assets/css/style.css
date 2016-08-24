@@ -234,7 +234,7 @@ input[type=file] {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
   background-position: right 5px center;
-  background-size: 8px;
+  background-size: 6px;
   padding-right: 15px;
 }
 
@@ -242,7 +242,7 @@ input[type=file] {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
   background-position: right 5px center;
-  background-size: 8px;
+  background-size: 6px;
   padding-right: 15px;
 }
 
@@ -414,7 +414,7 @@ body {
 }
 
 .header {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 .image {
@@ -490,13 +490,13 @@ body {
   display: flex;
   font-size: 20px;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 10px;
   align-items: center;
-  height: 60px;
+  height: 50px;
   text-decoration: none;
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 2000;
   background-color: #fff;
   top: 0;
   max-width: 1024px;
@@ -524,9 +524,15 @@ body {
   color: #000;
 }
 
-.header .topnav .nav.back {
+.header .topnav .nav.back, .header .topnav .nav.home {
   font-size: 30px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header .topnav .nav.home {
+  justify-content: flex-end;
 }
 
 .header .topnav .nav.next {
@@ -534,7 +540,7 @@ body {
 }
 
 .header .topnav .nav.home img, .header .topnav .nav.back img {
-  height: 32px;
+  height: 20px;
   width: auto;
 }
 
@@ -592,7 +598,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 32px 0;
+  padding: 16px 0;
 }
 
 .toolbar .tool {
@@ -640,7 +646,8 @@ body {
   font-family: 'FZKaTong';
   padding-bottom: 2vw;
   letter-spacing: 1vw;
-  text-align: center;
+  text-align: left;
+  padding-left: 12%;
 }
 
 .footer {
@@ -969,7 +976,7 @@ form#request_loan_form {
   bottom: 0;
   width: 100%;
   max-width: 1024px;
-  z-index: 1000;
+  z-index: 2000;
   min-height: 56px;
 }
 
@@ -1008,7 +1015,7 @@ form#request_loan_form {
 /* credit section */
 .my-credits {
   background-color: #333;
-  padding: 32px;
+  padding: 24px;
 }
 
 .my-credits .my-credits-label {
@@ -1022,9 +1029,10 @@ form#request_loan_form {
 }
 
 .my-credits-data .msg {
-  font-size: 18px;
+  font-size: 12px;
   color: #999;
-  margin: 0 20px 10px;
+  margin: 0 20px 20px;
+  text-align: center;
 }
 
 .my-credits-data .credits-medals {
@@ -1041,7 +1049,7 @@ form#request_loan_form {
 }
 
 .my-credits-data .credits-heart {
-  padding: 50px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
@@ -1148,6 +1156,7 @@ form#request_loan_form {
 .info-box {
   color: #f3512c;
   font-size: 12px;
+  margin-bottom: 10px;
 }
 /* / credit section */
 
@@ -1376,12 +1385,15 @@ form#request_loan_form {
   position: relative;
   width: 120px;
   height: 120px;
+  min-width: 120px;
 }
 
 .mall-item-list .mall-item .item-image img {
   min-width: 120px;
   width: 120px;
   height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .mall-item-list .mall-item .item-detail {
@@ -1397,8 +1409,7 @@ form#request_loan_form {
 }
 
 .mall-item-list .mall-item .item-detail .top .item-name {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
