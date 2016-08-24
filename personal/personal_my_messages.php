@@ -1,3 +1,23 @@
+<?php
+require_once('../api/curl.php');
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_MSG'], array('uId' => $uId));
+  $result = json_decode($result);
+  
+  if($result->error->errno == 200) {
+    $messages = $result->msgList->msg;
+    $_SESSION['personal_msgs'] = $messages;
+  }
+
+} else {
+  header("Location: ../signup.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,43 +49,19 @@
       </nav>
     </header>
     <section class="main no-padding">
+      <?php if(isset($messages)): ?>
       <div class="messages-list">
-        <div class="message repaid-loan unread">
+        <?php foreach($messages as $msg): ?>
+        <a href="../templates/message_tpl.php?msg_id=<?= $msg->mId ?>" class="message review-failed unread">
           <div class="message-body">
-            <div class="message-title"><span>活利贷已还清, 求好评</span></div>
-            <div class="message-content">活利贷已还清, 求好评</div>
+            <div class="message-title"><span><?= $msg->title ?></span></div>
+            <div class="message-content"><?= $msg->content ?></div>
           </div>
-          <div class="message-date">2017-05-09</div>
-        </div>
-        <div class="message receive-payment unread">
-          <div class="message-body">
-            <div class="message-title"><span>已收到活利贷还款100元</span></div>
-            <div class="message-content">已收到活利贷还款100元</div>
-          </div>
-          <div class="message-date">2017-05-08</div>
-        </div>
-        <div class="message apply-loan unread">
-          <div class="message-body">
-            <div class="message-title"><span>您申请的活利贷100元一放款</span></div>
-            <div class="message-content">可以</div>
-          </div>
-          <div class="message-date">2017-05-07</div>
-        </div>
-        <div class="message information-approved unread">
-          <div class="message-body">
-            <div class="message-title"><span>提交基出资料已通过审核</span></div>
-            <div class="message-content">符号条件</div>
-          </div>
-          <div class="message-date">2017-05-06</div>
-        </div>
-        <div class="message review-failed">
-          <div class="message-body">
-            <div class="message-title"><span>提交基出资料审核不通过</span></div>
-            <div class="message-content">身份证号码有误</div>
-          </div>
-          <div class="message-date">2017-05-05</div>
-        </div>
+          <div class="message-date"><?php echo date('Y-m-d', $msg->time); ?></div>
+        </a>
+        <?php endforeach; ?>
       </div>
+      <?php endif; ?>
     </section>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
@@ -73,3 +69,4 @@
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>
 </html>
+ 
