@@ -122,7 +122,6 @@ if(checkUserLogin()) {
             </div>
           </div>
         </div>
-        <br />
         <h4>联系人同学一:</h4>
         <div class="form-row">
           <div class="form-element width-55pc">

@@ -37,7 +37,7 @@ if(checkUserLogin()) {
       <nav class="topnav">
         <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">个人资料</span>
-        <a href="" class="nav text next">完成</a>
+        <div class="nav"></div>
       </nav>
     </header>
     <section class="main no-padding">
@@ -77,29 +77,6 @@ if(checkUserLogin()) {
         </a>
       </div>
     </section>
-    <footer class="footer">
-      <nav class="bottomnav">
-        <a href="../" class="nav">
-          <img src="../assets/images/footer_icon_home.png" alt="首页" />
-          <span>首页</span>
-        </a>
-        <span class="bar"></span>
-        <a href="index.html" class="nav">
-          <img src="../assets/images/footer_icon_personal.png" alt="个人" />
-          <span>个人</span>
-        </a>
-        <span class="bar"></span>
-        <a href="../more" class="nav">
-          <img src="../assets/images/footer_icon_more.png" alt="更多" />
-          <span>更多</span>
-        </a>
-        <span class="bar"></span>
-        <a href="../personal/personal_my_history.html" class="nav">
-          <img src="../assets/images/footer_icon_activity.png" alt="活动" />
-          <span>活动</span>
-        </a>
-      </nav>
-    </footer>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
