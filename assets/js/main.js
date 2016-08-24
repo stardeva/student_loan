@@ -16,7 +16,7 @@ function goCardPage() {
         callback: function() {
           window.location ="card.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -39,7 +39,7 @@ function completeCard() {
         callback: function() {
           window.location ="request.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -64,7 +64,7 @@ function decideLoan() {
           $('#request_modal').modal('hide');
           window.location ="request_success.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -140,7 +140,7 @@ $(document).ready(function() {
                     callback: function() {
                       
                     }
-                  }                  
+                  }
                 }
               });
             }
@@ -835,4 +835,28 @@ $(document).ready(function() {
       }
     });
   }
+});
+
+/* user logout */
+$(document).ready(function() {
+  $('#user_logout').on('click', function() {
+    bootbox.dialog({
+      className: 'custom-dialog dialog-confirm',
+      closeButton: false,
+      message: "<h3>确认退出当前账吗?</h3>",
+      buttons: {
+        danger: {
+          label: "取消",
+          callback: function() {
+
+          }
+        },
+        success: {
+          label: "确定",
+          callback: function() {
+          }
+        }
+      }
+    });
+  });
 });

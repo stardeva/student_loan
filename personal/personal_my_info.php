@@ -72,16 +72,16 @@ if(checkUserLogin()) {
         </div>
         <br />
         <br />
-        <a href="#" class="button">
+        <button href="" class="button" id="user_logout">
           退出当前账号
-        </a>
+        </button>
       </div>
     </section>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootbox.min.js"></script>
 
-    <script type="text/javascript" src="../assets/js/api.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>
 </html>
