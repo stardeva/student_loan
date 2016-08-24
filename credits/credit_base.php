@@ -1,12 +1,14 @@
 <?php
-session_start();
 require_once('../api/curl.php');
-if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
 } else {
   header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +25,8 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-datepicker3.min.css" rel="stylesheet">
     <link href="../assets/css/swiper.min.css" rel="stylesheet">
+    <link href="../assets/css/select2.min.css" rel="stylesheet">
+    <link href="../assets/css/select2-flat.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -130,6 +134,54 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
 
             <!-- Credit Base Step 2 -->
             <div class="swiper-slide">
+              <div class="form-row">
+                <div class="form-element width-100pc">
+                  <div class="select-block">
+                    <label for="credit_base2_university" class="required">学校</label>
+                    <div class="input-holder">
+                      <select name="university" id="credit_base2_university" required="true">
+                        <?php if($userAllData->cdBase->university == ''): ?>
+                          <option selected="selected" value="<?= $userAllData->cdBase->university ?>"><?= $userAllData->cdBase->university ?></option>
+                        <?php endif; ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-element width-100pc">
+                  <div class="input-block">
+                    <label for="credit_base2_college" class="required">学院</label>
+                    <div class="input-holder">
+                      <input type="text" name="college" id="credit_base2_college" required="true" value="<?= $userAllData->cdBase->college ?>" placeholder="请输入学院名称" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-element width-100pc">
+                  <div class="input-block">
+                    <label for="credit_base2_major" class="required">专业</label>
+                    <div class="input-holder">
+                      <input type="text" name="major" id="credit_base2_major" required="true" value="<?= $userAllData->cdBase->major ?>" placeholder="请输入专业名称" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-element width-100pc">
+                  <div class="select-block">
+                    <label for="credit_base2_enrollment" class="required">学历</label>
+                    <div class="input-holder">
+                      <select name="education" id="credit_base2_education" required="true" placeholder="请输入学历信息">
+                        <?php foreach($DEGREE_LIST as $degree): ?>
+                          <option <?php if(intval($userAllData->cdBase->education) == $degree) echo 'selected="selected"' ?> value="<?=$degree ?>"><?=$degree ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="form-row">
                 <div class="form-element width-100pc">
                   <div class="select-block">
@@ -284,6 +336,7 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/swiper.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
+    <script type="text/javascript" src="../assets/js/select2.min.js"></script>
 
     <script type="text/javascript" src="../assets/js/api.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>

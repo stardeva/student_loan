@@ -1,19 +1,5 @@
 ﻿<?php
 session_start();
-require_once('api/curl.php');
-if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
-  $login_temp = array(
-    'phone' => '15640111949',
-    'passwd' => '7018e9bbe25b6617aabebd1d789d36b7'
-  );
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_LOGIN'], $login_temp);
-  $result = json_decode($result);
-  if($result->error->errno == '200') {
-    setcookie('uid', $result->uId, time() + 86400);
-    $_SESSION['uid'] = $result->uId;
-    header("Location: index.php");
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,12 +28,15 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
       <nav class="topnav">
         <a href="./" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">登录</span>
-        <a href="personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
+        <div class="nav"></div>
       </nav>
     </header>
 
     <section class="main">
-      <form method="POST" action="">
+      <form method="POST" action="api/actions.php">
+        <input type="hidden" name="phone" value="15640111949" />
+        <input type="hidden" name="passwd" value="7018e9bbe25b6617aabebd1d789d36b7" />
+        <input type="hidden" name="page" value="signup_page" />
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
@@ -103,10 +92,10 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
 
     <script src="assets/js/main.js"></script>
 
-    <?php if(isset($result) && $result->error->errno != '200') : ?>
+    <?php if(isset($_SESSION['flash']) && $_SESSION['flash'] != '') : ?>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.notification-popup').html("<?= $result->error->usermsg ?>");
+        $('.notification-popup').html("<?= $_SESSION['flash'] ?>");
         $('.notification-popup').popup({
           autoopen: true,
           blur: false,
@@ -118,6 +107,7 @@ if(isset($_POST['signup_student_id']) && $_POST['signup_student_id'] != '') {
         });
       });
     </script>
+    <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
   </body>
 </html>
