@@ -63,7 +63,7 @@ if(checkUserLogin()) {
         <img src="assets/images/home_icon_repay.png" alt="还款" />
         <span>还&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</span>
       </a>
-      <a href="calculate/index.php" class="tool">
+      <a href="calculate/index.php" class="tool calculate-link">
         <img src="assets/images/home_icon_rates.png" alt="费率计算" />
         <span>费&nbsp;率&nbsp;计&nbsp;算</span>
       </a>
@@ -117,7 +117,6 @@ if(checkUserLogin()) {
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
     <script type="text/javascript" src="assets/js/slick.min.js"></script>
-    <script type="text/javascript" src="assets/js/api.js"></script>
 
     <script type="text/javascript" src="assets/js/main.js"></script>
   </body>

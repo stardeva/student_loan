@@ -338,7 +338,6 @@ if(checkUserLogin()) {
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script type="text/javascript" src="../assets/js/select2.min.js"></script>
 
-    <script type="text/javascript" src="../assets/js/api.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
 
     <?php if(isset($_SESSION['flash']) && $_SESSION['flash'] != '') : ?>

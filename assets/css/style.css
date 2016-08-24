@@ -14,6 +14,7 @@
 /* / Custom Fonts */
 
 /* UI styles */
+
 .width-5pc {
   width: 5%;
 }
@@ -1464,8 +1465,8 @@ form#request_loan_form {
   padding: 10px 10px 10px 80px;
   justify-content: center;
   background-size: 70px;
-  height: 90px;
-  background-position: 10px;
+  background-position: 10px 10px;
+  text-decoration: none;
 }
 
 .messages-list .message:first-child {
@@ -1475,6 +1476,7 @@ form#request_loan_form {
 .messages-list .message.unread .message-body .message-title span {
   display: inline-block;
   position: relative;
+  color: #333;
 }
 
 .messages-list .message.unread .message-body .message-title span:after {
@@ -1533,6 +1535,17 @@ form#request_loan_form {
 
 .messages-list .message.repaid-loan {
   background-image: url('../images/repaid_loan.png');
+}
+
+.message-template-area {
+  padding: 20px;
+  color: #888;
+  font-size: 16px;
+}
+
+.message-template-area .date {
+  font-size: 12px;
+  margin: 20px 0;
 }
 /* / messages page */
 
@@ -1990,6 +2003,26 @@ form#request_loan_form {
   width: 100%;
   border: none;
   resize:none
+}
+
+.error-message-area {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: calc( 100% - 60px );
+}
+
+.error-message-area .error-image {
+  width: 250px;
+  height: 250px;
+  background-image: url('../images/error_tip.png');
+}
+
+.error-message-area .content {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #888;
 }
 
 /* Notification Popup custom style */

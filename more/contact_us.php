@@ -1,13 +1,16 @@
 <?php
-session_start();
+require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  if(isset($_SESSION["initData"])) {
-    $result = $_SESSION["initData"];
-  }
+if(checkUserLogin()) {
+  $initData = $_SESSION['initData'];
+  $uId = $_SESSION['uid'];
+
+  if( isset($initData) ) {}
 } else {
-  header("Location: ../../signup.php");
+  header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +50,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="item-icon"><img src="../assets/images/about_wx.png" /></div>
             <div class="item-title">微信</div>
           </div>
-          <div class="item-desc"><?php echo $result->contact->weixin ?></div>
+          <div class="item-desc"><?php echo $initData->contact->weixin ?></div>
         </div>
 
         <div class="info-item flex-wrap-space">
@@ -55,7 +58,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="item-icon"><img src="../assets/images/about_qq.png" /></div>
             <div class="item-title">QQ</div>
           </div>
-          <div class="item-desc"><?php echo $result->contact->qq ?></div>
+          <div class="item-desc"><?php echo $initData->contact->qq ?></div>
         </div>
 
         <div class="info-item flex-wrap-space">
@@ -63,7 +66,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="item-icon"><img src="../assets/images/about_tele.png" /></div>
             <div class="item-title">电话</div>
           </div>
-          <div class="item-desc"><?php echo $result->contact->tele ?></div>
+          <div class="item-desc"><?php echo $initData->contact->tele ?></div>
         </div>
       </div>
     </section>

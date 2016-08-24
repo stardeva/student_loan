@@ -506,7 +506,7 @@ $(document).ready(function() {
     });
   }
 
-  // feedback page form validation
+  // feedback page form validation in more/feedback.php
   if($('#feedback_form').length) {    
 
     $('#feedback_form').bootstrapValidator({
@@ -539,10 +539,15 @@ $(document).ready(function() {
 
     // Validate the form manually
     $('#feedback_form .submit-btn').click(function() {
-      Api.post(ENDPOINT.ADDRESS_U_FEEDBACK, $(this).serialize()).then(function (res) {
-        if(res.error.errno == 200) {
+      var postdata = {'uId': $('#uid').val(), 'page': 'feedback_data'};
+      $.ajax({
+        url: '../api/actions.php',
+        type: 'post',
+        data: postdata,
+        success: function(res) {
+          res = JSON.parse(res);
           window.location ="index.php";
-        }  
+        }
       });
     });
   }
@@ -666,6 +671,43 @@ $(document).ready(function() {
   $('#yueli').find('select.during-selector').change(function() {
     setValue('#yueli', $(this).attr('rate'));
   });
+
+  function getOptions(data, step, start_value) {
+    var html = '', option = '';
+
+    if(data > 1) {
+      for(var i = start_value; i <= data; i += step) {
+        option = '<option value="' + i + '">' + i + '</option>';
+        html += option;
+      }
+    }  
+
+    return html;
+  }
+
+  function createSelectBox(el, data) {
+    el.find('.start-loan .description .content > p').html(data.intro);
+    el.find('.start-loan .last-description .content > p').html(data.lateIntro);
+    var options = getOptions(data.maxMoney, 50, data.minMoney);
+    el.find('select.cost-selector').html(options);
+    options = getOptions(data.maxMonth, 1, data.minMonth);
+    el.find('select.during-selector').html(options);
+  }
+  
+  $('.home-index-page').on('click', '.calculate-link', function (e) {
+    var postdata = {'uId': $('#uid').val(), 'page': 'calculator_base'};
+    $.ajax({
+      url: '../api/actions.php',
+      type: 'post',
+      data: postdata,
+      success: function(res) {
+        res = JSON.parse(res);
+        createSelectBox($('#fuli'), res.lnProdList.prod[0]);
+        createSelectBox($('#fuoli'), res.lnProdList.prod[1]);
+        createSelectBox($('#yueli'), res.lnProdList.prod[2]);
+      }
+    });
+  });  
 });
 
 
