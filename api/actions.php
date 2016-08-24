@@ -83,6 +83,19 @@ if(isset($_POST['page']) && $_POST['page'] == 'credit_other') {
   }
 }
 
+// Upload Image
+if(isset($_POST['page']) && $_POST['page'] == 'upload_image') {
+  $cfile = '';
+  if(function_exists('curl_file_create')) {
+    $cfile = curl_file_create($_FILES['file']['tmp_name'], $_FILES['file']['type'], $_FILES['file']['name']);
+  } else {
+    $cfile = "@{$_FILES['file']['tmp_name']};filename=".$_FILES['file']['name'].";type=".$_FILES['file']['type'];
+  }
+  $postdata = array('file' => $cfile);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_UP_IMAGE'], $postdata);
+  echo $result;
+}
+
 // Upload Personal Image
 if(isset($_POST['page']) && $_POST['page'] == 'personal_info') {
   $postdata = $_POST;
@@ -147,5 +160,59 @@ if(isset($_POST['page']) && $_POST['page'] == 'feedback_data') {
   unset($postdata['page']);
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_FEEDBACK'], $postdata);
   echo $result;
+}
+
+// Search University
+if(isset($_POST['page']) && $_POST['page'] == 'search_university') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SE_SCHOOL'], $postdata);
+  echo $result;
+}
+
+// Signup Page
+if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  unset($_POST['signup_student_id']);
+  unset($_POST['signgup_agree']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_LOGIN'], $postdata);
+  $result = json_decode($result);
+  if($result->error->errno == '200') {
+    $uId = $result->uId;
+    $_SESSION['uid'] = $uId;
+
+    $user_temp = array(
+      'uid' => $uId,
+      'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
+      'deviceOs' => 'Android',
+      'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
+      'deviceOp' => '4.1.1',
+      'version' => '1.0.1',
+      'deviceToken' => 'dd'
+    );
+
+    $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $user_temp);
+    $result = json_decode($result);
+
+    if($result->error->errno == '200') {
+      unset($result->error);
+      $_SESSION['sys_info'] = $result;
+    }
+
+    $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+    $result = json_decode($result);
+
+    if($result->error->errno == '200') {
+      $userAllData = $result;
+      unset($userAllData->error);
+      $_SESSION['user_all_data'] = $userAllData;
+    }
+
+    header("Location: ../index.php");
+  } else {
+    $_SESSION['flash'] = $result->error->usermsg;
+    header("Location: ../signup.php");
+  }
 }
 ?>

@@ -1,38 +1,13 @@
 <?php
-session_start();
 require_once('api/curl.php');
+require_once('api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  $uId = $_COOKIE['uid'];
-  $login_temp = array(
-    'uid' => $uId,
-    'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
-    'deviceOs' => 'Android',
-    'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
-    'deviceOp' => '4.1.1',
-    'version' => '1.0.1',
-    'deviceToken' => 'dd'
-  );
-
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $login_temp);
-  $result = json_decode($result);
-
-  if($result->error->errno == '200') {
-    $carousel = $result->ad->carousel;
-    $_SESSION["initData"] = $result;
-  }
-
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
-  $result = json_decode($result);
-  if($result->error->errno != '200') {
-    
-  } else {
-    $userAllData = $result;
-    unset($userAllData->error);
-    $_SESSION['user_all_data'] = $userAllData;
-  }
+if(checkUserLogin()) {
+  $uId = $_SESSION['uid'];
+  if(isset($_SESSION['sys_info']))
+    $carousel = $_SESSION['sys_info']->ad->carousel;
+  $userAllData = $_SESSION['user_all_data'];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +35,11 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
   <body class="home-index-page">    
     <header class="header">
       <nav class="topnav">
-        <a href="signup.php" class="nav text unregistered">未登录</a>
+        <?php if(checkUserLogin()): ?>
+          <div class="nav"></div>
+        <?php else: ?>
+          <a href="signup.php" class="nav text unregistered">未登录</a>
+        <?php endif; ?>
         <span class="nav text title">学融宝</span>
         <a href="personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
       </nav>
@@ -97,7 +76,13 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <a href="credits" class="credit">
       <?php if(isset($userAllData)): ?>
         <img src="assets/images/credit-banner.png" alt="" />
-        <span class="credit-number"><?= $userAllData->user->quotaTotal ?></span>
+        <?php
+          $paddingLeft = '';
+          if(strlen($userAllData->user->quotaTotal) == 1) $paddingLeft = 'padding-left: 20%;';
+          else if(strlen($userAllData->user->quotaTotal) == 3) $paddingLeft = 'padding-left: 15%;';
+          else $paddingLeft = 'padding-left: 12%;';
+        ?>
+        <span class="credit-number" style="<?= $paddingLeft ?>"><?= $userAllData->user->quotaTotal ?></span>
       <?php else: ?>
         <img src="assets/images/credit-default.png" alt="" />
       <?php endif; ?>
@@ -131,6 +116,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
-    <script type="text/javascript" src="assets/js/slick.min.js"></script><script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/slick.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/main.js"></script>
   </body>
 </html>

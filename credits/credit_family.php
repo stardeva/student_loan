@@ -1,12 +1,14 @@
 <?php
-session_start();
 require_once('../api/curl.php');
-if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
+require_once('../api/functions.php');
+
+if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
 } else {
   header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +35,9 @@ if(isset($_SESSION['user_all_data']) && !empty($_SESSION['user_all_data'])) {
   <body class="credits-page credit-family-page form-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.html" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">家庭资料</span>
-        <a href="index.html" class="nav text next">完成</a>
+        <a href="" class="nav text next">完成</a>
       </nav>
     </header>
     <section class="main">

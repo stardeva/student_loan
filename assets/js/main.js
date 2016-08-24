@@ -16,7 +16,7 @@ function goCardPage() {
         callback: function() {
           window.location ="card.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -39,7 +39,7 @@ function completeCard() {
         callback: function() {
           window.location ="request.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -64,7 +64,7 @@ function decideLoan() {
           $('#request_modal').modal('hide');
           window.location ="request_success.html";
         }
-      }                  
+      }
     }
   });
 }
@@ -140,7 +140,7 @@ $(document).ready(function() {
                     callback: function() {
                       
                     }
-                  }                  
+                  }
                 }
               });
             }
@@ -217,8 +217,9 @@ $(document).ready(function() {
       // Image upload
       var formdata = new FormData();
       formdata.append('file', file);
+      formdata.append('page', 'upload_image');
       $.ajax({
-        url: ENDPOINT.HOST + ENDPOINT.ADDRESS_UP_IMAGE,
+        url: '../api/actions.php',
         async: false,
         type: 'post',
         data: formdata,
@@ -262,8 +263,9 @@ $(document).ready(function() {
       }
       var formdata = new FormData();
       formdata.append('file', file);
+      formdata.append('page', 'upload_image');
       $.ajax({
-        url: ENDPOINT.HOST + ENDPOINT.ADDRESS_UP_IMAGE,
+        url: '../api/actions.php',
         async: false,
         type: 'post',
         data: formdata,
@@ -302,6 +304,7 @@ $(document).ready(function() {
         if(swiper.isEnd) $('.header .topnav .next').html('完成');
         else $('.header .topnav .next').html('下一步');
       }
+      $("html, body").animate({ scrollTop: 0 }, 0);
     });
 
     if($('body').hasClass('credit-base-page')) {
@@ -311,8 +314,84 @@ $(document).ready(function() {
         else {
           $('#credit_base').submit();
         }
+        $("html, body").animate({ scrollTop: 0 }, 0);
       });
     }
+  }
+
+  /* credit base 2 university */
+  if($('#credit_base2_university').length) {
+    (function() {
+      if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) var e = jQuery.fn.select2.amd;
+      return e.define("select2/i18n/zh-CN", [], function() {
+        return {
+          errorLoading: function() {
+            return "无法载入结果。"
+          },
+          inputTooLong: function(e) {
+            var t = e.input.length - e.maximum,
+              n = "请删除" + t + "个字符";
+            return n
+          },
+          inputTooShort: function(e) {
+            var t = e.minimum - e.input.length,
+              n = "请再输入至少" + t + "个字符";
+            return n
+          },
+          loadingMore: function() {
+            return "载入更多结果…"
+          },
+          maximumSelected: function(e) {
+            var t = "最多只能选择" + e.maximum + "个项目";
+            return t
+          },
+          noResults: function() {
+            return "未找到结果"
+          },
+          searching: function() {
+            return "搜索中…"
+          }
+        }
+      }), {
+        define: e.define,
+        require: e.require
+      }
+    })();
+    var credit_base_university = $("#credit_base2_university").select2({
+      language: 'zh-CN',
+      placeholder: {id:'请输入就读学校名称', name:'请输入就读学校名称'},
+      ajax: {
+        url: "../api/actions.php",
+        method: 'post',
+        delay: 250,
+        data: function (params) {
+          return {
+            school: params.term,
+            page: 'search_university'
+          };
+        },
+        processResults: function (data, params) {
+          data = JSON.parse(data);
+          if(data.error.errno !== 200) return {results: []};
+          
+          var schoolName = [];
+          $.each(data.schoolList.schoolName, function(ind, school) {
+            schoolName.push({id: school.name, name: school.name});
+          });
+
+          return {results: schoolName};
+        }
+      },
+      escapeMarkup: function (markup) { return markup; },
+      minimumInputLength: 1,
+      templateResult: function(item) {
+        if(item.loading) return item.text;
+        return item.name;
+      },
+      templateSelection: function(item) {
+        return item.name || item.text;
+      }
+    });
   }
 
   if($('body').hasClass('credit-family-page')) {
@@ -798,4 +877,28 @@ $(document).ready(function() {
       }
     });
   }
+});
+
+/* user logout */
+$(document).ready(function() {
+  $('#user_logout').on('click', function() {
+    bootbox.dialog({
+      className: 'custom-dialog dialog-confirm',
+      closeButton: false,
+      message: "<h3>确认退出当前账吗?</h3>",
+      buttons: {
+        danger: {
+          label: "取消",
+          callback: function() {
+
+          }
+        },
+        success: {
+          label: "确定",
+          callback: function() {
+          }
+        }
+      }
+    });
+  });
 });
