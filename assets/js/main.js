@@ -658,15 +658,16 @@ $(document).ready(function() {
   }
 
   //select event in calculate page for borrow and calculate page
-  function setValue(ele) { console.log($(ele))
-    var price = $(ele).find('select.cost-selector').val();
-    var date = $(ele).find('select.during-selector').val();
-    var rate = $(ele).find('select.cost-selector').attr('rate');
-    id = $(ele).selector;
+  function setValue(ele) { 
+    var $ele = $(ele);console.log($ele)
+    var price = $ele.find('select.cost-selector').val();
+    var date = $ele.find('select.during-selector').val();
+    var rate = $ele.find('select.cost-selector').attr('rate');
+    id = ele;
     price = calResult(id, price, rate, date);console.log(id, price, rate, date)
-    $(ele).find('.loan-price').html(price + '元');
+    $ele.find('.loan-price').html(price + '元');
     if(getCalcType(id) != '#yueli')
-      $(id).find('.loan-time .number').html(date);
+      $ele.find('.loan-time .number').html(date);
   }
 
   function getDay(intPrincipal, floatRate, intLoanPeriod) {
@@ -706,11 +707,12 @@ $(document).ready(function() {
           break;
       }
     }
-console.log(value)
 
     return parseFloat(value).toFixed(2);
 
   }
+
+  var g_page_element;
 
   function initCalculator(page_element) {
     var array_element = ['#fuli', '#huoli', '#yueli'];
@@ -718,48 +720,46 @@ console.log(value)
       var element = page_element + ' ';
       element += array_element[i];
       var rate = $(element).find('select.cost-selector').attr('rate');
-      setValue($(element));console.log($(element))
+      setValue(element);
     }
+
+    g_page_element = page_element;
   }
 
-  // function watchCalcSelectBox(page_element) {
-  //   var array_element = ['#fuli', '#huoli', '#yueli'];
-  //   for(var i = 0; i < array_element.length; i ++) {
-  //     var element = page_element + ' ';
-  //     element += array_element[i];
-  //     // watch if cost select box is changed
-  //     $(element).find('select.cost-selector').change(function() {
-  //       setValue(element, $(this).attr('rate'));
-  //     });
-  //     // watch if date select box is changed
-  //     $(element).find('select.during-selector').change(function() {
-  //       setValue(element, $(this).attr('rate'));
-  //     });
-  //   }
-  // }
-
   $('#fuli').find('select.cost-selector').change(function() {
-    setValue(this);
+    var element = g_page_element + ' ';
+    element += '#fuli';
+    setValue(element);
   });
 
   $('#fuli').find('select.during-selector').change(function() {
-    setValue(this);
+    var element = g_page_element + ' ';
+    element += '#fuli';
+    setValue(element);
   });
 
-  $('#fuoli').find('select.cost-selector').change(function() {
-    setValue(this);
+  $('#huoli').find('select.cost-selector').change(function() {
+    var element = g_page_element + ' ';
+    element += '#huoli';
+    setValue(element);
   });
 
-  $('#fuoli').find('select.during-selector').change(function() {
-    setValue(this);
+  $('#huoli').find('select.during-selector').change(function() {
+    var element = g_page_element + ' ';
+    element += '#huoli';
+    setValue(element);
   });
 
   $('#yueli').find('select.cost-selector').change(function() {
-    setValue(this);
+    var element = g_page_element + ' ';
+    element += '#yueli';
+    setValue(element);
   });
 
   $('#yueli').find('select.during-selector').change(function() {
-    setValue(this);
+    var element = g_page_element + ' ';
+    element += '#yueli';
+    setValue(element);
   });
  
 

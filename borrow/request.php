@@ -47,7 +47,7 @@ if(checkUserLogin()) {
   <body class="request-loan-page">
     <header class="header">
       <nav class="topnav">
-        <a href="card.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款申请</span>
         <div class="nav"></div>
       </nav>
