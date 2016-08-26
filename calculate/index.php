@@ -4,18 +4,18 @@ require_once('../api/functions.php');
 
 function setOption ($min, $max, $step) {
   for ($i = $min; $i <= $max; $i+= $step) {
-    if ($i == $min)
+    if ($i == $min) {
       echo "<option value=\"$i\" selected>$i</option>";
-    else
+    }
+    else {
       echo "<option value=\"$i\">$i</option>";
+    }
   }
 }
 
 if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array('uId' => $uId));
-  $result = json_decode($result);
+  $caculator_data = $_SESSION['ln_calculator'];
 } else {
   header("Location: ../signup.php");
 }
@@ -43,7 +43,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page">
+  <body class="personal-page calculator-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -54,7 +54,7 @@ if(checkUserLogin()) {
     <section class="process">
       <ul class="nav nav-tabs">
         <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#fuoli">活利货</a></li>
+        <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
         <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利货</a></li>
       </ul>
 
@@ -68,17 +68,17 @@ if(checkUserLogin()) {
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[0]->rateFlt ?>">
+                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[0]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[0]->minMoney, $result->lnProdList->prod[0]->maxMoney, 50);
+                    setOption($caculator_data->lnProdList->prod[0]->minMoney, $caculator_data->lnProdList->prod[0]->maxMoney, 50);
                   ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[0]->rateFlt ?>">
+                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[0]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[0]->minDay, $result->lnProdList->prod[0]->maxDay, 1);
+                    setOption($caculator_data->lnProdList->prod[0]->minDay, $caculator_data->lnProdList->prod[0]->maxDay, 1);
                   ?>
                 </select>
               </div>          
@@ -89,7 +89,7 @@ if(checkUserLogin()) {
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[0]->minDay ?></span>天</span>
+              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[0]->minDay ?></span>天</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -103,7 +103,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[0]->intro;
+                    echo $caculator_data->lnProdList->prod[0]->intro;
                   ?>
                 </p>
               </div>
@@ -117,7 +117,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[0]->lateIntro;
+                    echo $caculator_data->lnProdList->prod[0]->lateIntro;
                   ?>
                 </p>
             </div>
@@ -125,7 +125,7 @@ if(checkUserLogin()) {
           </div>
         </div>
 
-        <div id="fuoli" class="tab-pane fade">
+        <div id="huoli" class="tab-pane fade">
           <div class="loan-kind image">
             <div class="kind-head flex-wrap">
               <span class="flex1">借款金额(元)</span>
@@ -134,17 +134,17 @@ if(checkUserLogin()) {
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[1]->rateFlt ?>">
+                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[1]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[1]->minMoney, $result->lnProdList->prod[1]->maxMoney, 50);
+                    setOption($caculator_data->lnProdList->prod[1]->minMoney, $caculator_data->lnProdList->prod[1]->maxMoney, 50);
                   ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[1]->rateFlt ?>">
+                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[1]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[1]->minDay, $result->lnProdList->prod[1]->maxDay, 1);
+                    setOption($caculator_data->lnProdList->prod[1]->minDay, $caculator_data->lnProdList->prod[1]->maxDay, 1);
                   ?>
                 </select>
               </div>   
@@ -155,7 +155,7 @@ if(checkUserLogin()) {
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[1]->minDay ?></span>天</span>
+              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[1]->minDay ?></span>天</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -169,7 +169,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[1]->intro;
+                    echo $caculator_data->lnProdList->prod[1]->intro;
                   ?>
                 </p>
               </div>
@@ -183,7 +183,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[1]->lateIntro;
+                    echo $caculator_data->lnProdList->prod[1]->lateIntro;
                   ?>
                 </p>
               </div>
@@ -195,22 +195,22 @@ if(checkUserLogin()) {
           <div class="loan-kind image">
             <div class="kind-head flex-wrap">
               <span class="flex1">借款金额(元)</span>
-              <span class="flex1">借款期限(天)</span>
+              <span class="flex1">借款期限(月)</span>
             </div>
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector" rate="<?php echo $result->lnProdList->prod[2]->rateFlt ?>">
+                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[2]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[2]->minMoney, $result->lnProdList->prod[2]->maxMoney, 50);
+                    setOption($caculator_data->lnProdList->prod[2]->minMoney, $caculator_data->lnProdList->prod[2]->maxMoney, 50);
                   ?>
                 </select>
               </div>
 
               <div class="flex1">
-                <select class="during-selector" rate="<?php echo $result->lnProdList->prod[2]->rateFlt ?>">
+                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[2]->rateFlt ?>">
                   <?php
-                    setOption($result->lnProdList->prod[2]->minMonth, $result->lnProdList->prod[2]->maxMonth, 1);
+                    setOption($caculator_data->lnProdList->prod[2]->minMonth, $caculator_data->lnProdList->prod[2]->maxMonth, 1);
                   ?>
                 </select>
               </div>          
@@ -221,7 +221,7 @@ if(checkUserLogin()) {
             <span class="pull-left">计划还款</span>
             <div class="pull-right">
               <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $result->lnProdList->prod[2]->minMonth ?></span>月</span>
+              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[2]->minMonth ?></span>月</span>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -235,7 +235,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[2]->intro;
+                    echo $caculator_data->lnProdList->prod[2]->intro;
                   ?>
                 </p>
               </div>
@@ -249,7 +249,7 @@ if(checkUserLogin()) {
               <div class="content">
                 <p>
                   <?php
-                    echo $result->lnProdList->prod[2]->lateIntro;
+                    echo $caculator_data->lnProdList->prod[2]->lateIntro;
                   ?>
                 </p>
               </div>
