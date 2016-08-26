@@ -1,24 +1,48 @@
 ﻿// go to card page in borrow index
-function goCardPage() {
-  bootbox.dialog({
-    className: 'custom-dialog dialog-confirm',
-    closeButton: false,
-    message: "<h3>您还没有绑定银行卡</h3>",
-    buttons: {
-      danger: {
-        label: "取消",
-        callback: function() {
+function goCardPage(id, limit_price, pro_id) {
+  var price_element = '.borrow-page #', time_element, origin_element;
 
-        }
-      },
-      success: {
-        label: "去绑定",
-        callback: function() {
-          window.location ="card.html";
+  if(id) {
+    price_element += id;    
+  }
+  time_element = price_element;
+  
+  time_element = price_element + ' select.during-selector';
+  origin_element = price_element + ' select.cost-selector';
+  price_element += ' .loan-price';
+  var borrow_price = parseFloat( $(price_element).html() );
+  // if borrow price is bigger than quotaToal, redirect to the credits page
+  if(borrow_price <= 0) {
+    
+  }else if(limit_price < borrow_price) {
+    bootbox.dialog({
+      className: 'custom-dialog dialog-confirm',
+      closeButton: false,
+      message: "<h3>您还没有绑定银行卡</h3>",
+      buttons: {
+        danger: {
+          label: "取消",
+          callback: function() {
+
+          }
+        },
+        success: {
+          label: "去绑定",
+          callback: function() {
+            window.location ="../credits";
+          }
         }
       }
-    }
-  });
+    });
+  } else {
+    var $borrow_form = $('#borrow_hidden_form');
+    $borrow_form.find('#origin_price').val(parseInt( $(origin_element).val() ));
+    $borrow_form.find('#sum_price').val(borrow_price);
+    $borrow_form.find('#time').val(parseInt( $(time_element).val() ));
+    $borrow_form.find('#pro_id').val(pro_id);
+    $borrow_form.submit();
+  }
+  
 }
 
 // decide to complete card page in card index
@@ -45,7 +69,8 @@ function completeCard() {
 }
 
 // decide to send loan request in request page
-function decideLoan() {
+function decideLoan(e) {
+  e.preventDefault();
   bootbox.dialog({
     className: 'custom-dialog dialog-confirm',
     closeButton: false,
@@ -60,9 +85,38 @@ function decideLoan() {
       success: {
         label: "确定",
         callback: function(e) {          
-          //$('#request_loan_form').submit();
           $('#request_modal').modal('hide');
-          window.location ="request_success.html";
+          var $request_form = $('#request_loan_form');
+          var pro_id = $request_form.find('#pro_id').val();
+          var money = $request_form.find('#money').val();
+          var time = $request_form.find('#time').val();
+          var day = 0, month = 0;
+          if(pro_id == 3) {
+            month = time;
+          } else {
+            day = time;
+          }
+
+          var postdata = {'uId': $('#uid').val(), 
+                        'page': 'request_loan_page',
+                        'lnProdId': pro_id,
+                        'money': money,
+                        'day': day,
+                        'month': month};
+          $.ajax({
+            url: '../api/actions.php',
+            type: 'post',
+            data: postdata,
+            success: function(res) {
+              res = JSON.parse(res);
+              if(res.error.errno == 200) {
+                window.location ="request_success.php";
+              } else {
+                console.log('error: ' +res);
+              }
+            }
+          });
+          
         }
       }
     }
@@ -415,8 +469,8 @@ $(document).ready(function() {
     });
   }
 
-  if($("#detail_slider").length) {
-    $("#detail_slider").slider({});
+  if($(".refund-page").length) {
+    var slider = $(".slider-wrap #detail_slider").slider();
   }  
 
   // set main form width as windows one in back card page
@@ -601,15 +655,9 @@ $(document).ready(function() {
       }
     });
 
-    // check if the button is disabled when clicking the submit button
-    $('#request_loan_form').on('click', '.submit-btn', function (e) {
-      if($(this).attr("disabled")) {
-        e.stopPropagation()
-      }
-    });
   }
 
-  //select event in calculate page
+  //select event in calculate page for borrow and calculate page
   function setValue(id, rate) {
     var price = $(id).find('select.cost-selector').val();
     var date = $(id).find('select.during-selector').val();
@@ -629,48 +677,65 @@ $(document).ready(function() {
     return result;
   }
 
-  function calResult(mode, mAmount, mRate, mTime) {
-    var value = 0; 
-
-    switch(mode) {
-      case '#huoli':
-          value = getDay(mAmount, mRate, mTime);
-        break;
-      case '#fuli':
-          value = mAmount;
-        break;
-      case '#yueli':
-          value = getMonth(mAmount, mRate, mTime);
-        break;
+  function getCalcType(str) {
+    var array_element = ['#fuli', '#huoli', '#yueli'];
+    for(var i = 0; i < array_element.length; i ++) {
+      if ( str.includes(array_element[i]) )
+        return array_element[i];
     }
 
-    return value.toFixed(2);
+    return null;
+  }
+
+  function calResult(mode, mAmount, mRate, mTime) {
+    var value = 0;
+    mode = getCalcType(mode);
+
+    if (mode) {
+      switch(mode) {
+        case '#huoli':
+            value = getDay(mAmount, mRate, mTime);
+          break;
+        case '#fuli':
+            value = mAmount;
+          break;
+        case '#yueli':
+            value = getMonth(mAmount, mRate, mTime);
+          break;
+      }
+    }   
+
+
+    return parseFloat(value).toFixed(2);
 
   }
 
-  $('#fuli').find('select.cost-selector').change(function() {
-    setValue('#fuli', $(this).attr('rate'));
-  });
+  function initCalculator(page_element) {
+    var array_element = ['#fuli', '#huoli', '#yueli'];
+    for(var i = 0; i < array_element.length; i ++) {
+      var element = page_element + ' ';
+      element += array_element[i];
+      var rate = $(element).find('select.cost-selector').attr('rate');
+      setValue(element, rate);
+    }
+  }
 
-  $('#fuli').find('select.during-selector').change(function() {
-    setValue('#fuli', $(this).attr('rate'));
-  });
-
-  $('#fuoli').find('select.cost-selector').change(function() {
-    setValue('#fuoli', $(this).attr('rate'));
-  });
-
-  $('#fuoli').find('select.during-selector').change(function() {
-    setValue('#fuoli', $(this).attr('rate'));
-  });
-
-  $('#yueli').find('select.cost-selector').change(function() {
-    setValue('#yueli', $(this).attr('rate'));
-  });
-
-  $('#yueli').find('select.during-selector').change(function() {
-    setValue('#yueli', $(this).attr('rate'));
-  });
+  function watchCalcSelectBox(page_element) {
+    var array_element = ['#fuli', '#huoli', '#yueli'];
+    for(var i = 0; i < array_element.length; i ++) {
+      var element = page_element + ' ';
+      element += array_element[i];
+      // watch if cost select box is changed
+      $(element).find('select.cost-selector').change(function() {
+        setValue(element, $(this).attr('rate'));
+      });
+      // watch if date select box is changed
+      $(element).find('select.during-selector').change(function() {
+        setValue(element, $(this).attr('rate'));
+      });
+    }
+  }
+ 
 
   function getOptions(data, step, start_value) {
     var html = '', option = '';
@@ -685,29 +750,17 @@ $(document).ready(function() {
     return html;
   }
 
-  function createSelectBox(el, data) {
-    el.find('.start-loan .description .content > p').html(data.intro);
-    el.find('.start-loan .last-description .content > p').html(data.lateIntro);
-    var options = getOptions(data.maxMoney, 50, data.minMoney);
-    el.find('select.cost-selector').html(options);
-    options = getOptions(data.maxMonth, 1, data.minMonth);
-    el.find('select.during-selector').html(options);
+  // init data in borrow page
+  if($('body').hasClass('borrow-page')) {    
+    initCalculator('.borrow-page');
+    watchCalcSelectBox('.borrow-page');
   }
-  
-  $('.home-index-page').on('click', '.calculate-link', function (e) {
-    var postdata = {'uId': $('#uid').val(), 'page': 'calculator_base'};
-    $.ajax({
-      url: '../api/actions.php',
-      type: 'post',
-      data: postdata,
-      success: function(res) {
-        res = JSON.parse(res);
-        createSelectBox($('#fuli'), res.lnProdList.prod[0]);
-        createSelectBox($('#fuoli'), res.lnProdList.prod[1]);
-        createSelectBox($('#yueli'), res.lnProdList.prod[2]);
-      }
-    });
-  });  
+
+  // init data in calculator page
+  if($('body').hasClass('calculator-page')) {
+    initCalculator('.calculator-page');
+    watchCalcSelectBox('.calculator-page');
+  }  
 });
 
 

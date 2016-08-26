@@ -1,26 +1,20 @@
 <?php
-session_start();
 require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  $uId = $_COOKIE['uid'];
-  $login_temp = array(
-    'uid' => $uId
-  );
+if(checkUserLogin()) {
+  $uId = $_SESSION['uid'];
+  $postdata = array('uid' => $uId);
+  $initData = $_SESSION["sys_info"];
+  $returnList = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_RETURN'], array('uId' => $uId));
+  $returnList = json_decode($returnList);
 
-  if(isset($_SESSION["initData"])) {
-    $userAllData = $_SESSION["initData"];
-  }
-
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_RETURN'], $login_temp);
-  $result = json_decode($result);
-
-  $output = '<script>console.log('.json_encode($result).')</script>';
+  $output = '<script>console.log('.json_encode($returnList).')</script>';
   echo $output;
-
 } else {
   header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +39,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="personal-page main-loan-area refund-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -53,7 +47,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
         <div class="nav"></div>
       </nav>
     </header>
-
+    
+    <?php if(isset($returnList) && count($returnList->lnList->loan) > 0 ): ?>
     <section class="main-loan-area">
       <div class="refund-nav image">
         <div class="nav-area">
@@ -64,13 +59,13 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="nav-detail">
               <div class="title">
                 <b>
-                  <?php if(isset($userAllData)): ?>
-                    <?= $userAllData->returnWay->bankBranch ?>
+                  <?php if(isset($initData)): ?>
+                    <?= $initData->returnWay->bankBranch ?>
                   <?php endif; ?>
                 </b></div>
               <div class="content">
-                <?php if(isset($userAllData)): ?>
-                  <?= $userAllData->returnWay->bankCard ?> 分行
+                <?php if(isset($initData)): ?>
+                  <?= $initData->returnWay->bankCard ?>&nbsp;<?= $initData->returnWay->bankUser ?>
                 <?php endif; ?>
               </div>
             </div>  
@@ -83,8 +78,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="nav-detail">
               <div class="title"><b>支付宝</b></div>
               <div class="content">
-                <?php if(isset($userAllData)): ?>
-                  <?= $userAllData->returnWay->aliPay ?>
+                <?php if(isset($initData)): ?>
+                  <?= $initData->returnWay->aliPay ?>
                 <?php endif; ?>
               </div>
             </div>  
@@ -97,8 +92,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
             <div class="nav-detail">
               <div class="title"><b>微信</b></div>
               <div class="content">
-                <?php if(isset($userAllData)): ?>
-                  <?= $userAllData->returnWay->weixinPay ?>
+                <?php if(isset($initData)): ?>
+                  <?= $initData->returnWay->weixinPay ?>
                 <?php endif; ?>
               </div>
             </div>  
@@ -111,45 +106,58 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       </div>
 
       <div class="refund-detail">
-        <div class="detail-header flex-wrap-space">
-          <div><b>活利货</b></div>
-          <div class="">
-            <span>计划还款</span>
-            <span class="highlight-text"><b>&nbsp;&nbsp;￥ 100</b></span>
-          </div>
-        </div>
-
-        <div class="detail-slider">
-          <input id="detail_slider" data-slider-id='exSlider' type="text" class="span2" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="[50,70]"/>
-          <div class="slider-value flex-wrap-space">
-            <span>0%</span>
-            <span>100%</span>
-          </div>
-        </div>
-
-        <div class="detail-body">
-          <div class="detail-group flex-wrap">
-            <div class="title"><b>申请时间</b></div>
-            <div class="content">2016-04-24</div>
+        <?php foreach($returnList->lnList->loan as $loan): ?>
+          <div class="detail-header flex-wrap-space">
+            <div><b><?= $loan->name ?></b></div>
+            <div class="">
+              <span>计划还款</span>
+              <span class="highlight-text"><b>&nbsp;&nbsp;￥ <?= $loan->returnTotal ?></b></span>
+            </div>
           </div>
 
-          <div class="detail-group flex-wrap">
-            <div class="title"><b>申请金额</b></div>
-            <div class="content">￥ 100</div>
+          <div class="slider-wrap">
+            <input id="detail_slider" data-slider-id='exSlider' type="text" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="[<?php echo($loan->returnMoney/$loan->returnTotal*10) ?>, 10]" data-slider-enabled = "false"/>
+            <div class="slider-value flex-wrap-space">
+              <span>0%</span>
+              <span>100%</span>
+            </div>
           </div>
 
-          <div class="detail-group flex-wrap">
-            <div class="title"><b>应还款日</b></div>
-            <div class="content">2016-04-25</div>
-          </div>
+          <div class="detail-body">
+            <div class="detail-group flex-wrap">
+              <div class="title"><b>申请时间</b></div>
+              <div class="content"><?php echo date('Y-m-d', $loan->lnTime); ?></div>
+            </div>
 
-          <div class="detail-group flex-wrap">
-            <div class="title"><b>剩余应还</b></div>
-            <div class="content">￥ 100</div>
+            <div class="detail-group flex-wrap">
+              <div class="title"><b>申请金额</b></div>
+              <div class="content">￥ <?= $loan->money ?></div>
+            </div>
+
+            <div class="detail-group flex-wrap">
+              <div class="title"><b>应还款日</b></div>
+              <div class="content"><?php echo date('Y-m-d', $loan->returnTime); ?></div>
+            </div>
+
+            <div class="detail-group flex-wrap">
+              <div class="title"><b>剩余应还</b></div>
+              <div class="content">￥ <?= $loan->returnTotal ?></div>
+            </div>
+
+            <div class="detail-group flex-wrap">
+              <div class="title"><b>每期应还</b></div>
+              <div class="content">￥ <?= $loan->returnAver ?></div>
+            </div>
           </div>
-        </div>
+        <?php endforeach; ?>        
       </div>
     </section>
+    <?php else: ?>
+      <?php 
+        $title = '暂不需要还款';
+        include '../templates/error_tpl.php';
+      ?>
+    <?php endif; ?> 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>

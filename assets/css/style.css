@@ -168,6 +168,10 @@
   flex-grow: 1;
   flex-wrap: wrap;
 }
+select.form-control {
+  margin: auto;
+  width: 80%;
+}
 
 .file-block .input-holder .file-input {
   border: 1px solid #999;
@@ -823,6 +827,10 @@ form .reqire-icon {
 .loan-form {
   font-size: 16px;
   color: #aaa;
+}
+
+.loan-form .form-group .help-block {
+  display: none !important;
 }
 
 .loan-form .form-control, .loan-form .form-control:focus {
@@ -1744,12 +1752,12 @@ form#request_loan_form {
   flex: 2;
 }
 
-.refund-detail .detail-slider {
+.refund-detail .slider-wrap {
   padding: 20px 30px;
   border-bottom: 1px solid #ccc;
 }
 
-.refund-detail .detail-slider .slider-value {
+.refund-detail .slider-wrap .slider-value {
   margin-top: 10px;
   font-size: 10px;
 }
@@ -1770,6 +1778,7 @@ form#request_loan_form {
   width: 10px;
   height: 10px;
   margin-top: 5px;
+  background-color: #888;
 }
 
 .refund-detail #exSlider .slider-track {

@@ -200,6 +200,13 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
       $_SESSION['sys_info'] = $result;
     }
 
+    $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array('uId' => $uId));
+    $result = json_decode($result);
+    if($result->error->errno == '200') {
+      unset($result->error);
+      $_SESSION['ln_calculator'] = $result;
+    }
+
     $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
     $result = json_decode($result);
 
@@ -214,5 +221,13 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
     $_SESSION['flash'] = $result->error->usermsg;
     header("Location: ../signup.php");
   }
+}
+
+// Request Loan Page
+if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_APPLY'], $postdata);
+  echo $result;
 }
 ?>

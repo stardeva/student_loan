@@ -4,18 +4,19 @@ require_once('../api/functions.php');
 
 function setOption ($min, $max, $step) {
   for ($i = $min; $i <= $max; $i+= $step) {
-    if ($i == $min) {
+    if ($i == $min)
       echo "<option value=\"$i\" selected>$i</option>";
-    }
-    else {
+    else
       echo "<option value=\"$i\">$i</option>";
-    }
   }
 }
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
   $caculator_data = $_SESSION['ln_calculator'];
+  $limit_price = $_SESSION["user_all_data"]->user->quotaTotal;
+  $output = '<script>console.log('.json_encode($caculator_data).')</script>';
+  echo $output;
 } else {
   header("Location: ../signup.php");
 }
@@ -43,15 +44,21 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page calculator-page">
+  <body class="personal-page borrow-page">
     <header class="header">
       <nav class="topnav">
         <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title">费率计算</span>
+        <span class="nav text title">贷款</span>
         <div class="nav"></div>
       </nav>
     </header>
     <section class="process">
+      <form action="request.php" id="borrow_hidden_form" method="POST" style="display:none;">
+        <input type="hidden" name="origin_price" id="origin_price" />
+        <input type="hidden" name="sum_price" id="sum_price" />
+        <input type="hidden" name="time" id="time" />
+        <input type="hidden" name="pro_id" id="pro_id" />
+      </form>
       <ul class="nav nav-tabs">
         <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
         <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
@@ -95,6 +102,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
+            <a class="loan-button" href="#" onclick="goCardPage('fuli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)"></a>
             <div class="description">
               <div class="title">
                 <p>产品及借款费用说明</p>          
@@ -161,6 +169,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
+            <a class="loan-button" href="#" onclick="goCardPage('huoli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[1]->lnProdId ?>)"></a>
             <div class="description">
               <div class="title">
                 <p>产品及借款费用说明</p>          
@@ -227,6 +236,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
+            <a class="loan-button" href="#" onclick="goCardPage('yueli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[2]->lnProdId ?>)"></a>
             <div class="description">
               <div class="title">
                 <p>产品及借款费用说明</p>          
@@ -263,6 +273,7 @@ if(checkUserLogin()) {
     <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
+   <!--  <script src="../assets/js/jquery.mobile-1.4.5.min.js"></script> -->
     <script src="../assets/js/jsrender.js"></script>
     <script src="../assets/js/main.js"></script>
 
