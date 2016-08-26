@@ -1,17 +1,14 @@
 <?php
-session_start();
 require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  if(isset($_SESSION["initData"])) {
-    $userAllData = $_SESSION["initData"];
-    $output = '<script>console.log('.json_encode($userAllData).')</script>';
-  echo $output;
-  }
-
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
 } else {
   header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +17,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <title>学融宝</title>
+    <title>学融宝 - 更多</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +32,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page">
+  <body class="more-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -44,37 +41,30 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       </nav>
     </header>
 
-    <section class="more-area loan-data-area">
-      <div class="main-wrap">
-        <div class="more-wrap ">
-          <a href="about_us.php" class="data-group flex-wrap-space">
-            <div class="title"><b>关于我们</b></div>
-            <div class="arrow-right image"></div>
-          </a>
+    <section class="main no-padding">
+      <br />
+      <div class="personal-info-list">
+        <a href="about_us.php" class="info-item right-arrow">
+          <div class="item-title">关于我们</div>
+        </a>
+        <a href="feedback.php" class="info-item right-arrow">
+          <div class="item-title">意见反馈</div>
+        </a>
+        <a href="contact_us.php" class="info-item right-arrow">
+          <div class="item-title">联系客服</div>
+        </a>
+      </div>
 
-          <a  href="feedback.php?title=意见反馈" class="data-group flex-wrap-space">
-            <div class="title"><b>意见反馈</b></div>
-            <div class="arrow-right image"></div>
-          </a>  
+      <br />
 
-          <a href="contact_us.php?title=联系客服" class="data-group flex-wrap-space">
-            <div class="title"><b>联系客服</b></div>
-            <div class="arrow-right image"></div>
-          </a>
-        </div>
-
-        <div class="helper">
-          <a href="contract.php?url=<?= $userAllData->contract->guide?>&title=新手指南&type=jpg" class="data-group flex-wrap-space">
-            <div class="title"><b>新手指南</b></div>
-            <div class="arrow-right image"></div>
-          </a>
-          <!-- <a href="contract.php?url=<?= $userAllData->contract->help?>&title=使用帮助&type=pdf" class="data-group flex-wrap-space"> -->
-          <a href="#" class="data-group flex-wrap-space">
-            <div class="title"><b>使用帮助</b></div>
-            <div class="arrow-right image"></div>
-          </a>
-        </div>    
-      </div>      
+      <div class="personal-info-list">
+        <a href="contract.php" class="info-item right-arrow">
+          <div class="item-title">新手指南</div>
+        </a>
+        <a href="#" class="info-item right-arrow">
+          <div class="item-title">使用帮助</div>
+        </a>
+      </div>
     </section>
 
     <footer class="footer">
@@ -94,17 +84,16 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
           <span>更多</span>
         </a>
         <span class="bar"></span>
-        <a href="../personal/personal_my_history.html" class="nav">
+        <a href="#" class="nav">
           <img src="../assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
         </a>
       </nav>
     </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
+
     <script src="../assets/js/main.js"></script>
 
   </body>

@@ -154,8 +154,8 @@ if(isset($_POST['page']) && $_POST['page'] == 'calculator_base') {
   echo $result;
 }
 
-// Set feedback
-if(isset($_POST['page']) && $_POST['page'] == 'feedback_data') {
+// Submit Feedback
+if(isset($_POST['page']) && $_POST['page'] == 'more_feedback') {
   $postdata = $_POST;
   unset($postdata['page']);
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_FEEDBACK'], $postdata);

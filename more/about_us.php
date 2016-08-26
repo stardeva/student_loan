@@ -1,13 +1,15 @@
 <?php
-session_start();
+require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  if(isset($_SESSION["initData"])) {
-    $result = $_SESSION["initData"];
-  }
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
+  $company = $_SESSION['sys_info']->contact;
 } else {
-  header("Location: ../../signup.php");
+  header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <title>学融宝</title>
+    <title>学融宝 - 关于我们</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -31,28 +33,32 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page">
+  <body class="more-page more-aboutus-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">关于我们</span>
         <div class="nav"></div>
       </nav>
     </header>
 
-    <section class="about-us-area flex-wrap-column">
-      <div class="logo image"></div>
-      <div class="content"><b><?php echo $result->contact->content ?></b></div>
-      <div class="barcode image"></div>
-      <div class="wrap-content text-center"><b>扫描二维码，好友即可下载学融宝</b></div>
-      <div class="company wrap-content text-center"><?php echo $result->contact->company ?></div>
+    <section class="main">
+      <div class="more-about-page text-center">
+        <div class="logo-block">
+          <img src="../assets/images/logo.png" class="logo" />
+        </div>
+        <div class="text-left"><?= nl2br($company->content) ?></div>
+        <div class="barcode-block">
+          <img src="../assets/images/barcode.png" class="barcode" />
+        </div>
+        <div>扫描二维码，好友即可下载学融宝</div>
+        <div class="copyright"><?= $company->company ?></div>
+      </div>
     </section>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/pdf.js"></script>
+
     <script src="../assets/js/main.js"></script>
   </body>
 </html>

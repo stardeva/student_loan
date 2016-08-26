@@ -1,13 +1,14 @@
 <?php
-session_start();
+require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  if(isset($_SESSION["initData"])) {
-    $result = $_SESSION["initData"];
-  }
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
 } else {
-  header("Location: ../../signup.php");
+  header("Location: ../signup.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,12 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <title>学融宝</title>
+    <title>学融宝 - 意见反馈</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/bootstrapValidator.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -32,32 +32,40 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page">
+  <body class="more-page more-feedback-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title"><?php echo $_GET['title'] ?></span>
+        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <span class="nav text title">意见反馈</span>
         <div class="nav"></div>
       </nav>
     </header>
 
-    <section class="feedback-area">
-      <form id="feedback_form" class="loan-form
-      ">
-        <div class="form-group edit-area">
-          <textarea class="form-control" rows="10" name="feedback" id="feedback" placeholder="亲，您遇到什么问题啦？或者有什么好的建议给我们吗？欢迎提给我们！"></textarea>
+    <section class="main no-padding">
+      <form method="post" class="more-feedback">
+        <input type="hidden" name="uId" id="uid" value="<?= $uId ?>" />
+        <input type="hidden" name="page" value="more_feedback" />
+        <input type="hidden" name="backurl" id="backurl" value="../more" />
+        <div class="form-row">
+          <div class="form-element width-100pc">
+            <div class="textarea-holder">
+              <textarea rows="10" name="feedback" id="feedback" placeholder="亲，您遇到什么问题啦？或者有什么好的建议给我们吗？欢迎提给我们！"></textarea>
+            </div>
+          </div>
         </div>
-        
-        <input type="button" class="btn btn-lg submit-btn" disabled value="提交反馈">  
-      </form>      
+
+        <div class="buttons">
+          <input type="submit" class="button" value="提交反馈" id="feedback_submit" disabled="disabled" />
+        </div>
+      </form>
     </section>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <div class="notification-popup"></div>
+
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bootbox.min.js"></script>
-    <script src="../assets/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
+
     <script src="../assets/js/main.js"></script>
   </body>
 </html>

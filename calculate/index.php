@@ -46,7 +46,7 @@ if(checkUserLogin()) {
   <body class="personal-page calculator-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">费率计算</span>
         <div class="nav"></div>
       </nav>
@@ -264,6 +264,7 @@ if(checkUserLogin()) {
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/jsrender.js"></script>
+
     <script src="../assets/js/main.js"></script>
 
   </body>
