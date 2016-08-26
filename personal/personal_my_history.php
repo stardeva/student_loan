@@ -85,7 +85,7 @@ if(checkUserLogin()) {
     </section>
     <?php else: ?>
       <?php 
-        $title = '历史记录';
+        $title = '暂无历史记录';
         include '../templates/error_tpl.php';
       ?>
     <?php endif; ?>  
