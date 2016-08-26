@@ -27,7 +27,7 @@
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">申请成功</span>
-        <a href="../personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
+        <a href="../personal/personal_my_messages.php" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
       </nav>
     </header>
 

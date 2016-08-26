@@ -1,14 +1,12 @@
 <?php
-session_start();
 require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  $uId = $_COOKIE['uid'];
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
   $history = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_HISTORY'], array('uId' => $uId));
   $history = json_decode($history);
-
-  $output = '<script>console.log('.json_encode($history).')</script>';
-  echo $output;
 } else {
   header("Location: ../signup.php");
 }

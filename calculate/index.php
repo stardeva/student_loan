@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once('../api/curl.php');
+require_once('../api/functions.php');
 
 function setOption ($min, $max, $step) {
   for ($i = $min; $i <= $max; $i+= $step) {
@@ -11,8 +11,9 @@ function setOption ($min, $max, $step) {
   }
 }
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  $uId = $_COOKIE['uid'];
+if(checkUserLogin()) {
+  $userAllData = $_SESSION['user_all_data'];
+  $uId = $_SESSION['uid'];
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array('uId' => $uId));
   $result = json_decode($result);
 } else {
@@ -33,7 +34,6 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,7 +46,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
   <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">费率计算</span>
         <div class="nav"></div>
       </nav>
@@ -263,8 +263,8 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
-    <script src="../assets/js/jquery.mobile-1.4.5.min.js"></script>
     <script src="../assets/js/jsrender.js"></script>
+
     <script src="../assets/js/main.js"></script>
 
   </body>
