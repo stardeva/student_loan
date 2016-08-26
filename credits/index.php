@@ -6,6 +6,9 @@ if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
   $creditPercent = min($userAllData->user->quotaTotal, 5000) * 100 / 5000.0;
+  $is_step2 = $userAllData->cdBase->audit == 1;
+  $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
+  $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
 } else {
   header("Location: ../signup.php");
 }
@@ -33,7 +36,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="credits-page">
+  <body class="credits-page credits-index-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -68,14 +71,14 @@ if(checkUserLogin()) {
           <a href="credit_base.php" class="medal base">
             <img src="../assets/images/<?php echo $userAllData->cdBase->audit != 0 ? 'basic_info.png' : 'basic_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_family.php" class="medal home">
-            <img src="../assets/images/<?php echo $userAllData->cdHome->audit != 0 ? 'family_info.png' : 'family_info_gray.png'; ?>" class="img-responsive center-block" />
+          <a href="<?= $is_step2 ? 'credit_family.php' : ''?>" class="medal home <?php if(!$is_step2) echo 'disabled'; ?>">
+            <img src="../assets/images/<?php echo $is_step2 && $userAllData->cdHome->audit != 0 ? 'family_info.png' : 'family_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_contact.php" class="medal contacts">
-            <img src="../assets/images/<?php echo $userAllData->cdSchool->audit != 0 ? 'contact_info.png' : 'contact_info_gray.png'; ?>" class="img-responsive center-block" />
+          <a href="<?= $is_step3 ? 'credit_contact.php' : ''?>" class="medal contacts <?php if(!$is_step3) echo 'disabled'; ?>">
+            <img src="../assets/images/<?php echo $is_step3 && $userAllData->cdSchool->audit != 0 ? 'contact_info.png' : 'contact_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
-          <a href="credit_other.php" class="medal consume">
-            <img src="../assets/images/<?php echo $userAllData->cdSchool->audit != 0 ? 'other_info.png' : 'other_info_gray.png'; ?>" class="img-responsive center-block" />
+          <a href="<?= $is_step4 ? 'credit_other.php' : ''?>" class="medal other <?php if(!$is_step4) echo 'disabled'; ?>">
+            <img src="../assets/images/<?php echo $is_step4 && $userAllData->cdLife->audit != 0 ? 'other_info.png' : 'other_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
         </div>
         <div class="credits-heart">

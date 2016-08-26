@@ -373,6 +373,27 @@ $(document).ready(function() {
     }
   }
 
+  if($('body').hasClass('credits-index-page')) {
+    $('.medal.disabled').on('click', function(e) {
+      e.preventDefault();
+      if($(this).hasClass('home'))
+        $('.notification-popup').html("You need to fill the base information.");
+      else if($(this).hasClass('contacts'))
+        $('.notification-popup').html("You need to fill the base and home information.");
+      else if($(this).hasClass('other'))
+        $('.notification-popup').html("You need to fill the base, home and school information.");
+      $('.notification-popup').popup({
+        autoopen: true,
+        blur: false,
+        onopen: function() {
+          setTimeout(function() {
+            $('.notification-popup').popup('hide');
+          }, 1000);
+        }
+      });
+    });
+  }
+
   /* credit base 2 university */
   if($('#credit_base2_university').length) {
     (function() {
