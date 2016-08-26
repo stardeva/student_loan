@@ -32,12 +32,6 @@ function goCardPage(id, limit_price, pro_id) {
             window.location ="../credits";
           }
         }
-      },
-      success: {
-        label: "去绑定",
-        callback: function() {
-          window.location ="card.php";
-        }
       }
     });
   } else {
@@ -67,7 +61,7 @@ function completeCard() {
       success: {
         label: "确定",
         callback: function() {
-          window.location ="request.php";
+          window.location ="request.html";
         }
       }
     }
@@ -92,7 +86,6 @@ function decideLoan(e) {
         label: "确定",
         callback: function(e) {          
           $('#request_modal').modal('hide');
-          window.location ="request_success.php";
           var $request_form = $('#request_loan_form');
           var pro_id = $request_form.find('#pro_id').val();
           var money = $request_form.find('#money').val();
@@ -568,7 +561,7 @@ $(document).ready(function() {
   }
 
   // feedback page form validation in more/feedback.php
-  /*if($('#feedback_form').length) {    
+  if($('#feedback_form').length) {    
 
     $('#feedback_form').bootstrapValidator({
       message: '#messages',
@@ -608,44 +601,6 @@ $(document).ready(function() {
         success: function(res) {
           res = JSON.parse(res);
           window.location ="index.php";
-        }
-      });
-    });
-  }*/
-  if($('body').hasClass('more-feedback-page')) {
-    $(document).on('keyup', '.more-feedback #feedback', function() {
-      if($(this).val() != '') {
-        $('#feedback_submit').removeAttr('disabled');
-        $('#feedback_submit').addClass('success');
-      }
-      else{
-        $('#feedback_submit').removeClass('success');
-        $('#feedback_submit').attr('disabled', 'disabled');
-      }
-    });
-
-    $('.more-feedback #feedback_submit').on('click', function(e) {
-      e.preventDefault();
-      var postdata = {'uId': $('#uid').val(), 'page': 'more_feedback', 'feedback': $('.more-feedback #feedback').val()};
-      $.ajax({
-        url: '../api/actions.php',
-        type: 'post',
-        data: postdata,
-        success: function(res) {
-          res = JSON.parse(res);
-          if(res.error.errno === 200) {
-            $('.notification-popup').html("已提交");
-            $('.notification-popup').popup({
-              autoopen: true,
-              blur: false,
-              onopen: function() {
-                setTimeout(function() {
-                  $('.notification-popup').popup('hide');
-                  window.location = $('#backurl').val();
-                }, 1000);
-              }
-            });
-          }
         }
       });
     });
@@ -703,12 +658,14 @@ $(document).ready(function() {
   }
 
   //select event in calculate page for borrow and calculate page
-  function setValue(id, rate) {
-    var price = $(id).find('select.cost-selector').val();
-    var date = $(id).find('select.during-selector').val();
-    price = calResult(id, price, rate, date);
-    $(id).find('.loan-price').html(price + '元');
-    if(id != '#yueli')
+  function setValue(ele) { console.log($(ele))
+    var price = $(ele).find('select.cost-selector').val();
+    var date = $(ele).find('select.during-selector').val();
+    var rate = $(ele).find('select.cost-selector').attr('rate');
+    id = $(ele).selector;
+    price = calResult(id, price, rate, date);console.log(id, price, rate, date)
+    $(ele).find('.loan-price').html(price + '元');
+    if(getCalcType(id) != '#yueli')
       $(id).find('.loan-time .number').html(date);
   }
 
@@ -748,8 +705,8 @@ $(document).ready(function() {
             value = getMonth(mAmount, mRate, mTime);
           break;
       }
-    }   
-
+    }
+console.log(value)
 
     return parseFloat(value).toFixed(2);
 
@@ -761,25 +718,49 @@ $(document).ready(function() {
       var element = page_element + ' ';
       element += array_element[i];
       var rate = $(element).find('select.cost-selector').attr('rate');
-      setValue(element, rate);
+      setValue($(element));console.log($(element))
     }
   }
 
-  function watchCalcSelectBox(page_element) {
-    var array_element = ['#fuli', '#huoli', '#yueli'];
-    for(var i = 0; i < array_element.length; i ++) {
-      var element = page_element + ' ';
-      element += array_element[i];
-      // watch if cost select box is changed
-      $(element).find('select.cost-selector').change(function() {
-        setValue(element, $(this).attr('rate'));
-      });
-      // watch if date select box is changed
-      $(element).find('select.during-selector').change(function() {
-        setValue(element, $(this).attr('rate'));
-      });
-    }
-  }
+  // function watchCalcSelectBox(page_element) {
+  //   var array_element = ['#fuli', '#huoli', '#yueli'];
+  //   for(var i = 0; i < array_element.length; i ++) {
+  //     var element = page_element + ' ';
+  //     element += array_element[i];
+  //     // watch if cost select box is changed
+  //     $(element).find('select.cost-selector').change(function() {
+  //       setValue(element, $(this).attr('rate'));
+  //     });
+  //     // watch if date select box is changed
+  //     $(element).find('select.during-selector').change(function() {
+  //       setValue(element, $(this).attr('rate'));
+  //     });
+  //   }
+  // }
+
+  $('#fuli').find('select.cost-selector').change(function() {
+    setValue(this);
+  });
+
+  $('#fuli').find('select.during-selector').change(function() {
+    setValue(this);
+  });
+
+  $('#fuoli').find('select.cost-selector').change(function() {
+    setValue(this);
+  });
+
+  $('#fuoli').find('select.during-selector').change(function() {
+    setValue(this);
+  });
+
+  $('#yueli').find('select.cost-selector').change(function() {
+    setValue(this);
+  });
+
+  $('#yueli').find('select.during-selector').change(function() {
+    setValue(this);
+  });
  
 
   function getOptions(data, step, start_value) {
@@ -798,13 +779,13 @@ $(document).ready(function() {
   // init data in borrow page
   if($('body').hasClass('borrow-page')) {    
     initCalculator('.borrow-page');
-    watchCalcSelectBox('.borrow-page');
+    //watchCalcSelectBox('.borrow-page');
   }
 
   // init data in calculator page
   if($('body').hasClass('calculator-page')) {
     initCalculator('.calculator-page');
-    watchCalcSelectBox('.calculator-page');
+    //watchCalcSelectBox('.calculator-page');
   }  
 });
 

@@ -20,7 +20,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page">
+  <body class="personal-page borrow-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -45,7 +45,7 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
+                <select class="cost-selector form-control">
                   <option value="1">50</option>
                   <option value="2">100</option>
                   <option value="3">150</option>
@@ -55,7 +55,7 @@
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
+                <select class="during-selector form-control">
                   <option value="1">0</option>
                   <option value="2">1</option>
                   <option value="3">2</option>
@@ -67,7 +67,7 @@
           </div>
         </div>
 
-        <div id="fuoli" class="tab-pane fade">
+        <div id="huoli" class="tab-pane fade">
           <div class="loan-kind image">
             <div class="kind-head flex-wrap">
               <span class="flex1">借款金额(元)</span>
@@ -76,7 +76,7 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
+                <select class="cost-selector form-control">
                   <option value="1">50</option>
                   <option value="2">100</option>
                   <option value="3">150</option>
@@ -86,7 +86,7 @@
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
+                <select class="during-selector form-control">
                   <option value="1">0</option>
                   <option value="2">1</option>
                   <option value="3">2</option>
@@ -107,7 +107,7 @@
             
             <div class="kind-body flex-wrap">
               <div class="flex1">
-                <select class="cost-selector">
+                <select class="cost-selector form-control">
                   <option value="1">50</option>
                   <option value="2">100</option>
                   <option value="3">150</option>
@@ -117,7 +117,7 @@
               </div>
 
               <div class="flex1">
-                <select class="during-selector">
+                <select class="during-selector form-control">
                   <option value="1">0</option>
                   <option value="2">1</option>
                   <option value="3">2</option>
