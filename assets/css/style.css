@@ -141,12 +141,17 @@
   color: #333;
 }
 
-.file-block .input-label span {
+.file-block .input-label .remind-link {
   font-size: small;
   color: #f3512c;
   margin-top: 10px;
   display: block;
 }
+
+.file-block .input-label .remind-link:hover, .file-block .input-label .remind-link:focus, .file-block .input-label .remind-link:active {
+  text-decoration: none;
+}
+
 .input-block label.required:after, .select-block label.required:after, .file-block label.required:after {
   content: '*';
   color: #f3512c;

@@ -370,6 +370,11 @@ $(document).ready(function() {
         }
         $("html, body").animate({ scrollTop: 0 }, 0);
       });
+
+      if(Cookies.get('back') == 1) {
+        creditBaseSwiper.slideNext();
+        Cookies.remove('back');
+      }
     }
   }
 

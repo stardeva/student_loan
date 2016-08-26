@@ -6,6 +6,7 @@ if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
   $bankPics = explode(',', $userAllData->cdLife->bankPics);
+  $contract = $_SESSION['sys_info']->contract;
 } else {
   header("Location: ../signup.php");
 }
@@ -53,7 +54,7 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_other_website_screenshot" class="required">手机信息运营商网站截图</label>
-                <span>点击查看上传方法</span>
+                <a href="./remind_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
               </div>
               <div class="input-holder">
                 <div class="file-input" style="<?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? 'background-position: -9999px;' : ''; ?>">
