@@ -1,10 +1,11 @@
 <?php
-session_start();
+require_once('../api/curl.php');
+require_once('../api/functions.php');
 
-if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
-  
+if(checkUserLogin()) {
+  $contract = $_SESSION['sys_info']->contract;
 } else {
-  header("Location: ../../signup.php");
+  header("Location: ../signup.php");
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +15,7 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <title>学融宝</title>
+    <title>学融宝 - 新手指南</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -33,31 +34,17 @@ if(isset($_COOKIE['uid']) && $_COOKIE['uid'] != '') {
     <header class="header">
       <nav class="topnav">
         <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title"><?php echo $_GET['title'] ?></span>
+        <span class="nav text title">新手指南</span>
         <div class="nav"></div>
       </nav>
     </header>
 
-    <section class="contract-area">
-      <?php
-        if($_GET['type'] != 'pdf') {
-          echo "<embed src=".$_GET['url'].">";
-        } else {
-          echo "<canvas id='pdf_canvas'></canvas>";
-        }
-      ?>
+    <section class="main no-padding">
+      <img src="<?= $contract->guide ?>" class="img-responsive" />
     </section>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/pdf.js"></script>
     <script src="../assets/js/main.js"></script>
-    <?php
-      if($_GET['type'] == 'pdf') {
-        echo "<script>generatePdf('".$_GET['url']."')</script>";
-      }
-    ?>
   </body>
 </html>

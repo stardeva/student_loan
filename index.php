@@ -2,10 +2,29 @@
 require_once('api/curl.php');
 require_once('api/functions.php');
 
+$user_temp = array(
+  'uid' => '',
+  'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
+  'deviceOs' => 'Android',
+  'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
+  'deviceOp' => '4.1.1',
+  'version' => '1.0.1',
+  'deviceToken' => 'dd'
+);
+
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $user_temp);
+$result = json_decode($result);
+
+if($result->error->errno == '200') {
+  unset($result->error);
+  $_SESSION['sys_info'] = $result;
+}
+
+if(isset($_SESSION['sys_info']))
+  $carousel = $_SESSION['sys_info']->ad->carousel;
+
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
-  if(isset($_SESSION['sys_info']))
-    $carousel = $_SESSION['sys_info']->ad->carousel;
   $userAllData = $_SESSION['user_all_data'];
 }
 ?>
@@ -41,7 +60,7 @@ if(checkUserLogin()) {
           <a href="signup.php" class="nav text unregistered">未登录</a>
         <?php endif; ?>
         <span class="nav text title">学融宝</span>
-        <a href="personal/personal_my_messages.html" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
+        <a href="personal/personal_my_messages.php" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
       </nav>
       <?php if(isset($carousel)): ?>
       <div id="banner_slider">
@@ -63,7 +82,7 @@ if(checkUserLogin()) {
         <img src="assets/images/home_icon_repay.png" alt="还款" />
         <span>还&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</span>
       </a>
-      <a href="calculate/index.php" class="tool calculate-link">
+      <a href="calculate" class="tool calculate-link">
         <img src="assets/images/home_icon_rates.png" alt="费率计算" />
         <span>费&nbsp;率&nbsp;计&nbsp;算</span>
       </a>

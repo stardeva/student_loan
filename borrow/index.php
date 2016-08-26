@@ -11,7 +11,6 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,9 +23,9 @@
   <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../index.html" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款</span>
-        <a href="../index.html" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
+        <a href="../" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
       </nav>
     </header>
     <section class="process">
@@ -155,10 +154,9 @@
     </section>
 
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
-    <script src="../assets/js/jquery.mobile-1.4.5.min.js"></script>
+
     <script src="../assets/js/main.js"></script>
 
   </body>

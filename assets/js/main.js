@@ -14,7 +14,7 @@ function goCardPage() {
       success: {
         label: "去绑定",
         callback: function() {
-          window.location ="card.html";
+          window.location ="card.php";
         }
       }
     }
@@ -37,7 +37,7 @@ function completeCard() {
       success: {
         label: "确定",
         callback: function() {
-          window.location ="request.html";
+          window.location ="request.php";
         }
       }
     }
@@ -62,7 +62,7 @@ function decideLoan() {
         callback: function(e) {          
           //$('#request_loan_form').submit();
           $('#request_modal').modal('hide');
-          window.location ="request_success.html";
+          window.location ="request_success.php";
         }
       }
     }
@@ -507,7 +507,7 @@ $(document).ready(function() {
   }
 
   // feedback page form validation in more/feedback.php
-  if($('#feedback_form').length) {    
+  /*if($('#feedback_form').length) {    
 
     $('#feedback_form').bootstrapValidator({
       message: '#messages',
@@ -547,6 +547,44 @@ $(document).ready(function() {
         success: function(res) {
           res = JSON.parse(res);
           window.location ="index.php";
+        }
+      });
+    });
+  }*/
+  if($('body').hasClass('more-feedback-page')) {
+    $(document).on('keyup', '.more-feedback #feedback', function() {
+      if($(this).val() != '') {
+        $('#feedback_submit').removeAttr('disabled');
+        $('#feedback_submit').addClass('success');
+      }
+      else{
+        $('#feedback_submit').removeClass('success');
+        $('#feedback_submit').attr('disabled', 'disabled');
+      }
+    });
+
+    $('.more-feedback #feedback_submit').on('click', function(e) {
+      e.preventDefault();
+      var postdata = {'uId': $('#uid').val(), 'page': 'more_feedback', 'feedback': $('.more-feedback #feedback').val()};
+      $.ajax({
+        url: '../api/actions.php',
+        type: 'post',
+        data: postdata,
+        success: function(res) {
+          res = JSON.parse(res);
+          if(res.error.errno === 200) {
+            $('.notification-popup').html("已提交");
+            $('.notification-popup').popup({
+              autoopen: true,
+              blur: false,
+              onopen: function() {
+                setTimeout(function() {
+                  $('.notification-popup').popup('hide');
+                  window.location = $('#backurl').val();
+                }, 1000);
+              }
+            });
+          }
         }
       });
     });
