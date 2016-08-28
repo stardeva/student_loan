@@ -5,6 +5,7 @@ require_once('../api/functions.php');
 if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $contract = $_SESSION['sys_info']->contract;
 } else {
   header("Location: ../signup.php");
 }
@@ -212,7 +213,7 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_contact_handheld_id_photo" class="required">手持身份证照片</label>
-                <span>点击查看上传方法</span>
+                <a href="./remind_view.php?fileurl=<?= $contract->hand ?>" class="remind-link">点击查看上传方法</a>
               </div>
               <div class="input-holder">
                 <div class="file-input" style="<?php echo isset($userAllData->cdSchool->handPic) && $userAllData->cdSchool->handPic !='' ? 'background-position: -9999px;' : ''; ?>">

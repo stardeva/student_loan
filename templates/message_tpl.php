@@ -24,7 +24,7 @@ if(checkUserLogin()) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta HTTP-http-equiv="content-type" content="text/html; charset=charset_name">
 
-    <title>学融宝</title>
+    <title>学融宝 - 消息</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@ if(checkUserLogin()) {
     <header class="header">
       <nav class="topnav">
         <a href="../personal/personal_my_messages.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-        <span class="nav text title"><?php echo substr(htmlentities($message->title), 0, 24)."..." ?></span>
+        <span class="nav text title"><?php echo mb_strcut($message->title, 0, 28, 'UTF-8').(mb_strlen($message->title, 'UTF-8') > 14 ? '...' : ''); ?></span>
         <div class="nav"></div>
       </nav>
     </header>

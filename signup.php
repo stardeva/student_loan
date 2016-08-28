@@ -77,7 +77,7 @@ session_destroy();
           <span>更多</span>
         </a>
         <span class="bar"></span>
-        <a href="personal/personal_my_history.html" class="nav">
+        <a href="personal/personal_activities.php" class="nav">
           <img src="assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
         </a>

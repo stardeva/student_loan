@@ -5,6 +5,7 @@ require_once('../api/functions.php');
 if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $contract = $_SESSION['sys_info']->contract;
 } else {
   header("Location: ../signup.php");
 }
@@ -277,7 +278,7 @@ if(checkUserLogin()) {
                   <div class="file-block">
                     <div class="input-label">
                       <label for="credit_base2_xxw_photo" class="required">学信网</label>
-                      <span>点击查看上传方法</span>
+                      <a href="./remind_view.php?fileurl=<?= $contract->xuexin ?>" class="remind-link">点击查看上传方法</a>
                     </div>
                     <div class="input-holder">
                       <div class="file-input" style="<?php echo isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic !='' ? 'background-position: -9999px;' : ''; ?>">
@@ -337,6 +338,7 @@ if(checkUserLogin()) {
     <script type="text/javascript" src="../assets/js/swiper.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script type="text/javascript" src="../assets/js/select2.min.js"></script>
+    <script type="text/javascript" src="../assets/js/js.cookie.js"></script>
 
     <script type="text/javascript" src="../assets/js/main.js"></script>
 

@@ -238,4 +238,9 @@ if(isset($_POST['page']) && $_POST['page'] == 'help_page') {
   $result = httpGet($url);
   echo $result;
 }
+
+// Log out page
+if(isset($_POST['page']) && $_POST['page'] == 'logout') {
+  session_destroy();
+}
 ?>
