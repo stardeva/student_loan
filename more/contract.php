@@ -2,11 +2,7 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-if(checkUserLogin()) {
-  $contract = $_SESSION['sys_info']->contract;
-} else {
-  header("Location: ../signup.php");
-}
+$contract = $_SESSION['sys_info']->contract;
 ?>
 <!DOCTYPE html>
 <html lang="en">

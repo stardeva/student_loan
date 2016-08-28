@@ -230,4 +230,12 @@ if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_APPLY'], $postdata);
   echo $result;
 }
+
+// Help page
+if(isset($_POST['page']) && $_POST['page'] == 'help_page') {
+  $postdata = $_POST;
+  $url = $_POST['url'];
+  $result = httpGet($url);
+  echo $result;
+}
 ?>

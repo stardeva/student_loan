@@ -126,6 +126,14 @@
   margin: 1px;
 }
 
+#helper_content canvas {
+  margin-bottom: 10px;
+}
+
+#helper_content canvas:last-child {
+  margin-bottom: 0;
+}
+
 .input-block label, .select-block label, .file-block .input-label {
   margin: 0;
   padding: 0 10px;
