@@ -13,6 +13,10 @@
 
 /* / Custom Fonts */
 
+a:hover, a:focus, a:active, a:link {
+  text-decoration: none;
+}
+
 /* UI styles */
 
 .width-5pc {
@@ -536,7 +540,7 @@ body {
 .header .topnav .nav {
   font-size: 20px;
   color: #000;
-  flex-basis: 25%;
+  flex-basis: 16%;
 }
 
 .header .topnav .nav:hover {
@@ -547,7 +551,7 @@ body {
 .header .topnav .nav.title {
   font-size: 30px;
   text-align: center;
-  flex-basis: 50%;
+  flex-basis: 68%;
 }
 
 .header .topnav .nav.notification {
@@ -1497,24 +1501,20 @@ form#request_loan_form {
   background-repeat: no-repeat;
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
-  padding: 10px 10px 10px 80px;
-  justify-content: center;
-  background-size: 70px;
+  padding: 10px 10px 10px 70px;
+  background-size: 50px;
   background-position: 10px 10px;
   text-decoration: none;
+  flex-direction: column;
+  min-height: 90px;
+  position: relative;
 }
 
 .messages-list .message:first-child {
   border-top: 1px solid #e4e4e4;
 }
 
-.messages-list .message.unread .message-body .message-title span {
-  display: inline-block;
-  position: relative;
-  color: #333;
-}
-
-.messages-list .message.unread .message-body .message-title span:after {
+.messages-list .message.unread .message-body .message-title:after {
   content: ' ';
   border-radius: 50%;
   background-color: #cd1a1d;
@@ -1525,26 +1525,24 @@ form#request_loan_form {
 
 .messages-list .message .message-body {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding-left: 10px;
+  justify-content: space-between;
+  max-width: 100%;
 }
 
 .messages-list .message .message-body .message-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   font-size: 18px;
+  color: #333;
+  flex-shrink: 1;
+  width: calc(100% - 65px);
 }
 
-.messages-list .message .message-body .message-content {
+.messages-list .message .message-content {
   font-size: 14px;
   color: #999;
 }
 
 .messages-list .message .message-date {
   white-space: nowrap;
-  align-self: flex-start;
   font-size: 10px;
   color: #999;
   line-height: 24px;
@@ -1552,24 +1550,40 @@ form#request_loan_form {
   width: 65px;
 }
 
-.messages-list .message.review-failed {
-  background-image: url('../images/review_profile.png');
+.messages-list .message.message-system {
+  background-image: url('../images/msg_system.png');
 }
 
-.messages-list .message.information-approved {
-  background-image: url('../images/information_approved.png');
+.messages-list .message.message-overdue {
+  background-image: url('../images/msg_overdue.png');
 }
 
-.messages-list .message.apply-loan {
-  background-image: url('../images/apply_loan.png');
+.messages-list .message.message-audit-success {
+  background-image: url('../images/msg_audit_success.png');
 }
 
-.messages-list .message.receive-payment {
-  background-image: url('../images/receive_payment.png');
+.messages-list .message.message-payoff {
+  background-image: url('../images/msg_payoff.png');
 }
 
-.messages-list .message.repaid-loan {
-  background-image: url('../images/repaid_loan.png');
+.messages-list .message.message-repayment {
+  background-image: url('../images/msg_repayment.png');
+}
+
+.messages-list .message.message-seek {
+  background-image: url('../images/msg_seek.png');
+}
+
+.messages-list .message.message-apply {
+  background-image: url('../images/msg_apply.png');
+}
+
+.messages-list .message.message-audit-fail {
+  background-image: url('../images/msg_audit_fail.png');
+}
+
+.messages-list .message.message-loan {
+  background-image: url('../images/msg_loan.png');
 }
 
 .message-template-area {
@@ -2097,6 +2111,67 @@ form#request_loan_form {
 #personal_bind_card .buttons {
   margin: 20px 0;
 }
+
+/* user invite apps */
+.user-invite-apps {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  background-color: #fff;
+  z-index: 3000;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.user-invite-apps .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 33.33%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-invite-apps .app img {
+  width: 50px;
+  height: 50px;
+}
+
+.user-invite-apps .app span {
+  margin-top: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.user-invite-apps #close_invite {
+  color: #f00;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.bg-overlay {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/* / user invite apps */
+
+/* activity page */
+.activity-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* / activity page */
 
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {

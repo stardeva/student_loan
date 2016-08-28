@@ -230,4 +230,9 @@ if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_APPLY'], $postdata);
   echo $result;
 }
+
+// Log out page
+if(isset($_POST['page']) && $_POST['page'] == 'logout') {
+  session_destroy();
+}
 ?>

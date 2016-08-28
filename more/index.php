@@ -84,7 +84,7 @@ if(checkUserLogin()) {
           <span>更多</span>
         </a>
         <span class="bar"></span>
-        <a href="#" class="nav">
+        <a href="../personal/personal_activities.php" class="nav">
           <img src="../assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
         </a>

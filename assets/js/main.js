@@ -158,7 +158,7 @@ function generatePdf(url) {
 
 $(document).ready(function() {
   /* show modal when page load */
-  /*if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
+  if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
     if(typeof bootbox !== 'undefined') {
       bootbox.dialog({
         className: 'custom-dialog dialog-alert',
@@ -202,7 +202,7 @@ $(document).ready(function() {
         }
       });
     }
-  }*/
+  }
 
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({
@@ -373,6 +373,7 @@ $(document).ready(function() {
 
       if(Cookies.get('back') == 1) {
         creditBaseSwiper.slideNext();
+        Cookies.set('back', 0);
         Cookies.remove('back');
       }
     }
@@ -995,15 +996,42 @@ $(document).ready(function() {
         danger: {
           label: "取消",
           callback: function() {
-
           }
         },
         success: {
           label: "确定",
           callback: function() {
+            var postdata = {page: 'logout'};
+            $.ajax({
+              url: '../api/actions.php',
+              type: 'post',
+              data: postdata,
+              success: function(res) {
+                window.location = '../index.php';
+              }
+            });
           }
         }
       }
     });
+  });
+});
+
+/* share app */
+$(document).ready(function() {
+  $('.personal-index-page .personal-info-list .user-invite').on('click', function(e) {
+    e.preventDefault();
+    $('.personal-index-page .bg-overlay').removeClass('hidden');
+    $('.personal-index-page .user-invite-apps').css('display', 'flex');
+  });
+
+  $('.personal-index-page .bg-overlay').on('click', function(e) {
+    $('.personal-index-page .user-invite-apps').hide();
+    $('.personal-index-page .bg-overlay').addClass('hidden');
+  });
+
+  $('.personal-index-page #close_invite').on('click', function(e) {
+    $('.personal-index-page .user-invite-apps').hide();
+    $('.personal-index-page .bg-overlay').addClass('hidden');
   });
 });
