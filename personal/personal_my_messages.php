@@ -52,12 +52,28 @@ if(checkUserLogin()) {
       <?php if(isset($messages)): ?>
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
-        <a href="../templates/message_tpl.php?msg_id=<?= $msg->mId ?>" class="message review-failed unread">
+        <?php
+          $msg_url = '';
+          switch($msg->mType) {
+          case 2: case 5:
+            $msg_url = '../refund';
+            break;
+          case 3: case 4:
+            $msg_url = '../credits';
+            break;
+          case 6:
+            $msg_url = '../estimate';
+            break;
+          default:
+            $msg_url = '../templates/message_tpl.php?msg_id='.$msg->mId;
+          }
+        ?>
+        <a href="<?= $msg_url ?>" class="message <?= messageIcon($msg->mType) ?> unread">
           <div class="message-body">
-            <div class="message-title"><span><?= $msg->title ?></span></div>
-            <div class="message-content"><?= $msg->content ?></div>
+            <div class="message-title"><?= $msg->title ?></div>
+            <div class="message-date"><?php echo date('Y-m-d', $msg->time); ?></div>
           </div>
-          <div class="message-date"><?php echo date('Y-m-d', $msg->time); ?></div>
+          <div class="message-content"><?= mb_strcut($msg->content, 0, 200, 'UTF-8').(mb_strlen($msg->content, 'UTF-8') > 200 ? '...' : '') ?></div>
         </a>
         <?php endforeach; ?>
       </div>
