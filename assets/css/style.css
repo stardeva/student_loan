@@ -1620,22 +1620,28 @@ form#request_loan_form {
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
   color: #999;
+  font-size: 12px;
 }
 
-.history-list .history-block .history:first-child {
+.history-list .history-block .history.head {
   border-top: 1px solid #e4e4e4;
   color: #000;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .history-list .history-block .history .history-body {
-  flex-grow: 1
+  flex-grow: 1;
+  word-break: break-word;
 }
 
 .history-list .history-block .history .history-date {
   flex-wrap: nowrap;
   white-space: nowrap;
   padding-left: 16px;
+}
+
+.history-list .history-block .history.head .history-date {
+  color: #999;
 }
 
 .history-list .history-block .history .history-date.overdue {

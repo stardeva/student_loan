@@ -43,46 +43,24 @@ if(checkUserLogin()) {
       </nav>
     </header>
     <?php if(isset($history) && count($history->lnList->loan) > 0 ): ?>
-    <section class="main no-padding">      
+      <section class="main no-padding">
         <div class="history-list">
-          <div class="history-block">
-            <div class="history">
-              <div class="history-body">活利贷 申请额度 ￥ 200</div>
-              <div class="history-date">已逾期</div>
+          <?php foreach($history->lnList->loan as $loan) : ?>
+            <div class="history-block">
+              <div class="history head">
+                <div class="history-body"><?= $loan->name ?> 申请额度 ￥ <?= $loan->money ?></div>
+                <div class="history-date"><?= getLoanStatus($loan->status) ?></div>
+              </div>
+              <?php foreach($loan->hisList->loanHis as $his) : ?>
+                <div class="history" style="color: #<?php echo isset($his->color) && $his->color != '' ? dechex($his->color) : '000'; ?>;">
+                  <div class="history-body"><?= $his->his ?></div>
+                  <div class="history-date"><?= date('Y-m-d', $his->hisTime) ?></div>
+                </div>
+              <?php endforeach; ?>
             </div>
-            <div class="history">
-              <div class="history-body">资料审核中</div>
-              <div class="history-date">2016-05-05</div>
-            </div>
-            <div class="history">
-              <div class="history-body">元已不发到盛京银行 （卡号： 1313131313131）</div>
-              <div class="history-date">2016-05-06</div>
-            </div>
-            <div class="history">
-              <div class="history-body">贷款已逾期, 请尽快还款</div>
-              <div class="history-date">2016-05-07</div>
-            </div>
-          </div>
-          <div class="history-block">
-            <div class="history">
-              <div class="history-body">活利贷 申请额度 ￥ 200</div>
-              <div class="history-date overdue">已逾期</div>
-            </div>
-            <div class="history">
-              <div class="history-body">资料审核中</div>
-              <div class="history-date">2016-05-05</div>
-            </div>
-            <div class="history">
-              <div class="history-body">元已不发到盛京银行 （卡号： 1313131313131）</div>
-              <div class="history-date">2016-05-06</div>
-            </div>
-            <div class="history overdue">
-              <div class="history-body">贷款已逾期, 请尽快还款</div>
-              <div class="history-date">2016-05-07</div>
-            </div>
-          </div>
-        </div>        
-    </section>
+          <?php endforeach; ?>
+        </div>
+      </section>
     <?php else: ?>
       <?php 
         $title = '暂无历史记录';

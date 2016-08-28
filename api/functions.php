@@ -33,4 +33,21 @@ function messageIcon($m_type) {
   }
   return $icon;
 }
+
+// Return loan status
+function getLoanStatus($status_num) {
+  switch($status_num) {
+    case 0:
+      return "待审核";
+    case 1:
+      return "审核不通过";
+    case 2:
+      return "还款中";
+    case 3:
+      return "已还完";
+    case 4:
+      return "已逾期";
+  }
+  return '';
+}
 ?>
