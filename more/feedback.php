@@ -1,15 +1,3 @@
-<?php
-require_once('../api/curl.php');
-require_once('../api/functions.php');
-
-if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
-  $uId = $_SESSION['uid'];
-} else {
-  header("Location: ../signup.php");
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

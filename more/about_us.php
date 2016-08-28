@@ -2,13 +2,8 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
-  $uId = $_SESSION['uid'];
-  $company = $_SESSION['sys_info']->contact;
-} else {
-  header("Location: ../signup.php");
-}
+$userAllData = $_SESSION['user_all_data'];
+$company = $_SESSION['sys_info']->contact;
 
 ?>
 <!DOCTYPE html>
