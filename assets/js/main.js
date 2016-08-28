@@ -243,52 +243,54 @@ function getBinaryData (url, canvasContainer) {
 
 $(document).ready(function() {
   /* show modal when page load */
-  if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
-    if(typeof bootbox !== 'undefined') {
-      bootbox.dialog({
-        className: 'custom-dialog dialog-alert',
-        closeButton: false,
-        message: "<h3>免责申明</h3><div>本服条由学融宝提供, 相关服条和责任将由学融宝承担, 如有问题请资询学融宝公司客服。</div>",
-        buttons: {
-          success: {
-            label: "我知道了",
-            className: "btn-intro",
-            callback: function() {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                  console.log(position);
-                });
-              }
-              else {
-                window.close();
-              }
-              //Cookies.set('intro_dialog', true);
-              bootbox.dialog({
-                className: 'custom-dialog dialog-confirm',
-                closeButton: false,
-                message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
-                buttons: {
-                  danger: {
-                    label: "不允许",
-                    callback: function() {
+  if($('body').hasClass('home-index-page')) {
+    if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
+      if(typeof bootbox !== 'undefined') {
+        bootbox.dialog({
+          className: 'custom-dialog dialog-alert',
+          closeButton: false,
+          message: "<h3>免责申明</h3><div>本服条由学融宝提供, 相关服条和责任将由学融宝承担, 如有问题请资询学融宝公司客服。</div>",
+          buttons: {
+            success: {
+              label: "我知道了",
+              className: "btn-intro",
+              callback: function() {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    console.log(position);
+                  });
+                }
+                else {
+                  window.close();
+                }
+                //Cookies.set('intro_dialog', true);
+                bootbox.dialog({
+                  className: 'custom-dialog dialog-confirm',
+                  closeButton: false,
+                  message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+                  buttons: {
+                    danger: {
+                      label: "不允许",
+                      callback: function() {
 
-                    }
-                  },
-                  success: {
-                    label: "允许",
-                    callback: function() {
-                      
+                      }
+                    },
+                    success: {
+                      label: "允许",
+                      callback: function() {
+                        
+                      }
                     }
                   }
-                }
-              });
+                });
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
   }
-
+  
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({
       dots: true,
