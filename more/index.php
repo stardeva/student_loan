@@ -1,15 +1,3 @@
-<?php
-require_once('../api/curl.php');
-require_once('../api/functions.php');
-
-if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
-  $uId = $_SESSION['uid'];
-} else {
-  header("Location: ../signup.php");
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,6 +12,10 @@ if(checkUserLogin()) {
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
+    <style>
+    .pdfobject-container { height: 500px;}
+    .pdfobject { border: 1px solid #666; }
+    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,7 +53,7 @@ if(checkUserLogin()) {
         <a href="contract.php" class="info-item right-arrow">
           <div class="item-title">新手指南</div>
         </a>
-        <a href="#" class="info-item right-arrow">
+        <a href="help.php" class="info-item right-arrow">
           <div class="item-title">使用帮助</div>
         </a>
       </div>
@@ -93,7 +85,6 @@ if(checkUserLogin()) {
 
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-
     <script src="../assets/js/main.js"></script>
 
   </body>

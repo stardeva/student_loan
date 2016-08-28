@@ -231,6 +231,14 @@ if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
   echo $result;
 }
 
+// Help page
+if(isset($_POST['page']) && $_POST['page'] == 'help_page') {
+  $postdata = $_POST;
+  $url = $_POST['url'];
+  $result = httpGet($url);
+  echo $result;
+}
+
 // Log out page
 if(isset($_POST['page']) && $_POST['page'] == 'logout') {
   session_destroy();

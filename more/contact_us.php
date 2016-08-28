@@ -2,13 +2,7 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-if(checkUserLogin()) {
-  $uId = $_SESSION['uid'];
-  $contact = $_SESSION['sys_info']->contact;
-} else {
-  header("Location: ../signup.php");
-}
-
+$contact = $_SESSION['sys_info']->contact;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +58,8 @@ if(checkUserLogin()) {
             <div class="item-icon"><img src="../assets/images/about_tele.png" /></div>
             <div class="item-title">电话</div>
           </div>
-          <div class="item-desc"><?= $contact->tele ?></div>
+          <!-- <div class="item-desc"><?= $contact->tele ?></div> -->
+          <a href="tel:13238831500">13238831500</a>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-﻿// go to card page in borrow index
+// go to card page in borrow index
 function goCardPage(id, limit_price, pro_id) {
   var price_element = '.borrow-page #', time_element, origin_element;
 
@@ -123,7 +123,7 @@ function decideLoan(e) {
   });
 }
 
-// generate pdf in more/contract.php
+// generate pdf in more/help.php
 function generatePdf(url) {
   //var url = 'http://zxb-pic.img-cn-beijing.aliyuncs.com/1463534014_%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9.pdf';
   PDFJS.workerSrc = '../assets/js/pdf.worker.js';
@@ -154,6 +154,91 @@ function generatePdf(url) {
       page.render(renderContext);
     });
   });
+}
+
+// generate pdf on the canvas
+function renderPDF(url, canvasContainer, options) {
+    var scale = 1;
+        
+    function renderPage(page) {
+        var viewport = page.getViewport(scale);
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        canvasContainer.appendChild(canvas);
+        
+        page.render(renderContext);
+    }
+    
+    function renderPages(pdfDoc) {
+        for(var num = 1; num <= pdfDoc.numPages; num++)
+            pdfDoc.getPage(num).then(renderPage);
+    }
+    PDFJS.disableWorker = true;
+    PDFJS.getDocument(url).then(renderPages);
+}   
+
+function callGetDocment (response, canvasContainer) {
+  var scale = 1;
+        
+  function renderPage(page) {
+      var viewport = page.getViewport(scale);
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      var renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;      
+      canvasContainer.appendChild(canvas);
+      
+      page.render(renderContext);
+  }
+
+  function renderPages(pdfDoc) {
+      for(var num = 1; num <= pdfDoc.numPages; num++)
+          pdfDoc.getPage(num).then(renderPage);
+  }
+  PDFJS.disableWorker = true;
+  PDFJS.getDocument(response).then(renderPages);
+}
+
+function getBinaryData (url, canvasContainer) {
+  
+  // var postdata = {'page': 'help_page', 'url' : url};
+  // $.ajax({
+  //   url: '../api/actions.php',
+  //   type: 'post',
+  //   data: postdata,
+  //   success: function(res) {
+      
+  //     console.log(res);
+  //     callGetDocment(res, canvasContainer);
+  //   }
+  // });
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function(e) {console.log(e.currentTarget.response)
+    //binary form of ajax response,
+    callGetDocment(e.currentTarget.response, canvasContainer);
+  };
+
+    xhr.onerror = function  () {
+        // body...
+        alert("xhr error");
+    }
+
+    xhr.send();
 }
 
 $(document).ready(function() {

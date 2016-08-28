@@ -42690,7 +42690,7 @@ var NetworkManager = (function NetworkManagerClosure() {
     return array.buffer;
   }
 
-  var supportsMozChunked = (function supportsMozChunkedClosure() {
+  var supportsMozChunked = !(typeof navigator !== 'undefined' && /Chrome/.test(navigator.userAgent)) && (function supportsMozChunkedClosure() {
     try {
       var x = new XMLHttpRequest();
       // Firefox 37- required .open() to be called before setting responseType.
@@ -43008,7 +43008,7 @@ var NetworkManager = (function NetworkManagerClosure() {
 
       var networkManager = this._manager;
       var fullRequestXhrId = this._fullRequestId;
-      var fullRequestXhr = networkManager.getRequestXhr(fullRequestXhrId);
+      var fullRequestXhr = networkManager.getRequestXhr(fullRequestXhrId);console.log(fullRequestXhr)
       if (fullRequestXhr.getResponseHeader('Accept-Ranges') !== 'bytes') {
         return false;
       }
