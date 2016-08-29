@@ -49,8 +49,8 @@ if(checkUserLogin()) {
 
       <div class="form-group">
         <div class="flex-wrap-space space estimate-mark"">
-          <div>
-	      	评分
+          <div class="title">
+	      	<b>评分</b>
 	      </div>
 
       	  <div class="rating">
@@ -75,7 +75,7 @@ if(checkUserLogin()) {
       		<div class="agree-checkbox">
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
-                <b>匿名评论</b>
+                <b class="title">匿名评论</b>
               </label>
             </div>  
       	</div>

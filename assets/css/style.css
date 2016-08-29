@@ -330,7 +330,8 @@ form > h4 {
   border: 1px solid #ddd;
   resize: none;
   padding: 5px;
-  font-size: 12px;
+  font-size: 16px;
+  color: #333;
   border-radius: 0;
   box-shadow: none;
   -webkit-appearance: none;
@@ -2037,6 +2038,10 @@ form#request_loan_form {
   padding-left: 16px;
   bottom: 0;
   width: 100%;
+}
+
+.set-estimate-page .estimate-form .submit-group .title {
+  font-size: 12px;
 }
 
 .set-estimate-page .estimate-form .submit-btn {
