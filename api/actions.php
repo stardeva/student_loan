@@ -239,6 +239,14 @@ if(isset($_GET['page']) && $_GET['page'] == 'help_page') {
   echo $result;
 }
 
+// Receive feedback
+if(isset($_POST['page']) && $_POST['page'] == 'set_estimate_page') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_SEVALUATE'], $postdata);
+  echo $result;
+}
+
 // Log out page
 if(isset($_POST['page']) && $_POST['page'] == 'logout') {
   session_destroy();

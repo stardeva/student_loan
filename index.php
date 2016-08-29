@@ -86,7 +86,7 @@ if(checkUserLogin()) {
         <img src="assets/images/home_icon_rates.png" alt="费率计算" />
         <span>费&nbsp;率&nbsp;计&nbsp;算</span>
       </a>
-      <a href="estimate/user.php" class="tool">
+      <a href="estimate/index.php" class="tool">
         <img src="assets/images/home_icon_feedback.png" alt="评价" />
         <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
       </a>

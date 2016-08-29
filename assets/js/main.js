@@ -123,6 +123,42 @@ function decideLoan(e) {
   });
 }
 
+// receive feedback in estimate/feedback.php
+function giveUserFeedback(e) {
+  e.preventDefault();
+  
+  var $request_form = $('.set-estimate-page .estimate-form');
+  var form_data = $request_form.serializeArray();
+  var postdata = {};
+
+  $.map(form_data, function(item, index){
+      postdata[item.name] = item.value;   
+  });
+
+  if(postdata.agree == 'on') {
+    postdata.hide = 1;
+  } else {
+    postdata.hide = 0;
+  }
+  delete postdata["agree"];
+
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);
+      if(res.error.errno == 200) {console.log(res)
+        
+      } else {
+        alert(res.error.usermsg);
+        console.log('error: ');
+        console.log(res);
+      }
+    }
+  });
+}
+
 // get pdf Document
 function callGetPDFDocment (response, canvasContainer) {
   var scale = 1;
@@ -652,7 +688,7 @@ $(document).ready(function() {
     });
   }
 
-  // request page validation
+  // request page validation in borrow/request.php
   if($('#request_loan_form').length) {
     $('#request_loan_form').bootstrapValidator({
       fields: {
@@ -688,6 +724,43 @@ $(document).ready(function() {
     });
 
     $('#request_loan_form').on('status.field.bv', function(e, data) {
+      formIsValid = true;
+
+      $('.form-group',$(this)).each( function() {
+        formIsValid = formIsValid && $(this).hasClass('has-success');
+      });
+        
+      if(formIsValid) {
+          $('.submit-btn', $(this)).attr('disabled', false);                  
+      } else {
+          $('.submit-btn', $(this)).attr('disabled', true);
+      }
+    });
+
+  }
+
+  // estimate page validation in estimate/feedback.php
+  if($('.set-estimate-page .estimate-form').length) {
+    $('.set-estimate-page .estimate-form').bootstrapValidator({
+      fields: {
+        content: {
+          validators: {
+            notEmpty: {
+              message: 'The feedback is required.'
+            }
+          }
+        },
+      star: {
+        validators: {
+          notEmpty: {
+            message: 'The star is required.'
+          }
+        }
+      }
+    }
+    });
+
+    $('.set-estimate-page .estimate-form').on('status.field.bv', function(e, data) {
       formIsValid = true;
 
       $('.form-group',$(this)).each( function() {

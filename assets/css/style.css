@@ -526,7 +526,7 @@ body {
 .loan-data-area .content .user-head{
   background-color: #ccc;
   border-radius: 50%;
-  padding: 3px;
+  padding: 5px;
 }
 
 .header .topnav {
@@ -2000,8 +2000,8 @@ form#request_loan_form {
 }
 
 .user-estimate-area .estimate-group .user-head {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   font-size: 14px;
 }
 
@@ -2012,6 +2012,76 @@ form#request_loan_form {
 .user-estimate-area .estimate-group .name {
   margin: 0 auto;
 }
+
+.estimate-mark .star-image {
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/evaluate_star_empty.png');
+}
+
+.set-estimate-page .form-group {
+  margin: 0;
+}
+
+.set-estimate-page .main-section {
+  align-items: initial;
+}
+
+.set-estimate-page .estimate-mark {
+  border-bottom: 1px solid #ddd;
+  padding: 0 16px;
+}
+
+.set-estimate-page .estimate-form .submit-group {
+  position: absolute;
+  padding-left: 16px;
+  bottom: 0;
+  width: 100%;
+}
+
+.set-estimate-page .estimate-form .submit-btn {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.rating > label {
+  float: right;
+  display: inline;
+  padding: 0;
+  margin-left: 5px;
+  position: relative;
+  width: 1.1em;
+  cursor: pointer;
+  color: #000;
+}
+
+.rating > input,
+.rating > input:checked,
+.rating > input:hover {
+  border: none;
+  border-radius: 0;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  -webkit-appearance: none;
+  outline: 0;
+}
+
+.rating > label:hover ~ label .star-image,
+.rating > input.radio-btn:checked ~ label .star-image {
+  background-image: url('../images/evaluate_star.png'); 
+}
+
+.space {
+  align-items: initial;
+}
+
+/*.estimate-mark .star-image:hover,
+.estimate-mark .star-image:hover, {
+  background-image: url('../images/evaluate_star.png'); 
+}*/
 
 /*contract*/
 .contract-area > embed {
