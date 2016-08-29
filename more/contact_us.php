@@ -59,14 +59,13 @@ $contact = $_SESSION['sys_info']->contact;
             <div class="item-title">电话</div>
           </div>
           <!-- <div class="item-desc"><?= $contact->tele ?></div> -->
-          <a href="tel:13238831500">13238831500</a>
+          <a href="tel:13238831500" class="item-desc">13238831500</a>
         </div>
       </div>
     </section>
 
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-
     <script src="../assets/js/main.js"></script>
   </body>
 </html>

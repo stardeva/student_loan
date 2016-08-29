@@ -793,6 +793,7 @@ body {
   color: #aaa;
   font-size: 20px;
   background-color: #fff;
+  border-bottom: 1px solid #dedede;
 }
 
 .loan-kind {
@@ -821,7 +822,7 @@ body {
 
 .start-loan {
   color: #aaa;
-  background-color: #f0f0f0;
+  background-color: #eee;
 }
 
 .start-loan .description {
@@ -2056,6 +2057,7 @@ form#request_loan_form {
 
 .contact-us-area .info-item .item-desc {
   color: #888;
+  font-size: 12px;
 }
 
 .error-message-area {
