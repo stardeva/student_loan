@@ -2128,6 +2128,10 @@ form#request_loan_form {
   margin: 20px 0;
 }
 
+.more-feedback .buttons {
+  margin: 0;
+}
+
 /* user invite apps */
 .user-invite-apps {
   display: none;
