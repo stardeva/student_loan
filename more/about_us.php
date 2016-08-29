@@ -2,7 +2,6 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-$userAllData = $_SESSION['user_all_data'];
 $company = $_SESSION['sys_info']->contact;
 
 ?>

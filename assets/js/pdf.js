@@ -8683,7 +8683,7 @@ var fakeWorkerFilesLoader = useRequireEnsure ? (function (callback) {
  * @return {PDFDocumentLoadingTask}
  */
 function getDocument(src, pdfDataRangeTransport,
-                     passwordCallback, progressCallback) {console.log('ddd')
+                     passwordCallback, progressCallback) {
   var task = new PDFDocumentLoadingTask();
 
   // Support of the obsolete arguments (for compatibility with API v1.0)
