@@ -232,9 +232,9 @@ if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
 }
 
 // Help page
-if(isset($_POST['page']) && $_POST['page'] == 'help_page') {
-  $postdata = $_POST;
-  $url = $_POST['url'];
+if(isset($_GET['page']) && $_GET['page'] == 'help_page') {
+  $postdata = $_GET;
+  $url = $_GET['url'];
   $result = httpGet($url);
   echo $result;
 }

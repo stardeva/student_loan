@@ -3,9 +3,7 @@ require_once('../api/curl.php');
 require_once('../api/functions.php');
 header('Access-Control-Allow-Origin: *');
 
-$helpLink = $_SESSION['sys_info']->contract->help; 
-$output = '<script>console.log('.json_encode($helpLink).')</script>';
-echo $output;
+$helpLink = $_SESSION['sys_info']->contract->help;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,12 +46,11 @@ echo $output;
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/pdf.js"></script>
-    <!-- <script src="../assets/js/compatibility.js"></script> -->
+    <script src="../assets/js/compatibility.js"></script>
     <script src="../assets/js/main.js"></script>
     <script type="text/javascript">      
-      //var pdf_url = "<?php echo $helpLink; ?>";
-      //pdf_url = "../assets/1463534014_使用帮助.pdf";
-      //getBinaryData(pdf_url, document.getElementById('helper_content'));
+      var pdf_url = "<?php echo $helpLink; ?>";
+      displayPDF(pdf_url, document.getElementById('helper_content'));
     </script> 
   </body>
 </html>
