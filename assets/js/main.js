@@ -100,7 +100,7 @@ function decideLoan(e) {
   });
 
   if(picIdList == '') {
-    notification($('.request-loan-page .notification-popup'), 'please upload the picture.');
+    notification($('.request-loan-page .notification-popup'), '请上传图片');
     return;
   }
 
@@ -757,18 +757,11 @@ $(document).ready(function() {
     });
 
     $('#request_loan_form').on('status.field.bv', function(e, data) {
-      formIsValid = true;console.log('ddd//');
+      formIsValid = true;
 
       $('.form-group',$(this)).each( function() {
         formIsValid = formIsValid && $(this).hasClass('has-success');
       });
-
-      console.log(data)
-
-      // if($('#request_loan_form').find('.upload-picture')){
-      //   var pictures = document.getElementsByTagName("conPics");
-      //   console.log(pictures)
-      // }
 
       if(formIsValid) {
           $('.submit-btn', $(this)).attr('disabled', false);                  
