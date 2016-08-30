@@ -2,13 +2,7 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-$user_temp = array(
-  'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
-  'deviceOs' => 'Android',
-  'version' => '1.0.1'
-);
-
-$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $user_temp);
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
 $result = json_decode($result);
 
 if($result->error->errno == '200') {

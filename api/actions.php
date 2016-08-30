@@ -173,26 +173,18 @@ if(isset($_POST['page']) && $_POST['page'] == 'search_university') {
 // Signup Page
 if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
   $postdata = $_POST;
+  $backurl = $_POST['backurl'];
   unset($_POST['page']);
   unset($_POST['signup_student_id']);
   unset($_POST['signgup_agree']);
+  unset($_POST['backurl']);
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_LOGIN'], $postdata);
   $result = json_decode($result);
   if($result->error->errno == '200') {
     $uId = $result->uId;
     $_SESSION['uid'] = $uId;
 
-    $user_temp = array(
-      'uid' => $uId,
-      'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
-      'deviceOs' => 'Android',
-      'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
-      'deviceOp' => '4.1.1',
-      'version' => '1.0.1',
-      'deviceToken' => 'dd'
-    );
-
-    $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $user_temp);
+    $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
     $result = json_decode($result);
 
     if($result->error->errno == '200') {
@@ -216,7 +208,8 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
       $_SESSION['user_all_data'] = $userAllData;
     }
 
-    header("Location: ../index.php");
+    if($backurl == '') $backurl = '../index.php';
+    header("Location: " . $backurl);
   } else {
     $_SESSION['flash'] = $result->error->usermsg;
     header("Location: ../signup.php");

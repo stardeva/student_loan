@@ -2,9 +2,24 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
+$backurl = "javascript:history.go(-1)";
+if(isset($_SERVER['HTTP_REFERER'])) 
+  $backurl = $_SERVER['HTTP_REFERER'];
+
 if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $userAllData = $result;
+    unset($userAllData->error);
+    $_SESSION['user_all_data'] = $userAllData;
+    $_SESSION['uid'] = $uId;
+  }
+
+  $userAllData = $_SESSION['user_all_data'];
+
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_MSG'], array('uId' => $uId));
   $result = json_decode($result);
   
@@ -43,7 +58,7 @@ if(checkUserLogin()) {
   <body class="personal-page personal-my-message">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= $backurl ?>" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">消息</span>
         <div class="nav"></div>
       </nav>
