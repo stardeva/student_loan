@@ -60,11 +60,10 @@ if(checkUserLogin()) {
             </div>
             <div class="nav-detail">
               <div class="title">
-                <b>
-                  <?php if(isset($initData)): ?>
-                    <?= $initData->returnWay->bankBranch ?>
-                  <?php endif; ?>
-                </b></div>
+                <?php if(isset($initData)): ?>
+                  <?= $initData->returnWay->bankBranch ?>
+                <?php endif; ?>
+              </div>
               <div class="content">
                 <?php if(isset($initData)): ?>
                   <?= $initData->returnWay->bankCard ?>&nbsp;<?= $initData->returnWay->bankUser ?>
@@ -78,7 +77,7 @@ if(checkUserLogin()) {
               <div class="image"></div>
             </div>
             <div class="nav-detail">
-              <div class="title"><b>支付宝</b></div>
+              <div class="title">支付宝</div>
               <div class="content">
                 <?php if(isset($initData)): ?>
                   <?= $initData->returnWay->aliPay ?>
@@ -92,7 +91,7 @@ if(checkUserLogin()) {
               <div class="image"></div>
             </div>
             <div class="nav-detail">
-              <div class="title"><b>微信</b></div>
+              <div class="title">微信</div>
               <div class="content">
                 <?php if(isset($initData)): ?>
                   <?= $initData->returnWay->weixinPay ?>
@@ -109,49 +108,57 @@ if(checkUserLogin()) {
 
       <div class="refund-detail">
         <?php foreach($returnList as $loan): ?>
-          <div class="detail-header flex-wrap-space">
-            <div><b><?= $loan->name ?></b></div>
-            <div class="">
-              <span>计划还款</span>
-              <span class="highlight-text"><b>&nbsp;&nbsp;￥ <?= $loan->returnTotal ?></b></span>
+          <div class="detail-wrap">
+            <div class="detail-header flex-wrap-space">
+              <div class="title"><?= $loan->name ?></div>
+              <div class="">
+                <span>计划还款</span>
+                <span class="highlight-text"><b>&nbsp;￥ <?= $loan->returnTotal ?></b></span>
+              </div>
+            </div>
+
+            <div class="slider-wrap">
+              <input id="detail_slider" data-slider-id='exSlider' type="text" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="[<?php echo($loan->returnMoney/$loan->returnTotal*10) ?>, 10]" data-slider-enabled = "false"/>
+              <div class="slider-value flex-wrap-space">
+                <?php if($loan->lnProdId == 3): ?>
+                  <span>0期</span>
+                  <span><?= $loan->month ?>期</span>
+                <?php else: ?>
+                  <span>0%</span>
+                  <span>100%</span>
+                <?php endif; ?>
+              </div>
+            </div>
+
+            <div class="detail-body">
+              <div class="detail-group flex-wrap">
+                <div class="title">申请时间</div>
+                <div class="content"><?php echo date('Y-m-d', $loan->lnTime); ?></div>
+              </div>
+
+              <div class="detail-group flex-wrap">
+                <div class="title">申请金额</div>
+                <div class="content">￥ <?= $loan->money ?></div>
+              </div>
+
+              <div class="detail-group flex-wrap">
+                <div class="title">应还款日</div>
+                <div class="content"><?php echo date('Y-m-d', $loan->returnTime); ?></div>
+              </div>
+
+              <div class="detail-group flex-wrap">
+                <div class="title">剩余应还</div>
+                <div class="content">￥ <?= $loan->returnTotal ?></div>
+              </div>
+              <?php if($loan->lnProdId == 3): ?>
+                <div class="detail-group flex-wrap">
+                  <div class="title">每期应还</div>
+                  <div class="content">￥ <?= $loan->returnAver ?>/期</div>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
-
-          <div class="slider-wrap">
-            <input id="detail_slider" data-slider-id='exSlider' type="text" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="[<?php echo($loan->returnMoney/$loan->returnTotal*10) ?>, 10]" data-slider-enabled = "false"/>
-            <div class="slider-value flex-wrap-space">
-              <span>0%</span>
-              <span>100%</span>
-            </div>
-          </div>
-
-          <div class="detail-body">
-            <div class="detail-group flex-wrap">
-              <div class="title"><b>申请时间</b></div>
-              <div class="content"><?php echo date('Y-m-d', $loan->lnTime); ?></div>
-            </div>
-
-            <div class="detail-group flex-wrap">
-              <div class="title"><b>申请金额</b></div>
-              <div class="content">￥ <?= $loan->money ?></div>
-            </div>
-
-            <div class="detail-group flex-wrap">
-              <div class="title"><b>应还款日</b></div>
-              <div class="content"><?php echo date('Y-m-d', $loan->returnTime); ?></div>
-            </div>
-
-            <div class="detail-group flex-wrap">
-              <div class="title"><b>剩余应还</b></div>
-              <div class="content">￥ <?= $loan->returnTotal ?></div>
-            </div>
-
-            <div class="detail-group flex-wrap">
-              <div class="title"><b>每期应还</b></div>
-              <div class="content">￥ <?= $loan->returnAver ?></div>
-            </div>
-          </div>
-        <?php endforeach; ?>        
+        <?php endforeach; ?>
       </div>
     </section>
     <?php else: ?>

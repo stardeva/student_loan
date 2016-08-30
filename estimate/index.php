@@ -59,12 +59,16 @@ if(checkUserLogin()) {
                 <div class="user-head emoticon">
                   <div class="user-head-image image"></div>
                 </div>
-                <div class="name"><b><?php echo $item->name ?></b></div>
+                <div class="name title">
+                  <?php echo $item->name ?>                    
+                </div>
               </div>
-              <div class="active-money">
-                <span><b><?php echo $item->title ?></b></span>
+              <div class="active-money title">
+                <?php echo $item->title ?>
               </div>
-              <div class="power text-center"><?php echo $item->content ?></div>
+              <div class="power text-center">
+                <?php echo $item->content ?>                
+              </div>
             </div>
 
             <div class="user-mark flex-wrap-space">
