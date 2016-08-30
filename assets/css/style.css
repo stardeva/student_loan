@@ -2214,8 +2214,102 @@ form#request_loan_form {
 .activity-block {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 10px;
+}
+
+.activity-block .activity {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.activity-block .activity .hex {
+  width: 60px;
+  height: 60px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  font-stretch: condensed;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  z-index: 10;
+}
+
+.activity-block .activity .hex.hex-1 {
+  background-image: url('../images/hex_1.png');
+}
+
+.activity-block .activity .hex.hex-2 {
+  background-image: url('../images/hex_2.png');
+}
+
+.activity-block .activity .hex.hex-3 {
+  background-image: url('../images/hex_3.png');
+}
+
+.activity-block .activity .hex.hex-4 {
+  background-image: url('../images/hex_4.png');
+}
+
+.activity-block .activity .hex.hex-5 {
+  background-image: url('../images/hex_5.png');
+}
+
+.activity-block .activity .hex.hex-6 {
+  background-image: url('../images/hex_6.png');
+}
+
+.activity-block .activity .hex.hex-7 {
+  background-image: url('../images/hex_7.png');
+}
+
+.activity-block .activity .hex.hex-8 {
+  background-image: url('../images/hex_8.png');
+}
+
+.activity-block .activity .hex.hex-9 {
+  background-image: url('../images/hex_9.png');
+}
+
+.activity-block .activity .hex.hex-10 {
+  background-image: url('../images/hex_10.png');
+}
+
+.activity-block .activity .item {
+  border: 3px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,.3);
+  margin-left: -16px;
+  margin-top: 28px;
+  position: relative;
+}
+
+.activity-block .activity .item:after {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: right 0 top 0;
+  content: '';
+  width: 100px;
+  height: 100px;
+  z-index: 9;
+  position: absolute;
+  right: -10px;
+  top: -40px;
+}
+
+.activity-block .activity.activity-progress .item:after {
+  background-image: url('../images/activity_progress.png');
+}
+
+.activity-block .activity.activity-completed .item:after {
+  background-image: url('../images/activity_completed.png');
+}
+
+.activity-block .activity .item img {
+  border-radius: 5px;
 }
 
 /* / activity page */

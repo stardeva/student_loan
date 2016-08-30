@@ -53,9 +53,16 @@ if(isset($_SESSION['sys_info']))
     <?php if(isset($carousel) && count($carousel) > 0): ?>
     <section class="main no-padding">
       <div class="activity-block">
-        <?php foreach($carousel as $item): ?>
-          <a href="<?= $item->url ?>" class="activity"><img src="<?= $item->picUrl ?>" class="img-responsive" /></a>
-        <?php endforeach; ?>
+        <?php for($i = 0; $i < min(count($carousel), 10); $i++): ?>
+          <a href="<?= $carousel[$i]->url ?>" class="activity activity-progress">
+            <div class="hex hex-<?= $i % 10 + 1 ?>">
+              <?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?>
+            </div>
+            <div class="item">
+              <img src="<?= $carousel[$i]->picUrl ?>" class="img-responsive" />
+            </div>
+          </a>
+        <?php endfor; ?>
       </div>
     </section>
     <?php else: ?>
