@@ -224,8 +224,11 @@ if(checkUserLogin()) {
       </div>      
     </section>
 
+    <div class="notification-popup"></div>
+
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
     <script src="../assets/js/js.cookie.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/bootstrapValidator.min.js"></script>
