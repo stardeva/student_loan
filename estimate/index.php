@@ -2,17 +2,11 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
-  $uId = $_SESSION['uid'];
-  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_EVALUATE'], array('uId' => $uId));
-  $result = json_decode($result);
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_EVALUATE'], array());
+$result = json_decode($result);
 
-  if($result->error->errno == 200) {
-    $evaluateList = $result->evaluateList->evaluate;
-  }
-} else {
-  header("Location: ../signup.php");
+if($result->error->errno == 200) {
+  $evaluateList = $result->evaluateList->evaluate;
 }
 
 ?>
