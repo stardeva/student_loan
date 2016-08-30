@@ -42,7 +42,7 @@ if(checkUserLogin()) {
         <div class="nav"></div>
       </nav>
     </header>
-    <?php if(isset($history) && count($history->lnList->loan) > 0 ): ?>
+    <?php if(isset($history) && count($history->lnList->loan) > 0): ?>
       <section class="main no-padding">
         <div class="history-list">
           <?php foreach($history->lnList->loan as $loan) : ?>
@@ -64,6 +64,7 @@ if(checkUserLogin()) {
     <?php else: ?>
       <?php 
         $title = '暂无历史记录';
+        $error_type = 'history';
         include '../templates/error_tpl.php';
       ?>
     <?php endif; ?>  

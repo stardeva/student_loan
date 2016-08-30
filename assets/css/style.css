@@ -833,7 +833,7 @@ body {
   margin-top: 10px;
   height: 55px;
   display: block;
-  background-color: #fee841;
+  background-color: #3b74a1;
   text-decoration: none;
   text-align: center;
   color: #fff;
@@ -2061,23 +2061,50 @@ form#request_loan_form {
 }
 
 .error-message-area {
+  background-color: #fff;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  height: calc( 100% - 60px );
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.error-message-area .error-image {
+.error-message-area .image {
   width: 250px;
   height: 250px;
   background-image: url('../images/error_tip.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .error-message-area .content {
   margin-top: 20px;
   font-size: 20px;
-  color: #888;
+  color: #cdc9c9;
+}
+
+.error-message-area .image.loan {
+  background-image: url('../images/error_loan.png');
+}
+
+.error-message-area .image.evaluate {
+  background-image: url('../images/error_evaluate.png');
+}
+
+.error-message-area .image.message {
+  background-image: url('../images/error_message.png');
+}
+
+.error-message-area .image.activity {
+  background-image: url('../images/error_activity.png');
+}
+
+.error-message-area .image.history {
+  background-image: url('../images/error_history.png');
 }
 
 /* Notification Popup custom style */
@@ -2192,6 +2219,10 @@ form#request_loan_form {
 }
 
 /* / activity page */
+
+.bg-white {
+  background-color: #fff;
+}
 
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {

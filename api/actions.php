@@ -138,7 +138,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'personal_unbind_card') {
   echo json_encode($result);
 }
 
-// Bind Band Card
+// Mall List
 if(isset($_POST['page']) && $_POST['page'] == 'personal_coin_mall') {
   $postdata = $_POST;
   unset($postdata['page']);

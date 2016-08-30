@@ -40,7 +40,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page personal-my-info">
+  <body class="personal-page personal-my-message">
     <header class="header">
       <nav class="topnav">
         <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -48,8 +48,8 @@ if(checkUserLogin()) {
         <div class="nav"></div>
       </nav>
     </header>
+    <?php if(isset($messages) && count($messages) > 0): ?>
     <section class="main no-padding">
-      <?php if(isset($messages)): ?>
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
         <?php
@@ -77,8 +77,14 @@ if(checkUserLogin()) {
         </a>
         <?php endforeach; ?>
       </div>
-      <?php endif; ?>
     </section>
+    <?php else: ?>
+      <?php 
+        $title = '暂无消息';
+        $error_type = 'message';
+        include '../templates/error_tpl.php';
+      ?>
+    <?php endif; ?>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

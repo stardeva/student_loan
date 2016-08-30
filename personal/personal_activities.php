@@ -50,6 +50,7 @@ if(isset($_SESSION['sys_info']))
         <div class="nav"></div>
       </nav>
     </header>
+    <?php if(isset($carousel) && count($carousel) > 0): ?>
     <section class="main no-padding">
       <div class="activity-block">
         <?php foreach($carousel as $item): ?>
@@ -57,6 +58,13 @@ if(isset($_SESSION['sys_info']))
         <?php endforeach; ?>
       </div>
     </section>
+    <?php else: ?>
+      <?php 
+        $title = '暂无活动';
+        $error_type = 'activity';
+        include '../templates/error_tpl.php';
+      ?>
+    <?php endif; ?>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
