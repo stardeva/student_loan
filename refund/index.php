@@ -111,15 +111,20 @@ if(checkUserLogin()) {
               <div class="title"><?= $loan->name ?></div>
               <div class="">
                 <span>计划还款</span>
-                <span class="highlight-text"><b>&nbsp;&nbsp;￥ <?= $loan->returnTotal ?></b></span>
+                <span class="highlight-text"><b>&nbsp;￥ <?= $loan->returnTotal ?></b></span>
               </div>
             </div>
 
             <div class="slider-wrap">
               <input id="detail_slider" data-slider-id='exSlider' type="text" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="[<?php echo($loan->returnMoney/$loan->returnTotal*10) ?>, 10]" data-slider-enabled = "false"/>
               <div class="slider-value flex-wrap-space">
-                <span>0%</span>
-                <span>100%</span>
+                <?php if($loan->lnProdId == 3): ?>
+                  <span>0期</span>
+                  <span><?= $loan->month ?>期</span>
+                <?php else: ?>
+                  <span>0%</span>
+                  <span>100%</span>
+                <?php endif; ?>                
               </div>
             </div>
 
@@ -143,11 +148,12 @@ if(checkUserLogin()) {
                 <div class="title">剩余应还</div>
                 <div class="content">￥ <?= $loan->returnTotal ?></div>
               </div>
-
-              <div class="detail-group flex-wrap">
-                <div class="title">每期应还</div>
-                <div class="content">￥ <?= $loan->returnAver ?>/期</div>
-              </div>
+              <?php if($loan->lnProdId == 3): ?>
+                <div class="detail-group flex-wrap">
+                  <div class="title">每期应还</div>
+                  <div class="content">￥ <?= $loan->returnAver ?>/期</div>
+                </div>
+              <?php endif; ?>
             </div>
           </div>        
         <?php endforeach; ?>        

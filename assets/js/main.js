@@ -14,7 +14,7 @@ function goCardPage(id, limit_price, pro_id) {
   // if borrow price is bigger than quotaToal, redirect to the credits page
   if(borrow_price <= 0) {
     
-  }else if(limit_price < borrow_price) {
+  }else if( ( limit_price < borrow_price ) && (borrow_price <= limit_price * 10 )) {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
@@ -90,6 +90,20 @@ function decideLoan(e) {
           var pro_id = $request_form.find('#pro_id').val();
           var money = $request_form.find('#money').val();
           var time = $request_form.find('#time').val();
+          var pictur = $request_form.find('#time').val();
+          var picIdList = '';
+          $("input[name='conPics[]']").each(function() {
+            if($(this).val()) {
+              picIdList += $(this).val();
+              picIdList += ',';
+            }             
+          });
+          if(picIdList.slice(-1) == ',') {
+            picIdList.slice(0,-1);
+          }
+          
+          console.log(picIdList)
+
           var day = 0, month = 0;
           if(pro_id == 3) {
             month = time;
@@ -102,7 +116,8 @@ function decideLoan(e) {
                         'lnProdId': pro_id,
                         'money': money,
                         'day': day,
-                        'month': month};
+                        'month': month,
+                        'conPics': picIdList};
           $.ajax({
             url: '../api/actions.php',
             type: 'post',
@@ -699,37 +714,44 @@ $(document).ready(function() {
             }
           }
         },
-      number: {
-        validators: {
-          notEmpty: {
-            message: 'The number is required.'
-          },
-          stringLength: {
-            min: 5,
-            message: 'Your number must be at least 5 characters.'
+        number: {
+          validators: {
+            notEmpty: {
+              message: 'The number is required.'
+            },
+            stringLength: {
+              min: 5,
+              message: 'Your number must be at least 5 characters.'
+            }
           }
-        }
-      },
-      agree: {
-        validators: {
-          choice: {
-            min: 1,
-            max: 1,
-            message: "Please accept the agreement."
+        },
+        agree: {
+          validators: {
+            choice: {
+              min: 1,
+              max: 1,
+              message: "Please accept the agreement."
 
+            }
           }
         }
       }
-        }
     });
 
     $('#request_loan_form').on('status.field.bv', function(e, data) {
-      formIsValid = true;
+      formIsValid = true;console.log('ddd//');
 
       $('.form-group',$(this)).each( function() {
         formIsValid = formIsValid && $(this).hasClass('has-success');
       });
-        
+
+      console.log(data)
+
+      // if($('#request_loan_form').find('.upload-picture')){
+      //   var pictures = document.getElementsByTagName("conPics");
+      //   console.log(pictures)
+      // }
+
       if(formIsValid) {
           $('.submit-btn', $(this)).attr('disabled', false);                  
       } else {
