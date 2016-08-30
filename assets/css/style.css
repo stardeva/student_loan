@@ -111,7 +111,7 @@ a:hover, a:focus, a:active, a:link {
 
 /* form elements */
 .title {
-  color: #888;
+  color: #000;
 }
 
 .input-block, .select-block {
@@ -162,6 +162,11 @@ a:hover, a:focus, a:active, a:link {
 
 .file-block .input-label .remind-link:hover, .file-block .input-label .remind-link:focus, .file-block .input-label .remind-link:active {
   text-decoration: none;
+}
+
+.file-block .input-label .content {
+  font-size: 12px;
+  color: #888;
 }
 
 .input-block label.required:after, .select-block label.required:after, .file-block label.required:after {
@@ -330,7 +335,8 @@ form > h4 {
   border: 1px solid #ddd;
   resize: none;
   padding: 5px;
-  font-size: 12px;
+  font-size: 16px;
+  color: #333;
   border-radius: 0;
   box-shadow: none;
   -webkit-appearance: none;
@@ -526,7 +532,7 @@ body {
 .loan-data-area .content .user-head{
   background-color: #ccc;
   border-radius: 50%;
-  padding: 3px;
+  padding: 5px;
 }
 
 .header .topnav {
@@ -702,8 +708,13 @@ body {
   padding-top: 11px;
 }
 
-.highlight-text {
+.highlight-text,
+.highlight-text a {
   color: #ec8558;
+}
+
+.highlight-text a {
+  text-decoration: underline;
 }
 
 .modal .modal-body {
@@ -773,7 +784,7 @@ body {
 }
 
 .process > .nav-tabs >li > a {
-  color: #888;
+  color: #555;
   padding: 0;
   font-size: 16px;
 }
@@ -803,6 +814,10 @@ body {
   background-image: url('../images/loan_bg.png'); 
 }
 
+.loan-kind .kind-head .title {
+  color: #555;
+}
+
 .loan-kind .kind-body {
   margin-top: 20px;
 }
@@ -822,7 +837,15 @@ body {
 
 .start-loan {
   color: #aaa;
-  background-color: #eee;
+  background-color: #eee;  
+}
+
+.calculator-page .start-loan {
+  overflow: scroll;
+}
+
+.borrow-page .start-loan .description-group {
+  overflow: scroll;
 }
 
 .start-loan .description {
@@ -888,7 +911,8 @@ form .reqire-icon {
 }
 
 .loan-form .form-group .control-label {
-  color: #aaa;
+  color: #000;
+  font-weight: 400;
 }
 
 .loan-form .submit-btn {
@@ -1005,6 +1029,10 @@ form#request_loan_form {
 
 .loan-detail .detail-row .detail-unit {
   color: #333;
+}
+
+.loan-detail .detail-row .detail-content label {
+  font-weight: 400;
 }
 
 .main-loan-area.request-success {
@@ -1779,7 +1807,7 @@ form#request_loan_form {
   padding: 1em;
 }
 
-.refund-detail {
+.refund-page .refund-detail .detail-wrap {
   margin-top: 10px;
   background-color: #fff;
 }
@@ -1789,6 +1817,10 @@ form#request_loan_form {
   padding: 10px 20px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+}
+
+.refund-detail .detail-header .title {
+  font-size: 20px;
 }
 
 .refund-detail .detail-body {
@@ -1834,7 +1866,6 @@ form#request_loan_form {
   width: 10px;
   height: 10px;
   margin-top: 5px;
-  background-color: #888;
 }
 
 .refund-detail #exSlider .slider-track {
@@ -2000,8 +2031,8 @@ form#request_loan_form {
 }
 
 .user-estimate-area .estimate-group .user-head {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   font-size: 14px;
 }
 
@@ -2012,6 +2043,80 @@ form#request_loan_form {
 .user-estimate-area .estimate-group .name {
   margin: 0 auto;
 }
+
+.estimate-mark .star-image {
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/evaluate_star_empty.png');
+}
+
+.set-estimate-page .form-group {
+  margin: 0;
+}
+
+.set-estimate-page .main-section {
+  align-items: initial;
+}
+
+.set-estimate-page .estimate-mark {
+  border-bottom: 1px solid #ddd;
+  padding: 0 16px;
+}
+
+.set-estimate-page .estimate-form .submit-group {
+  position: absolute;
+  padding-left: 16px;
+  bottom: 0;
+  width: 100%;
+}
+
+.set-estimate-page .estimate-form .submit-group .title {
+  font-size: 12px;
+}
+
+.set-estimate-page .estimate-form .submit-btn {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.rating > label {
+  float: right;
+  display: inline;
+  padding: 0;
+  margin-left: 5px;
+  position: relative;
+  width: 1.1em;
+  cursor: pointer;
+  color: #000;
+}
+
+.rating > input,
+.rating > input:checked,
+.rating > input:hover {
+  border: none;
+  border-radius: 0;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  -webkit-appearance: none;
+  outline: 0;
+}
+
+.rating > label:hover ~ label .star-image,
+.rating > input.radio-btn:checked ~ label .star-image {
+  background-image: url('../images/evaluate_star.png'); 
+}
+
+.space {
+  align-items: initial;
+}
+
+/*.estimate-mark .star-image:hover,
+.estimate-mark .star-image:hover, {
+  background-image: url('../images/evaluate_star.png'); 
+}*/
 
 /*contract*/
 .contract-area > embed {

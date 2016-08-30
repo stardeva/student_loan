@@ -4,12 +4,19 @@ require_once('../api/functions.php');
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
+
+  if(empty($_POST)) {
+    $_POST = $_SESSION['request_post'];
+  }
+
   foreach ($_SESSION['ln_calculator']->lnProdList->prod as $key => $value) {
     if($value->lnProdId == $_POST['pro_id']) {
       $caculator_data = $value;
       break;
     }
   }
+
+  $_SESSION['request_post'] = $_POST;
   
   $originPrice = $_POST['origin_price'];
   $consultPrice = round($caculator_data->consultRateFlt * $originPrice, 2);
@@ -105,7 +112,11 @@ if(checkUserLogin()) {
               <div class="detail-label">还款金额</div>
               <div class="detail-content">
                 <label class="detail-value highlight-text"><?= $_POST['sum_price'] ?></label>
-                <label class="detail-unit">元</label>
+                <?php if($_POST['pro_id'] == 3): ?>
+                  <label class="detail-unit">元/月</label>
+                <?php else: ?>
+                  <label class="detail-unit">元</label>
+                <?php endif; ?>
               </div>
             </div>
           </div> 
@@ -116,28 +127,90 @@ if(checkUserLogin()) {
           <input type="hidden" name="time" id="time" value="<?= $_POST['time'] ?>">
           <input type="hidden" name="pro_id" id="pro_id" value="<?= $_POST['pro_id'] ?>">
           <input type="hidden" name="money" id="money" value="<?= $_POST['sum_price'] ?>">
-          <div class="form-group">
-            <label class="col-xs-4 cols control-label">借款用途<span class="reqire-icon"> *</span></label>
-            <div class="col-xs-8 cols">
-                <input class="form-control input-lg" name="card" type="text" size="35" placeholder="请输入借款用途 ">
+
+          <div class="form-row form-group">
+            <div class="form-element width-100pc">
+              <div class="input-block">
+                <label for="card" class="required">借款用途</label>
+                <div class="input-holder">
+                  <input type="text" name="card" id="card" required="true" placeholder="请输入借款用途" />
+                </div>
+              </div>
             </div>
-            </input>
           </div>
 
-          <div class="form-group">
-            <label class="col-xs-4 cols control-label">还款来源<span class="reqire-icon"> *</span></label>
-            <div class="col-xs-8 cols">
-                <input class="form-control input-lg" name="number" type="text" size="35" placeholder="请输入还款来源"></input>
+          <div class="form-row form-group">
+            <div class="form-element width-100pc">
+              <div class="input-block">
+                <label for="number" class="required">还款来源</label>
+                <div class="input-holder">
+                  <input type="text" name="number" id="number" required="true" placeholder="请输入还款来源" />
+                </div>
+              </div>
             </div>
-            </input>
           </div>
+
+          <?php if($originPrice >= 10000): ?>
+            <div class="form-row upload-picture">
+              <div class="form-element width-100pc">
+                <div class="file-block">
+                  <div class="input-label">
+                    <label for="credit_other_banks" class="required">合同照片</label>
+                    <div class="content">下载&nbsp;《<a class="highlight-text" href="loan_contact.php">借款合同</a>》并</div>
+                    <div class="content">签字上传照片，审批</div>
+                    <div class="content">通过后电子邮箱接收</div>
+                    <div class="content">《借款合同》</div>
+                  </div>
+                  <div class="input-holder">
+                    <div class="file-input">
+                      <label class="required">上传照片</label>
+                      <input type="file" required="true" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                    <div class="file-input">
+                      <label class="">上传照片</label>
+                      <input type="file" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                    <div class="file-input">
+                      <label class="">上传照片</label>
+                      <input type="file" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                    <div class="file-input">
+                      <label class="">上传照片</label>
+                      <input type="file" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                    <div class="file-input">
+                      <label class="">上传照片</label>
+                      <input type="file" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                    <div class="file-input">
+                      <label class="">上传照片</label>
+                      <input type="file" accept='image/*' class="file-upload" />
+                      <img class="image-preview" />
+                      <input type="hidden" name="conPics[]" class="file-key" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endif; ?>
+
           <div class="form-group has-success checkbox-form-group">
             <div class="agree-checkbox">
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
                 <span>&nbsp;同意</span>
-                <span class="highlight-text">&nbsp;<借款合同></span>
-                <span>&nbsp; 条款，电子邮箱接收 <借款合同> 回执</span>
+                <span class="highlight-text">&nbsp;《<a href="loan_contact.php">借款合同</a>》</span>
+                <span>&nbsp; 条款，电子邮箱接收 《借款合同》 回执</span>
               </label>
             </div>  
           </div>

@@ -14,7 +14,7 @@ function goCardPage(id, limit_price, pro_id) {
   // if borrow price is bigger than quotaToal, redirect to the credits page
   if(borrow_price <= 0) {
     
-  }else if(limit_price < borrow_price) {
+  }else if( ( limit_price < borrow_price ) && (borrow_price <= limit_price * 10 )) {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
@@ -90,6 +90,20 @@ function decideLoan(e) {
           var pro_id = $request_form.find('#pro_id').val();
           var money = $request_form.find('#money').val();
           var time = $request_form.find('#time').val();
+          var pictur = $request_form.find('#time').val();
+          var picIdList = '';
+          $("input[name='conPics[]']").each(function() {
+            if($(this).val()) {
+              picIdList += $(this).val();
+              picIdList += ',';
+            }             
+          });
+          if(picIdList.slice(-1) == ',') {
+            picIdList.slice(0,-1);
+          }
+          
+          console.log(picIdList)
+
           var day = 0, month = 0;
           if(pro_id == 3) {
             month = time;
@@ -102,7 +116,8 @@ function decideLoan(e) {
                         'lnProdId': pro_id,
                         'money': money,
                         'day': day,
-                        'month': month};
+                        'month': month,
+                        'conPics': picIdList};
           $.ajax({
             url: '../api/actions.php',
             type: 'post',
@@ -118,6 +133,42 @@ function decideLoan(e) {
           });
           
         }
+      }
+    }
+  });
+}
+
+// receive feedback in estimate/feedback.php
+function giveUserFeedback(e) {
+  e.preventDefault();
+  
+  var $request_form = $('.set-estimate-page .estimate-form');
+  var form_data = $request_form.serializeArray();
+  var postdata = {};
+
+  $.map(form_data, function(item, index){
+      postdata[item.name] = item.value;   
+  });
+
+  if(postdata.agree == 'on') {
+    postdata.hide = 1;
+  } else {
+    postdata.hide = 0;
+  }
+  delete postdata["agree"];
+
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);
+      if(res.error.errno == 200) {console.log(res)
+        
+      } else {
+        alert(res.error.usermsg);
+        console.log('error: ');
+        console.log(res);
       }
     }
   });
@@ -652,7 +703,7 @@ $(document).ready(function() {
     });
   }
 
-  // request page validation
+  // request page validation in borrow/request.php
   if($('#request_loan_form').length) {
     $('#request_loan_form').bootstrapValidator({
       fields: {
@@ -663,31 +714,75 @@ $(document).ready(function() {
             }
           }
         },
-      number: {
-        validators: {
-          notEmpty: {
-            message: 'The number is required.'
-          },
-          stringLength: {
-            min: 5,
-            message: 'Your number must be at least 5 characters.'
+        number: {
+          validators: {
+            notEmpty: {
+              message: 'The number is required.'
+            },
+            stringLength: {
+              min: 5,
+              message: 'Your number must be at least 5 characters.'
+            }
           }
-        }
-      },
-      agree: {
-        validators: {
-          choice: {
-            min: 1,
-            max: 1,
-            message: "Please accept the agreement."
+        },
+        agree: {
+          validators: {
+            choice: {
+              min: 1,
+              max: 1,
+              message: "Please accept the agreement."
 
+            }
           }
         }
       }
-        }
     });
 
     $('#request_loan_form').on('status.field.bv', function(e, data) {
+      formIsValid = true;console.log('ddd//');
+
+      $('.form-group',$(this)).each( function() {
+        formIsValid = formIsValid && $(this).hasClass('has-success');
+      });
+
+      console.log(data)
+
+      // if($('#request_loan_form').find('.upload-picture')){
+      //   var pictures = document.getElementsByTagName("conPics");
+      //   console.log(pictures)
+      // }
+
+      if(formIsValid) {
+          $('.submit-btn', $(this)).attr('disabled', false);                  
+      } else {
+          $('.submit-btn', $(this)).attr('disabled', true);
+      }
+    });
+
+  }
+
+  // estimate page validation in estimate/feedback.php
+  if($('.set-estimate-page .estimate-form').length) {
+    $('.set-estimate-page .estimate-form').bootstrapValidator({
+      fields: {
+        content: {
+          validators: {
+            notEmpty: {
+              message: 'The feedback is required.'
+            }
+          }
+        },
+      star: {
+        validators: {
+          notEmpty: {
+            message: 'The star is required.'
+          }
+        }
+      }
+    }
+    });
+
+    $('.set-estimate-page .estimate-form').on('status.field.bv', function(e, data) {
       formIsValid = true;
 
       $('.form-group',$(this)).each( function() {
@@ -705,12 +800,12 @@ $(document).ready(function() {
 
   //select event in calculate page for borrow and calculate page
   function setValue(ele) { 
-    var $ele = $(ele);console.log($ele)
+    var $ele = $(ele);
     var price = $ele.find('select.cost-selector').val();
     var date = $ele.find('select.during-selector').val();
     var rate = $ele.find('select.cost-selector').attr('rate');
     id = ele;
-    price = calResult(id, price, rate, date);console.log(id, price, rate, date)
+    price = calResult(id, price, rate, date);
     $ele.find('.loan-price').html(price + '元');
     if(getCalcType(id) != '#yueli')
       $ele.find('.loan-time .number').html(date);
@@ -769,7 +864,7 @@ $(document).ready(function() {
       setValue(element);
     }
 
-    g_page_element = page_element;
+    g_page_element = page_element;    
   }
 
   $('#fuli').find('select.cost-selector').change(function() {
@@ -822,16 +917,35 @@ $(document).ready(function() {
     return html;
   }
 
+  // borrow/loan_contact.php
+  if($('body').hasClass('loan-contact-page')) {
+    $('.loan-contact-page .header .back').click(function(){
+      window.location.origin;
+    });
+  }
+
   // init data in borrow page
   if($('body').hasClass('borrow-page')) {    
     initCalculator('.borrow-page');
-    //watchCalcSelectBox('.borrow-page');
+    var description_height = $(window).height() 
+                          - parseInt($('.header').css('height'))
+                          - parseInt($('.process .nav-tabs').css('height'))
+                          - parseInt($('.process .loan-kind').css('height')) 
+                          - parseInt($('.process .result').css('height'))
+                          - parseInt($('.process .start-loan .loan-button').css('height'));
+    $('.process .start-loan .description-group').height(description_height);
   }
 
   // init data in calculator page
   if($('body').hasClass('calculator-page')) {
     initCalculator('.calculator-page');
-    //watchCalcSelectBox('.calculator-page');
+    var description_height = $(window).height() 
+                          - parseInt($('.header').css('height'))
+                          - parseInt($('.process .nav-tabs').css('height'))
+                          - parseInt($('.process .loan-kind').css('height')) 
+                          - parseInt($('.process .result').css('height'));
+
+    $('.process .start-loan').height(description_height);
   }  
 });
 
