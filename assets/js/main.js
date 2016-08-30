@@ -778,12 +778,12 @@ $(document).ready(function() {
 
   //select event in calculate page for borrow and calculate page
   function setValue(ele) { 
-    var $ele = $(ele);console.log($ele)
+    var $ele = $(ele);
     var price = $ele.find('select.cost-selector').val();
     var date = $ele.find('select.during-selector').val();
     var rate = $ele.find('select.cost-selector').attr('rate');
     id = ele;
-    price = calResult(id, price, rate, date);console.log(id, price, rate, date)
+    price = calResult(id, price, rate, date);
     $ele.find('.loan-price').html(price + '元');
     if(getCalcType(id) != '#yueli')
       $ele.find('.loan-time .number').html(date);
@@ -842,7 +842,7 @@ $(document).ready(function() {
       setValue(element);
     }
 
-    g_page_element = page_element;
+    g_page_element = page_element;    
   }
 
   $('#fuli').find('select.cost-selector').change(function() {
@@ -895,16 +895,35 @@ $(document).ready(function() {
     return html;
   }
 
+  // borrow/loan_contact.php
+  if($('body').hasClass('loan-contact-page')) {
+    $('.loan-contact-page .header .back').click(function(){
+      window.location.origin;
+    });
+  }
+
   // init data in borrow page
   if($('body').hasClass('borrow-page')) {    
     initCalculator('.borrow-page');
-    //watchCalcSelectBox('.borrow-page');
+    var description_height = $(window).height() 
+                          - parseInt($('.header').css('height'))
+                          - parseInt($('.process .nav-tabs').css('height'))
+                          - parseInt($('.process .loan-kind').css('height')) 
+                          - parseInt($('.process .result').css('height'))
+                          - parseInt($('.process .start-loan .loan-button').css('height'));
+    $('.process .start-loan .description-group').height(description_height);
   }
 
   // init data in calculator page
   if($('body').hasClass('calculator-page')) {
     initCalculator('.calculator-page');
-    //watchCalcSelectBox('.calculator-page');
+    var description_height = $(window).height() 
+                          - parseInt($('.header').css('height'))
+                          - parseInt($('.process .nav-tabs').css('height'))
+                          - parseInt($('.process .loan-kind').css('height')) 
+                          - parseInt($('.process .result').css('height'));
+
+    $('.process .start-loan').height(description_height);
   }  
 });
 

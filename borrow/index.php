@@ -103,33 +103,35 @@ if(checkUserLogin()) {
 
           <div class="start-loan">
             <a class="loan-button" href="#" onclick="goCardPage('fuli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)"></a>
-            <div class="description">
-              <div class="title">
-                <p>产品及借款费用说明</p>          
+            <div class="description-group">
+              <div class="description">
+                <div class="title">
+                  <p>产品及借款费用说明</p>          
+                </div>
+
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[0]->intro;
+                    ?>
+                  </p>
+                </div>
               </div>
 
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[0]->intro;
-                  ?>
-                </p>
-              </div>
-            </div>
+              <div class="description last-description">
+                <div class="title">
+                  <p>逾期费用说明.</p>          
+                </div>
 
-            <div class="description last-description">
-              <div class="title">
-                <p>逾期费用说明.</p>          
-              </div>
-
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[0]->lateIntro;
-                  ?>
-                </p>
-            </div>
-            </div>     
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[0]->lateIntro;
+                    ?>
+                  </p>
+                </div>
+              </div> 
+            </div>                
           </div>
         </div>
 
@@ -170,33 +172,35 @@ if(checkUserLogin()) {
 
           <div class="start-loan">
             <a class="loan-button" href="#" onclick="goCardPage('huoli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[1]->lnProdId ?>)"></a>
-            <div class="description">
-              <div class="title">
-                <p>产品及借款费用说明</p>          
+            <div class="description-group">
+              <div class="description">
+                <div class="title">
+                  <p>产品及借款费用说明</p>          
+                </div>
+
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[1]->intro;
+                    ?>
+                  </p>
+                </div>
               </div>
 
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[1]->intro;
-                  ?>
-                </p>
-              </div>
-            </div>
+              <div class="description last-description">
+                <div class="title">
+                  <p>逾期费用说明</p>          
+                </div>
 
-            <div class="description last-description">
-              <div class="title">
-                <p>逾期费用说明</p>          
-              </div>
-
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[1]->lateIntro;
-                  ?>
-                </p>
-              </div>
-            </div>     
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[1]->lateIntro;
+                    ?>
+                  </p>
+                </div>
+              </div> 
+            </div>              
           </div>
         </div>
 
@@ -237,33 +241,35 @@ if(checkUserLogin()) {
 
           <div class="start-loan">
             <a class="loan-button" href="#" onclick="goCardPage('yueli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[2]->lnProdId ?>)"></a>
-            <div class="description">
-              <div class="title">
-                <p>产品及借款费用说明</p>          
+            <div class="description-group">
+              <div class="description">
+                <div class="title">
+                  <p>产品及借款费用说明</p>          
+                </div>
+
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[2]->intro;
+                    ?>
+                  </p>
+                </div>
               </div>
 
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[2]->intro;
-                  ?>
-                </p>
-              </div>
-            </div>
+              <div class="description last-description">
+                <div class="title">
+                  <p>逾期费用说明</p>          
+                </div>
 
-            <div class="description last-description">
-              <div class="title">
-                <p>逾期费用说明</p>          
-              </div>
-
-              <div class="content">
-                <p>
-                  <?php
-                    echo $caculator_data->lnProdList->prod[2]->lateIntro;
-                  ?>
-                </p>
-              </div>
-            </div>     
+                <div class="content">
+                  <p>
+                    <?php
+                      echo $caculator_data->lnProdList->prod[2]->lateIntro;
+                    ?>
+                  </p>
+                </div>
+              </div> 
+            </div>              
           </div>
         </div>        
       </div>

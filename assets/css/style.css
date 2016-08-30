@@ -703,8 +703,13 @@ body {
   padding-top: 11px;
 }
 
-.highlight-text {
+.highlight-text,
+.highlight-text a {
   color: #ec8558;
+}
+
+.highlight-text a {
+  text-decoration: underline;
 }
 
 .modal .modal-body {
@@ -827,7 +832,15 @@ body {
 
 .start-loan {
   color: #aaa;
-  background-color: #eee;
+  background-color: #eee;  
+}
+
+.calculator-page .start-loan {
+  overflow: scroll;
+}
+
+.borrow-page .start-loan .description-group {
+  overflow: scroll;
 }
 
 .start-loan .description {

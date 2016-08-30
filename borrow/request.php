@@ -4,12 +4,19 @@ require_once('../api/functions.php');
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
+
+  if(empty($_POST)) {
+    $_POST = $_SESSION['request_post'];
+  }
+
   foreach ($_SESSION['ln_calculator']->lnProdList->prod as $key => $value) {
     if($value->lnProdId == $_POST['pro_id']) {
       $caculator_data = $value;
       break;
     }
   }
+
+  $_SESSION['request_post'] = $_POST;
   
   $originPrice = $_POST['origin_price'];
   $consultPrice = round($caculator_data->consultRateFlt * $originPrice, 2);
@@ -105,7 +112,11 @@ if(checkUserLogin()) {
               <div class="detail-label">还款金额</div>
               <div class="detail-content">
                 <label class="detail-value highlight-text"><?= $_POST['sum_price'] ?></label>
-                <label class="detail-unit">元</label>
+                <?php if($_POST['pro_id'] == 3): ?>
+                  <label class="detail-unit">元/月</label>
+                <?php else: ?>
+                  <label class="detail-unit">元</label>
+                <?php endif; ?>
               </div>
             </div>
           </div> 
@@ -136,8 +147,8 @@ if(checkUserLogin()) {
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
                 <span>&nbsp;同意</span>
-                <span class="highlight-text">&nbsp;<借款合同></span>
-                <span>&nbsp; 条款，电子邮箱接收 <借款合同> 回执</span>
+                <span class="highlight-text">&nbsp;《<a href="loan_contact.php">借款合同</a>》</span>
+                <span>&nbsp; 条款，电子邮箱接收 《借款合同》 回执</span>
               </label>
             </div>  
           </div>
