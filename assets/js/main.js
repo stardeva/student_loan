@@ -68,9 +68,53 @@ function completeCard() {
   });
 }
 
+function notification($ele, msg) {
+  $ele.html(msg);
+  $ele.popup({
+    autoopen: true,
+    blur: false,
+    onopen: function() {
+      setTimeout(function() {
+        $('.notification-popup').popup('hide');
+      }, 1000);
+    }
+  });
+}
+
 // decide to send loan request in request page
 function decideLoan(e) {
   e.preventDefault();
+
+  $('#request_modal').modal('hide');
+  var $request_form = $('#request_loan_form');
+  var pro_id = $request_form.find('#pro_id').val();
+  var money = $request_form.find('#money').val();
+  var time = $request_form.find('#time').val();
+  var pictur = $request_form.find('#time').val();
+  var picIdList = '';
+  $request_form.find("input[name='conPics[]']").each(function() {
+    if($(this).val()) {
+      picIdList += $(this).val();
+      picIdList += ',';
+    }             
+  });
+
+  if(picIdList == '') {
+    notification($('.request-loan-page .notification-popup'), '请上传图片');
+    return;
+  }
+
+  if(picIdList.slice(-1) == ',') {
+    picIdList = picIdList.slice(0,-1);
+  }
+
+  var day = 0, month = 0;
+  if(pro_id == 3) {
+    month = time;
+  } else {
+    day = time;
+  }
+
   bootbox.dialog({
     className: 'custom-dialog dialog-confirm',
     closeButton: false,
@@ -85,32 +129,6 @@ function decideLoan(e) {
       success: {
         label: "确定",
         callback: function(e) {          
-          $('#request_modal').modal('hide');
-          var $request_form = $('#request_loan_form');
-          var pro_id = $request_form.find('#pro_id').val();
-          var money = $request_form.find('#money').val();
-          var time = $request_form.find('#time').val();
-          var pictur = $request_form.find('#time').val();
-          var picIdList = '';
-          $("input[name='conPics[]']").each(function() {
-            if($(this).val()) {
-              picIdList += $(this).val();
-              picIdList += ',';
-            }             
-          });
-          if(picIdList.slice(-1) == ',') {
-            picIdList.slice(0,-1);
-          }
-          
-          console.log(picIdList)
-
-          var day = 0, month = 0;
-          if(pro_id == 3) {
-            month = time;
-          } else {
-            day = time;
-          }
-
           var postdata = {'uId': $('#uid').val(), 
                         'page': 'request_loan_page',
                         'lnProdId': pro_id,
@@ -127,7 +145,7 @@ function decideLoan(e) {
               if(res.error.errno == 200) {
                 window.location ="request_success.php";
               } else {
-                console.log('error: ' +res);
+                notification($('.request-loan-page .notification-popup'), res.error.usermsg);
               }
             }
           });
@@ -778,18 +796,11 @@ $(document).ready(function() {
     });
 
     $('#request_loan_form').on('status.field.bv', function(e, data) {
-      formIsValid = true;console.log('ddd//');
+      formIsValid = true;
 
       $('.form-group',$(this)).each( function() {
         formIsValid = formIsValid && $(this).hasClass('has-success');
       });
-
-      console.log(data)
-
-      // if($('#request_loan_form').find('.upload-picture')){
-      //   var pictures = document.getElementsByTagName("conPics");
-      //   console.log(pictures)
-      // }
 
       if(formIsValid) {
           $('.submit-btn', $(this)).attr('disabled', false);                  
