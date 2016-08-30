@@ -111,7 +111,7 @@ a:hover, a:focus, a:active, a:link {
 
 /* form elements */
 .title {
-  color: #888;
+  color: #000;
 }
 
 .input-block, .select-block {
@@ -774,7 +774,7 @@ body {
 }
 
 .process > .nav-tabs >li > a {
-  color: #888;
+  color: #555;
   padding: 0;
   font-size: 16px;
 }
@@ -802,6 +802,10 @@ body {
   color: #aaa;
   background-color: #f0f0f0;
   background-image: url('../images/loan_bg.png'); 
+}
+
+.loan-kind .kind-head .title {
+  color: #555;
 }
 
 .loan-kind .kind-body {
@@ -889,7 +893,8 @@ form .reqire-icon {
 }
 
 .loan-form .form-group .control-label {
-  color: #aaa;
+  color: #000;
+  font-weight: 400;
 }
 
 .loan-form .submit-btn {
@@ -1006,6 +1011,10 @@ form#request_loan_form {
 
 .loan-detail .detail-row .detail-unit {
   color: #333;
+}
+
+.loan-detail .detail-row .detail-content label {
+  font-weight: 400;
 }
 
 .main-loan-area.request-success {
@@ -1780,7 +1789,7 @@ form#request_loan_form {
   padding: 1em;
 }
 
-.refund-detail {
+.refund-page .refund-detail .detail-wrap {
   margin-top: 10px;
   background-color: #fff;
 }
@@ -1790,6 +1799,10 @@ form#request_loan_form {
   padding: 10px 20px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+}
+
+.refund-detail .detail-header .title {
+  font-size: 20px;
 }
 
 .refund-detail .detail-body {
