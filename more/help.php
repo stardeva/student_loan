@@ -3,6 +3,14 @@ require_once('../api/curl.php');
 require_once('../api/functions.php');
 header('Access-Control-Allow-Origin: *');
 
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
+$result = json_decode($result);
+
+if($result->error->errno == '200') {
+  unset($result->error);
+  $_SESSION['sys_info'] = $result;
+}
+
 $helpLink = $_SESSION['sys_info']->contract->help;
 ?>
 <!DOCTYPE html>

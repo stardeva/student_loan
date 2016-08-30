@@ -2,9 +2,24 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
+$backurl = "javascript:history.go(-1)";
+if(isset($_SERVER['HTTP_REFERER'])) 
+  $backurl = $_SERVER['HTTP_REFERER'];
+
 if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $userAllData = $result;
+    unset($userAllData->error);
+    $_SESSION['user_all_data'] = $userAllData;
+    $_SESSION['uid'] = $uId;
+  }
+
+  $userAllData = $_SESSION['user_all_data'];
+
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_MSG'], array('uId' => $uId));
   $result = json_decode($result);
   
@@ -40,16 +55,16 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page personal-my-info">
+  <body class="personal-page personal-my-message">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= $backurl ?>" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">消息</span>
         <div class="nav"></div>
       </nav>
     </header>
+    <?php if(isset($messages) && count($messages) > 0): ?>
     <section class="main no-padding">
-      <?php if(isset($messages)): ?>
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
         <?php
@@ -77,8 +92,14 @@ if(checkUserLogin()) {
         </a>
         <?php endforeach; ?>
       </div>
-      <?php endif; ?>
     </section>
+    <?php else: ?>
+      <?php 
+        $title = '暂无消息';
+        $error_type = 'message';
+        include '../templates/error_tpl.php';
+      ?>
+    <?php endif; ?>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

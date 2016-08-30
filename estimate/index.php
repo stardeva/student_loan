@@ -7,6 +7,10 @@ if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
   $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_EVALUATE'], array('uId' => $uId));
   $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $evaluateList = $result->evaluateList->evaluate;
+  }
 } else {
   header("Location: ../signup.php");
 }
@@ -19,7 +23,7 @@ if(checkUserLogin()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <title>学融宝</title>
+    <title>学融宝 - 用户评价</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +38,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="evaluate-page evaluate-view-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -43,11 +47,12 @@ if(checkUserLogin()) {
       </nav>
     </header>
 
+    <?php if(isset($evaluateList) && count($evaluateList) > 0): ?>
     <section class="loan-data-area main-loan-area">
       <div class="main-wrap user-estimate-area">
         <div class="estimate-group flex-wrap-space">
           <?php 
-            foreach ($result->evaluateList->evaluate as $item) {
+            foreach ($evaluateList as $item) {
           ?>
             <div class="content">
               <div class="user-name flex-wrap-space">
@@ -87,6 +92,13 @@ if(checkUserLogin()) {
         </div>
       </div>      
     </section>
+    <?php else: ?>
+      <?php 
+        $title = '暂无评价';
+        $error_type = 'evaluate';
+        include '../templates/error_tpl.php';
+      ?>
+    <?php endif; ?>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>

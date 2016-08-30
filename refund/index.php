@@ -6,11 +6,13 @@ if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
   $postdata = array('uid' => $uId);
   $initData = $_SESSION["sys_info"];
-  $returnList = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_RETURN'], array('uId' => $uId));
-  $returnList = json_decode($returnList);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_RETURN'], array('uId' => $uId));
+  $result = json_decode($result);
 
-  $output = '<script>console.log('.json_encode($returnList).')</script>';
-  echo $output;
+  if($result->error->errno == 200) {
+    $returnList = $result->lnList->loan;
+  }
+
 } else {
   header("Location: ../signup.php");
 }
@@ -48,7 +50,7 @@ if(checkUserLogin()) {
       </nav>
     </header>
     
-    <?php if(isset($returnList) && count($returnList->lnList->loan) > 0 ): ?>
+    <?php if(isset($returnList) && count($returnList) > 0): ?>
     <section class="main-loan-area">
       <div class="refund-nav image">
         <div class="nav-area">
@@ -60,7 +62,7 @@ if(checkUserLogin()) {
               <div class="title">
                 <?php if(isset($initData)): ?>
                   <?= $initData->returnWay->bankBranch ?>
-                <?php endif; ?>                  
+                <?php endif; ?>
               </div>
               <div class="content">
                 <?php if(isset($initData)): ?>
@@ -105,7 +107,7 @@ if(checkUserLogin()) {
       </div>
 
       <div class="refund-detail">
-        <?php foreach($returnList->lnList->loan as $loan): ?>
+        <?php foreach($returnList as $loan): ?>
           <div class="detail-wrap">
             <div class="detail-header flex-wrap-space">
               <div class="title"><?= $loan->name ?></div>
@@ -124,7 +126,7 @@ if(checkUserLogin()) {
                 <?php else: ?>
                   <span>0%</span>
                   <span>100%</span>
-                <?php endif; ?>                
+                <?php endif; ?>
               </div>
             </div>
 
@@ -155,23 +157,22 @@ if(checkUserLogin()) {
                 </div>
               <?php endif; ?>
             </div>
-          </div>        
-        <?php endforeach; ?>        
+          </div>
+        <?php endforeach; ?>
       </div>
     </section>
     <?php else: ?>
       <?php 
         $title = '暂不需要还款';
+        $error_type = 'loan';
         include '../templates/error_tpl.php';
       ?>
     <?php endif; ?> 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap-slider.min.js"></script>
-    <script src="../assets/js/main.js"></script>
 
+    <script src="../assets/js/main.js"></script>
   </body>
 </html>

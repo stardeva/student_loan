@@ -1,6 +1,9 @@
 ﻿<?php
-session_start();
-session_destroy();
+if (isset($_SESSION)) session_destroy();
+
+if(isset($_SERVER['HTTP_REFERER'])) {
+  $backurl = $_SERVER['HTTP_REFERER'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +30,7 @@ session_destroy();
   <body class="signup-page">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= isset($backurl) ? $backurl : './' ?>" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">登录</span>
         <div class="nav"></div>
       </nav>
@@ -38,6 +41,7 @@ session_destroy();
         <input type="hidden" name="phone" value="15640111949" />
         <input type="hidden" name="passwd" value="7018e9bbe25b6617aabebd1d789d36b7" />
         <input type="hidden" name="page" value="signup_page" />
+        <input type="hidden" name="backurl" value="<?= isset($backurl) ? $backurl : '' ?>" />
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
