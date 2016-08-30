@@ -54,9 +54,7 @@ if(checkUserLogin()) {
     <section class="main no-padding">
       <?php if(isset($fileurl) && $fileurl != '') : ?>
         <?php if($file_extension == 'pdf'): ?>
-          <script type="text/javascript">
-            
-          </script>
+          <div id="pdf_view"></div>
         <?php else: ?>
           <img src="<?= $fileurl ?>" class="img-responsive" />
         <?php endif; ?>
@@ -66,8 +64,13 @@ if(checkUserLogin()) {
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/pdf.js"></script>
-    <script type="text/javascript" src="../assets/js/pdf.worker.js"></script>
+    <script src="../assets/js/compatibility.js"></script>
 
     <script type="text/javascript" src="../assets/js/main.js"></script>
+    <?php if($file_extension == 'pdf'): ?>
+      <script type="text/javascript">
+        displayPDF("<?= $fileurl ?>", document.getElementById('pdf_view'));
+      </script>
+    <?php endif; ?>
   </body>
 </html>

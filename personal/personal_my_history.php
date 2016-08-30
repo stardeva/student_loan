@@ -3,10 +3,22 @@ require_once('../api/curl.php');
 require_once('../api/functions.php');
 
 if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $userAllData = $result;
+    unset($userAllData->error);
+    $_SESSION['user_all_data'] = $userAllData;
+    $_SESSION['uid'] = $uId;
+  }
+
+  $userAllData = $_SESSION['user_all_data'];
+
   $history = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_HISTORY'], array('uId' => $uId));
   $history = json_decode($history);
+
 } else {
   header("Location: ../signup.php");
 }
@@ -42,7 +54,7 @@ if(checkUserLogin()) {
         <div class="nav"></div>
       </nav>
     </header>
-    <?php if(isset($history) && count($history->lnList->loan) > 0 ): ?>
+    <?php if(isset($history) && count($history->lnList->loan) > 0): ?>
       <section class="main no-padding">
         <div class="history-list">
           <?php foreach($history->lnList->loan as $loan) : ?>
@@ -64,6 +76,7 @@ if(checkUserLogin()) {
     <?php else: ?>
       <?php 
         $title = '暂无历史记录';
+        $error_type = 'history';
         include '../templates/error_tpl.php';
       ?>
     <?php endif; ?>  

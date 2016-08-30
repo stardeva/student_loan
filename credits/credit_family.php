@@ -3,8 +3,18 @@ require_once('../api/curl.php');
 require_once('../api/functions.php');
 
 if(checkUserLogin()) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $userAllData = $result;
+    unset($userAllData->error);
+    $_SESSION['user_all_data'] = $userAllData;
+    $_SESSION['uid'] = $uId;
+  }
+
+  $userAllData = $_SESSION['user_all_data'];
 } else {
   header("Location: ../signup.php");
 }
@@ -91,6 +101,8 @@ if(checkUserLogin()) {
         <img src="../assets/images/family_info_page.png" class="img-responsive width-100pc" />
       </form>
     </section>
+
+    <div class="notification-popup"></div>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

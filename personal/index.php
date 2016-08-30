@@ -5,10 +5,19 @@ require_once('../api/functions.php');
 $is_logged_in = checkUserLogin();
 
 if($is_logged_in) {
-  $userAllData = $_SESSION['user_all_data'];
   $uId = $_SESSION['uid'];
-}
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
+  $result = json_decode($result);
 
+  if($result->error->errno == 200) {
+    $userAllData = $result;
+    unset($userAllData->error);
+    $_SESSION['user_all_data'] = $userAllData;
+    $_SESSION['uid'] = $uId;
+  }
+
+  $userAllData = $_SESSION['user_all_data'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
