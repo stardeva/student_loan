@@ -13,11 +13,12 @@ function setOption ($min, $max, $step) {
   }
 }
 
-if(checkUserLogin()) {
-  $uId = $_SESSION['uid'];
+if(empty($_SESSION['ln_calculator'])) {
   $caculator_data = $_SESSION['ln_calculator'];
 } else {
-  header("Location: ../signup.php");
+  $caculator_data = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array());
+  $caculator_data = json_decode($caculator_data);
+  $_SESSION['ln_calculator'] = $caculator_data;
 }
 
 ?>
