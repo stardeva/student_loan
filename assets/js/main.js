@@ -92,6 +92,7 @@ function decideLoan(e) {
   var time = $request_form.find('#time').val();
   var pictur = $request_form.find('#time').val();
   var picIdList = '';
+  var boolPic = false;
   $request_form.find("input[name='conPics[]']").each(function() {
     if($(this).val()) {
       picIdList += $(this).val();
@@ -99,10 +100,14 @@ function decideLoan(e) {
     }             
   });
 
-  if(picIdList == '') {
-    notification($('.request-loan-page .notification-popup'), '请上传图片');
-    return;
+  if($('.request-loan-page').find('.upload-picture').length > 0) {
+    boolPic = true;
+    if(picIdList == '') {
+      notification($('.request-loan-page .notification-popup'), '请上传图片');
+      return;
+    }
   }
+  
 
   if(picIdList.slice(-1) == ',') {
     picIdList = picIdList.slice(0,-1);
@@ -134,8 +139,10 @@ function decideLoan(e) {
                         'lnProdId': pro_id,
                         'money': money,
                         'day': day,
-                        'month': month,
-                        'conPics': picIdList};
+                        'month': month};
+          if(boolPic) {
+            postdata.conPics = picIdList;
+          }
           $.ajax({
             url: '../api/actions.php',
             type: 'post',
