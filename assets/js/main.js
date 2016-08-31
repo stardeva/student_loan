@@ -801,10 +801,6 @@ $(document).ready(function() {
           validators: {
             notEmpty: {
               message: 'The number is required.'
-            },
-            stringLength: {
-              min: 5,
-              message: 'Your number must be at least 5 characters.'
             }
           }
         },
