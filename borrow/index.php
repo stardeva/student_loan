@@ -106,7 +106,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
-            <a class="loan-button" href="#" onclick='goCardPage("fuli", JSON.stringify(<?= $audit_data ?>), <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)'></a>
+            <a class="loan-button" href="#" onclick='goCardPage("fuli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)'></a>
             <div class="description-group">
               <div class="description">
                 <div class="title">
