@@ -66,8 +66,7 @@ $contact = $_SESSION['sys_info']->contact;
             <div class="item-icon"><img src="../assets/images/about_tele.png" /></div>
             <div class="item-title">电话</div>
           </div>
-          <!-- <div class="item-desc"><?= $contact->tele ?></div> -->
-          <a href="tel:13238831500" class="item-desc">13238831500</a>
+          <a href="tel:<?= $contact->tele ?>" class="item-desc"><?= $contact->tele ?></a>
         </div>
       </div>
     </section>
