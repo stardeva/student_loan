@@ -13,7 +13,7 @@ function setOption ($min, $max, $step) {
   }
 }
 
-if(!empty($_SESSION['ln_calculator'])) {
+if(!isset($_SESSION['ln_calculator'])) {
   $caculator_data = $_SESSION['ln_calculator'];
 } else {
   $caculator_data = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_CALCULATOR'], array());
