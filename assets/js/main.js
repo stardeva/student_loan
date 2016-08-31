@@ -27,6 +27,8 @@ function goCardPage(id, data, pro_id) {
   var borrow_price = parseFloat( $(price_element).html() );
   var error_msg = '';
 
+  console.log(data.cdBase)
+
   if(borrow_price <= 500) {
     if(data.cdBase != 1) {
       error_msg = '基本信息';
