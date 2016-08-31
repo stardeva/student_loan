@@ -251,7 +251,7 @@ function displayPDF (url, canvasContainer) {
 
 $(document).ready(function() {
   /* show modal when page load */
-  if($('body').hasClass('home-index-page')) {
+  /*if($('body').hasClass('home-index-page')) {
     if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
       if(typeof bootbox !== 'undefined') {
         bootbox.dialog({
@@ -297,7 +297,7 @@ $(document).ready(function() {
         });
       }
     }
-  }
+  }*/
   
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({

@@ -42,7 +42,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'credit_family') {
   }
 }
 
-// Credit Family Page Submit
+// Credit Contact Page Submit
 if(isset($_POST['page']) && $_POST['page'] == 'credit_contact') {
   $back_url = $_POST['backurl'];
   $postdata = $_POST;

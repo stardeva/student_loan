@@ -3,8 +3,12 @@ require_once('../api/curl.php');
 require_once('../api/functions.php');
 
 $backurl = "javascript:history.go(-1)";
-if(isset($_SERVER['HTTP_REFERER'])) 
-  $backurl = $_SERVER['HTTP_REFERER'];
+if(isset($_SERVER['HTTP_REFERER'])) {
+  if(strpos($_SERVER['HTTP_REFERER'], 'message_tpl') !== false)
+    $backurl = './';
+  else
+    $backurl = $_SERVER['HTTP_REFERER'];
+}
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
