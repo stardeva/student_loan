@@ -4,6 +4,7 @@ require_once('../api/functions.php');
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
+  $lnId = $_GET['lnId'];
 } else {
   header("Location: ../signup.php");
 }
@@ -37,7 +38,8 @@ if(checkUserLogin()) {
 
   <section class="main-section flex-wrap-column">
   	<form method="post" class="estimate-form loan-form">
-  	  <input type="hidden" name="lnId" value="<?= $uId ?>">
+      <input type="hidden" name="uId" value="<?= $uId ?>">
+  	  <input type="hidden" name="lnId" value="<?= $lnId ?>">
   	  <input type="hidden" name="page" value="set_estimate_page">
       <div class="form-group form-row">
         <div class="form-element width-100pc">
@@ -47,7 +49,7 @@ if(checkUserLogin()) {
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-success">
         <div class="flex-wrap-space space estimate-mark"">
           <div class="title">
 	      	<b>评分</b>
@@ -87,8 +89,11 @@ if(checkUserLogin()) {
     </form>
   </section>
 
+  <div class="notification-popup"></div>
+
   <script src="../assets/js/jquery-2.1.4.min.js"></script>
   <script src="../assets/js/js.cookie.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
   <script src="../assets/js/bootbox.min.js"></script>
   <script src="../assets/js/bootstrapValidator.min.js"></script>

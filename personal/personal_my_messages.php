@@ -81,7 +81,10 @@ if(checkUserLogin()) {
             $msg_url = '../credits';
             break;
           case 6:
-            $msg_url = '../estimate';
+            $arr = explode('#', $msg->url);
+            $ln_id_obj = $arr[1];
+            $ln_id_obj = json_decode($ln_id_obj);
+            $msg_url = '../estimate/feedback.php?lnId='.$ln_id_obj->lnId;
             break;
           default:
             $msg_url = '../templates/message_tpl.php?msg_id='.$msg->mId;

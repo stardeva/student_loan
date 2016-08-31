@@ -32,7 +32,7 @@ if($result->error->errno == 200) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="evaluate-page evaluate-view-page">
+  <body class="evaluate-page evaluate-view-page personal-page">
     <header class="header">
       <nav class="topnav">
         <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -44,46 +44,47 @@ if($result->error->errno == 200) {
     <?php if(isset($evaluateList) && count($evaluateList) > 0): ?>
     <section class="loan-data-area main-loan-area">
       <div class="main-wrap user-estimate-area">
-        <div class="estimate-group flex-wrap-space">
+        
           <?php 
             foreach ($evaluateList as $item) {
           ?>
-            <div class="content">
-              <div class="user-name flex-wrap-space">
-                <div class="user-head emoticon">
-                  <div class="user-head-image image"></div>
+            <div class="estimate-group flex-wrap-space">
+              <div class="content">
+                <div class="user-name flex-wrap-space">
+                  <div class="user-head emoticon">
+                    <div class="user-head-image image"></div>
+                  </div>
+                  <div class="name title">
+                    <?php echo $item->name ?>                    
+                  </div>
                 </div>
-                <div class="name title">
-                  <?php echo $item->name ?>                    
+                <div class="active-money title">
+                  <?php echo $item->title ?>
+                </div>
+                <div class="power text-center">
+                  <?php echo $item->content ?>                
                 </div>
               </div>
-              <div class="active-money title">
-                <?php echo $item->title ?>
-              </div>
-              <div class="power text-center">
-                <?php echo $item->content ?>                
-              </div>
-            </div>
 
-            <div class="user-mark flex-wrap-space">
-              <div class="date"><?php echo date('Y-m-d', $item->time); ?></div>
-              <div class="mark-wrap">
-                <?php 
-                  for($i = 0; $i < $item->star; $i ++) {
-                    echo "<div class='mark-image active image'></div>";
-                  }
-                ?>
-                <?php 
-                  for($i = 0; $i < 5 - $item->star; $i ++) {
-                    echo "<div class='mark-image image'></div>";
-                  }
-                ?>
+              <div class="user-mark flex-wrap-space">
+                <div class="date"><?php echo date('Y-m-d', $item->time); ?></div>
+                <div class="mark-wrap">
+                  <?php 
+                    for($i = 0; $i < $item->star; $i ++) {
+                      echo "<div class='mark-image active image'></div>";
+                    }
+                  ?>
+                  <?php 
+                    for($i = 0; $i < 5 - $item->star; $i ++) {
+                      echo "<div class='mark-image image'></div>";
+                    }
+                  ?>
+                </div>
               </div>
-            </div>
+            </div>            
           <?php
             }
-          ?>          
-        </div>
+          ?>
       </div>      
     </section>
     <?php else: ?>

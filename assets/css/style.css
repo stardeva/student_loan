@@ -883,7 +883,6 @@ form .reqire-icon {
 }
 
 .main-loan-area {
-  background-color: #f0f0f0;
   color: #888;
 }
 
@@ -1998,11 +1997,21 @@ form#request_loan_form {
 }
 
 /*user estimate*/
-.loan-data-area .estimate-group {
-  background-color: #fff;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
-  padding: 20px;
+.evaluate-view-page .loan-data-area .estimate-group {
+  background-color: #fff;  
+  padding: 20px;  
+}
+
+.evaluate-view-page .loan-data-area .estimate-group:first-child {
+  border-top: 1px solid #ccc;
+}
+
+.evaluate-view-page .loan-data-area .estimate-group:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.user-estimate-area .estimate-group {
+  margin-top: 20px;
 }
 
 .loan-data-area .estimate-group .user-name,

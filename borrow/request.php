@@ -126,7 +126,7 @@ if(checkUserLogin()) {
           <input type="hidden" name="uid" id="uid" value="<?= $uId ?>">
           <input type="hidden" name="time" id="time" value="<?= $_POST['time'] ?>">
           <input type="hidden" name="pro_id" id="pro_id" value="<?= $_POST['pro_id'] ?>">
-          <input type="hidden" name="money" id="money" value="<?= $_POST['sum_price'] ?>">
+          <input type="hidden" name="money" id="money" value="<?= $_POST['origin_price'] ?>">
 
           <div class="form-row form-group">
             <div class="form-element width-100pc">

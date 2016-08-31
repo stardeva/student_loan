@@ -109,7 +109,7 @@ function decideLoan(e) {
   var pro_id = $request_form.find('#pro_id').val();
   var money = $request_form.find('#money').val();
   var time = $request_form.find('#time').val();
-  var pictur = $request_form.find('#time').val();
+  
   var picIdList = '';
   var boolPic = false;
   $request_form.find("input[name='conPics[]']").each(function() {
@@ -127,7 +127,6 @@ function decideLoan(e) {
     }
   }
   
-
   if(picIdList.slice(-1) == ',') {
     picIdList = picIdList.slice(0,-1);
   }
@@ -194,6 +193,10 @@ function giveUserFeedback(e) {
       postdata[item.name] = item.value;   
   });
 
+  if (!postdata.star || postdata.star == '') {
+     postdata.star = 0;
+  }
+
   if(postdata.agree == 'on') {
     postdata.hide = 1;
   } else {
@@ -207,12 +210,12 @@ function giveUserFeedback(e) {
     data: postdata,
     success: function(res) {
       res = JSON.parse(res);
-      if(res.error.errno == 200) {console.log(res)
-        
+      if(res.error.errno == 200) {
+        window.location ="../estimate";
       } else {
-        alert(res.error.usermsg);
         console.log('error: ');
         console.log(res);
+        notification($('.set-estimate-page .notification-popup'), res.error.errmsg);
       }
     }
   });
@@ -843,14 +846,7 @@ $(document).ready(function() {
               message: 'The feedback is required.'
             }
           }
-        },
-      star: {
-        validators: {
-          notEmpty: {
-            message: 'The star is required.'
-          }
         }
-      }
     }
     });
 
