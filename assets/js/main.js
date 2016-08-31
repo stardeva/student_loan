@@ -1,5 +1,19 @@
+// notification function
+function notification($ele, msg) {
+  $ele.html(msg);
+  $ele.popup({
+    autoopen: true,
+    blur: false,
+    onopen: function() {
+      setTimeout(function() {
+        $('.notification-popup').popup('hide');
+      }, 1000);
+    }
+  });
+}
+
 // go to card page in borrow index
-function goCardPage(id, limit_price, pro_id) {
+function goCardPage(id, data, pro_id) {
   var price_element = '.borrow-page #', time_element, origin_element;
 
   if(id) {
@@ -11,14 +25,31 @@ function goCardPage(id, limit_price, pro_id) {
   origin_element = price_element + ' select.cost-selector';
   price_element += ' .loan-price';
   var borrow_price = parseFloat( $(price_element).html() );
-  // if borrow price is bigger than quotaToal, redirect to the credits page
-  if(borrow_price <= 0) {
-    
-  }else if( ( limit_price < borrow_price ) && (borrow_price <= limit_price * 10 )) {
+  var error_msg = '';
+
+  if(borrow_price <= 500) {
+    if(data.cdBase != 1) {
+      error_msg = '基本信息';
+    }
+  } else if (borrow_price > 500 && borrow_price <= 1000) {
+    if (data.cdBase != 1 || data.cdHome != 1) {
+        error_msg = "基本信息和家庭资料";
+    }
+  } else if (borrow_price > 1000 && borrow_price <= 3000) {
+    if (data.cdBase != 1 || data.cdHome != 1 || data.cdSchool != 1) {
+        error_msg = "基本信息、家庭资料和联系资料";
+    }
+  } else if (borrow_price > 3000 && borrow_price <= 5000) {
+    if (data.cdBase != 1 || data.cdHome != 1 || data.cdSchool != 1 || data.cdLife != 1) {
+        error_msg = "全部资料";
+    }
+  }
+
+  if(error_msg != '') {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
-      message: "<h3>您还没有绑定银行卡</h3>",
+      message: "<h3>需要点亮全部资料才能申请贷款</h3>",
       buttons: {
         danger: {
           label: "取消",
@@ -27,13 +58,14 @@ function goCardPage(id, limit_price, pro_id) {
           }
         },
         success: {
-          label: "去绑定",
+          label: "确认",
           callback: function() {
             window.location ="../credits";
           }
         }
       }
     });
+    return;
   } else {
     var $borrow_form = $('#borrow_hidden_form');
     $borrow_form.find('#origin_price').val(parseInt( $(origin_element).val() ));
@@ -64,19 +96,6 @@ function completeCard() {
           window.location ="request.html";
         }
       }
-    }
-  });
-}
-
-function notification($ele, msg) {
-  $ele.html(msg);
-  $ele.popup({
-    autoopen: true,
-    blur: false,
-    onopen: function() {
-      setTimeout(function() {
-        $('.notification-popup').popup('hide');
-      }, 1000);
     }
   });
 }
