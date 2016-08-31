@@ -14,9 +14,13 @@ function setOption ($min, $max, $step) {
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
   $caculator_data = $_SESSION['ln_calculator'];
-  $limit_price = $_SESSION["user_all_data"]->user->quotaTotal;
-  $output = '<script>console.log('.json_encode($caculator_data).')</script>';
-  echo $output;
+  $user_all_data = $_SESSION["user_all_data"];
+
+  $audit_data = array('cdBase'=> $user_all_data->cdBase->audit,
+                'cdHome'=> $user_all_data->cdHome->audit,
+                'cdSchool'=> $user_all_data->cdSchool->audit,
+                'cdLife'=> $user_all_data->cdLife->audit);
+  $audit_data = json_encode($audit_data);
 } else {
   header("Location: ../signup.php");
 }
@@ -102,7 +106,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
-            <a class="loan-button" href="#" onclick="goCardPage('fuli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)"></a>
+            <a class="loan-button" href="#" onclick='goCardPage("fuli", JSON.stringify(<?= $audit_data ?>), <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)'></a>
             <div class="description-group">
               <div class="description">
                 <div class="title">
@@ -171,7 +175,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
-            <a class="loan-button" href="#" onclick="goCardPage('huoli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[1]->lnProdId ?>)"></a>
+            <a class="loan-button" href="#" onclick='goCardPage("huoli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[1]->lnProdId ?>)'></a>
             <div class="description-group">
               <div class="description">
                 <div class="title">
@@ -240,7 +244,7 @@ if(checkUserLogin()) {
           </div>
 
           <div class="start-loan">
-            <a class="loan-button" href="#" onclick="goCardPage('yueli', <?= $limit_price ?>, <?= $caculator_data->lnProdList->prod[2]->lnProdId ?>)"></a>
+            <a class="loan-button" href="#" onclick='goCardPage("yueli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[2]->lnProdId ?>)'></a>
             <div class="description-group">
               <div class="description">
                 <div class="title">
