@@ -607,34 +607,6 @@ $(document).ready(function() {
     var slider = $(".slider-wrap #detail_slider").slider();
   }  
 
-  // set main form width as windows one in back card page
-  function setMainDocumentHeight() {
-    var footer_height = 0, 
-      main_height = 0,
-      window_height = $(window).height(),
-      wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
-      header_height = 60;
-
-    if($('.main-loan-area .footer').length > 0) {
-      footer_height = parseInt( $('.main-loan-area .footer').height() );
-    }
-
-    var main_height = wrap_height + header_height + footer_height + 40;
-
-
-    if(window_height >= main_height ) {
-      $('.main-loan-area').height(window_height - header_height);
-    } else {
-      $('.main-loan-area').height(main_height);
-    }
-  }
-  
-  setMainDocumentHeight();
-
-  $(window).resize(function() {
-    setMainDocumentHeight();
-  });
-
   // card page form validation
   if($('#bank_card_form').length) {
     $('#bank_card_form').bootstrapValidator({

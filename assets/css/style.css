@@ -1037,7 +1037,25 @@ form#request_loan_form {
 }
 
 .main-loan-area.request-success {
-  background-image: url('../images/request-success.png'); 
+  background-image: url('../images/request-success.png');
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-size: 100% 100%;
+  text-align: center;
+}
+
+.main-loan-area.request-success .main-wrap {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 40px;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /*footer*/
@@ -1267,7 +1285,7 @@ form#request_loan_form {
   padding: 8px;
   border-radius: 50%;
   width: 70%;
-  max-width: 100px;
+  max-width: 80px;
   margin-right: 10px;
 }
 
@@ -1292,6 +1310,7 @@ form#request_loan_form {
 .personal-box .user-body .user-info {
   display: flex;
   flex-wrap: wrap;
+  font-size: 3.2vw;
   justify-content: space-between;
 }
 
@@ -1371,6 +1390,7 @@ form#request_loan_form {
 .personal-info-list .info-item .item-title {
   flex-grow: 1;
   color: #999;
+  font-size: 4.5vw;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
@@ -1385,7 +1405,7 @@ form#request_loan_form {
 .personal-info-list .info-item.right-arrow .item-desc {
   padding-right: 20px;
   color: #999;
-  font-size: 12px;
+  font-size: 3.2vw;
 }
 
 .personal-info-list .info-item .item-title .badge.msg {

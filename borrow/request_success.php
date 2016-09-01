@@ -32,7 +32,7 @@
     </header>
 
     <section class="main-loan-area request-success image">
-      <div class="main-wrap"></div>
+      <div class="main-wrap">学融宝会尽快完成审核</div>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
