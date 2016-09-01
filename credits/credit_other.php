@@ -161,7 +161,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher1_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="text" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="phone" value="<?= $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="" value="<?= $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher2_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="text" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="phone" value="<?= $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="" value="<?= $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
