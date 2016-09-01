@@ -450,8 +450,9 @@ form > h4 {
   background-color: #f3512c;
 }
 
-span.link {
+a.link {
   color: #fbb33f;
+  text-decoration: none;
 }
 
 /* / form elements */

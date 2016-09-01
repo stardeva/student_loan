@@ -1,9 +1,25 @@
 ﻿<?php
-if (isset($_SESSION)) session_destroy();
+require_once('api/curl.php');
+require_once('api/functions.php');
 
-if(isset($_SERVER['HTTP_REFERER'])) {
-  $backurl = $_SERVER['HTTP_REFERER'];
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
+$result = json_decode($result);
+
+if($result->error->errno == '200') {
+  unset($result->error);
+  $_SESSION['sys_info'] = $result;
+  $contract = $_SESSION['sys_info']->contract;
 }
+
+if(strpos($_SERVER['HTTP_REFERER'], 'file_view.php') === false) {
+  $_SESSION['login_url'] = $_SERVER['HTTP_REFERER'];
+}
+if(!isset($_SESSION['login_url'])) {
+  $backurl = 'index.php';
+} else {
+  $backurl = $_SESSION['login_url'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +70,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
         </div>
         <div class="checkbox">
           <input type="checkbox" name="signgup_agree" id="signup_agree" checked />
-          <label for="signup_agree"> 我己阅读开同意 <span class="link">《隐私条》</span>, <span class="link">《注册协议》</span> 及 <span class="link">《注册协议》</span>.</label>
+          <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>" class="link">《隐私条》</a>, <a href="./file_view.php?fileurl=<?= $contract->reg ?>" class="link">《授权协议》</span>.</label>
         </div>
         <div class="buttons">
           <input type="submit" class="button" value="登录" id="signup_submit" disabled="disabled" />
@@ -107,7 +123,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });

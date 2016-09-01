@@ -1,3 +1,16 @@
+<?php
+require_once('../api/curl.php');
+require_once('../api/functions.php');
+
+$result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
+$result = json_decode($result);
+
+if($result->error->errno == '200') {
+  unset($result->error);
+  $_SESSION['sys_info'] = $result;
+  $contract = $_SESSION['sys_info']->contract;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,7 +66,7 @@
         <a href="contract.php" class="info-item right-arrow">
           <div class="item-title">新手指南</div>
         </a>
-        <a href="help.php" class="info-item right-arrow">
+        <a href="../file_view.php?fileurl=<?= $contract->help ?>&title=使用帮助" class="info-item right-arrow">
           <div class="item-title">使用帮助</div>
         </a>
       </div>

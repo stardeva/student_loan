@@ -298,7 +298,7 @@ if(checkUserLogin()) {
                   <div class="file-block">
                     <div class="input-label">
                       <label for="credit_base2_xxw_photo" class="required">学信网</label>
-                      <a href="./remind_view.php?fileurl=<?= $contract->xuexin ?>" class="remind-link">点击查看上传方法</a>
+                      <a href="../file_view.php?fileurl=<?= $contract->xuexin ?>" class="remind-link">点击查看上传方法</a>
                     </div>
                     <div class="input-holder">
                       <div class="file-input" style="<?php echo isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic !='' ? 'background-position: -9999px;' : ''; ?>">
@@ -372,7 +372,7 @@ if(checkUserLogin()) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });
