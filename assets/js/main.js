@@ -27,8 +27,6 @@ function goCardPage(id, data, pro_id) {
   var borrow_price = parseFloat( $(price_element).html() );
   var error_msg = '';
 
-  console.log(data.cdBase)
-
   if(borrow_price <= 500) {
     if(data.cdBase != 1) {
       error_msg = '基本信息';
@@ -51,7 +49,7 @@ function goCardPage(id, data, pro_id) {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
-      message: "<h3>需要点亮全部资料才能申请贷款</h3>",
+      message: "<h3>" + error_msg + "</h3>",
       buttons: {
         danger: {
           label: "取消",
