@@ -73,7 +73,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_family_father_mobile" class="required">父亲手机</label>
               <div class="input-holder">
-                <input type="tel" name="faPhone" id="credit_family_father_mobile" required="true" class="phone" value="<?= $userAllData->cdHome->faPhone ?>" placeholder="请输入父亲手机" />
+                <input type="tel" name="faPhone" id="credit_family_father_mobile" required="true" class="" value="<?= $userAllData->cdHome->faPhone ?>" placeholder="请输入父亲手机" />
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_family_mother_mobile" class="required">母亲手机</label>
               <div class="input-holder">
-                <input type="text" name="moPhone" id="credit_family_mother_mobile" required="true" class="phone" value="<?= $userAllData->cdHome->moPhone ?>" placeholder="请输入母亲手机" />
+                <input type="tel" name="moPhone" id="credit_family_mother_mobile" required="true" class="" value="<?= $userAllData->cdHome->moPhone ?>" placeholder="请输入母亲手机" />
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@ if(checkUserLogin()) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });

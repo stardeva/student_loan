@@ -168,7 +168,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_contact_classmate1_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="tel" name="caPhone" id="credit_contact_classmate1_mobile" required="true" class="phone" value="<?= $userAllData->cdSchool->caPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="caPhone" id="credit_contact_classmate1_mobile" required="true" class="" value="<?= $userAllData->cdSchool->caPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -210,7 +210,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_contact_classmate2_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="tel" name="cbPhone" id="credit_contact_classmate2_mobile" required="true" class="phone" value="<?= $userAllData->cdSchool->cbPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="cbPhone" id="credit_contact_classmate2_mobile" required="true" class="" value="<?= $userAllData->cdSchool->cbPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -232,7 +232,7 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_contact_handheld_id_photo" class="required">手持身份证照片</label>
-                <a href="./remind_view.php?fileurl=<?= $contract->hand ?>" class="remind-link">点击查看上传方法</a>
+                <a href="../file_view.php?fileurl=<?= $contract->hand ?>" class="remind-link">点击查看上传方法</a>
               </div>
               <div class="input-holder">
                 <div class="file-input" style="<?php echo isset($userAllData->cdSchool->handPic) && $userAllData->cdSchool->handPic !='' ? 'background-position: -9999px;' : ''; ?>">
@@ -265,7 +265,7 @@ if(checkUserLogin()) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });

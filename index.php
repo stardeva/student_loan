@@ -66,12 +66,12 @@ if(checkUserLogin()) {
       <div id="banner_slider">
         <?php foreach($carousel as $item): ?>          
           <div class="item">
-            <?php if(parse_url(str_replace(' ', '', $item->url), PHP_URL_PATH) == '/luckybag'): ?>
-              <a href="more/red_activity.php">
-            <?php else: ?>
-              <a href="<?= $item->url ?>">
-            <?php endif; ?>            
-            <img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
+            <?php
+              $itemUrl = $item->url;
+              if(strpos($itemUrl, 'checkin') !== false) $itemUrl = 'checkin.php';
+              if(strpos($itemUrl, 'luckybag') !== false) $itemUrl = 'more/red_activity.php';
+            ?>
+            <a href="<?= $itemUrl ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
           </div>
         <?php endforeach; ?>
       </div>

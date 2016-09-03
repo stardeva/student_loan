@@ -74,7 +74,7 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_other_website_screenshot" class="required">手机信息运营商网站截图</label>
-                <a href="./remind_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
+                <a href="./file_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
               </div>
               <div class="input-holder">
                 <div class="file-input" style="<?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? 'background-position: -9999px;' : ''; ?>">
@@ -161,7 +161,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher1_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="text" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="phone" value="<?= $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="" value="<?= $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher2_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="text" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="phone" value="<?= $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="" value="<?= $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -239,7 +239,7 @@ if(checkUserLogin()) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });
