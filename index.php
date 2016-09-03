@@ -64,11 +64,12 @@ if(checkUserLogin()) {
       </nav>
       <?php if(isset($carousel)): ?>
       <div id="banner_slider">
-        <?php foreach($carousel as $item): ?>
+        <?php foreach($carousel as $item): ?>          
           <div class="item">
             <?php
               $itemUrl = $item->url;
               if(strpos($itemUrl, 'checkin') !== false) $itemUrl = 'checkin.php';
+              if(strpos($itemUrl, 'luckybag') !== false) $itemUrl = 'more/red_activity.php';
             ?>
             <a href="<?= $itemUrl ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
           </div>

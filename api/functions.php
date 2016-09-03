@@ -50,4 +50,19 @@ function getLoanStatus($status_num) {
   }
   return '';
 }
+
+// Check string
+function checkString($string) {
+  if(is_null($string)) {
+    return false;
+  }
+
+  $string = str_replace(' ', '', $string);
+
+  if(strlen($string) == 0) {
+    return false;
+  }
+
+  return true;
+}
 ?>

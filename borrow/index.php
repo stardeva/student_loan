@@ -13,14 +13,30 @@ function setOption ($min, $max, $step) {
 
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
-  $caculator_data = $_SESSION['ln_calculator'];
   $user_all_data = $_SESSION["user_all_data"];
 
+  // check if bank was already linked
+  if(empty($user_all_data) || empty($user_all_data->user) || !checkString($user_all_data->user->bank)) {
+    header("Location: ../personal/personal_bind_bank.php");
+  }
+
+  // audit data for the capability which user can borrow
   $audit_data = array('cdBase'=> $user_all_data->cdBase->audit,
                 'cdHome'=> $user_all_data->cdHome->audit,
                 'cdSchool'=> $user_all_data->cdSchool->audit,
                 'cdLife'=> $user_all_data->cdLife->audit);
   $audit_data = json_encode($audit_data);
+
+  // calculator data
+  $caculator_data = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_PROD'], array('uId' => $uId));
+  $caculator_data = json_decode($caculator_data);
+
+  $array_tab_id = ['fuli', 'huoli', 'yueli'];
+  $array_time = ['天', '天', '月'];
+
+  $output = '<script>console.log('.json_encode($caculator_data).')</script>';
+  echo $output;
+
 } else {
   header("Location: ../signup.php");
 }
@@ -64,218 +80,105 @@ if(checkUserLogin()) {
         <input type="hidden" name="pro_id" id="pro_id" />
       </form>
       <ul class="nav nav-tabs">
-        <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
+        <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
+          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
+        <?php else: ?>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利货</a></li>
+        <?php endif; ?>        
         <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利货</a></li>
       </ul>
 
       <div class="tab-content">
-        <div id="fuli" class="tab-pane fade in active">
-          <div class="loan-kind image">
-            <div class="kind-head flex-wrap">
-              <span class="flex1 title">借款金额(元)</span>
-              <span class="flex1 title">借款期限(天)</span>
-            </div>
-            
-            <div class="kind-body flex-wrap">
-              <div class="flex1">
-                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[0]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[0]->minMoney, $caculator_data->lnProdList->prod[0]->maxMoney, 50);
-                  ?>
-                </select>
+        <?php if(isset($caculator_data->lnProdList->prod)): ?>
+          <?php foreach($caculator_data->lnProdList->prod as $key => $item): ?>
+            <?php if($key== 0): ?>
+              <?php if($item->lnProdId == 1): ?>
+                <div id="fuli" class="tab-pane fade in active">
+              <?php else: ?>
+                <div id="huoli" class="tab-pane fade in active">
+              <?php endif; ?>
+            <?php else: ?>
+              <div id="<?= $array_tab_id[$item->lnProdId-1] ?>" class="tab-pane fade">
+            <?php endif; ?>            
+          
+            <div class="loan-kind image">
+              <div class="kind-head flex-wrap">
+                <span class="flex1 title">借款金额(元)</span>
+                <span class="flex1 title">借款期限(<?= $array_time[$item->lnProdId-1] ?>)</span>
               </div>
-
-              <div class="flex1">
-                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[0]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[0]->minDay, $caculator_data->lnProdList->prod[0]->maxDay, 1);
-                  ?>
-                </select>
-              </div>          
-            </div>
-          </div>
-
-          <div class="result">
-            <span class="pull-left">计划还款</span>
-            <div class="pull-right">
-              <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[0]->minDay ?></span>天</span>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="start-loan">
-            <a class="loan-button" href="#" onclick='goCardPage("fuli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[0]->lnProdId ?>)'></a>
-            <div class="description-group">
-              <div class="description">
-                <div class="title">
-                  <p>产品及借款费用说明</p>          
-                </div>
-
-                <div class="content">
-                  <p>
+              
+              <div class="kind-body flex-wrap">
+                <div class="flex1">
+                  <select class="cost-selector form-control" rate="<?php echo $item->rateFlt ?>">
                     <?php
-                      echo $caculator_data->lnProdList->prod[0]->intro;
+                      setOption($item->minMoney, $item->maxMoney, 50);
                     ?>
-                  </p>
+                  </select>
                 </div>
+
+                <div class="flex1">
+                  <select class="during-selector form-control" rate="<?php echo $item->rateFlt ?>">                    
+                    <?php 
+                      if($item->lnProdId == 3) {
+                        setOption($item->minMonth, $item->maxMonth, 1);
+                      } else {
+                        setOption($item->minDay, $item->maxDay, 1);
+                      }
+                    ?>
+                  </select>
+                </div>          
               </div>
-
-              <div class="description last-description">
-                <div class="title">
-                  <p>逾期费用说明.</p>          
-                </div>
-
-                <div class="content">
-                  <p>
-                    <?php
-                      echo $caculator_data->lnProdList->prod[0]->lateIntro;
-                    ?>
-                  </p>
-                </div>
-              </div> 
-            </div>                
-          </div>
-        </div>
-
-        <div id="huoli" class="tab-pane fade">
-          <div class="loan-kind image">
-            <div class="kind-head flex-wrap">
-              <span class="flex1 title">借款金额(元)</span>
-              <span class="flex1 title">借款期限(天)</span>
             </div>
-            
-            <div class="kind-body flex-wrap">
-              <div class="flex1">
-                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[1]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[1]->minMoney, $caculator_data->lnProdList->prod[1]->maxMoney, 50);
-                  ?>
-                </select>
+
+            <div class="result">
+              <span class="pull-left">计划还款</span>
+              <div class="pull-right">
+                <span class="loan-price">0</span>
+                <span class="loan-time"> /
+                <span class="number">
+                  <?php 
+                    if($item->lnProdId != 3) {
+                      echo $item->minDay;
+                    }
+                  ?>                 
+                </span>
+                <span><?= $array_time[$item->lnProdId-1] ?></span>
               </div>
+              <div class="clearfix"></div>
+            </div>
 
-              <div class="flex1">
-                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[1]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[1]->minDay, $caculator_data->lnProdList->prod[1]->maxDay, 1);
-                  ?>
-                </select>
-              </div>   
+            <div class="start-loan">
+              <a class="loan-button" href="#" onclick='goCardPage("<?= $array_tab_id[$item->lnProdId-1] ?>", <?= $audit_data ?>, <?= $item->lnProdId ?>)'></a>
+              <div class="description-group">
+                <div class="description">
+                  <div class="title">
+                    <p>产品及借款费用说明</p>          
+                  </div>
+
+                  <div class="content">
+                    <p>
+                      <?= $item->intro;?>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="description last-description">
+                  <div class="title">
+                    <p>逾期费用说明.</p>          
+                  </div>
+
+                  <div class="content">
+                    <p>
+                      <?= $item->lateIntro; ?>
+                    </p>
+                  </div>
+                </div> 
+              </div>                
             </div>
           </div>
-
-          <div class="result">
-            <span class="pull-left">计划还款</span>
-            <div class="pull-right">
-              <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[1]->minDay ?></span>天</span>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="start-loan">
-            <a class="loan-button" href="#" onclick='goCardPage("huoli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[1]->lnProdId ?>)'></a>
-            <div class="description-group">
-              <div class="description">
-                <div class="title">
-                  <p>产品及借款费用说明</p>          
-                </div>
-
-                <div class="content">
-                  <p>
-                    <?php
-                      echo $caculator_data->lnProdList->prod[1]->intro;
-                    ?>
-                  </p>
-                </div>
-              </div>
-
-              <div class="description last-description">
-                <div class="title">
-                  <p>逾期费用说明</p>          
-                </div>
-
-                <div class="content">
-                  <p>
-                    <?php
-                      echo $caculator_data->lnProdList->prod[1]->lateIntro;
-                    ?>
-                  </p>
-                </div>
-              </div> 
-            </div>              
-          </div>
-        </div>
-
-        <div id="yueli" class="tab-pane fade">
-          <div class="loan-kind image">
-            <div class="kind-head flex-wrap">
-              <span class="flex1 title">借款金额(元)</span>
-              <span class="flex1 title">借款期限(月)</span>
-            </div>
-            
-            <div class="kind-body flex-wrap">
-              <div class="flex1">
-                <select class="cost-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[2]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[2]->minMoney, $caculator_data->lnProdList->prod[2]->maxMoney, 50);
-                  ?>
-                </select>
-              </div>
-
-              <div class="flex1">
-                <select class="during-selector form-control" rate="<?php echo $caculator_data->lnProdList->prod[2]->rateFlt ?>">
-                  <?php
-                    setOption($caculator_data->lnProdList->prod[2]->minMonth, $caculator_data->lnProdList->prod[2]->maxMonth, 1);
-                  ?>
-                </select>
-              </div>          
-            </div>
-          </div>
-
-          <div class="result">
-            <span class="pull-left">计划还款</span>
-            <div class="pull-right">
-              <span class="loan-price">0</span>
-              <span class="loan-time"> /<span class="number"><?php $caculator_data->lnProdList->prod[2]->minMonth ?></span>月</span>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="start-loan">
-            <a class="loan-button" href="#" onclick='goCardPage("yueli", <?= $audit_data ?>, <?= $caculator_data->lnProdList->prod[2]->lnProdId ?>)'></a>
-            <div class="description-group">
-              <div class="description">
-                <div class="title">
-                  <p>产品及借款费用说明</p>          
-                </div>
-
-                <div class="content">
-                  <p>
-                    <?php
-                      echo $caculator_data->lnProdList->prod[2]->intro;
-                    ?>
-                  </p>
-                </div>
-              </div>
-
-              <div class="description last-description">
-                <div class="title">
-                  <p>逾期费用说明</p>          
-                </div>
-
-                <div class="content">
-                  <p>
-                    <?php
-                      echo $caculator_data->lnProdList->prod[2]->lateIntro;
-                    ?>
-                  </p>
-                </div>
-              </div> 
-            </div>              
-          </div>
-        </div>        
+          <?php endforeach; ?>
+        <?php endif; ?>   
       </div>
     </section>
 

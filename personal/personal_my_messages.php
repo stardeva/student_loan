@@ -74,14 +74,20 @@ if(checkUserLogin()) {
         <?php
           $msg_url = '';
           switch($msg->mType) {
-          case 2: case 5:
+          case 2:
             $msg_url = '../refund';
             break;
-          case 3: case 4:
+          case 3:
             $msg_url = '../credits';
             break;
+          case 4:
+            $msg_url = 'personal_my_history.php';
+            break;
           case 6:
-            $msg_url = '../estimate';
+            $arr = explode('#', $msg->url);
+            $ln_id_obj = $arr[1];
+            $ln_id_obj = json_decode($ln_id_obj);
+            $msg_url = '../estimate/feedback.php?lnId='.$ln_id_obj->lnId;
             break;
           default:
             $msg_url = '../templates/message_tpl.php?msg_id='.$msg->mId;

@@ -240,6 +240,22 @@ if(isset($_POST['page']) && $_POST['page'] == 'set_estimate_page') {
   echo $result;
 }
 
+// sred activity page
+if(isset($_POST['page']) && $_POST['page'] == 'sred_activity_page') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_SRED'], $postdata);
+  echo $result;
+}
+
+// red activity page
+if(isset($_POST['page']) && $_POST['page'] == 'red_activity_page') {
+  $postdata = $_POST;
+  unset($_POST['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_RED'], $postdata);
+  echo $result;
+}
+
 // Log out page
 if(isset($_POST['page']) && $_POST['page'] == 'logout') {
   session_destroy();
