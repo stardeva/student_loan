@@ -11,13 +11,15 @@ if($result->error->errno == '200') {
   $contract = $_SESSION['sys_info']->contract;
 }
 
-if(strpos($_SERVER['HTTP_REFERER'], 'file_view.php') === false) {
+if(isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'file_view.php') === false) {
   $_SESSION['login_url'] = $_SERVER['HTTP_REFERER'];
 }
 if(!isset($_SESSION['login_url'])) {
   $backurl = 'index.php';
+  $backurl_post = '../index.php';
 } else {
   $backurl = $_SESSION['login_url'];
+  $backurl_post = $backurl;
 }
 
 ?>
@@ -57,7 +59,7 @@ if(!isset($_SESSION['login_url'])) {
         <input type="hidden" name="phone" value="15640111949" />
         <input type="hidden" name="passwd" value="7018e9bbe25b6617aabebd1d789d36b7" />
         <input type="hidden" name="page" value="signup_page" />
-        <input type="hidden" name="backurl" value="<?= isset($backurl) ? $backurl : '' ?>" />
+        <input type="hidden" name="backurl" value="<?= isset($backurl_post) ? $backurl_post : '' ?>" />
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">

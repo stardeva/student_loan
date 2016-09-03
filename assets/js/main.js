@@ -1209,3 +1209,31 @@ $(document).ready(function() {
     $('.personal-index-page .bg-overlay').addClass('hidden');
   });
 });
+
+
+/* Check in */
+$(document).ready(function() {
+  $('.home-checkin-page .main .button.btn-unsigned').on('click', function() {
+    var postdata = {'uId': $('#uid').val(), 
+                  'page': 'checkin_page'};
+    $.ajax({
+      url: 'api/actions.php',
+      type: 'post',
+      data: postdata,
+      success: function(res) {
+        res = JSON.parse(res);
+        if(res.error.errno == 200) {
+          $('.checkin-success-wrapper .checkin-success .days').html(res.coins);
+          $('.checkin-success-wrapper .checkin-success .coins').html(res.totalCoins);
+          $('.checkin-success-wrapper.hidden').removeClass('hidden');
+          setTimeout(function() {
+            $('.checkin-success-wrapper').addClass('hidden');
+            window.location ="index.php";
+          }, notifyTime);
+        } else {
+          notificationPopup('.home-checkin-page .notification-popup', res.error.usermsg);
+        }
+      }
+    });
+  });
+});

@@ -66,7 +66,11 @@ if(checkUserLogin()) {
       <div id="banner_slider">
         <?php foreach($carousel as $item): ?>
           <div class="item">
-            <a href="<?= $item->url ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
+            <?php
+              $itemUrl = $item->url;
+              if(strpos($itemUrl, 'checkin') !== false) $itemUrl = 'checkin.php';
+            ?>
+            <a href="<?= $itemUrl ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
           </div>
         <?php endforeach; ?>
       </div>

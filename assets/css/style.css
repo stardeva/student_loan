@@ -2444,6 +2444,186 @@ form#request_loan_form {
   background-color: #fff;
 }
 
+/* Check in page */
+.home-checkin-page .checkin-bg {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+}
+
+.home-checkin-page .arrow {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  padding: 5px;
+}
+
+.home-checkin-page .arrow img {
+  max-width: 100%;
+}
+
+.home-checkin-page .main {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px 10px 0;
+  background-color: #fff;
+  margin: 0px 20px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0px;
+  height: 75%;
+}
+
+.home-checkin-page .main .wrapper {
+  overflow-y: auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.home-checkin-page .main .wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.home-checkin-page .main .button {
+  border-radius: 5px;
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  height: 100px;
+  font-weight: bold;
+}
+
+.home-checkin-page .main .button.btn-unsigned {
+  background-color: #ff4800;
+  border: 0px solid #eee;
+  border-bottom-width: 1px;
+  box-shadow: 0px 3px 0px #ff4800;
+}
+
+.home-checkin-page .main .button.btn-unsigned .note {
+  font-size: 14px;
+  color: #000;
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+
+.home-checkin-page .main .button.btn-unsigned .note .days {
+  color: #ffff00;
+}
+
+.home-checkin-page .main .coin-ads {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.home-checkin-page .main .coin-ads .ad {
+  width: 22%;
+  position: relative;
+  display: block;
+}
+
+.home-checkin-page .main .coin-ads .ad img{
+  max-width: 100%;
+  display: block;
+}
+
+.home-checkin-page .main .coin-ads .ad span {
+  color: red;
+  position: absolute;
+  font-weight: bold;
+  font-size: 12px;
+  z-index: 999;
+}
+
+.home-checkin-page .main .coin-ads .ad .coin {
+  top: 10%;
+  right: 12%;
+}
+
+.home-checkin-page .main .coin-ads .ad .day {
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.home-checkin-page .main .desc {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  color: #aaa;
+  padding: 30px 10px 20px;
+  margin-top: 60px;
+}
+
+.home-checkin-page .main .desc .title {
+  border: 1px solid #ddd;
+  background-color: #eee;
+  color: #000;
+  font-size: 16px;
+  height: 30px;
+  line-height: 30px;
+  width: 80%;
+  border-radius: 30px;
+  text-align: center;
+  margin: -45px auto 20px;
+}
+
+.checkin-success-wrapper {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.checkin-success-wrapper .checkin-success {
+  width: 90%;
+  position: relative;
+  margin-bottom: 120px;
+}
+
+.checkin-success-wrapper .checkin-success img {
+  max-width: 100%;
+}
+
+.checkin-success-wrapper .checkin-success .first, .checkin-success-wrapper .checkin-success .second {
+  font-size: 14px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.checkin-success-wrapper .checkin-success .first {
+  margin-bottom: 20px;
+  top: 58%;
+}
+
+.checkin-success-wrapper .checkin-success .second {
+  top: 70%;
+}
+
+.checkin-success-wrapper .checkin-success .days, .checkin-success-wrapper .checkin-success .coins {
+  color: #ff4800;
+}
+
+/* / Check in page */
+
 @media screen and (min-width: 1024px) {
   .header #banner_slider .carousel-inner .item {
     max-height: 600px;
