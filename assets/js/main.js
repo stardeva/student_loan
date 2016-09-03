@@ -12,6 +12,70 @@ function notification($ele, msg) {
   });
 }
 
+// red activity button
+function redClick() {
+  var $red_handler = $('.red-activity-page');
+
+  var postdata = {'uId': $red_handler.find('#uid').val(), 
+                'page': 'sred_activity_page'};
+
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);console.log(res)
+      if(res.error.errno == 200) {
+        if(res.grabed == 1) {
+          $red_handler.find('.red-active-btn').css('display', 'inline-block');
+          $red_handler.find('.red-unactive-btn').hide();
+        } else {
+          $red_handler.find('.red-active-btn').hide();
+          $red_handler.find('.red-unactive-btn').show();
+        }
+        initialRedActivity();
+        
+      } else {
+        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+      }
+    }
+  });
+  
+}
+
+// initial red activity page
+function initialRedActivity() {
+  var $red_handler = $('.red-activity-page');
+  var postdata = {'uId': $red_handler.find('#uid').val(), 
+                'page': 'red_activity_page'};
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);console.log(res)
+      if(res.error.errno == 200) {
+        if(res.grabed == 1) {
+          $red_handler.find('.red-process').show();          
+          $red_handler.find('.red-check').hide();
+          $red_handler.find('.grab-amount').html(res.grabMoney + '元');
+          $red_handler.find('.red-section').hide();          
+        } else {
+          $red_handler.find('.red-process').hide();
+          $red_handler.find('.red-check').show();
+          $red_handler.find('.red-section').show();
+          $red_handler.find('.red-section').height($(window).height() * 0.35 - 50);
+        }
+        
+        $red_handler.find('.main-loan-area .wrap').height($(window).height() * 0.65);        
+        
+      } else {
+        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+      }
+    }
+  });
+}
+
 // go to card page in borrow index
 function goCardPage(id, data, pro_id) {
   var price_element = '.borrow-page #', time_element, origin_element;
@@ -24,32 +88,39 @@ function goCardPage(id, data, pro_id) {
   time_element = price_element + ' select.during-selector';
   origin_element = price_element + ' select.cost-selector';
   price_element += ' .loan-price';
+  var original_price = parseInt( $(origin_element).val() );
   var borrow_price = parseFloat( $(price_element).html() );
   var error_msg = '';
 
-  if(borrow_price <= 500) {
+  if(original_price <= 500) {
     if(data.cdBase != 1) {
       error_msg = '基本信息';
     }
-  } else if (borrow_price > 500 && borrow_price <= 1000) {
+  } else if (original_price > 500 && original_price <= 1000) {
     if (data.cdBase != 1 || data.cdHome != 1) {
         error_msg = "基本信息和家庭资料";
     }
-  } else if (borrow_price > 1000 && borrow_price <= 3000) {
+  } else if (original_price > 1000 && original_price <= 3000) {
     if (data.cdBase != 1 || data.cdHome != 1 || data.cdSchool != 1) {
         error_msg = "基本信息、家庭资料和联系资料";
     }
-  } else if (borrow_price > 3000 && borrow_price <= 5000) {
+  } else if (original_price > 3000 && original_price <= 5000) {
     if (data.cdBase != 1 || data.cdHome != 1 || data.cdSchool != 1 || data.cdLife != 1) {
         error_msg = "全部资料";
     }
   }
 
   if(error_msg != '') {
+    var dialog_message = '<h3>完善资料</h3>';
+    dialog_message += '<p class="dialog-error">需要点亮';
+    dialog_message += error_msg;
+    dialog_message += '才能申请贷款';
+    dialog_message += '</p>';
+
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
-      message: "<h3>" + error_msg + "</h3>",
+      message: dialog_message,
       buttons: {
         danger: {
           label: "取消",
@@ -270,6 +341,34 @@ function displayPDF (url, canvasContainer) {
 
   xhr.send();
 }
+
+// set main form width as windows one in back card page
+function setMainDocumentHeight() {
+  var footer_height = 0, 
+    main_height = 0,
+    window_height = $(window).height(),
+    wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
+    header_height = 60;
+
+  $('.one-loan-page').height(window_height);
+
+  if($('.main-loan-area .footer').length > 0) {
+    footer_height = parseInt( $('.main-loan-area .footer').height() );
+  }
+
+  var main_height = wrap_height + header_height + footer_height + 40;
+
+
+  if(window_height >= main_height ) {
+    $('.main-loan-area').height(window_height - header_height);
+  } else {
+    $('.main-loan-area').height(main_height);
+  }
+}
+
+$(window).resize(function() {
+  setMainDocumentHeight();
+});
 
 $(document).ready(function() {
   /* show modal when page load */
@@ -616,34 +715,6 @@ $(document).ready(function() {
   if($(".refund-page").length) {
     var slider = $(".slider-wrap #detail_slider").slider();
   }  
-
-  // set main form width as windows one in back card page
-  function setMainDocumentHeight() {
-    var footer_height = 0, 
-      main_height = 0,
-      window_height = $(window).height(),
-      wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
-      header_height = 60;
-
-    if($('.main-loan-area .footer').length > 0) {
-      footer_height = parseInt( $('.main-loan-area .footer').height() );
-    }
-
-    var main_height = wrap_height + header_height + footer_height + 40;
-
-
-    if(window_height >= main_height ) {
-      $('.main-loan-area').height(window_height - header_height);
-    } else {
-      $('.main-loan-area').height(main_height);
-    }
-  }
-  
-  setMainDocumentHeight();
-
-  $(window).resize(function() {
-    setMainDocumentHeight();
-  });
 
   // card page form validation
   if($('#bank_card_form').length) {
@@ -1015,6 +1086,13 @@ $(document).ready(function() {
 
     $('.process .start-loan').height(description_height);
   }  
+
+  /* red activity page */
+  if($('body').hasClass('red-activity-page')) {
+    initialRedActivity();  
+  }
+
+  setMainDocumentHeight();
 });
 
 
@@ -1236,3 +1314,4 @@ $(document).ready(function() {
     $('.personal-index-page .bg-overlay').addClass('hidden');
   });
 });
+

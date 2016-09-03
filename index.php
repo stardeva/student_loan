@@ -64,9 +64,14 @@ if(checkUserLogin()) {
       </nav>
       <?php if(isset($carousel)): ?>
       <div id="banner_slider">
-        <?php foreach($carousel as $item): ?>
+        <?php foreach($carousel as $item): ?>          
           <div class="item">
-            <a href="<?= $item->url ?>"><img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
+            <?php if(parse_url(str_replace(' ', '', $item->url), PHP_URL_PATH) == '/luckybag'): ?>
+              <a href="more/red_activity.php">
+            <?php else: ?>
+              <a href="<?= $item->url ?>">
+            <?php endif; ?>            
+            <img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
           </div>
         <?php endforeach; ?>
       </div>

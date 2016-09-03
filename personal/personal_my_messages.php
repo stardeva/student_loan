@@ -74,11 +74,14 @@ if(checkUserLogin()) {
         <?php
           $msg_url = '';
           switch($msg->mType) {
-          case 2: case 5:
+          case 2:
             $msg_url = '../refund';
             break;
-          case 3: case 4:
+          case 3:
             $msg_url = '../credits';
+            break;
+          case 4:
+            $msg_url = 'personal_my_history.php';
             break;
           case 6:
             $arr = explode('#', $msg->url);
