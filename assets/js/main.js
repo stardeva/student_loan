@@ -1,13 +1,15 @@
 // notification function
-function notification($ele, msg) {
+var notifyTime = 2000;
+function notificationPopup(ele, msg) {
+  $ele = $(ele);
   $ele.html(msg);
   $ele.popup({
     autoopen: true,
     blur: false,
     onopen: function() {
       setTimeout(function() {
-        $('.notification-popup').popup('hide');
-      }, 1000);
+        $ele.popup('hide');
+      }, notifyTime);
     }
   });
 }
@@ -193,7 +195,7 @@ function decideLoan(e) {
   if($('.request-loan-page').find('.upload-picture').length > 0) {
     boolPic = true;
     if(picIdList == '') {
-      notification($('.request-loan-page .notification-popup'), '请上传图片');
+      notificationPopup('.request-loan-page .notification-popup', '请上传图片');
       return;
     }
   }
@@ -241,7 +243,7 @@ function decideLoan(e) {
               if(res.error.errno == 200) {
                 window.location ="request_success.php";
               } else {
-                notification($('.request-loan-page .notification-popup'), res.error.usermsg);
+                notificationPopup('.request-loan-page .notification-popup', res.error.usermsg);
               }
             }
           });
@@ -322,10 +324,10 @@ function callGetPDFDocment (response, canvasContainer) {
 
 // display pdf to the canvas in more/help.php
 function displayPDF (url, canvasContainer) {
-  PDFJS.workerSrc = '../assets/js/pdf.worker.js';
+  PDFJS.workerSrc = './assets/js/pdf.worker.js';
   var params = 'page=help_page&url=';
   params += url;
-  var get_url = '../api/actions.php';
+  var get_url = './api/actions.php';
   var xhr = new XMLHttpRequest();
   xhr.open('GET', get_url + '?' + params, true);
   xhr.responseType = 'arraybuffer';
@@ -599,20 +601,11 @@ $(document).ready(function() {
     $('.medal.disabled').on('click', function(e) {
       e.preventDefault();
       if($(this).hasClass('home'))
-        $('.notification-popup').html("You need to fill the base information.");
+        notificationPopup('.notification-popup', 'You need to fill the base information.')
       else if($(this).hasClass('contacts'))
-        $('.notification-popup').html("You need to fill the base and home information.");
+        notificationPopup('.notification-popup', 'You need to fill the base and home information.')
       else if($(this).hasClass('other'))
-        $('.notification-popup').html("You need to fill the base, home and school information.");
-      $('.notification-popup').popup({
-        autoopen: true,
-        blur: false,
-        onopen: function() {
-          setTimeout(function() {
-            $('.notification-popup').popup('hide');
-          }, 1000);
-        }
-      });
+        notificationPopup('.notification-popup', 'You need to fill the base, home and school information.')
     });
   }
 
@@ -851,7 +844,7 @@ $(document).ready(function() {
                   setTimeout(function() {
                     $('.notification-popup').popup('hide');
                     window.location = $('#backurl').val();
-                  }, 1000);
+                  }, notifyTime);
                 }
               });
             }
@@ -1146,7 +1139,7 @@ $(document).on('click', '#bind_bank_submit', function(e) {
       onopen: function() {
         setTimeout(function() {
           $('.notification-popup').popup('hide');
-        }, 1000);
+        }, notifyTime);
       }
     });
     return;
@@ -1175,7 +1168,7 @@ $(document).on('click', '#bind_bank_submit', function(e) {
             setTimeout(function() {
               window.location = $('#backurl').val();
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       }
@@ -1219,7 +1212,7 @@ $(document).on('click', '#bind_unbank_submit', function(e) {
                     setTimeout(function() {
                       window.location = $('#backurl').val();
                       $('.notification-popup').popup('hide');
-                    }, 1000);
+                    }, notifyTime);
                   }
                 });
               }
@@ -1315,3 +1308,29 @@ $(document).ready(function() {
   });
 });
 
+/* Check in */
+$(document).ready(function() {
+  $('.home-checkin-page .main .button.btn-unsigned').on('click', function() {
+    var postdata = {'uId': $('#uid').val(), 
+                  'page': 'checkin_page'};
+    $.ajax({
+      url: 'api/actions.php',
+      type: 'post',
+      data: postdata,
+      success: function(res) {
+        res = JSON.parse(res);
+        if(res.error.errno == 200) {
+          $('.checkin-success-wrapper .checkin-success .days').html(res.coins);
+          $('.checkin-success-wrapper .checkin-success .coins').html(res.totalCoins);
+          $('.checkin-success-wrapper.hidden').removeClass('hidden');
+          setTimeout(function() {
+            $('.checkin-success-wrapper').addClass('hidden');
+            window.location ="index.php";
+          }, notifyTime);
+        } else {
+          notificationPopup('.home-checkin-page .notification-popup', res.error.usermsg);
+        }
+      }
+    });
+  });
+});
