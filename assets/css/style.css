@@ -1899,6 +1899,23 @@ form#request_loan_form {
   display: none;
 }
 
+.refund-detail #exSlider .slider-tick-label-container {
+  display: none;
+}
+
+.refund-detail .slider-wrap .slider-label-container {
+  position: relative;
+  display: flex;
+}
+
+.refund-detail .slider-wrap .slider-label-container > div {
+  position: absolute;
+}
+
+.refund-detail .slider-wrap .slider-label-container .end-label {
+  right: 0;
+}
+
 /*more*/
 .more-area {
   position: relative;

@@ -123,15 +123,33 @@ if(checkUserLogin()) {
               <?php if($loan->lnProdId == 3): ?>
                 <?php if($loan->returnMonth != 0): ?>
                   <input id="detail_slider" data-slider-id='exSlider' data-slider-value="<?= $loan->returnMonth ?>" type="text" data-slider-ticks="[0, <?= $loan->returnMonth ?>, <?= $loan->month ?>]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["0期", "<?= $loan->returnMonth ?>期", "<?= $loan->month ?>期"]'  data-slider-enabled = "false"/>
+                  <div class="slider-label-container">
+                    <div class="start-label">0期</div>
+                    <div class="value-label" slider-value="<?= $loan->returnMonth/$loan->month*100 ?>%"><?= $loan->returnMonth ?>期</div>
+                    <div class="end-label"><?= $loan->month ?>期</div>
+                  </div>
                 <?php else: ?>
-                  <input id="detail_slider" data-slider-id='exSlider' data-slider-value = '0' type="text" data-slider-ticks="[0, <?= $loan->month ?>]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["0期", "<?= $loan->month ?>期"]'  data-slider-enabled = "false"/> 
+                  <input id="detail_slider" data-slider-id='exSlider' data-slider-value = '0' type="text" data-slider-ticks="[0, <?= $loan->month ?>]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["0期", "<?= $loan->month ?>期"]'  data-slider-enabled = "false"/>
+                  <div class="slider-label-container">
+                    <div class="start-label">0期</div>
+                    <div class="end-label"><?= $loan->month ?>期</div>
+                  </div>
                 <?php endif; ?> 
                 
               <?php else: ?>
                 <?php if($loan->returnMoney != 0): ?>
-                  <input id="detail_slider" data-slider-id='exSlider' type="text" data-slider-ticks="[0, <?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>, 100]" data-slider-value="<?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>" data-slider-ticks-labels='["0%", "<?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>%", "100%"]' data-slider-enabled = "false"/>  
+                  <input id="detail_slider" data-slider-id='exSlider' type="text" data-slider-ticks="[0, <?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>, 100]" data-slider-value="<?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>" data-slider-ticks-labels='["0%", "<?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>%", "100%"]' data-slider-enabled = "false"/>
+                  <div class="slider-label-container">
+                    <div class="start-label">0%</div>
+                    <div class="value-label" slider-value="<?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>%"><?= round($loan->returnMoney/($loan->returnTotal + $loan->returnMoney)*100) ?>%</div>
+                    <div class="end-label">100%</div>
+                  </div>
                 <?php else: ?>
-                  <input id="detail_slider" data-slider-id='exSlider' type="text" data-slider-value="0" data-slider-ticks="[0,100]" data-slider-ticks-snap-bounds="10" data-slider-ticks-labels='["0%", "100%"]' data-slider-enabled = "false"/>  
+                  <input id="detail_slider" data-slider-id='exSlider' type="text" data-slider-value="0" data-slider-ticks="[0,100]" data-slider-ticks-snap-bounds="10" data-slider-ticks-labels='["0%", "100%"]' data-slider-enabled = "false"/>
+                  <div class="slider-label-container">
+                    <div class="start-label">0%</div>
+                    <div class="end-label">100%</div>
+                  </div>
                 <?php endif; ?>                
               <?php endif; ?>  
             </div>
