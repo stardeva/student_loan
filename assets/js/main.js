@@ -714,6 +714,13 @@ $(document).ready(function() {
 
   if($(".refund-page").length) {
     var slider = $(".slider-wrap #detail_slider").slider();
+
+    // set slider value label in refund page
+    $( ".refund-detail .slider-wrap .slider-label-container .value-label" ).each(function() {
+      var slider_value = $(this).attr('slider-value');
+      $( this ).css( "left",  slider_value);
+    });
+
   }  
 
   // card page form validation

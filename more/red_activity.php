@@ -54,9 +54,7 @@ if(checkUserLogin()) {
     <section class="main-loan-area">
       <div class="wrap image flex-wrap-column red-process">
         <div class="flex-wrap-column">
-          <div class="grab-amount">
-            <?= $grab->grabMoney ?>元
-          </div>
+          <div class="grab-amount"></div>
 
           <div class="free-money-content">
             免息额度
