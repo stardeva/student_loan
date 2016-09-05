@@ -2405,6 +2405,10 @@ form#request_loan_form {
   margin: 0;
 }
 
+#personal_coin_buy .buttons {
+  margin: 20px -10px 0;
+}
+
 /* user invite apps */
 .user-invite-apps {
   display: none;
