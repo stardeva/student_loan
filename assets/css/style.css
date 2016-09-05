@@ -424,6 +424,11 @@ form > h4 {
   border: 1px solid #ec472c;
 }
 
+#signup_agree + label {
+  font-size: 10px;
+  line-height: 22px;
+}
+
 .buttons {
   margin: 30px 15px;
 }
