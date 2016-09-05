@@ -70,7 +70,7 @@ if(checkUserLogin()) {
               <a href="more/red_activity.php">
             <?php else: ?>
               <a href="<?= $item->url ?>">
-            <?php endif; ?>            
+            <?php endif; ?>
             <img src="<?= $item->picUrl ?>" class="carousel-image" /></a>
           </div>
         <?php endforeach; ?>
