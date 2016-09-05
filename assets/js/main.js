@@ -775,6 +775,25 @@ $(document).ready(function() {
     });
   }
 
+  // calculator page 
+  if($('body').hasClass('calculator-page')) {
+    Hammer.plugins.fakeMultitouch();
+
+    $("select.loan-selector").drum({
+      onChange : function (elem) {
+        var rate = $(elem).attr('rate');
+        var pro_id = $(elem).attr('proId');
+        var element_id = g_page_element + ' ';
+        var array_tab = ['#fuli', '#huoli', '#yueli'];
+
+        if(rate && pro_id) {
+          element_id += array_tab[parseInt(pro_id)-1];
+          setCalculatedValue(element_id);
+        }
+      }
+    });
+  }
+
   // feedback page form validation in more/feedback.php
   /*if($('#feedback_form').length) {    
 
@@ -938,7 +957,7 @@ $(document).ready(function() {
   }
 
   //select event in calculate page for borrow and calculate page
-  function setValue(ele) { 
+  function setCalculatedValue(ele) { 
     var $ele = $(ele);
     var price = $ele.find('select.cost-selector').val();
     var date = $ele.find('select.during-selector').val();
@@ -1000,48 +1019,11 @@ $(document).ready(function() {
       var element = page_element + ' ';
       element += array_element[i];
       var rate = $(element).find('select.cost-selector').attr('rate');
-      setValue(element);
+      setCalculatedValue(element);
     }
 
-    g_page_element = page_element;    
+    g_page_element = page_element;
   }
-
-  $('#fuli').find('select.cost-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#fuli';
-    setValue(element);
-  });
-
-  $('#fuli').find('select.during-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#fuli';
-    setValue(element);
-  });
-
-  $('#huoli').find('select.cost-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#huoli';
-    setValue(element);
-  });
-
-  $('#huoli').find('select.during-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#huoli';
-    setValue(element);
-  });
-
-  $('#yueli').find('select.cost-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#yueli';
-    setValue(element);
-  });
-
-  $('#yueli').find('select.during-selector').change(function() {
-    var element = g_page_element + ' ';
-    element += '#yueli';
-    setValue(element);
-  });
- 
 
   function getOptions(data, step, start_value) {
     var html = '', option = '';
