@@ -153,7 +153,7 @@ if(checkUserLogin()) {
           onopen: function() {
             setTimeout(function() {
               $('.notification-popup').popup('hide');
-            }, 1000);
+            }, notifyTime);
           }
         });
       });

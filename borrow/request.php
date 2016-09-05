@@ -156,7 +156,7 @@ if(checkUserLogin()) {
                 <div class="file-block">
                   <div class="input-label">
                     <label for="credit_other_banks" class="required">合同照片</label>
-                    <div class="content">下载&nbsp;《<a class="highlight-text" href="loan_contact.php">借款合同</a>》并</div>
+                    <div class="content">下载&nbsp;《<a class="highlight-text" href="../file_view.php?fileurl=<?= $_SESSION['sys_info']->contract->loan ?>&title=借款合同">借款合同</a>》并</div>
                     <div class="content">签字上传照片，审批</div>
                     <div class="content">通过后电子邮箱接收</div>
                     <div class="content">《借款合同》</div>
@@ -209,7 +209,7 @@ if(checkUserLogin()) {
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
                 <span>&nbsp;同意</span>
-                <span class="highlight-text">&nbsp;《<a href="loan_contact.php">借款合同</a>》</span>
+                <span class="highlight-text">&nbsp;《<a href="../file_view.php?fileurl=<?= $_SESSION['sys_info']->contract->loan ?>&title=借款合同">借款合同</a>》</span>
                 <span>&nbsp; 条款，电子邮箱接收 《借款合同》 回执</span>
               </label>
             </div>  
