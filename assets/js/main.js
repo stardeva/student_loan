@@ -790,7 +790,8 @@ $(document).ready(function() {
           element_id += array_tab[parseInt(pro_id)-1];
           setCalculatedValue(element_id);
         }
-      }
+      },
+      interactive: false
     });
   }
 

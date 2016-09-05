@@ -79,12 +79,12 @@ if(checkUserLogin()) {
       </form>
       <ul class="nav nav-tabs">
         <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
-          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
+          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利贷</a></li>
         <?php else: ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利货</a></li>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利贷</a></li>
         <?php endif; ?>        
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利货</a></li>
+        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利贷</a></li>
       </ul>
 
       <div class="tab-content">

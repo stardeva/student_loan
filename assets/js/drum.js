@@ -226,6 +226,7 @@
 				c = k;
 				if (k < 0) c = l+k;
 				if (k > l-1) c = k-l;
+
 				list.push(c);
 			}
 			var t = list.slice(ph-i); 
