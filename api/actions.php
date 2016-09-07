@@ -269,4 +269,21 @@ if(isset($_POST['page']) && $_POST['page'] == 'checkin_page') {
   echo $result;
 }
 
+// Coin Gift Buy
+if(isset($_POST['page']) && $_POST['page'] == 'personal_coin_buy') {
+  $postdata = $_POST;
+  $backurl = $postdata['backurl'];
+  unset($postdata['backurl']);
+  unset($postdata['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_MALL_BUY'], $postdata);
+  $result = json_decode($result);
+  if($result->error->errno == 200) {
+    $_SESSION['flash'] = '提交成功';
+    header("Location: ../personal/index.php");
+  } else {
+    $_SESSION['flash'] = $result->error->usermsg;
+    header("Location: ../personal/personal_coin_buy.php?itemId=".$postdata['itemId']);
+  }
+}
+
 ?>
