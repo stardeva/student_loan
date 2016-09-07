@@ -63,16 +63,26 @@ if(!isset($_SESSION['login_url'])) {
         <div class="form-row">
           <div class="form-element width-100pc">
             <div class="input-block">
-              <label for="signup_student_id" class="required">学号</label>
+              <label for="signup_student_id">学&nbsp;&nbsp;&nbsp;号:</label>
               <div class="input-holder">
                 <input type="text" name="signup_student_id" id="signup_student_id" required="true" placeholder="请输入智慧大学学号" />
               </div>
             </div>
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-element width-100pc">
+            <div class="input-block">
+              <label for="signup_invitation_code" >邀请码:</label>
+              <div class="input-holder">
+                <input type="text" name="signup_invitation_code" id="signup_invitation_code" placeholder="请输入邀请码 (选填)" />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="checkbox">
           <input type="checkbox" name="signgup_agree" id="signup_agree" checked />
-          <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>" class="link">《隐私条》</a>, <a href="./file_view.php?fileurl=<?= $contract->reg ?>" class="link">《授权协议》</span>.</label>
+          <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
         </div>
         <div class="buttons">
           <input type="submit" class="button" value="登录" id="signup_submit" disabled="disabled" />

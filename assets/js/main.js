@@ -1217,39 +1217,6 @@ $(document).on('click', '#bind_unbank_submit', function(e) {
   });
 });
 
-/* unbind bank card page */
-$(document).ready(function() {
-  if($('body').hasClass('personal-coin-mall')) {
-    var postdata = {'uId': $('#uid').val(), 'page': 'personal_coin_mall'};
-    $.ajax({
-      url: '../api/actions.php',
-      type: 'post',
-      data: postdata,
-      success: function(res) {
-        res = JSON.parse(res);
-        var mall_item_template = $.templates(
-          '<div class="mall-item" data-item-id="{{:itemId}}">\
-            <div class="item-image">\
-              <img src="{{:picUrl}}" />\
-            </div>\
-            <div class="item-detail">\
-              <div class="top">\
-                <div class="item-name">{{:name}}</div>\
-                <div class="item-content">{{:content}}</div>\
-              </div>\
-              <div class="bottom">\
-                <div class="item-coin-num"><span>{{:coinNum}}</span> 金币</div>\
-                <a href="#" class="item-buy">立即兑换</a>\
-              </div>\
-            </div>\
-          </div>');
-        var mall_list_html = mall_item_template.render(res.itemList.item);
-        $('.mall-item-list').html(mall_list_html);
-      }
-    });
-  }
-});
-
 /* user logout */
 $(document).ready(function() {
   $('#user_logout').on('click', function() {
@@ -1326,4 +1293,28 @@ $(document).ready(function() {
       }
     });
   });
+});
+
+/* Coin Gift Buy */
+$(document).ready(function() {
+  if($('body').hasClass('personal-coin-buy')) {
+
+    $(document).on('keyup', '#personal_coin_buy #coin_buy_signee, #personal_coin_buy #coin_buy_phone, #personal_coin_buy #coin_buy_addr', function() {
+      if(!!$('#personal_coin_buy #coin_buy_signee').val() && 
+          !!$('#personal_coin_buy #coin_buy_phone').val() &&
+          !!$('#personal_coin_buy #coin_buy_addr').val()) {
+        $('#coin_buy_submit').removeAttr('disabled');
+        $('#coin_buy_submit').addClass('success');
+      }
+      else{
+        $('#coin_buy_submit').removeClass('success');
+        $('#coin_buy_submit').attr('disabled', 'disabled');
+      }
+    });
+
+    $('.personal-coin-buy #feedback_submit').on('click', function(e) {
+      e.preventDefault();
+      $('#personal_coin_buy').submit();
+    });
+  }
 });

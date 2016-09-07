@@ -141,8 +141,29 @@ if($is_logged_in) {
       <div id="close_invite">取消</div>
     </div>
 
+    <div class="notification-popup"></div>
+
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
+
+    <?php if(isset($_SESSION['flash']) && $_SESSION['flash'] != '') : ?>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.notification-popup').html("<?= $_SESSION['flash'] ?>");
+        $('.notification-popup').popup({
+          autoopen: true,
+          blur: false,
+          onopen: function() {
+            setTimeout(function() {
+              $('.notification-popup').popup('hide');
+            }, notifyTime);
+          }
+        });
+      });
+    </script>
+    <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
   </body>
 </html>

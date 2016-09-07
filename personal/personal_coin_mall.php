@@ -15,6 +15,14 @@ if(checkUserLogin()) {
   }
 
   $userAllData = $_SESSION['user_all_data'];
+
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_MALL_LIST'], array('uId' => $uId));
+  $result = json_decode($result);
+
+  if($result->error->errno == 200) {
+    $itemList = $result->itemList->item;
+  }
+
 } else {
   header("Location: ../signup.php");
 }
@@ -54,14 +62,42 @@ if(checkUserLogin()) {
       <input type="hidden" name="uId" id="uid" value="<?= $uId ?>" />
       <input type="hidden" name="page" id="page" value="personal_coin_mall" />
       <div class="mall-coin-info">您当前有<span><?= $userAllData->user->coins ?></span>个金币</div>
-      <div class="mall-item-list"></div>
+      <div class="mall-item-list">
+        <?php if(isset($itemList) && count($itemList) > 0) : ?>
+          <?php foreach($itemList as $item) : ?>
+            <div class="mall-item" data-item-id="<?= $item->itemId ?>">
+              <div class="item-image">
+                <img src="<?= $item->picUrl ?>" />
+              </div>
+              <div class="item-detail">
+                <div class="top">
+                  <div class="item-name"><?= $item->name ?></div>
+                  <div class="item-content"><?= $item->content ?></div>
+                </div>
+                <div class="bottom">
+                  <div class="item-coin-num"><span><?= $item->coinNum ?></span> 金币</div>
+                  <?php
+                    if($item->coinNum > $userAllData->user->coins) {
+                      $url = "javascript:notificationPopup('.notification-popup', '金币不足');";
+                    } else {
+                      $url = 'personal_coin_buy.php?itemId='.$item->itemId;
+                    }
+                  ?>
+                  <a href="<?= $url ?>" class="item-buy">立即兑换</a>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
     </section>
 
     <div class="notification-popup"></div>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/jsrender.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
+
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>
 </html>
