@@ -38,7 +38,7 @@ function redClick() {
         initialRedActivity();
         
       } else {
-        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+        notificationPopup($red_handler.find('.notification-popup'), res.error.usermsg);
       }
     }
   });
@@ -58,6 +58,8 @@ function initialRedActivity() {
       res = JSON.parse(res);console.log(res)
       if(res.error.errno == 200) {
         if(res.grabed == 1) {
+          $red_handler.find('.main-loan-area').show();  
+          $red_handler.find('.error-section').hide();  
           $red_handler.find('.red-process').show();          
           $red_handler.find('.red-check').hide();
           $red_handler.find('.grab-amount').html(res.grabMoney + '元');
@@ -72,7 +74,8 @@ function initialRedActivity() {
         $red_handler.find('.main-loan-area .wrap').height($(window).height() * 0.65);        
         
       } else {
-        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+        $red_handler.find('.main-loan-area').hide();  
+        $red_handler.find('.error-section').show();  
       }
     }
   });
@@ -288,7 +291,7 @@ function giveUserFeedback(e) {
       } else {
         console.log('error: ');
         console.log(res);
-        notification($('.set-estimate-page .notification-popup'), res.error.errmsg);
+        notificationPopup($('.set-estimate-page .notification-popup'), res.error.errmsg);
       }
     }
   });

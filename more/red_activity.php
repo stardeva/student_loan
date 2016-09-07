@@ -87,6 +87,14 @@ if(checkUserLogin()) {
 
       <div class="red-section"></div>      
     </section>
+    <div class="error-section">
+      <?php 
+        $title = '期待下次参加哦!';
+        $error_type = '';
+        include '../templates/error_tpl.php';
+      ?>
+    </div>
+    
 
     <div class="notification-popup"></div>
 
