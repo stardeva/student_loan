@@ -34,6 +34,10 @@ function messageIcon($m_type) {
   return $icon;
 }
 
+// variables for calculator page
+$array_tab_id = ['fuli', 'huoli', 'yueli'];
+$array_time = ['天', '天', '月'];
+
 // Return loan status
 function getLoanStatus($status_num) {
   switch($status_num) {

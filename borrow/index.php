@@ -31,9 +31,6 @@ if(checkUserLogin()) {
   $caculator_data = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_PROD'], array('uId' => $uId));
   $caculator_data = json_decode($caculator_data);
 
-  $array_tab_id = ['fuli', 'huoli', 'yueli'];
-  $array_time = ['天', '天', '月'];
-
   $output = '<script>console.log('.json_encode($caculator_data).')</script>';
   echo $output;
 
@@ -55,6 +52,7 @@ if(checkUserLogin()) {
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../assets/css/drum.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -64,7 +62,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page borrow-page">
+  <body class="personal-page borrow-page calculator-page one-loan-page">
     <header class="header">
       <nav class="topnav">
         <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -81,12 +79,12 @@ if(checkUserLogin()) {
       </form>
       <ul class="nav nav-tabs">
         <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利货</a></li>
-          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利货</a></li>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
+          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利贷</a></li>
         <?php else: ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利货</a></li>
+          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利贷</a></li>
         <?php endif; ?>        
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利货</a></li>
+        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利贷</a></li>
       </ul>
 
       <div class="tab-content">
@@ -110,7 +108,7 @@ if(checkUserLogin()) {
               
               <div class="kind-body flex-wrap">
                 <div class="flex1">
-                  <select class="cost-selector form-control" rate="<?php echo $item->rateFlt ?>">
+                  <select class="cost-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php
                       setOption($item->minMoney, $item->maxMoney, 50);
                     ?>
@@ -118,7 +116,7 @@ if(checkUserLogin()) {
                 </div>
 
                 <div class="flex1">
-                  <select class="during-selector form-control" rate="<?php echo $item->rateFlt ?>">                    
+                  <select class="during-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php 
                       if($item->lnProdId == 3) {
                         setOption($item->minMonth, $item->maxMonth, 1);
@@ -127,7 +125,10 @@ if(checkUserLogin()) {
                       }
                     ?>
                   </select>
-                </div>          
+                </div> 
+
+                <div class="sel-top"></div>
+                <div class="sel-btm"></div>
               </div>
             </div>
 
@@ -165,7 +166,7 @@ if(checkUserLogin()) {
 
                 <div class="description last-description">
                   <div class="title">
-                    <p>逾期费用说明.</p>          
+                    <p>逾期费用说明</p>          
                   </div>
 
                   <div class="content">
@@ -186,8 +187,10 @@ if(checkUserLogin()) {
     <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>
-   <!--  <script src="../assets/js/jquery.mobile-1.4.5.min.js"></script> -->
     <script src="../assets/js/jsrender.js"></script>
+    <script src="../assets/js/hammer.min.js"></script>
+    <script src="../assets/js/hammer.fakemultitouch.js"></script>
+    <script src="../assets/js/drum.js"></script>
     <script src="../assets/js/main.js"></script>
 
   </body>

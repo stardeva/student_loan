@@ -74,11 +74,6 @@ if($result->error->errno == 200) {
                       echo "<div class='mark-image active image'></div>";
                     }
                   ?>
-                  <?php 
-                    for($i = 0; $i < 5 - $item->star; $i ++) {
-                      echo "<div class='mark-image image'></div>";
-                    }
-                  ?>
                 </div>
               </div>
             </div>            
