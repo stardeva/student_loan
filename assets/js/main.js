@@ -14,6 +14,15 @@ function notificationPopup(ele, msg) {
   });
 }
 
+// make notifcation message icon
+function makeNotificationIcon() {
+  $('.notification .fa-envelope').css('color', 'red');
+}
+
+function backNotificationIcon() {
+  $('.notification .fa-envelope').css('color', '#000');
+}
+
 if (!!window.EventSource) {
   var index_page_directory_count = 2;
   var array_path = window.location.pathname.split('/');
@@ -39,7 +48,8 @@ if (!!window.EventSource) {
       if($('body').hasClass('personal-my-message')) {
         location.reload();
       } else {
-        $('.notification .fa-envelope').css('color', 'red');
+        Cookies.set('message_notification', true);
+        makeNotificationIcon();
       }
     }
   }, false);
@@ -48,8 +58,15 @@ if (!!window.EventSource) {
   alert("Your browser does not support Server-sent events! Please upgrade it!");
 }
 
-if($('.topnav .text-right').hasClass('notification')) {
-  $('.notification .fa-envelope').css('color', '#000');
+// click message notification
+if($('.topnav .text-right').hasClass('notification')) {  
+  Cookies.set('message_notification', false);
+  backNotificationIcon();
+}
+
+// check if new notification occur
+if(Cookies.get('message_notification')) {
+  makeNotificationIcon();
 }
 
 // red activity button
