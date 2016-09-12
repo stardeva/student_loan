@@ -60,12 +60,14 @@ if (!!window.EventSource) {
 
 // click message notification
 if($('.topnav .text-right').hasClass('notification')) {  
-  Cookies.set('message_notification', false);
-  backNotificationIcon();
+  $( ".topnav .notification" ).on( "click", function() {
+    Cookies.set('message_notification', false);
+    backNotificationIcon();
+  });
 }
 
 // check if new notification occur
-if(Cookies.get('message_notification')) {
+if(Cookies.get('message_notification') == 'true') {
   makeNotificationIcon();
 }
 
