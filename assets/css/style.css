@@ -2251,6 +2251,9 @@ form#request_loan_form {
   color: #fff;
   font-size: 20px;
 }
+.red-activity-page .error-section {
+  display: none;
+}
 
 .red-activity-page .main-loan-area .red-check.wrap {
   justify-content: center;
