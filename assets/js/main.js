@@ -14,6 +14,63 @@ function notificationPopup(ele, msg) {
   });
 }
 
+// make notifcation message icon
+function makeNotificationIcon() {
+  $('.notification .fa-envelope').css('color', 'red');
+}
+
+function backNotificationIcon() {
+  $('.notification .fa-envelope').css('color', '#000');
+}
+
+if (!!window.EventSource) {
+  var index_page_directory_count = 2;
+  var array_path = window.location.pathname.split('/');
+  var current_directory_count = array_path.length;
+  // remove empty and .php data
+  var array_length = 0;
+  for(var ap=0; ap< current_directory_count; ap ++) {
+    if(array_path[ap] != '' && !array_path[ap].includes('.php')) {
+      array_length ++;
+    }
+  }
+  current_directory_count = array_length;
+  var socket_php_path = '';
+
+  for(var i = 0; i < ( current_directory_count - index_page_directory_count ); i ++ ) {
+    socket_php_path += '../';
+  }
+  socket_php_path += 'api/socket_io.php';
+  var source = new EventSource(socket_php_path);
+  source.addEventListener('message', function(e) {
+    if(e.data == 'changed') {
+      // check if the current page is message one
+      if($('body').hasClass('personal-my-message')) {
+        location.reload();
+      } else {
+        Cookies.set('message_notification', true);
+        makeNotificationIcon();
+      }
+    }
+  }, false);
+
+} else {
+  alert("Your browser does not support Server-sent events! Please upgrade it!");
+}
+
+// click message notification
+if($('.topnav .text-right').hasClass('notification')) {  
+  $( ".topnav .notification" ).on( "click", function() {
+    Cookies.set('message_notification', false);
+    backNotificationIcon();
+  });
+}
+
+// check if new notification occur
+if(Cookies.get('message_notification') == 'true') {
+  makeNotificationIcon();
+}
+
 // red activity button
 function redClick() {
   var $red_handler = $('.red-activity-page');
@@ -38,7 +95,7 @@ function redClick() {
         initialRedActivity();
         
       } else {
-        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+        notificationPopup($red_handler.find('.notification-popup'), res.error.usermsg);
       }
     }
   });
@@ -58,6 +115,8 @@ function initialRedActivity() {
       res = JSON.parse(res);console.log(res)
       if(res.error.errno == 200) {
         if(res.grabed == 1) {
+          $red_handler.find('.main-loan-area').show();  
+          $red_handler.find('.error-section').hide();  
           $red_handler.find('.red-process').show();          
           $red_handler.find('.red-check').hide();
           $red_handler.find('.grab-amount').html(res.grabMoney + '元');
@@ -72,7 +131,8 @@ function initialRedActivity() {
         $red_handler.find('.main-loan-area .wrap').height($(window).height() * 0.65);        
         
       } else {
-        notification($red_handler.find('.notification-popup'), res.error.usermsg);
+        $red_handler.find('.main-loan-area').hide();  
+        $red_handler.find('.error-section').show();  
       }
     }
   });
@@ -288,7 +348,7 @@ function giveUserFeedback(e) {
       } else {
         console.log('error: ');
         console.log(res);
-        notification($('.set-estimate-page .notification-popup'), res.error.errmsg);
+        notificationPopup($('.set-estimate-page .notification-popup'), res.error.errmsg);
       }
     }
   });
