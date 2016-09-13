@@ -102,8 +102,8 @@ if(checkUserLogin()) {
         <img src="assets/images/credit-banner.png" alt="" />
         <?php
           $paddingLeft = '';
-          if(strlen($userAllData->user->quotaTotal) == 1) $paddingLeft = 'padding-left: 20%;';
-          else if(strlen($userAllData->user->quotaTotal) == 3) $paddingLeft = 'padding-left: 15%;';
+          if(strlen($userAllData->user->quotaTotal) == 1) $paddingLeft = 'padding-left: 22%;';
+          else if(strlen($userAllData->user->quotaTotal) == 3) $paddingLeft = 'padding-left: 16%;';
           else $paddingLeft = 'padding-left: 12%;';
         ?>
         <span class="credit-number" style="<?= $paddingLeft ?>"><?= $userAllData->user->quotaTotal ?></span>
