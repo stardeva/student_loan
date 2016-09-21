@@ -27,7 +27,10 @@
       <nav class="topnav">
         <a href="../borrow" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">申请成功</span>
-        <a href="../personal/personal_my_messages.php" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
+        <a href="../personal/personal_my_messages.php" class="nav link notification text-right">
+          <i class="fa fa-envelope"></i>
+          <div class="unread-icon"></div>
+        </a>
       </nav>
     </header>
 
@@ -37,6 +40,7 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script src="../assets/js/js.cookie.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrapValidator.min.js"></script>

@@ -16,59 +16,64 @@ function notificationPopup(ele, msg) {
 
 // make notifcation message icon
 function makeNotificationIcon() {
-  $('.notification .fa-envelope').css('color', 'red');
+  if( !$('.header .topnav .nav.notification').hasClass( 'unread' ) ) {
+    $('.header .topnav .nav.notification').addClass('unread');
+  }
 }
 
 function backNotificationIcon() {
-  $('.notification .fa-envelope').css('color', '#000');
+  if( $('.header .topnav .nav.notification').hasClass( 'unread' ) ) {
+    $('.header .topnav .nav.notification').removeClass('unread');
+  }
 }
 
-if (!!window.EventSource) {
-  var index_page_directory_count = 2;
-  var array_path = window.location.pathname.split('/');
-  var current_directory_count = array_path.length;
-  // remove empty and .php data
-  var array_length = 0;
-  for(var ap=0; ap< current_directory_count; ap ++) {
-    if(array_path[ap] != '' && !array_path[ap].includes('.php')) {
-      array_length ++;
-    }
-  }
-  current_directory_count = array_length;
-  var socket_php_path = '';
-
-  for(var i = 0; i < ( current_directory_count - index_page_directory_count ); i ++ ) {
-    socket_php_path += '../';
-  }
-  socket_php_path += 'api/socket_io.php';
-  var source = new EventSource(socket_php_path);
-  source.addEventListener('message', function(e) {
-    if(e.data == 'changed') {
-      // check if the current page is message one
-      if($('body').hasClass('personal-my-message')) {
-        location.reload();
-      } else {
-        Cookies.set('message_notification', true);
-        makeNotificationIcon();
-      }
-    }
-  }, false);
-
-} else {
-  alert("Your browser does not support Server-sent events! Please upgrade it!");
-}
-
-// click message notification
-if($('.topnav .text-right').hasClass('notification')) {  
+if($('.topnav .text-right').hasClass('notification')) {
+  // click message notification
   $( ".topnav .notification" ).on( "click", function() {
     Cookies.set('message_notification', false);
     backNotificationIcon();
   });
-}
 
-// check if new notification occur
-if(Cookies.get('message_notification') == 'true') {
-  makeNotificationIcon();
+  // check if new notification occur
+  if(Cookies.get('message_notification') == 'true') {
+    makeNotificationIcon();
+  }
+
+  if (!!window.EventSource) {
+    var index_page_directory_count = 2;
+    var array_path = window.location.pathname.split('/');
+    var current_directory_count = array_path.length;
+    // remove empty and .php data
+    var array_length = 0;
+    for(var ap=0; ap< current_directory_count; ap ++) {
+      if(array_path[ap] != '' && !array_path[ap].includes('.php')) {
+        array_length ++;
+      }
+    }
+    current_directory_count = array_length;
+    var socket_php_path = '';
+
+    for(var i = 0; i < ( current_directory_count - index_page_directory_count ); i ++ ) {
+      socket_php_path += '../';
+    }
+    socket_php_path += 'api/socket_io.php';
+    
+    var source = new EventSource(socket_php_path);
+    source.addEventListener('message', function(e) {
+      if(e.data == 'changed') {
+        // check if the current page is message one
+        if($('body').hasClass('personal-my-message')) {
+          location.reload();
+        } else {
+          Cookies.set('message_notification', true);
+          makeNotificationIcon();
+        }
+      }
+    }, false);
+
+  } else {
+    alert("Your browser does not support Server-sent events! Please upgrade it!");
+  }
 }
 
 // red activity button
