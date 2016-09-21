@@ -577,6 +577,22 @@ body {
 .header .topnav .nav.notification {
   font-size: 32px;
   color: #000;
+  position: relative;
+}
+
+.header .topnav .nav.notification .unread-icon {
+  display: none;
+}
+
+.header .topnav .nav.notification.unread .unread-icon {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  top: 3px;
+  right: 2px;
 }
 
 .header .topnav .nav.back, .header .topnav .nav.home {

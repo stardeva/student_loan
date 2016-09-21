@@ -60,7 +60,10 @@ if(checkUserLogin()) {
           <a href="signup.php" class="nav text unregistered">未登录</a>
         <?php endif; ?>
         <span class="nav text title">学融宝</span>
-        <a href="personal/personal_my_messages.php" class="nav link notification text-right"><i class="fa fa-envelope"></i></a>
+        <a href="personal/personal_my_messages.php" class="nav link notification text-right">
+          <i class="fa fa-envelope"></i>
+          <div class="unread-icon"></div>
+        </a>
       </nav>
       <?php if(isset($carousel)): ?>
       <div id="banner_slider">
