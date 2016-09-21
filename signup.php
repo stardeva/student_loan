@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once('api/curl.php');
 require_once('api/functions.php');
 
