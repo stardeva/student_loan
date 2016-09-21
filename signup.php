@@ -81,7 +81,7 @@ if(!isset($_SESSION['login_url'])) {
           </div>
         </div>
         <div class="checkbox">
-          <input type="checkbox" name="signgup_agree" id="signup_agree" checked />
+          <input type="checkbox" name="signgup_agree" id="signup_agree" />
           <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
         </div>
         <div class="buttons">
