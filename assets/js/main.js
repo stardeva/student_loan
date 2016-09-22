@@ -88,7 +88,7 @@ function redClick() {
     type: 'post',
     data: postdata,
     success: function(res) {
-      res = JSON.parse(res);console.log(res)
+      res = JSON.parse(res);
       if(res.error.errno == 200) {
         if(res.grabed == 1) {
           $red_handler.find('.red-active-btn').css('display', 'inline-block');
@@ -117,7 +117,7 @@ function initialRedActivity() {
     type: 'post',
     data: postdata,
     success: function(res) {
-      res = JSON.parse(res);console.log(res)
+      res = JSON.parse(res);
       if(res.error.errno == 200) {
         if(res.grabed == 1) {
           $red_handler.find('.main-loan-area').show();  
@@ -351,8 +351,6 @@ function giveUserFeedback(e) {
       if(res.error.errno == 200) {
         window.location ="../estimate";
       } else {
-        console.log('error: ');
-        console.log(res);
         notificationPopup($('.set-estimate-page .notification-popup'), res.error.errmsg);
       }
     }
@@ -439,7 +437,7 @@ $(window).resize(function() {
 
 $(document).ready(function() {
   /* show modal when page load */
-  /*if($('body').hasClass('home-index-page')) {
+  if($('body').hasClass('home-index-page')) {
     if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
       if(typeof bootbox !== 'undefined') {
         bootbox.dialog({
@@ -485,7 +483,7 @@ $(document).ready(function() {
         });
       }
     }
-  }*/
+  }
   
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({

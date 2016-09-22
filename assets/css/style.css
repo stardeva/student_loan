@@ -673,18 +673,17 @@ body {
 }
 
 .toolbar .tool {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
   max-width: 20%;
   text-decoration: none;
   color: #000;
+  text-align: center;
 }
 
 .toolbar .tool img {
   width: 90%;
-  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .toolbar .tool span {
@@ -1113,15 +1112,12 @@ form#request_loan_form {
 
 .footer .bottomnav .nav {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
   color: #FFF;
   text-decoration: none;
   width: calc( (100% - 9px) / 4);
   position: relative;
   height: 100%;
-  justify-content: center;
   text-align: center;
 }
 
@@ -1136,11 +1132,16 @@ form#request_loan_form {
 
 .footer .bottomnav .nav img {
   width: 40%;
+  display: block;
+  margin: 0 auto;
 }
 
 .footer .bottomnav .nav span {
   font-size: 24px;
-  margin-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 /* credit section */
