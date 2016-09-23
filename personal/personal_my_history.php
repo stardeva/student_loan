@@ -49,9 +49,9 @@ if(checkUserLogin()) {
   <body class="personal-page personal-my-info">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">历史记录</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <?php if(isset($history) && count($history->lnList->loan) > 0): ?>
@@ -62,11 +62,13 @@ if(checkUserLogin()) {
               <div class="history head">
                 <div class="history-body"><?= $loan->name ?> 申请额度 ￥ <?= $loan->money ?></div>
                 <div class="history-date"><?= getLoanStatus($loan->status) ?></div>
+                <div class="clearfix"></div>
               </div>
               <?php foreach($loan->hisList->loanHis as $his) : ?>
                 <div class="history" style="color: #<?php echo isset($his->color) && $his->color != '' ? dechex($his->color) : '000'; ?>;">
                   <div class="history-body"><?= $his->his ?></div>
                   <div class="history-date"><?= date('Y-m-d', $his->hisTime) ?></div>
+                  <div class="clearfix"></div>
                 </div>
               <?php endforeach; ?>
             </div>

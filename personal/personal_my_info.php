@@ -80,8 +80,7 @@ if(checkUserLogin()) {
           <div class="item-title">总额度</div>
           <div class="item-desc"><?= $userAllData->user->quotaTotal ?> 元</div>
         </div>
-        <br />
-        <br />
+        <div class="clearfix"></div>
         <button href="" class="button" id="user_logout">
           退出当前账号
         </button>
