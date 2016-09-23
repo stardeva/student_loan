@@ -2675,14 +2675,21 @@ form#request_loan_form {
   position: fixed;
   z-index: -1;
   top: 0;
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+.home-checkin-page .topnav {
+  position: fixed;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .home-checkin-page .arrow {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 20px;
-  padding: 5px;
+  width: 30px;
+  padding: 10px;
+  position: relative;
+  display: block;
 }
 
 .home-checkin-page .arrow img {
@@ -2694,22 +2701,24 @@ form#request_loan_form {
   border-top-right-radius: 10px;
   padding: 10px 10px 0;
   background-color: #fff;
-  margin: 0px 20px 20px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  display: block;
   position: fixed;
   bottom: 0px;
   height: 75%;
+  overflow-y: auto;
+  max-width: 1024px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-left: 5%;
+  left: 0;
 }
 
 .home-checkin-page .main .wrapper {
-  overflow-y: auto;
   position: relative;
   overflow-x: hidden;
 }
 
-.home-checkin-page .main .wrapper::-webkit-scrollbar {
+.home-checkin-page .main::-webkit-scrollbar {
   display: none;
 }
 
@@ -2717,13 +2726,12 @@ form#request_loan_form {
   border-radius: 5px;
   color: #fff;
   font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   width: 100%;
-  flex-direction: column;
   height: 100px;
   font-weight: bold;
+  line-height: 80px;
+  box-sizing: border-box;
 }
 
 .home-checkin-page .main .button.btn-unsigned {
@@ -2731,6 +2739,8 @@ form#request_loan_form {
   border: 0px solid #eee;
   border-bottom-width: 1px;
   box-shadow: 0px 3px 0px #ff4800;
+  line-height: 1;
+  padding-top: 30px;
 }
 
 .home-checkin-page .main .button.btn-unsigned .note {
@@ -2745,17 +2755,18 @@ form#request_loan_form {
 }
 
 .home-checkin-page .main .coin-ads {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   margin-top: 20px;
   width: 100%;
+  text-align: center;
 }
 
 .home-checkin-page .main .coin-ads .ad {
-  width: 22%;
+  width: 21%;
   position: relative;
-  display: block;
+  display: inline-block;
+  margin: 0 1%;
+  text-align: left;
 }
 
 .home-checkin-page .main .coin-ads .ad img{
@@ -2875,6 +2886,12 @@ form#request_loan_form {
 
   .footer .bottomnav {
     height: 120px;
+  }
+
+  .home-checkin-page .main {
+    width: 1024px;
+    margin: 0;
+    left: inherit;
   }
 }
 
