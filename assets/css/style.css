@@ -878,11 +878,7 @@ body {
 }
 
 .calculator-page .start-loan {
-  overflow: scroll;
-}
-
-.borrow-page .start-loan .description-group {
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .start-loan .description {

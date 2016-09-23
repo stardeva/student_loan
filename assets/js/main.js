@@ -415,7 +415,7 @@ function setMainDocumentHeight() {
     wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
     header_height = 60;
 
-  $('.one-loan-page').height(window_height);
+  $('body.one-loan-page').height(window_height);
 
   if($('.main-loan-area .footer').length > 0) {
     footer_height = parseInt( $('.main-loan-area .footer').height() );
@@ -1111,26 +1111,34 @@ $(document).ready(function() {
 
   // init data in borrow page
   if($('body').hasClass('borrow-page')) {    
+    function initLoanPage() {
+      var description_height = $(window).height() 
+                            - parseInt($('.header').css('height'))
+                            - parseInt($('.process .nav-tabs').css('height'))
+                            - parseInt($('.process .loan-kind').css('height')) 
+                            - parseInt($('.process .result').css('height'))
+                            - parseInt($('.process .start-loan .loan-button').css('height'));
+      $('.process .start-loan').height(description_height);
+    }
+
     initCalculator('.borrow-page');
-    var description_height = $(window).height() 
-                          - parseInt($('.header').css('height'))
-                          - parseInt($('.process .nav-tabs').css('height'))
-                          - parseInt($('.process .loan-kind').css('height')) 
-                          - parseInt($('.process .result').css('height'))
-                          - parseInt($('.process .start-loan .loan-button').css('height'));
-    $('.process .start-loan .description-group').height(description_height);
+    initLoanPage(); 
   }
 
   // init data in calculator page
   if($('body').hasClass('calculator-page')) {
-    initCalculator('.calculator-page');
-    var description_height = $(window).height() 
-                          - parseInt($('.header').css('height'))
-                          - parseInt($('.process .nav-tabs').css('height'))
-                          - parseInt($('.process .loan-kind').css('height')) 
-                          - parseInt($('.process .result').css('height'));
+    function initCalcPage() {
+      var description_height = $(window).height() 
+                            - parseInt($('.header').css('height'))
+                            - parseInt($('.process .nav-tabs').css('height'))
+                            - parseInt($('.process .loan-kind').css('height')) 
+                            - parseInt($('.process .result').css('height'));
 
-    $('.process .start-loan').height(description_height);
+      $('.process .start-loan').height(description_height);
+    }
+
+    initCalculator('.calculator-page');
+    initCalcPage();  
   }  
 
   /* red activity page */
