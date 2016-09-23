@@ -154,7 +154,7 @@ if(checkUserLogin()) {
               <div class="description-group">
                 <div class="description">
                   <div class="title">
-                    <p>产品及借款费用说明</p>          
+                    <p>产品及借款费用说明</p>
                   </div>
 
                   <div class="content">
