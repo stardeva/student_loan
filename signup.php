@@ -48,9 +48,9 @@ if(!isset($_SESSION['login_url'])) {
   <body class="signup-page">
     <header class="header">
       <nav class="topnav">
-        <a href="<?= isset($backurl) ? $backurl : './' ?>" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= isset($backurl) ? $backurl : './' ?>" class="nav text back left"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">登录</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 
@@ -66,16 +66,6 @@ if(!isset($_SESSION['login_url'])) {
               <label for="signup_student_id">学&nbsp;&nbsp;&nbsp;号:</label>
               <div class="input-holder">
                 <input type="text" name="signup_student_id" id="signup_student_id" required="true" placeholder="请输入智慧大学学号" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-element width-100pc">
-            <div class="input-block">
-              <label for="signup_invitation_code" >邀请码:</label>
-              <div class="input-holder">
-                <input type="text" name="signup_invitation_code" id="signup_invitation_code" placeholder="请输入邀请码 (选填)" />
               </div>
             </div>
           </div>
@@ -118,7 +108,7 @@ if(!isset($_SESSION['login_url'])) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>
