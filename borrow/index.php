@@ -65,9 +65,9 @@ if(checkUserLogin()) {
   <body class="personal-page borrow-page calculator-page one-loan-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../index.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="process">

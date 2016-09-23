@@ -60,9 +60,9 @@ if(checkUserLogin()) {
   <body class="credits-page credit-base-page form-page">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">基本信息 ( 1/3 )</span>
-        <a href="" class="nav text next">下一步</a>
+        <a href="" class="nav text next right">下一步</a>
       </nav>
     </header>
     <section class="main">
