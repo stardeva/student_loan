@@ -38,9 +38,9 @@ $company = $_SESSION['sys_info']->contact;
   <body class="more-page more-aboutus-page">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">关于我们</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 

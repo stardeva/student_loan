@@ -40,9 +40,9 @@ if($result->error->errno == '200') {
   <body class="more-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">更多</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 
