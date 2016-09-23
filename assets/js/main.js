@@ -1309,25 +1309,6 @@ $(document).ready(function() {
   });
 });
 
-/* share app */
-$(document).ready(function() {
-  $('.personal-index-page .personal-info-list .user-invite').on('click', function(e) {
-    e.preventDefault();
-    $('.personal-index-page .bg-overlay').removeClass('hidden');
-    $('.personal-index-page .user-invite-apps').css('display', 'flex');
-  });
-
-  $('.personal-index-page .bg-overlay').on('click', function(e) {
-    $('.personal-index-page .user-invite-apps').hide();
-    $('.personal-index-page .bg-overlay').addClass('hidden');
-  });
-
-  $('.personal-index-page #close_invite').on('click', function(e) {
-    $('.personal-index-page .user-invite-apps').hide();
-    $('.personal-index-page .bg-overlay').addClass('hidden');
-  });
-});
-
 /* Check in */
 $(document).ready(function() {
   $('.home-checkin-page .main .button.btn-unsigned').on('click', function() {

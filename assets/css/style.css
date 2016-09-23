@@ -1139,10 +1139,12 @@ form#request_loan_form {
   display: inline-block;
   color: #FFF;
   text-decoration: none;
-  width: calc( (100% - 20px) / 4);
+  width: 25%;
   position: relative;
   height: 100%;
   text-align: center;
+  float: left;
+  border-right: 2px solid #7c7c7c;
 }
 
 .footer .bottomnav .bar {
@@ -1152,6 +1154,10 @@ form#request_loan_form {
   border-right-width: 1px;
   height: 100%;
   width: 3px;
+}
+
+.footer .bottomnav .bar:last-child {
+  border: none;
 }
 
 .footer .bottomnav .nav img {
@@ -1317,12 +1323,12 @@ form#request_loan_form {
 
 /* personal pages */
 .personal-box {
-  background-image: url('../images/user_top_bg.png');
+  background-image: url(../images/user_top_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   padding: 15px;
-  display: flex;
+  display: block;
   color: #000;
   text-decoration: none;
 }
@@ -1333,10 +1339,10 @@ form#request_loan_form {
 }
 
 .personal-box .user-head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
   position: relative;
+  width: 70px;
+  float: left;
 }
 
 .personal-box .user-head img {
@@ -1344,16 +1350,15 @@ form#request_loan_form {
   border: 1px solid #fff;
   padding: 8px;
   border-radius: 50%;
-  width: 70%;
-  max-width: 80px;
   margin-right: 10px;
+  width: 60px;
 }
 
 .personal-box .user-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: block;
+  position: relative;
+  width: calc(100% - 70px);
+  float: left;
 }
 
 .personal-box .user-body .user-name {
@@ -1368,14 +1373,15 @@ form#request_loan_form {
 }
 
 .personal-box .user-body .user-info {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 3.2vw;
-  justify-content: space-between;
+  display: inline-block;
+  font-size: 11px;
+  width: 100%;
+  line-height: 11px;
 }
 
 .personal-box .user-body .user-info > div {
-  margin-bottom: 10px;
+  float: left;
+  width: 33%;
 }
 
 .personal-box .user-body .user-info span {
@@ -1392,20 +1398,26 @@ form#request_loan_form {
 }
 
 .personal-info-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
   font-size: 16px;
 }
 
 .personal-info-list .info-item {
   color: #000;
   text-decoration: none;
-  display: flex;
+  display: block;
   border-bottom: 1px solid #e4e4e4;
-  align-items: center;
   height: 60px;
   background-color: #fff;
   padding: 0 10px;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.personal-info-list .info-item:after {
+  content: '';
+  clear: both;
 }
 
 .personal-info-list .info-item.user-photo {
@@ -1441,6 +1453,10 @@ form#request_loan_form {
 .personal-info-list .info-item .item-icon {
   padding: 10px;
   width: 50px;
+  display: inline-block;
+  height: 60px;
+  vertical-align: middle;
+  line-height: 40px;
 }
 
 .personal-info-list .info-item .item-icon img {
@@ -1448,13 +1464,12 @@ form#request_loan_form {
 }
 
 .personal-info-list .info-item .item-title {
-  flex-grow: 1;
   color: #999;
-  font-size: 4.5vw;
+  font-size: 14px;
+  display: inline-block;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
-  flex-grow: 1;
   color: #000;
 }
 
@@ -1465,7 +1480,10 @@ form#request_loan_form {
 .personal-info-list .info-item.right-arrow .item-desc {
   padding-right: 20px;
   color: #999;
-  font-size: 3.2vw;
+  font-size: 9px;
+  display: inline-block;
+  float: right;
+  line-height: 60px;
 }
 
 .personal-info-list .info-item .item-title .badge.msg {
