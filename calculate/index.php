@@ -160,7 +160,7 @@ if(isset($_SESSION['ln_calculator'])) {
       </div>
     </section>
 
-    <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>

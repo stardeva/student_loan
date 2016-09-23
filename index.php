@@ -55,12 +55,12 @@ if(checkUserLogin()) {
     <header class="header">
       <nav class="topnav">
         <?php if(checkUserLogin()): ?>
-          <div class="nav"></div>
+          <div class="nav left"></div>
         <?php else: ?>
-          <a href="signup.php" class="nav text unregistered">未登录</a>
+          <a href="signup.php" class="nav text unregistered left">未登录</a>
         <?php endif; ?>
         <span class="nav text title">学融宝</span>
-        <a href="personal/personal_my_messages.php" class="nav link notification text-right">
+        <a href="personal/personal_my_messages.php" class="nav link notification text-right right">
           <i class="fa fa-envelope"></i>
           <div class="unread-icon"></div>
         </a>
@@ -139,7 +139,7 @@ if(checkUserLogin()) {
       </nav>
     </footer>
 
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootbox.min.js"></script>

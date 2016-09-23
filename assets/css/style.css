@@ -542,11 +542,9 @@ body {
 }
 
 .header .topnav {
-  display: flex;
+  display: block;
   font-size: 20px;
-  justify-content: space-between;
   padding: 0 10px;
-  align-items: center;
   height: 50px;
   text-decoration: none;
   position: fixed;
@@ -560,7 +558,8 @@ body {
 .header .topnav .nav {
   font-size: 20px;
   color: #000;
-  flex-basis: 16%;
+  line-height: 50px;
+  height: 50px;
 }
 
 .header .topnav .nav:hover {
@@ -571,13 +570,26 @@ body {
 .header .topnav .nav.title {
   font-size: 30px;
   text-align: center;
-  flex-basis: 68%;
+  display: block;
+}
+
+.header .topnav .nav.left {
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 0;
+}
+
+.header .topnav .nav.right {
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 0;
 }
 
 .header .topnav .nav.notification {
   font-size: 32px;
   color: #000;
-  position: relative;
 }
 
 .header .topnav .nav.notification .unread-icon {

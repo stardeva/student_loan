@@ -118,7 +118,7 @@ if(!isset($_SESSION['login_url'])) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>
