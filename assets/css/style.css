@@ -832,13 +832,22 @@ body {
   align-items: center;
 }
 
-.process > .nav-tabs {
+.tab-content .active {
+  background-color: transparent !important;
+}
+
+.process > .nav-tabs {/*
   display: flex;
-  flex-flow: row;
+  flex-flow: row;*/
   justify-content: space-between;
   border-bottom: 1px solid #000;
   background-color: #fff;
   padding: 10px;
+}
+
+.process > .nav-tabs > li {
+  margin: 0;
+  padding: 0;
 }
 
 .process > .nav-tabs >li.active > a {
@@ -875,7 +884,10 @@ body {
   padding: 20px 0;
   color: #aaa;
   background-color: #f0f0f0;
-  background-image: url('../images/loan_bg.png'); 
+  background-image: url('../images/loan_bg.png');
+  background-position: center top;
+  -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/loan_bg.png', sizingMethod='scale')";
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/loan_bg.png', sizingMethod='scale');
 }
 
 .loan-kind .kind-head .title {
@@ -939,7 +951,7 @@ body {
 
 .start-loan .loan-button {
   margin-top: 10px;
-  height: 55px;
+  height: 70px;
   display: block;
   background-color: #3b74a1;
   text-decoration: none;
@@ -948,6 +960,7 @@ body {
   background-image: url('../images/borrow_button.png');  
   background-repeat: no-repeat;    
   background-size: 100% 100%;
+  background-position: center top;
 }
 
 .start-loan  .description .title.last {
