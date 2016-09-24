@@ -39,7 +39,7 @@
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/js.cookie.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../assets/js/bootstrap.min.js"></script>

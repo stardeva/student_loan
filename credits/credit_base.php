@@ -60,9 +60,9 @@ if(checkUserLogin()) {
   <body class="credits-page credit-base-page form-page">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">基本信息 ( 1/3 )</span>
-        <a href="" class="nav text next">下一步</a>
+        <a href="" class="nav text next right">下一步</a>
       </nav>
     </header>
     <section class="main">
@@ -88,8 +88,8 @@ if(checkUserLogin()) {
                 </div>
                 <div class="form-element width-45pc">
                   <div class="select-block">
-                    <label for="credit_base1_sex" class="required" placeholder="请输入性别">性别</label>
-                    <div class="input-holder">
+                    <label for="credit_base1_sex" class="required" placeholder="请输入性别" style="width: 60px;">性别</label>
+                    <div class="input-holder" style="width: calc(100% - 70px);">
                       <select name="sex" id="credit_base1_sex" required="true">
                         <option <?php echo $userAllData->cdBase->sex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                         <option <?php echo $userAllData->cdBase->sex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -353,9 +353,10 @@ if(checkUserLogin()) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="../assets/js/classList.min.js"></script>
     <script type="text/javascript" src="../assets/js/swiper.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script type="text/javascript" src="../assets/js/select2.min.js"></script>

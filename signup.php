@@ -48,9 +48,9 @@ if(!isset($_SESSION['login_url'])) {
   <body class="signup-page">
     <header class="header">
       <nav class="topnav">
-        <a href="<?= isset($backurl) ? $backurl : './' ?>" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= isset($backurl) ? $backurl : './' ?>" class="nav text back left"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">登录</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 
@@ -70,18 +70,9 @@ if(!isset($_SESSION['login_url'])) {
             </div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-element width-100pc">
-            <div class="input-block">
-              <label for="signup_invitation_code" >邀请码:</label>
-              <div class="input-holder">
-                <input type="text" name="signup_invitation_code" id="signup_invitation_code" placeholder="请输入邀请码 (选填)" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" name="signgup_agree" id="signup_agree" />
+        <div class="checkbox" id="signup_checkbox">
+          <div class="check-tick checked"></div>
+          <input type="checkbox" name="signgup_agree" id="signup_agree" class="hidden" checked="checked" />
           <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
         </div>
         <div class="buttons">
@@ -98,17 +89,14 @@ if(!isset($_SESSION['login_url'])) {
           <img src="assets/images/footer_icon_home.png" alt="首页" />
           <span>首页</span>
         </a>
-        <span class="bar"></span>
         <a href="personal" class="nav">
           <img src="assets/images/footer_icon_personal.png" alt="个人" />
           <span>个人</span>
         </a>
-        <span class="bar"></span>
         <a href="more" class="nav">
           <img src="assets/images/footer_icon_more.png" alt="更多" />
           <span>更多</span>
         </a>
-        <span class="bar"></span>
         <a href="personal/personal_activities.php" class="nav">
           <img src="assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
@@ -118,7 +106,7 @@ if(!isset($_SESSION['login_url'])) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>

@@ -2,12 +2,12 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
-  $uId = $_SESSION['uid'];
-  $itemId = $_GET['itemId'];
-} else {
-  header("Location: ../signup.php");
-}
+// if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
+//   $uId = $_SESSION['uid'];
+//   $itemId = $_GET['itemId'];
+// } else {
+//   header("Location: ../signup.php");
+// }
 
 ?>
 <!DOCTYPE html>
@@ -35,9 +35,9 @@ if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
   <body class="personal-page personal-coin-buy">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./personal_coin_mall.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">兑换</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="main">
@@ -84,7 +84,7 @@ if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
 

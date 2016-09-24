@@ -24,9 +24,9 @@
   <body>
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">绑定银行卡</span>
-        <a href="../" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
+        <a href="../" class="nav link home text-right right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
       </nav>
     </header>
 
@@ -64,7 +64,7 @@
       </form>
     </section>
     
-    <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootbox.min.js"></script>

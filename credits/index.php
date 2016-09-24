@@ -17,9 +17,12 @@ if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   
   $creditPercent = min($userAllData->user->quotaTotal, 5000) * 100 / 5000.0;
-  $is_step2 = $userAllData->cdBase->audit == 1;
-  $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
-  $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
+  // $is_step2 = $userAllData->cdBase->audit == 1;
+  // $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
+  // $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
+  $is_step2 = true;
+  $is_step3 = true;
+  $is_step4 = true;
 } else {
   header("Location: ../signup.php");
 }
@@ -50,9 +53,9 @@ if(checkUserLogin()) {
   <body class="credits-page credits-index-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">信用额度</span>
-        <a href="../" class="nav link home text-right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
+        <a href="../" class="nav link home text-right right"><img src="../assets/images/home_icon_home.png" alt="" /></a>
       </nav>
     </header>
     <section class="main">
@@ -91,6 +94,7 @@ if(checkUserLogin()) {
           <a href="<?= $is_step4 ? 'credit_other.php' : ''?>" class="medal other <?php if(!$is_step4) echo 'disabled'; ?>">
             <img src="../assets/images/<?php echo $is_step4 && $userAllData->cdLife->audit != 0 ? 'other_info.png' : 'other_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
+          <div class="clearfix"></div>
         </div>
         <div class="credits-heart">
           <?php
@@ -116,17 +120,14 @@ if(checkUserLogin()) {
           <img src="../assets/images/footer_icon_home.png" alt="首页" />
           <span>首页</span>
         </a>
-        <span class="bar"></span>
         <a href="../personal" class="nav">
           <img src="../assets/images/footer_icon_personal.png" alt="个人" />
           <span>个人</span>
         </a>
-        <span class="bar"></span>
         <a href="../more" class="nav">
           <img src="../assets/images/footer_icon_more.png" alt="更多" />
           <span>更多</span>
         </a>
-        <span class="bar"></span>
         <a href="../personal/personal_activities.php" class="nav">
           <img src="../assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
@@ -136,7 +137,7 @@ if(checkUserLogin()) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>

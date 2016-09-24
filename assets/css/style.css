@@ -116,18 +116,17 @@ a:hover, a:focus, a:active, a:link {
 
 .input-block, .select-block {
   background-color: #fafafa;
-  display: flex;
+  display: block;
   height: 50px;
-  align-items: center;
   padding: 5px;
   margin: 1px;
+  box-sizing: border-box;
 }
 
 .file-block {
   background-color: #fafafa;
-  display: flex;
+  display: block;
   padding: 5px;
-  margin: 1px;
 }
 
 #helper_content canvas {
@@ -140,12 +139,21 @@ a:hover, a:focus, a:active, a:link {
 
 .input-block label, .select-block label, .file-block .input-label {
   margin: 0;
-  padding: 0 10px;
-  flex-basis: 30%;
+  padding: 0 5px;
+  width: 30%;
   color: #333;
   position: relative;
   min-width: 60px;
   font-weight: normal;
+  display: inline-block;
+  box-sizing: border-box;
+  line-height: 40px;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+.file-block .input-label {
+  line-height: 1;
 }
 
 .file-block .input-label label {
@@ -176,8 +184,14 @@ a:hover, a:focus, a:active, a:link {
 }
 
 .input-block .input-holder, .select-block .input-holder {
-  flex-grow: 1;
+  width: 66%;
   height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.input-block label.required + .input-holder, .select-block label.required + .input-holder {
+  width: calc(66% - 10px);
 }
 
 .submit-btn {
@@ -190,9 +204,10 @@ a:hover, a:focus, a:active, a:link {
 }
 
 .file-block .input-holder {
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
+  width: 66%;
+  height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
 }
 select.form-control {
   margin: auto;
@@ -202,17 +217,20 @@ select.form-control {
 .file-block .input-holder .file-input {
   border: 1px solid #999;
   background-color: #fefefe;
-  margin: 5px;
-  width: calc(50% - 10px);
+  padding: 5px;
+  width: 48%;
   position: relative;
-  display: block;
-  height: 20vw;
-  background-image: url('../images/reg_add.png');
+  display: inline-block;
+  height: 70px;
+  background-image: url(../images/reg_add.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 5vw;
   cursor: pointer;
   text-align: center;
+  box-sizing: border-box;
+  float: left;
+  margin: 0 1% 5px;
 }
 
 .file-block .input-holder .file-input label {
@@ -252,8 +270,9 @@ input[type=file] {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 100%;
-  color: #333;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
 }
 
 .input-block .input-holder input:focus, .select-block .input-holder select:focus {
@@ -263,49 +282,46 @@ input[type=file] {
 .select-block .input-holder select {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 6px;
+  background-position: right center;
   padding-right: 15px;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
 }
 
 .input-block .input-holder input.date {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 6px;
+  background-position: right center;
   padding-right: 15px;
 }
 
 .input-block .input-holder input.email {
   background-image: url('../images/about_mail.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 20px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.weixin {
   background-image: url('../images/about_wx.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 27px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.qq {
   background-image: url('../images/about_qq.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 32px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.phone {
   background-image: url('../images/reg_phone.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 25px 28px;
-  padding-right: 30px;
+  background-position: right center;
+  padding-right: 37px;
 }
 
 .form-row:before, .form-row:after {
@@ -349,7 +365,7 @@ form > h4 {
   color: #999;
 }
 
-[type="checkbox"]:not(:checked),
+/*[type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
@@ -361,7 +377,7 @@ form > h4 {
   cursor: pointer;
 }
 
-/* checkbox aspect */
+
 [type="checkbox"]:not(:checked) + label:before {
   content: '';
   position: absolute;
@@ -382,7 +398,7 @@ form > h4 {
   height: 17px;
   background: #ec472c;
 }
-/* checked mark aspect */
+
 
 [type="checkbox"]:checked + label:after {
   content: '';
@@ -405,7 +421,7 @@ form > h4 {
 [type="checkbox"]:checked + label:after {
   opacity: 1;
 }
-/* disabled checkbox */
+
 [type="checkbox"]:disabled:not(:checked) + label:before,
 [type="checkbox"]:disabled:checked + label:before {
   box-shadow: none;
@@ -418,15 +434,35 @@ form > h4 {
 [type="checkbox"]:disabled + label {
   color: #aaa;
 }
-/* accessibility */
+
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
   border: 1px solid #ec472c;
-}
+}*/
 
 #signup_agree + label {
   font-size: 10px;
   line-height: 22px;
+}
+
+.checkbox label {
+  padding-left: 0;
+}
+
+.checkbox .check-tick {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.checkbox .check-tick.checked {
+  background: url('../images/checked.png') center center no-repeat;
+}
+
+.checkbox .check-tick.unchecked {
+  background: url('../images/unchecked.png') center center no-repeat;
 }
 
 .buttons {
@@ -542,11 +578,9 @@ body {
 }
 
 .header .topnav {
-  display: flex;
+  display: block;
   font-size: 20px;
-  justify-content: space-between;
   padding: 0 10px;
-  align-items: center;
   height: 50px;
   text-decoration: none;
   position: fixed;
@@ -560,7 +594,8 @@ body {
 .header .topnav .nav {
   font-size: 20px;
   color: #000;
-  flex-basis: 16%;
+  line-height: 50px;
+  height: 50px;
 }
 
 .header .topnav .nav:hover {
@@ -571,13 +606,26 @@ body {
 .header .topnav .nav.title {
   font-size: 30px;
   text-align: center;
-  flex-basis: 68%;
+  display: block;
+}
+
+.header .topnav .nav.left {
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 0;
+}
+
+.header .topnav .nav.right {
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 0;
 }
 
 .header .topnav .nav.notification {
   font-size: 32px;
   color: #000;
-  position: relative;
 }
 
 .header .topnav .nav.notification .unread-icon {
@@ -597,22 +645,26 @@ body {
 
 .header .topnav .nav.back, .header .topnav .nav.home {
   font-size: 30px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
+  line-height: 50px;
+  display: block;
+  width: 30px;
 }
 
-.header .topnav .nav.home {
-  justify-content: flex-end;
+.header .topnav .nav.back {
+  width: 30px;
+}
+
+.header .topnav .nav.home img {
+  width: 24px;
+  height: 24px;
 }
 
 .header .topnav .nav.next {
   text-align: right;
 }
 
-.header .topnav .nav.home img, .header .topnav .nav.back img {
+.header .topnav .nav.back img {
   height: 16px;
-  width: auto;
 }
 
 .header .topnav .nav.house {
@@ -666,18 +718,18 @@ body {
 }
 
 .toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  display: block;
+  text-align: center;
   padding: 16px 0;
 }
 
 .toolbar .tool {
   display: block;
-  max-width: 20%;
+  width: 25%;
   text-decoration: none;
   color: #000;
   text-align: center;
+  float: left;
 }
 
 .toolbar .tool img {
@@ -706,18 +758,18 @@ body {
 .credit .credit-number {
   position: absolute;
   color: #fff;
-  bottom: 11vw;
+  bottom: 32%;
   width: 46%;
   left: 35%;
-  font-size: 12vw;
+  /*font-size: 12vw;*/
   line-height: 0.8;
   font-family: 'FZKaTong';
-  letter-spacing: 1vw;
+  letter-spacing: 1px;
   text-align: left;
 }
 
 .footer {
-  padding-bottom: 12vw;
+  padding-bottom: 100px;
 }
 
 /*borrow index*/
@@ -1093,17 +1145,13 @@ form#request_loan_form {
 .footer .bottomnav {
   background-color: #787878;
   color: #FFF;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 12vw;
+  display: block;
   border-top: 2px solid #6a6a6a;
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: 1024px;
   z-index: 2000;
-  min-height: 56px;
 }
 
 .footer .bottomnav .nav {
@@ -1111,10 +1159,12 @@ form#request_loan_form {
   display: block;
   color: #FFF;
   text-decoration: none;
-  width: calc( (100% - 9px) / 4);
+  width: 25%;
   position: relative;
   height: 100%;
   text-align: center;
+  float: left;
+  border-right: 2px solid #7c7c7c;
 }
 
 .footer .bottomnav .bar {
@@ -1126,10 +1176,15 @@ form#request_loan_form {
   width: 3px;
 }
 
+.footer .bottomnav .bar:last-child {
+  border: none;
+}
+
 .footer .bottomnav .nav img {
   width: 40%;
   display: block;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .footer .bottomnav .nav span {
@@ -1164,16 +1219,18 @@ form#request_loan_form {
 }
 
 .my-credits-data .credits-medals {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
 }
 
 .my-credits-data .credits-medals .medal {
-  margin: 0 5px;
-  width: 25%;
+  width: 23%;
+  margin: 0 1%;
   position: relative;
   text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  float: left;
 }
 
 .my-credits-data .credits-heart {
@@ -1201,48 +1258,49 @@ form#request_loan_form {
   width: 10%;
   background-image: linear-gradient(to bottom,#d24713 0,#f3512c 100%);
   background-color: #f3512c;
+  filter: none;
 }
 
 .my-credits-bar .pin-bar .pin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
   font-size: 12px;
   color: #999;
   position: absolute;
   width: 31px;
+  text-align: center;
+  margin-left: -15px;
 }
 
 .my-credits-bar .pin-bar .pin:before {
-  content: '';
-  border-left: 1px solid #999;
-  height: 5px;
-  margin: 0 auto 10px;
+  content: '|';
+  font-size: 8px;
+  margin: 0 auto;
   text-align: center;
+  display: block;
 }
 
 .my-credits-bar .pin-bar .pin.pin0 {
-  left: -15px;
+  left: 0;
 }
 
 .my-credits-bar .pin-bar .pin.pin500 {
-  left: calc(10% - 15px);
+  left: 10%;
 }
 
 .my-credits-bar .pin-bar .pin.pin1000 {
-  left: calc(20% - 15px);
+  left: 20%;
 }
 
 .my-credits-bar .pin-bar .pin.pin3000 {
-  left: calc(60% - 15px);
+  left: 60%;
 }
 
 .my-credits-bar .pin-bar .pin.pin5000 {
-  left: calc(100% - 15px);
+  left: 100%;
 }
 
 .my-credits-bar .credits-tooltip {
+  filter: none;
   opacity: 1;
   position: relative;
   display: inline-block;
@@ -1290,12 +1348,12 @@ form#request_loan_form {
 
 /* personal pages */
 .personal-box {
-  background-image: url('../images/user_top_bg.png');
+  background-image: url(../images/user_top_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   padding: 15px;
-  display: flex;
+  display: block;
   color: #000;
   text-decoration: none;
 }
@@ -1306,10 +1364,10 @@ form#request_loan_form {
 }
 
 .personal-box .user-head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
   position: relative;
+  width: 70px;
+  float: left;
 }
 
 .personal-box .user-head img {
@@ -1317,16 +1375,15 @@ form#request_loan_form {
   border: 1px solid #fff;
   padding: 8px;
   border-radius: 50%;
-  width: 70%;
-  max-width: 80px;
   margin-right: 10px;
+  width: 60px;
 }
 
 .personal-box .user-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: block;
+  position: relative;
+  width: calc(100% - 70px);
+  float: left;
 }
 
 .personal-box .user-body .user-name {
@@ -1336,19 +1393,20 @@ form#request_loan_form {
   background-image: url('../images/user_black_right_arrow.png');
   background-repeat: no-repeat;
   background-size: 8px 14px;
-  background-position: right 0px center;
+  background-position: right center;
   margin: 10px 0;
 }
 
 .personal-box .user-body .user-info {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 3.2vw;
-  justify-content: space-between;
+  display: inline-block;
+  font-size: 11px;
+  width: 100%;
+  line-height: 11px;
 }
 
 .personal-box .user-body .user-info > div {
-  margin-bottom: 10px;
+  float: left;
+  width: 33%;
 }
 
 .personal-box .user-body .user-info span {
@@ -1360,25 +1418,46 @@ form#request_loan_form {
   background-image: url('../images/user_bean.png');
   background-repeat: no-repeat;
   background-size: 16px 14px;
-  background-position: left 0 center;
+  background-position: left center;
   padding-left: 20px;
+  height: 14px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.personal-info-list .info-item .item-desc.user-credit-beans {
+  height: 60px;
 }
 
 .personal-info-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
   font-size: 16px;
 }
 
 .personal-info-list .info-item {
   color: #000;
   text-decoration: none;
-  display: flex;
+  display: block;
   border-bottom: 1px solid #e4e4e4;
-  align-items: center;
   height: 60px;
   background-color: #fff;
   padding: 0 10px;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.personal-info-list .info-item > img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.personal-info-list .info-item:after {
+  content: '';
+  clear: both;
 }
 
 .personal-info-list .info-item.user-photo {
@@ -1389,7 +1468,8 @@ form#request_loan_form {
   position: relative;
   padding-right: 20px;
   height: 80px;
-
+  float: right;
+  margin-top: 10px;
 }
 
 .personal-info-list .info-item.user-photo .user-photo-upload img.user-photo-preview {
@@ -1406,14 +1486,18 @@ form#request_loan_form {
 
 .personal-info-list .info-item.right-arrow {
   background-image: url('../images/right_arrow.png');
-  background-position: right 10px center;
+  background-position: right center;
   background-repeat: no-repeat;
-  background-size: 6px 12px;
+  padding-right: 10px;
 }
 
 .personal-info-list .info-item .item-icon {
   padding: 10px;
   width: 50px;
+  display: inline-block;
+  height: 60px;
+  vertical-align: middle;
+  line-height: 40px;
 }
 
 .personal-info-list .info-item .item-icon img {
@@ -1421,24 +1505,34 @@ form#request_loan_form {
 }
 
 .personal-info-list .info-item .item-title {
-  flex-grow: 1;
   color: #999;
-  font-size: 4.5vw;
+  font-size: 14px;
+  display: inline-block;
+  line-height: 60px;
+}
+
+.personal-info-list .info-item .item-desc {
+  float: right;
+  line-height: 60px;
+  margin-right: 10px;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
-  flex-grow: 1;
   color: #000;
 }
 
 .personal-info-list .info-item.user-photo .item-title {
   color: #999;
+  line-height: 100px;
 }
 
 .personal-info-list .info-item.right-arrow .item-desc {
   padding-right: 20px;
   color: #999;
-  font-size: 3.2vw;
+  font-size: 9px;
+  display: inline-block;
+  float: right;
+  line-height: 60px;
 }
 
 .personal-info-list .info-item .item-title .badge.msg {
@@ -1454,6 +1548,7 @@ form#request_loan_form {
   border-top: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
   color: #999;
+  margin-top: 30px;
 }
 
 .bank-card {
@@ -1497,17 +1592,15 @@ form#request_loan_form {
 
 /* mall */
 .mall-item-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .mall-item-list .mall-item {
-  display: flex;
+  display: block;
   padding: 5px 0;
   border: 0 solid #e9e9e9;
   border-top-width: 1px;
   box-sizing: border-box;
-  justify-content: flex-start;
 }
 
 .mall-item-list .mall-item .item-image {
@@ -1516,26 +1609,27 @@ form#request_loan_form {
   width: 120px;
   height: 120px;
   min-width: 120px;
+  float: left;
+  display: inline-block;
 }
 
 .mall-item-list .mall-item .item-image img {
   min-width: 120px;
   width: 120px;
-  height: 100%;
+  height: 120px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
 .mall-item-list .mall-item .item-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
+  display: inline-block;
+  float: left;
+  width: calc(100% - 130px);
+
 }
 
 .mall-item-list .mall-item .item-detail .top {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .mall-item-list .mall-item .item-detail .top .item-name {
@@ -1549,13 +1643,13 @@ form#request_loan_form {
 }
 
 .mall-item-list .mall-item .item-detail .bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  display: block;
 }
 
 .mall-item-list .mall-item .item-detail .bottom .item-coin-num {
   font-size: 12px;
+  float: left;
+  line-height: 30px;
 }
 
 .mall-item-list .mall-item .item-detail .bottom .item-coin-num span {
@@ -1571,6 +1665,7 @@ form#request_loan_form {
   line-height: 1;
   text-decoration: none;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+  float: right;
 }
 
 .mall-item-list .mall-item .item-detail .bottom .item-buy:hover, 
@@ -1583,20 +1678,18 @@ form#request_loan_form {
 
 /* messages page */
 .messages-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .messages-list .message {
-  display: flex;
+  display: block;
   background-repeat: no-repeat;
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
   padding: 10px 10px 10px 70px;
-  background-size: 50px;
+  background-size: 50px 50px;
   background-position: 10px 10px;
   text-decoration: none;
-  flex-direction: column;
   min-height: 90px;
   position: relative;
 }
@@ -1615,21 +1708,22 @@ form#request_loan_form {
 }
 
 .messages-list .message .message-body {
-  display: flex;
-  justify-content: space-between;
+  display: block;
   max-width: 100%;
 }
 
 .messages-list .message .message-body .message-title {
   font-size: 18px;
   color: #333;
-  flex-shrink: 1;
   width: calc(100% - 65px);
+  display: inline-block;
+  float: left;
 }
 
 .messages-list .message .message-content {
   font-size: 14px;
   color: #999;
+  clear: both;
 }
 
 .messages-list .message .message-date {
@@ -1639,6 +1733,8 @@ form#request_loan_form {
   line-height: 24px;
   padding-left: 8px;
   width: 65px;
+  display: inline-block;
+  float: right;
 }
 
 .messages-list .message.message-system {
@@ -1691,13 +1787,11 @@ form#request_loan_form {
 
 /* history page */
 .history-list {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .history-list .history-block {
-  display: flex;
-  flex-direction: column;
+  display: block;
   margin-bottom: 16px;
 }
 
@@ -1706,7 +1800,7 @@ form#request_loan_form {
 }
 
 .history-list .history-block .history {
-  display: flex;
+  display: block;
   padding: 16px;
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
@@ -1721,14 +1815,16 @@ form#request_loan_form {
 }
 
 .history-list .history-block .history .history-body {
-  flex-grow: 1;
-  word-break: break-word;
+  display: block;
+  float: left;
+  width: calc(100% - 80px);
 }
 
 .history-list .history-block .history .history-date {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  padding-left: 16px;
+  display: block;
+  float: right;
+  min-width: 80px;
+  text-align: right;
 }
 
 .history-list .history-block .history.head .history-date {
@@ -1775,16 +1871,15 @@ form#request_loan_form {
 .custom-dialog .modal-dialog .modal-footer {
   padding: 0;
   height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
 }
 
 .custom-dialog .modal-dialog .modal-footer .btn {
   background: transparent;
   border: 0;
   text-shadow: none;
-  flex-grow: 1;
+  width: 48%;
   height: 100%;
   border-radius: 0;
   color: #42a5f5;
@@ -1796,6 +1891,7 @@ form#request_loan_form {
 
 .custom-dialog .modal-dialog .modal-footer .btn.btn-intro {
   color: #38b832;
+  width: 100%;
 }
 
 /* / custom dialog */
@@ -2505,30 +2601,29 @@ form#request_loan_form {
 
 /* activity page */
 .activity-block {
-  display: flex;
-  flex-direction: column;
+  display: block;
   padding: 10px;
 }
 
 .activity-block .activity {
   margin-bottom: 20px;
-  display: flex;
+  display: block;
+  position: relative;
 }
 
 .activity-block .activity .hex {
   width: 60px;
-  height: 60px;
+  height: 55px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   color: #fff;
   font-size: 28px;
   line-height: 1;
   font-stretch: condensed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 60px;
   z-index: 10;
+  text-align: center;
+  line-height: 55px;
 }
 
 .activity-block .activity .hex.hex-1 {
@@ -2575,9 +2670,11 @@ form#request_loan_form {
   border: 3px solid #fff;
   border-radius: 8px;
   box-shadow: 0 2px 2px 1px rgba(0,0,0,.3);
-  margin-left: -16px;
-  margin-top: 28px;
+  margin-left: 28px;
+  margin-top: -28px;
   position: relative;
+  width: calc(100% - 50px);
+  z-index: -1;
 }
 
 .activity-block .activity .item:after {
@@ -2589,7 +2686,7 @@ form#request_loan_form {
   height: 100px;
   z-index: 9;
   position: absolute;
-  right: -10px;
+  right: -30px;
   top: -40px;
 }
 
@@ -2603,6 +2700,18 @@ form#request_loan_form {
 
 .activity-block .activity .item img {
   border-radius: 5px;
+}
+
+.activity-block .activity .result-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.activity-block .activity .result-img img {
+  max-width: 100%;
 }
 
 /* / activity page */
@@ -2620,14 +2729,21 @@ form#request_loan_form {
   position: fixed;
   z-index: -1;
   top: 0;
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+.home-checkin-page .topnav {
+  position: fixed;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .home-checkin-page .arrow {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 20px;
-  padding: 5px;
+  width: 30px;
+  padding: 10px;
+  position: relative;
+  display: block;
 }
 
 .home-checkin-page .arrow img {
@@ -2639,22 +2755,24 @@ form#request_loan_form {
   border-top-right-radius: 10px;
   padding: 10px 10px 0;
   background-color: #fff;
-  margin: 0px 20px 20px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  display: block;
   position: fixed;
   bottom: 0px;
   height: 75%;
+  overflow-y: auto;
+  max-width: 1024px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-left: 5%;
+  left: 0;
 }
 
 .home-checkin-page .main .wrapper {
-  overflow-y: auto;
   position: relative;
   overflow-x: hidden;
 }
 
-.home-checkin-page .main .wrapper::-webkit-scrollbar {
+.home-checkin-page .main::-webkit-scrollbar {
   display: none;
 }
 
@@ -2662,13 +2780,12 @@ form#request_loan_form {
   border-radius: 5px;
   color: #fff;
   font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   width: 100%;
-  flex-direction: column;
   height: 100px;
   font-weight: bold;
+  line-height: 80px;
+  box-sizing: border-box;
 }
 
 .home-checkin-page .main .button.btn-unsigned {
@@ -2676,6 +2793,8 @@ form#request_loan_form {
   border: 0px solid #eee;
   border-bottom-width: 1px;
   box-shadow: 0px 3px 0px #ff4800;
+  line-height: 1;
+  padding-top: 30px;
 }
 
 .home-checkin-page .main .button.btn-unsigned .note {
@@ -2690,17 +2809,18 @@ form#request_loan_form {
 }
 
 .home-checkin-page .main .coin-ads {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   margin-top: 20px;
   width: 100%;
+  text-align: center;
 }
 
 .home-checkin-page .main .coin-ads .ad {
-  width: 22%;
+  width: 21%;
   position: relative;
-  display: block;
+  display: inline-block;
+  margin: 0 1%;
+  text-align: left;
 }
 
 .home-checkin-page .main .coin-ads .ad img{
@@ -2806,8 +2926,8 @@ form#request_loan_form {
   }
 
   .credit .credit-number {
-    font-size: 102.4px;
-    bottom: 130px;
+    /*font-size: 102.4px;
+    bottom: 130px;*/
   }
 
   .file-block .input-holder .file-input {
@@ -2820,6 +2940,18 @@ form#request_loan_form {
 
   .footer .bottomnav {
     height: 120px;
+  }
+
+  .home-checkin-page .main {
+    width: 1024px;
+    margin: 0;
+    left: inherit;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .file-block .input-holder .file-input {
+    height: 150px;
   }
 }
 
@@ -2836,11 +2968,19 @@ form#request_loan_form {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 20px;
   }
+
+  .file-block .input-holder .file-input {
+    height: 100px;
+  }
 }
 
 @media screen and (max-width: 640px) {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 14px;
+  }
+
+  .file-block .input-holder .file-input {
+    height: 90px;
   }
 }
 
@@ -2873,6 +3013,10 @@ form#request_loan_form {
   .footer .bottomnav .nav span {
     font-size: 14px;
   }
+
+  .file-block .input-holder .file-input {
+    height: 80px;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -2903,5 +3047,9 @@ form#request_loan_form {
 
   .footer .bottomnav .nav span {
     font-size: 12px;
+  }
+
+  .file-block .input-holder .file-input {
+    height: 70px;
   }
 }

@@ -56,9 +56,9 @@ if(checkUserLogin()) {
   <body class="credits-page credit-contact-page form-page">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">联系资料</span>
-        <a href="" class="nav text next">完成</a>
+        <a href="" class="nav text next right">完成</a>
       </nav>
     </header>
     <section class="main">
@@ -154,8 +154,8 @@ if(checkUserLogin()) {
           </div>
           <div class="form-element width-45pc">
             <div class="select-block">
-              <label for="credit_contact_classmate1_sex" class="required">性别</label>
-              <div class="input-holder">
+              <label for="credit_contact_classmate1_sex" class="required" style="width: 60px;">性别</label>
+              <div class="input-holder" style="width: calc(100% - 70px);">
                 <select name="caSex" id="credit_contact_classmate1_sex" required="true">
                   <option <?php echo $userAllData->cdSchool->caSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdSchool->caSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -196,8 +196,8 @@ if(checkUserLogin()) {
           </div>
           <div class="form-element width-45pc">
             <div class="select-block">
-              <label for="credit_contact_classmate2_sex" class="required">性别</label>
-              <div class="input-holder">
+              <label for="credit_contact_classmate2_sex" class="required" style="width: 60px;">性别</label>
+              <div class="input-holder" style="width: calc(100% - 70px);">
                 <select name="cbSex" id="credit_contact_classmate2_sex" required="true">
                   <option <?php echo $userAllData->cdSchool->cbSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdSchool->cbSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -250,7 +250,7 @@ if(checkUserLogin()) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>

@@ -44,9 +44,9 @@ if(isset($_GET['title']) && $_GET['title'] != '') {
   <body class="credits-page credit-family-page form-page">
     <header class="header">
       <nav class="topnav">
-        <a href="<?= $previous ?>" class="nav text back"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= $previous ?>" class="nav text back left"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title"><?= $title ?></span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="main no-padding">
@@ -59,7 +59,7 @@ if(isset($_GET['title']) && $_GET['title'] != '') {
       <?php endif; ?>
     </section>
 
-    <script type="text/javascript" src="./assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./assets/js/pdf.js"></script>
     <script src="./assets/js/compatibility.js"></script>

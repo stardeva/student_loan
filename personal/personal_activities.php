@@ -39,21 +39,32 @@ if(isset($_SESSION['sys_info']))
   <body class="personal-page personal-activity-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">活动</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <?php if(isset($carousel) && count($carousel) > 0): ?>
     <section class="main no-padding">
       <div class="activity-block">
         <?php for($i = 0; $i < min(count($carousel), 10); $i++): ?>
-          <a href="<?= $carousel[$i]->url ?>" class="activity activity-progress">
+          <?php
+            $itemUrl = $carousel[$i]->url;
+            if(strpos($itemUrl, 'checkin') !== false) $itemUrl = '../checkin.php';
+            if(strpos($itemUrl, 'luckybag') !== false) $itemUrl = '../more/red_activity.php';
+          ?>
+          <a href="<?= $itemUrl ?>" class="activity">
             <div class="hex hex-<?= $i % 10 + 1 ?>">
               <?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?>
             </div>
             <div class="item">
               <img src="<?= $carousel[$i]->picUrl ?>" class="img-responsive" />
+            </div>
+            <?php
+              $result = 'activity-progress';
+            ?>
+            <div class="result-img <?= $result; ?>">
+              <img src="../assets/images/<?= $result; ?>.png" />
             </div>
           </a>
         <?php endfor; ?>
@@ -67,7 +78,7 @@ if(isset($_SESSION['sys_info']))
       ?>
     <?php endif; ?>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>

@@ -48,7 +48,9 @@ if($is_logged_in) {
   </head>
   <body class="home-checkin-page">
     <input type="hidden" id="uid" value="<?= $uId ?>" />
-    <a href="index.php" class="arrow"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+    <div class="topnav">
+        <a href="index.php" class="arrow"><img src="./assets/images/reg_black_left_arrow.png" alt="" /></a>
+    </div>
     <div class="checkin-bg">
       <img src="<?= $checkin_bg ?>" class="img-responsive" />
     </div>
@@ -91,7 +93,7 @@ if($is_logged_in) {
       </div>
     </div>
 
-    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/js.cookie.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.popupoverlay.js"></script>

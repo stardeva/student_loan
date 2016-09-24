@@ -45,9 +45,9 @@ if(checkUserLogin()) {
   <body class="personal-page personal-bind-card">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">绑定银行卡</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="main">
@@ -101,7 +101,7 @@ if(checkUserLogin()) {
 
     <div class="notification-popup"></div>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.popupoverlay.js"></script>
 

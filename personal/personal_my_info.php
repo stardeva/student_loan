@@ -45,20 +45,21 @@ if(checkUserLogin()) {
   <body class="personal-page personal-my-info">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">个人资料</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="main no-padding">
       <div class="personal-info-list">
-        <div class="info-item user-photo right-arrow">
+        <div class="info-item user-photo">
           <div class="item-title">头像</div>
           <div class="user-photo-upload">
             <img src="<?php echo isset($userAllData->user->portrait) && $userAllData->user->portrait != '' ? $userAllData->user->portrait : '../assets/images/user_head.png'; ?>" class="user-photo-preview" />
             <input type="file" id="my_photo" accept='image/*' class="file-upload" />
             <input type="hidden" name="uId" value="<?= $uId ?>" id="uid" />
           </div>
+          <img src="../assets/images/right_arrow.png" />
         </div>
         <div class="info-item">
           <div class="item-title">姓名</div>
@@ -80,15 +81,14 @@ if(checkUserLogin()) {
           <div class="item-title">总额度</div>
           <div class="item-desc"><?= $userAllData->user->quotaTotal ?> 元</div>
         </div>
-        <br />
-        <br />
+        <div class="clearfix"></div>
         <button href="" class="button" id="user_logout">
           退出当前账号
         </button>
       </div>
     </section>
 
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>    
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>    
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootbox.min.js"></script>
 

@@ -37,9 +37,9 @@ $contract = $_SESSION['sys_info']->contract;
   <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="index.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">新手指南</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 
@@ -47,7 +47,7 @@ $contract = $_SESSION['sys_info']->contract;
       <img src="<?= $contract->guide ?>" class="img-responsive" />
     </section>
 
-    <script src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>
