@@ -1046,7 +1046,7 @@ $(document).ready(function() {
   function getCalcType(str) {
     var array_element = ['#fuli', '#huoli', '#yueli'];
     for(var i = 0; i < array_element.length; i ++) {
-      if ( str.includes(array_element[i]) )
+      if ( str.indexOf(array_element[i]) > -1)
         return array_element[i];
     }
 

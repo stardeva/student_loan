@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require_once('../api/curl.php');
 require_once('../api/functions.php');
@@ -39,10 +40,10 @@ if(checkUserLogin()) {
 }
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
@@ -53,16 +54,15 @@ if(checkUserLogin()) {
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/drum.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet"> 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+     <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
   <body class="personal-page borrow-page calculator-page one-loan-page">
+   
     <header class="header">
       <nav class="topnav">
         <a href="../index.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
@@ -77,15 +77,17 @@ if(checkUserLogin()) {
         <input type="hidden" name="time" id="time" />
         <input type="hidden" name="pro_id" id="pro_id" />
       </form>
-      <ul class="nav nav-tabs">
+      <ul class="row nav nav-tabs" id="myTab">
         <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
-          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-4 text-center active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
+          <li class="col-xs-4 text-center"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-4 text-center"><a data-toggle="tab" href="#yueli">月利贷</a></li>
         <?php else: ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利贷</a></li>
-        <?php endif; ?>        
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利贷</a></li>
+          <li class="col-xs-6 table-cell active text-center"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-6 table-cell text-center"><a data-toggle="tab" href="#yueli">月利贷</a></li>
+        <?php endif; ?>                
       </ul>
+      
 
       <div class="tab-content">
         <?php if(isset($caculator_data->lnProdList->prod)): ?>
@@ -101,13 +103,13 @@ if(checkUserLogin()) {
             <?php endif; ?>            
           
             <div class="loan-kind image">
-              <div class="kind-head flex-wrap">
-                <span class="flex1 title">借款金额(元)</span>
-                <span class="flex1 title">借款期限(<?= $array_time[$item->lnProdId-1] ?>)</span>
+              <div class="row kind-headp">
+                <span class="col-xs-6 text-center title">借款金额(元)</span>
+                <span class="col-xs-6 text-center title">借款期限(<?= $array_time[$item->lnProdId-1] ?>)</span>
               </div>
               
-              <div class="kind-body flex-wrap">
-                <div class="flex1">
+              <div class="row kind-body">
+                <div class="col-xs-6">
                   <select class="cost-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php
                       setOption($item->minMoney, $item->maxMoney, 50);
@@ -115,7 +117,7 @@ if(checkUserLogin()) {
                   </select>
                 </div>
 
-                <div class="flex1">
+                <div class="col-xs-6">
                   <select class="during-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php 
                       if($item->lnProdId == 3) {
@@ -184,8 +186,8 @@ if(checkUserLogin()) {
     </section>
 
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
-    <script src="../assets/js/js.cookie.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/js.cookie.js"></script>      
     <script src="../assets/js/bootbox.min.js"></script>
     <script src="../assets/js/jsrender.js"></script>
     <script src="../assets/js/hammer.min.js"></script>
