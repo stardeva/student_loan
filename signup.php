@@ -70,8 +70,9 @@ if(!isset($_SESSION['login_url'])) {
             </div>
           </div>
         </div>
-        <div class="checkbox">
-          <input type="checkbox" name="signgup_agree" id="signup_agree" />
+        <div class="checkbox" id="signup_checkbox">
+          <div class="check-tick checked"></div>
+          <input type="checkbox" name="signgup_agree" id="signup_agree" class="hidden" checked="checked" />
           <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
         </div>
         <div class="buttons">
@@ -88,17 +89,14 @@ if(!isset($_SESSION['login_url'])) {
           <img src="assets/images/footer_icon_home.png" alt="首页" />
           <span>首页</span>
         </a>
-        <span class="bar"></span>
         <a href="personal" class="nav">
           <img src="assets/images/footer_icon_personal.png" alt="个人" />
           <span>个人</span>
         </a>
-        <span class="bar"></span>
         <a href="more" class="nav">
           <img src="assets/images/footer_icon_more.png" alt="更多" />
           <span>更多</span>
         </a>
-        <span class="bar"></span>
         <a href="personal/personal_activities.php" class="nav">
           <img src="assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>

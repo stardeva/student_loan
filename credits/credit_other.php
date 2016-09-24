@@ -74,7 +74,7 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_other_website_screenshot" class="required">手机信息运营商网站截图</label>
-                <a href="./file_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
+                <a href="../file_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
               </div>
               <div class="input-holder">
                 <div class="file-input" style="<?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? 'background-position: -9999px;' : ''; ?>">
@@ -147,8 +147,8 @@ if(checkUserLogin()) {
           </div>
           <div class="form-element width-45pc">
             <div class="select-block">
-              <label for="credit_other_teacher1_sex" class="required">性别</label>
-              <div class="input-holder">
+              <label for="credit_other_teacher1_sex" class="required" style="width: 60px;">性别</label>
+              <div class="input-holder" style="width: calc(100% - 70px);">
                 <select name="taSex" id="credit_other_teacher1_sex" required="true">
                   <option <?php echo $userAllData->cdLife->taSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdLife->taSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -189,8 +189,8 @@ if(checkUserLogin()) {
           </div>
           <div class="form-element width-45pc">
             <div class="select-block">
-              <label for="credit_other_teacher2_sex" class="required">性别</label>
-              <div class="input-holder">
+              <label for="credit_other_teacher2_sex" class="required" style="width: 60px;">性别</label>
+              <div class="input-holder" style="width: calc(100% - 70px);">
                 <select name="tbSex" id="credit_other_teacher2_sex" required="true">
                   <option <?php echo $userAllData->cdLife->tbSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdLife->tbSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>

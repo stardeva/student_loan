@@ -53,9 +53,9 @@ if(checkUserLogin()) {
   <body class="personal-page personal-coin-mall">
     <header class="header">
       <nav class="topnav">
-        <a href="./" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="./" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">金币商城</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="main">
@@ -86,6 +86,7 @@ if(checkUserLogin()) {
                   <a href="<?= $url ?>" class="item-buy">立即兑换</a>
                 </div>
               </div>
+              <div class="clearfix"></div>
             </div>
           <?php endforeach; ?>
         <?php endif; ?>

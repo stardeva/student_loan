@@ -62,9 +62,9 @@ if(checkUserLogin()) {
   <body class="personal-page personal-my-message">
     <header class="header">
       <nav class="topnav">
-        <a href="<?= $backurl ?>" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="<?= $backurl ?>" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">消息</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <?php if(isset($messages) && count($messages) > 0): ?>
@@ -72,6 +72,7 @@ if(checkUserLogin()) {
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
         <?php
+          if($msg->mType == 1 && strtotime($msg->time) < strtotime(date("Y-m-d"))) continue;
           $msg_url = '';
           switch($msg->mType) {
           case 2:

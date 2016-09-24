@@ -98,6 +98,7 @@ if(checkUserLogin()) {
         <img src="assets/images/home_icon_feedback.png" alt="评价" />
         <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
       </a>
+      <div class="clearfix"></div>
     </section>
 
     <a href="credits" class="credit">
@@ -121,17 +122,14 @@ if(checkUserLogin()) {
           <img src="assets/images/footer_icon_home.png" alt="首页" />
           <span>首页</span>
         </a>
-        <span class="bar"></span>
         <a href="personal" class="nav">
           <img src="assets/images/footer_icon_personal.png" alt="个人" />
           <span>个人</span>
         </a>
-        <span class="bar"></span>
         <a href="more" class="nav">
           <img src="assets/images/footer_icon_more.png" alt="更多" />
           <span>更多</span>
         </a>
-        <span class="bar"></span>
         <a href="personal/personal_activities.php" class="nav">
           <img src="assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
