@@ -127,7 +127,6 @@ if(isset($_SESSION['ln_calculator'])) {
             </div>
 
             <div class="start-loan">
-              <a class="loan-button" href="#" onclick='goCardPage("<?= $array_tab_id[$item->lnProdId-1] ?>", <?= $audit_data ?>, <?= $item->lnProdId ?>)'></a>
               <div class="description-group">
                 <div class="description">
                   <div class="title">
