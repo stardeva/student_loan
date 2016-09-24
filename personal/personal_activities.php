@@ -48,12 +48,23 @@ if(isset($_SESSION['sys_info']))
     <section class="main no-padding">
       <div class="activity-block">
         <?php for($i = 0; $i < min(count($carousel), 10); $i++): ?>
-          <a href="<?= $carousel[$i]->url ?>" class="activity activity-progress">
+          <?php
+            $itemUrl = $carousel[$i]->url;
+            if(strpos($itemUrl, 'checkin') !== false) $itemUrl = '../checkin.php';
+            if(strpos($itemUrl, 'luckybag') !== false) $itemUrl = '../more/red_activity.php';
+          ?>
+          <a href="<?= $itemUrl ?>" class="activity">
             <div class="hex hex-<?= $i % 10 + 1 ?>">
               <?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?>
             </div>
             <div class="item">
               <img src="<?= $carousel[$i]->picUrl ?>" class="img-responsive" />
+            </div>
+            <?php
+              $result = 'activity-progress';
+            ?>
+            <div class="result-img <?= $result; ?>">
+              <img src="../assets/images/<?= $result; ?>.png" />
             </div>
           </a>
         <?php endfor; ?>

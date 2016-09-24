@@ -98,6 +98,7 @@ if(checkUserLogin()) {
         <img src="assets/images/home_icon_feedback.png" alt="评价" />
         <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
       </a>
+      <div class="clearfix"></div>
     </section>
 
     <a href="credits" class="credit">

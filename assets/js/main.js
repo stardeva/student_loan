@@ -46,7 +46,7 @@ if($('.topnav .text-right').hasClass('notification')) {
     // remove empty and .php data
     var array_length = 0;
     for(var ap=0; ap< current_directory_count; ap ++) {
-      if(array_path[ap] != '' && !array_path[ap].includes('.php')) {
+      if(array_path[ap] != '' && array_path[ap].indexOf('.php') !== -1) {
         array_length ++;
       }
     }
@@ -72,7 +72,7 @@ if($('.topnav .text-right').hasClass('notification')) {
     }, false);
 
   } else {
-    alert("Your browser does not support Server-sent events! Please upgrade it!");
+    //alert("Your browser does not support Server-sent events! Please upgrade it!");
   }
 }
 
@@ -431,13 +431,31 @@ function setMainDocumentHeight() {
   }
 }
 
+var updateSize = function() {
+  var credit_number_font_size = $(window).width() * 12 / 100.0;
+  if($(window).width() > 1024) credit_number_font_size = '120';
+  $('.credit .credit-number').css('font-size', credit_number_font_size + 'px');
+
+  var personal_box_body_width = $('.personal-box').width() - 70;
+  $('.personal-box .user-body').css('width', personal_box_body_width + 'px');
+
+  var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 130;
+  $('.mall-item-list .mall-item .item-detail').css('width', mail_item_detail_width + 'px');
+};
+
 $(window).resize(function() {
   setMainDocumentHeight();
+  updateSize();
+});
+
+$(window).load(function() {
+  updateSize();
 });
 
 $(document).ready(function() {
+  updateSize();
   /* show modal when page load */
-  if($('body').hasClass('home-index-page')) {
+  /*if($('body').hasClass('home-index-page')) {
     if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
       if(typeof bootbox !== 'undefined') {
         bootbox.dialog({
@@ -483,7 +501,7 @@ $(document).ready(function() {
         });
       }
     }
-  }
+  }*/
   
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({
@@ -633,7 +651,7 @@ $(document).ready(function() {
 
   if($('.swiper-container').length) {
     var creditBaseSwiper = new Swiper('.swiper-container');
-    creditBaseSwiper.on('onSlideChangeEnd', function(swiper) {
+    creditBaseSwiper.on('onSlideChangeStart', function(swiper) {
       if($('body').hasClass('credit-base-page')) {
         $('.header .topnav .title').html('基本信息 ( ' + (swiper.activeIndex + 1) + '/3 )');
         if(swiper.isEnd) $('.header .topnav .next').html('完成');
@@ -1157,7 +1175,16 @@ $(document).on('keyup', '#signup_student_id', function() {
   validateSignup();
 });
 
-$(document).on('click', '#signup_agree', function() {
+$(document).on('click', '#signup_checkbox .check-tick, #signup_checkbox label', function() {
+  if($('#signup_checkbox .check-tick').hasClass('checked')) {
+    $('#signup_checkbox .check-tick').removeClass('checked');
+    $('#signup_checkbox .check-tick').addClass('unchecked');
+    $('#signup_agree').prop('checked', false);
+  } else {
+    $('#signup_checkbox .check-tick').removeClass('unchecked');
+    $('#signup_checkbox .check-tick').addClass('checked');
+    $('#signup_agree').prop('checked', true);
+  }
   validateSignup();
 });
 

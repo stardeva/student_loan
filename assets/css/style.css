@@ -149,6 +149,11 @@ a:hover, a:focus, a:active, a:link {
   box-sizing: border-box;
   line-height: 40px;
   vertical-align: top;
+  font-size: 12px;
+}
+
+.file-block .input-label {
+  line-height: 1;
 }
 
 .file-block .input-label label {
@@ -213,10 +218,10 @@ select.form-control {
   border: 1px solid #999;
   background-color: #fefefe;
   padding: 5px;
-  width: calc(50% - 10px);
+  width: 48%;
   position: relative;
   display: inline-block;
-  height: 20vw;
+  height: 70px;
   background-image: url(../images/reg_add.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -224,6 +229,8 @@ select.form-control {
   cursor: pointer;
   text-align: center;
   box-sizing: border-box;
+  float: left;
+  margin: 0 1% 5px;
 }
 
 .file-block .input-holder .file-input label {
@@ -263,8 +270,9 @@ input[type=file] {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 100%;
-  color: #333;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
 }
 
 .input-block .input-holder input:focus, .select-block .input-holder select:focus {
@@ -274,49 +282,46 @@ input[type=file] {
 .select-block .input-holder select {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 6px;
+  background-position: right center;
   padding-right: 15px;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
 }
 
 .input-block .input-holder input.date {
   background-image: url('../images/right_arrow.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 6px;
+  background-position: right center;
   padding-right: 15px;
 }
 
 .input-block .input-holder input.email {
   background-image: url('../images/about_mail.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 20px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.weixin {
   background-image: url('../images/about_wx.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 27px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.qq {
   background-image: url('../images/about_qq.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 32px 32px;
+  background-position: right center;
   padding-right: 37px;
 }
 
 .input-block .input-holder input.phone {
   background-image: url('../images/reg_phone.png');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 25px 28px;
-  padding-right: 30px;
+  background-position: right center;
+  padding-right: 37px;
 }
 
 .form-row:before, .form-row:after {
@@ -360,7 +365,7 @@ form > h4 {
   color: #999;
 }
 
-[type="checkbox"]:not(:checked),
+/*[type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
@@ -372,7 +377,7 @@ form > h4 {
   cursor: pointer;
 }
 
-/* checkbox aspect */
+
 [type="checkbox"]:not(:checked) + label:before {
   content: '';
   position: absolute;
@@ -393,7 +398,7 @@ form > h4 {
   height: 17px;
   background: #ec472c;
 }
-/* checked mark aspect */
+
 
 [type="checkbox"]:checked + label:after {
   content: '';
@@ -416,7 +421,7 @@ form > h4 {
 [type="checkbox"]:checked + label:after {
   opacity: 1;
 }
-/* disabled checkbox */
+
 [type="checkbox"]:disabled:not(:checked) + label:before,
 [type="checkbox"]:disabled:checked + label:before {
   box-shadow: none;
@@ -429,15 +434,35 @@ form > h4 {
 [type="checkbox"]:disabled + label {
   color: #aaa;
 }
-/* accessibility */
+
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
   border: 1px solid #ec472c;
-}
+}*/
 
 #signup_agree + label {
   font-size: 10px;
   line-height: 22px;
+}
+
+.checkbox label {
+  padding-left: 0;
+}
+
+.checkbox .check-tick {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.checkbox .check-tick.checked {
+  background: url('../images/checked.png') center center no-repeat;
+}
+
+.checkbox .check-tick.unchecked {
+  background: url('../images/unchecked.png') center center no-repeat;
 }
 
 .buttons {
@@ -699,11 +724,12 @@ body {
 }
 
 .toolbar .tool {
-  display: inline-block;
-  width: 24%;
+  display: block;
+  width: 25%;
   text-decoration: none;
   color: #000;
   text-align: center;
+  float: left;
 }
 
 .toolbar .tool img {
@@ -732,18 +758,18 @@ body {
 .credit .credit-number {
   position: absolute;
   color: #fff;
-  bottom: 11vw;
+  bottom: 32%;
   width: 46%;
   left: 35%;
-  font-size: 12vw;
+  /*font-size: 12vw;*/
   line-height: 0.8;
   font-family: 'FZKaTong';
-  letter-spacing: 1vw;
+  letter-spacing: 1px;
   text-align: left;
 }
 
 .footer {
-  padding-bottom: 12vw;
+  padding-bottom: 100px;
 }
 
 /*borrow index*/
@@ -1124,19 +1150,17 @@ form#request_loan_form {
   background-color: #787878;
   color: #FFF;
   display: block;
-  height: 12vw;
   border-top: 2px solid #6a6a6a;
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: 1024px;
   z-index: 2000;
-  min-height: 56px;
 }
 
 .footer .bottomnav .nav {
   box-sizing: border-box;
-  display: inline-block;
+  display: block;
   color: #FFF;
   text-decoration: none;
   width: 25%;
@@ -1164,6 +1188,7 @@ form#request_loan_form {
   width: 40%;
   display: block;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .footer .bottomnav .nav span {
@@ -1203,12 +1228,13 @@ form#request_loan_form {
 }
 
 .my-credits-data .credits-medals .medal {
-  padding: 0 5px;
-  width: calc(25% - 5px);
+  width: 23%;
+  margin: 0 1%;
   position: relative;
   text-align: center;
   display: inline-block;
   box-sizing: border-box;
+  float: left;
 }
 
 .my-credits-data .credits-heart {
@@ -1236,6 +1262,7 @@ form#request_loan_form {
   width: 10%;
   background-image: linear-gradient(to bottom,#d24713 0,#f3512c 100%);
   background-color: #f3512c;
+  filter: none;
 }
 
 .my-credits-bar .pin-bar .pin {
@@ -1245,6 +1272,7 @@ form#request_loan_form {
   position: absolute;
   width: 31px;
   text-align: center;
+  margin-left: -15px;
 }
 
 .my-credits-bar .pin-bar .pin:before {
@@ -1256,26 +1284,27 @@ form#request_loan_form {
 }
 
 .my-credits-bar .pin-bar .pin.pin0 {
-  left: -15px;
+  left: 0;
 }
 
 .my-credits-bar .pin-bar .pin.pin500 {
-  left: calc(10% - 15px);
+  left: 10%;
 }
 
 .my-credits-bar .pin-bar .pin.pin1000 {
-  left: calc(20% - 15px);
+  left: 20%;
 }
 
 .my-credits-bar .pin-bar .pin.pin3000 {
-  left: calc(60% - 15px);
+  left: 60%;
 }
 
 .my-credits-bar .pin-bar .pin.pin5000 {
-  left: calc(100% - 15px);
+  left: 100%;
 }
 
 .my-credits-bar .credits-tooltip {
+  filter: none;
   opacity: 1;
   position: relative;
   display: inline-block;
@@ -1368,7 +1397,7 @@ form#request_loan_form {
   background-image: url('../images/user_black_right_arrow.png');
   background-repeat: no-repeat;
   background-size: 8px 14px;
-  background-position: right 0px center;
+  background-position: right center;
   margin: 10px 0;
 }
 
@@ -1393,8 +1422,15 @@ form#request_loan_form {
   background-image: url('../images/user_bean.png');
   background-repeat: no-repeat;
   background-size: 16px 14px;
-  background-position: left 0 center;
+  background-position: left center;
   padding-left: 20px;
+  height: 14px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.personal-info-list .info-item .item-desc.user-credit-beans {
+  height: 60px;
 }
 
 .personal-info-list {
@@ -1413,6 +1449,14 @@ form#request_loan_form {
   float: left;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+}
+
+.personal-info-list .info-item > img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -4px;
 }
 
 .personal-info-list .info-item:after {
@@ -1446,9 +1490,9 @@ form#request_loan_form {
 
 .personal-info-list .info-item.right-arrow {
   background-image: url('../images/right_arrow.png');
-  background-position: right 10px center;
+  background-position: right center;
   background-repeat: no-repeat;
-  background-size: 6px 12px;
+  padding-right: 10px;
 }
 
 .personal-info-list .info-item .item-icon {
@@ -1474,6 +1518,7 @@ form#request_loan_form {
 .personal-info-list .info-item .item-desc {
   float: right;
   line-height: 60px;
+  margin-right: 10px;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
@@ -2567,11 +2612,12 @@ form#request_loan_form {
 .activity-block .activity {
   margin-bottom: 20px;
   display: block;
+  position: relative;
 }
 
 .activity-block .activity .hex {
   width: 60px;
-  height: 60px;
+  height: 55px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   color: #fff;
@@ -2581,7 +2627,7 @@ form#request_loan_form {
   min-width: 60px;
   z-index: 10;
   text-align: center;
-  line-height: 60px;
+  line-height: 55px;
 }
 
 .activity-block .activity .hex.hex-1 {
@@ -2658,6 +2704,18 @@ form#request_loan_form {
 
 .activity-block .activity .item img {
   border-radius: 5px;
+}
+
+.activity-block .activity .result-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.activity-block .activity .result-img img {
+  max-width: 100%;
 }
 
 /* / activity page */
@@ -2872,8 +2930,8 @@ form#request_loan_form {
   }
 
   .credit .credit-number {
-    font-size: 102.4px;
-    bottom: 130px;
+    /*font-size: 102.4px;
+    bottom: 130px;*/
   }
 
   .file-block .input-holder .file-input {
@@ -2895,6 +2953,12 @@ form#request_loan_form {
   }
 }
 
+@media screen and (max-width: 1023px) {
+  .file-block .input-holder .file-input {
+    height: 150px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .toolbar .tool span {
     font-size: 18px;
@@ -2908,11 +2972,19 @@ form#request_loan_form {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 20px;
   }
+
+  .file-block .input-holder .file-input {
+    height: 100px;
+  }
 }
 
 @media screen and (max-width: 640px) {
   .my-credits-data .credits-medals .medal .medal-text {
     font-size: 14px;
+  }
+
+  .file-block .input-holder .file-input {
+    height: 90px;
   }
 }
 
@@ -2945,6 +3017,10 @@ form#request_loan_form {
   .footer .bottomnav .nav span {
     font-size: 14px;
   }
+
+  .file-block .input-holder .file-input {
+    height: 80px;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -2975,5 +3051,9 @@ form#request_loan_form {
 
   .footer .bottomnav .nav span {
     font-size: 12px;
+  }
+
+  .file-block .input-holder .file-input {
+    height: 70px;
   }
 }

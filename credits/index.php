@@ -94,6 +94,7 @@ if(checkUserLogin()) {
           <a href="<?= $is_step4 ? 'credit_other.php' : ''?>" class="medal other <?php if(!$is_step4) echo 'disabled'; ?>">
             <img src="../assets/images/<?php echo $is_step4 && $userAllData->cdLife->audit != 0 ? 'other_info.png' : 'other_info_gray.png'; ?>" class="img-responsive center-block" />
           </a>
+          <div class="clearfix"></div>
         </div>
         <div class="credits-heart">
           <?php
@@ -119,17 +120,14 @@ if(checkUserLogin()) {
           <img src="../assets/images/footer_icon_home.png" alt="首页" />
           <span>首页</span>
         </a>
-        <span class="bar"></span>
         <a href="../personal" class="nav">
           <img src="../assets/images/footer_icon_personal.png" alt="个人" />
           <span>个人</span>
         </a>
-        <span class="bar"></span>
         <a href="../more" class="nav">
           <img src="../assets/images/footer_icon_more.png" alt="更多" />
           <span>更多</span>
         </a>
-        <span class="bar"></span>
         <a href="../personal/personal_activities.php" class="nav">
           <img src="../assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>

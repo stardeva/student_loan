@@ -52,13 +52,14 @@ if(checkUserLogin()) {
     </header>
     <section class="main no-padding">
       <div class="personal-info-list">
-        <div class="info-item user-photo right-arrow">
+        <div class="info-item user-photo">
           <div class="item-title">头像</div>
           <div class="user-photo-upload">
             <img src="<?php echo isset($userAllData->user->portrait) && $userAllData->user->portrait != '' ? $userAllData->user->portrait : '../assets/images/user_head.png'; ?>" class="user-photo-preview" />
             <input type="file" id="my_photo" accept='image/*' class="file-upload" />
             <input type="hidden" name="uId" value="<?= $uId ?>" id="uid" />
           </div>
+          <img src="../assets/images/right_arrow.png" />
         </div>
         <div class="info-item">
           <div class="item-title">姓名</div>

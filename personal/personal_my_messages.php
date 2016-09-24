@@ -72,6 +72,7 @@ if(checkUserLogin()) {
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
         <?php
+          if($msg->mType == 1 && strtotime($msg->time) < strtotime(date("Y-m-d"))) continue;
           $msg_url = '';
           switch($msg->mType) {
           case 2:
