@@ -462,13 +462,13 @@ $(window).load(function() {
 $(document).ready(function() {
   updateSize();
   /* show modal when page load */
-  /*if($('body').hasClass('home-index-page')) {
+  if($('body').hasClass('home-index-page')) {
     if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
       if(typeof bootbox !== 'undefined') {
         bootbox.dialog({
           className: 'custom-dialog dialog-alert',
           closeButton: false,
-          message: "<h3>免责申明</h3><div>本服条由学融宝提供, 相关服条和责任将由学融宝承担, 如有问题请资询学融宝公司客服。</div>",
+          message: "<h3>免责申明</h3><div>本服务由学融宝提供, 相关服务和责任将由学融宝承担, 如有问题请咨询学融宝公司客服。</div>",
           buttons: {
             success: {
               label: "我知道了",
@@ -482,7 +482,7 @@ $(document).ready(function() {
                 else {
                   window.close();
                 }
-                //Cookies.set('intro_dialog', true);
+                // Cookies.set('intro_dialog', true);
                 bootbox.dialog({
                   className: 'custom-dialog dialog-confirm',
                   closeButton: false,
@@ -508,7 +508,7 @@ $(document).ready(function() {
         });
       }
     }
-  }*/
+  }
   
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({

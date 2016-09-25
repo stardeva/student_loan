@@ -1451,6 +1451,7 @@ form#request_loan_form {
 .personal-info-list {
   display: block;
   font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .personal-info-list .info-item {
@@ -1876,6 +1877,8 @@ form#request_loan_form {
   width: 80%;
   max-width: 600px;
   font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .custom-dialog .modal-dialog .modal-body {
