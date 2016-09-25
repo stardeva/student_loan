@@ -344,8 +344,8 @@ function decideLoan(e) {
   return false;
 }
 
-// receive feedback in estimate/feedback.php
-function giveUserFeedback(e) {
+// submit feedback in estimate/feedback.php
+$(document).on('click', '#feedback_submit', function(e) {
   e.preventDefault();
   
   var $request_form = $('.set-estimate-page .estimate-form');
@@ -360,12 +360,7 @@ function giveUserFeedback(e) {
      postdata.star = 0;
   }
 
-  if(postdata.agree == 'on') {
-    postdata.hide = 1;
-  } else {
-    postdata.hide = 0;
-  }
-  delete postdata["agree"];
+  postdata.hide = postdata.hide | 0;
 
   $.ajax({
     url: '../api/actions.php',
@@ -380,7 +375,19 @@ function giveUserFeedback(e) {
       }
     }
   });
-}
+});
+
+$(document).on('click', '.estimate-mark .rating label', function() {
+  var star = $(this).attr('data-star');
+
+  for(i = 1; i <= 5; i++) {
+    $('.estimate-mark .rating .star-' + i + ' .star-image').css('background-image', "url('../assets/images/evaluate_star_empty.png')");
+  }
+
+  for(i = 1; i <= star; i++) {
+    $('.estimate-mark .rating .star-' + i + ' .star-image').css('background-image', "url('../assets/images/evaluate_star.png')");
+  }
+});
 
 // get pdf Document
 function callGetPDFDocment (response, canvasContainer) {
@@ -461,7 +468,7 @@ var updateSize = function() {
   if($(window).width() > 1024) credit_number_font_size = '120';
   $('.credit .credit-number').css('font-size', credit_number_font_size + 'px');
 
-  var personal_box_body_width = $('.personal-box').width() - 70;
+  var personal_box_body_width = $('.personal-box').width() - 75;
   $('.personal-box .user-body').css('width', personal_box_body_width + 'px');
 
   var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 130;
@@ -480,13 +487,13 @@ $(window).load(function() {
 $(document).ready(function() {
   updateSize();
   /* show modal when page load */
-  /*if($('body').hasClass('home-index-page')) {
+  if($('body').hasClass('home-index-page')) {
     if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
       if(typeof bootbox !== 'undefined') {
         bootbox.dialog({
           className: 'custom-dialog dialog-alert',
           closeButton: false,
-          message: "<h3>免责申明</h3><div>本服条由学融宝提供, 相关服条和责任将由学融宝承担, 如有问题请资询学融宝公司客服。</div>",
+          message: "<h3>免责申明</h3><div>本服务由学融宝提供, 相关服务和责任将由学融宝承担, 如有问题请咨询学融宝公司客服。</div>",
           buttons: {
             success: {
               label: "我知道了",
@@ -500,7 +507,7 @@ $(document).ready(function() {
                 else {
                   window.close();
                 }
-                //Cookies.set('intro_dialog', true);
+                // Cookies.set('intro_dialog', true);
                 bootbox.dialog({
                   className: 'custom-dialog dialog-confirm',
                   closeButton: false,
@@ -526,7 +533,7 @@ $(document).ready(function() {
         });
       }
     }
-  }*/
+  }
   
   if($('#banner_slider').length > 0) {
     $('#banner_slider').slick({
@@ -811,7 +818,7 @@ $(document).ready(function() {
     });
   }
 
-  if($(".refund-page").length) {
+  /*if($(".refund-page").length) {
     var slider = $(".slider-wrap #detail_slider").slider();
 
     // set slider value label in refund page
@@ -820,7 +827,7 @@ $(document).ready(function() {
       $( this ).css( "left",  slider_value);
     });
 
-  }  
+  }*/
 
   // card page form validation
   if($('#bank_card_form').length) {

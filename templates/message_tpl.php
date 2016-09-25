@@ -42,9 +42,9 @@ if(checkUserLogin()) {
   <body class="personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../personal/personal_my_messages.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../personal/personal_my_messages.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title"><?php echo mb_strcut($message->title, 0, 28, 'UTF-8').(mb_strlen($message->title, 'UTF-8') > 14 ? '...' : ''); ?></span>
-        <div class="nav"></div>
+        <div class="nav back right"></div>
       </nav>
     </header>
 
