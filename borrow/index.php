@@ -58,7 +58,7 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="personal-page borrow-page calculator-page one-loan-page">
+  <body class="personal-page borrow-page calculator-page one-loan-page sigle-page">
    
     <header class="header">
       <nav class="topnav">
@@ -67,7 +67,7 @@ if(checkUserLogin()) {
         <div class="nav right"></div>
       </nav>
     </header>
-    <section class="process">
+    <section class="process main-section">
       <form action="request.php" id="borrow_hidden_form" method="POST" style="display:none;">
         <input type="hidden" name="origin_price" id="origin_price" />
         <input type="hidden" name="sum_price" id="sum_price" />
@@ -149,7 +149,9 @@ if(checkUserLogin()) {
             </div>
 
             <div class="start-loan">
-              <a class="loan-button" href="#" onclick='goCardPage("<?= $array_tab_id[$item->lnProdId-1] ?>", <?= $audit_data ?>, <?= $item->lnProdId ?>)'></a>
+              <a class="loan-button" href="#" onclick='goCardPage("<?= $array_tab_id[$item->lnProdId-1] ?>", <?= $audit_data ?>, <?= $item->lnProdId ?>)'>
+                <img src="../assets/images/borrow_button.png" alt="borrow" />
+              </a>
               <div class="description-group">
                 <div class="description">
                   <div class="title">

@@ -114,6 +114,11 @@ a:hover, a:focus, a:active, a:link {
   color: #000;
 }
 
+.row {
+  width: 100%;
+  margin: 0;
+}
+
 .input-block, .select-block {
   background-color: #fafafa;
   display: block;
@@ -950,7 +955,7 @@ body {
   background-color: #eee;  
 }
 
-.calculator-page .start-loan {
+.calculator-page .start-loan .description-group {
   overflow-y: auto;
 }
 
@@ -960,16 +965,14 @@ body {
 
 .start-loan .loan-button {
   margin-top: 10px;
-  height: 70px;
   display: block;
   background-color: #3b74a1;
   text-decoration: none;
-  text-align: center;
-  color: #fff;
-  background-image: url('../images/borrow_button.png');  
-  background-repeat: no-repeat;    
-  background-size: 100% 100%;
-  background-position: center top;
+}
+
+.start-loan .loan-button > img {
+  width: 100%;
+  height: 60px;
 }
 
 .start-loan  .description .title.last {
@@ -1122,7 +1125,6 @@ form#request_loan_form {
 }
 
 .loan-detail .detail-row {
-  margin: 0 10px;
   padding: 10px 0;
   border-bottom: 1px solid #aaa;
 }
@@ -1144,25 +1146,28 @@ form#request_loan_form {
 }
 
 .request-success {
-  background-image: url('../images/request-success.png');
-  position: absolute;
-  top: 50px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-size: 100% 100%;
-  text-align: center;
+  position: relative;
+  width: 100%;
 }
 
-.request-success .main-wrap {
+.request-success .success-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 40px;
-  justify-content: center;
+  z-index: 1;
+}
+
+.request-success .success-content {
+  position: absolute;
+  width: 100%;
+  bottom: 40px;
   color: #fff;
   font-size: 20px;
   font-weight: bold;
+  text-align: center;
+  z-index: 10;
 }
 
 /*footer*/
