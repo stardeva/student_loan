@@ -135,7 +135,7 @@ if(checkUserLogin()) {
               <span class="pull-left">计划还款</span>
               <div class="pull-right">
                 <span class="loan-price">0</span>
-                <span class="loan-time"> /
+                <span class="loan-time"> / </span>
                 <span class="number">
                   <?php 
                     if($item->lnProdId != 3) {
