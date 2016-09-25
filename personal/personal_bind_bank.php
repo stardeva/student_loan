@@ -63,7 +63,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="personal_bank_card" class="required">银行卡号</label>
               <div class="input-holder">
-                <input type="number" name="bankCard" id="personal_bank_card" required="true" placeholder="仅支持储蓄卡" />
+                <input type="text" name="bankCard" id="personal_bank_card" class="number-input" required="true" placeholder="仅支持储蓄卡" />
               </div>
             </div>
           </div>

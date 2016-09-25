@@ -89,7 +89,7 @@ if(checkUserLogin()) {
                 <div class="form-element width-45pc">
                   <div class="select-block">
                     <label for="credit_base1_sex" class="required" placeholder="请输入性别" style="width: 60px;">性别</label>
-                    <div class="input-holder" style="width: calc(100% - 70px);">
+                    <div class="input-holder">
                       <select name="sex" id="credit_base1_sex" required="true">
                         <option <?php echo $userAllData->cdBase->sex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                         <option <?php echo $userAllData->cdBase->sex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -103,7 +103,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_pid" class="required">身份证号</label>
                     <div class="input-holder">
-                      <input type="number" name="pID" id="credit_base1_pid" required="true" value="<?= $userAllData->cdBase->pID ?>" placeholder="请输入身份证号" />
+                      <input type="text" name="pID" id="credit_base1_pid" required="true" value="<?= $userAllData->cdBase->pID ?>" placeholder="请输入身份证号" class="number-input" />
                     </div>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base3_qq" class="required">QQ</label>
                     <div class="input-holder">
-                      <input type="text" name="qq" id="credit_base3_qq" required="true" class="qq" value="<?= $userAllData->cdBase->qq ?>" placeholder=">请写QQ账号" />
+                      <input type="text" name="qq" id="credit_base3_qq" required="true" class="qq" value="<?= $userAllData->cdBase->qq ?>" placeholder="请写QQ账号" />
                     </div>
                   </div>
                 </div>

@@ -148,7 +148,7 @@ if(checkUserLogin()) {
           <div class="form-element width-45pc">
             <div class="select-block">
               <label for="credit_other_teacher1_sex" class="required" style="width: 60px;">性别</label>
-              <div class="input-holder" style="width: calc(100% - 70px);">
+              <div class="input-holder">
                 <select name="taSex" id="credit_other_teacher1_sex" required="true">
                   <option <?php echo $userAllData->cdLife->taSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdLife->taSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
@@ -190,7 +190,7 @@ if(checkUserLogin()) {
           <div class="form-element width-45pc">
             <div class="select-block">
               <label for="credit_other_teacher2_sex" class="required" style="width: 60px;">性别</label>
-              <div class="input-holder" style="width: calc(100% - 70px);">
+              <div class="input-holder">
                 <select name="tbSex" id="credit_other_teacher2_sex" required="true">
                   <option <?php echo $userAllData->cdLife->tbSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
                   <option <?php echo $userAllData->cdLife->tbSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>

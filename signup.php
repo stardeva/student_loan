@@ -73,7 +73,7 @@ if(!isset($_SESSION['login_url'])) {
         <div class="checkbox" id="signup_checkbox">
           <div class="check-tick checked"></div>
           <input type="checkbox" name="signgup_agree" id="signup_agree" class="hidden" checked="checked" />
-          <label for="signup_agree"> 我己阅读开同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
+          <label for="signup_agree"> 我己阅读并同意 <a href="./file_view.php?fileurl=<?= $contract->privacy ?>&title=隐私条款" class="link">《隐私条款》</a>及 <a href="./file_view.php?fileurl=<?= $contract->reg ?>&title=授权协议" class="link">《授权协议》</a>.</label>
         </div>
         <div class="buttons">
           <input type="submit" class="button" value="登录" id="signup_submit" disabled="disabled" />

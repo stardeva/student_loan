@@ -206,7 +206,7 @@ if(checkUserLogin()) {
 
           <div class="form-group checkbox-form-group">
             <div class="agree-checkbox">
-              <input type="checkbox" name="agree" id="agree" />
+              <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
                 <span>&nbsp;同意</span>
                 <span class="highlight-text">&nbsp;《<a href="../file_view.php?fileurl=<?= $_SESSION['sys_info']->contract->loan ?>&title=借款合同">借款合同</a>》</span>
