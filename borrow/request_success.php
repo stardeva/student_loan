@@ -21,7 +21,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="one-loan-page">
+  <body class="single-page borrow-success-page">
 
     <header class="header">
       <nav class="topnav">
@@ -34,8 +34,9 @@
       </nav>
     </header>
 
-    <section class="request-success image">
-      <div class="main-wrap">学融宝会尽快完成审核</div>
+    <section class="request-success main-section">
+      <img src="../assets/images/request-success.png" class="success-image">
+      <div class="success-content">学融宝会尽快完成审核</div>
     </section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
