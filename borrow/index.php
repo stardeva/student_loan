@@ -32,9 +32,6 @@ if(checkUserLogin()) {
   $caculator_data = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_LN_PROD'], array('uId' => $uId));
   $caculator_data = json_decode($caculator_data);
 
-  $output = '<script>console.log('.json_encode($caculator_data).')</script>';
-  echo $output;
-
 } else {
   header("Location: ../signup.php");
 }
@@ -77,7 +74,7 @@ if(checkUserLogin()) {
         <input type="hidden" name="time" id="time" />
         <input type="hidden" name="pro_id" id="pro_id" />
       </form>
-      <ul class="row nav nav-tabs" id="myTab">
+      <ul class="row nav nav-tabs" id="calc_tab">
         <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
           <li class="col-xs-4 text-center active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
           <li class="col-xs-4 text-center"><a data-toggle="tab" href="#huoli">活利贷</a></li>
@@ -185,15 +182,15 @@ if(checkUserLogin()) {
       </div>
     </section>
 
-    <script src="../assets/js/jquery-1.12.4.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/js.cookie.js"></script>      
-    <script src="../assets/js/bootbox.min.js"></script>
-    <script src="../assets/js/jsrender.js"></script>
-    <script src="../assets/js/hammer.min.js"></script>
-    <script src="../assets/js/hammer.fakemultitouch.js"></script>
-    <script src="../assets/js/drum.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/js.cookie.js"></script>      
+    <script type="text/javascript" src="../assets/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jsrender.js"></script>
+    <script type="text/javascript" src="../assets/js/hammer.min.js"></script> 
+    <script type="text/javascript" src="../assets/js/hammer.fakemultitouch.js"></script>
+    <script type="text/javascript" src="../assets/js/drum.js"></script>
+    <script type="text/javascript" src="../assets/js/main.js"></script>
 
   </body>
 </html>
