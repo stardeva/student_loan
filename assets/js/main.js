@@ -471,7 +471,7 @@ var updateSize = function() {
   var personal_box_body_width = $('.personal-box').width() - 75;
   $('.personal-box .user-body').css('width', personal_box_body_width + 'px');
 
-  var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 130;
+  var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 135;
   $('.mall-item-list .mall-item .item-detail').css('width', mail_item_detail_width + 'px');
 };
 
@@ -488,8 +488,8 @@ $(document).ready(function() {
   updateSize();
   /* show modal when page load */
   if($('body').hasClass('home-index-page')) {
-    if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
-      if(typeof bootbox !== 'undefined') {
+    if(typeof bootbox !== 'undefined') {
+      if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
         bootbox.dialog({
           className: 'custom-dialog dialog-alert',
           closeButton: false,
@@ -507,30 +507,54 @@ $(document).ready(function() {
                 else {
                   window.close();
                 }
-                // Cookies.set('intro_dialog', true);
-                bootbox.dialog({
-                  className: 'custom-dialog dialog-confirm',
-                  closeButton: false,
-                  message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
-                  buttons: {
-                    danger: {
-                      label: "不允许",
-                      callback: function() {
-
-                      }
-                    },
-                    success: {
-                      label: "允许",
-                      callback: function() {
-                        
+                Cookies.set('intro_dialog', true, {expires: 1});
+                if(Cookies.get('location') === undefined) {
+                  bootbox.dialog({
+                    className: 'custom-dialog dialog-confirm',
+                    closeButton: false,
+                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+                    buttons: {
+                      danger: {
+                        label: "不允许",
+                        callback: function() {
+                          Cookies.remove('location');
+                        }
+                      },
+                      success: {
+                        label: "允许",
+                        callback: function() {
+                          Cookies.set('location', 'shenyang', {expires: 1});
+                        }
                       }
                     }
-                  }
-                });
+                  });
+                }
               }
             }
           }
         });
+      } else if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog')) {
+        if(Cookies.get('location') === undefined) {
+          bootbox.dialog({
+            className: 'custom-dialog dialog-confirm',
+            closeButton: false,
+            message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+            buttons: {
+              danger: {
+                label: "不允许",
+                callback: function() {
+                  Cookies.remove('location');
+                }
+              },
+              success: {
+                label: "允许",
+                callback: function() {
+                  Cookies.set('location', 'shenyang', {expires: 1});
+                }
+              }
+            }
+          });
+        }
       }
     }
   }
