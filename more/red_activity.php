@@ -91,8 +91,8 @@ if(checkUserLogin()) {
     </section>
     <div class="error-section">
       <?php 
-        $title = '期待下次参加哦!';
-        $error_type = 'tip';
+        $title = '这一轮的红包派完啦~<br />期待下次参与';
+        $error_type = 'red';
         include '../templates/error_tpl.php';
       ?>
     </div>

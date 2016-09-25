@@ -2641,6 +2641,10 @@ form#request_loan_form {
   background-image: url('../images/error_history.png');
 }
 
+.error-message-area .image.red {
+  background-image: url('../images/error_red.png');
+}
+
 /* Notification Popup custom style */
 .notification-popup {
   background-color: rgba(0,0,0,0.8);
