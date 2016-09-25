@@ -228,6 +228,8 @@ function goCardPage(id, data, pro_id) {
         }
       }
     });
+
+    modalBoxInit();
     return;
   } else {
     var $borrow_form = $('#borrow_hidden_form');
@@ -261,21 +263,21 @@ function completeCard() {
       }
     }
   });
+
+  modalBoxInit();
 }
 
 // decide to send loan request in request page
 function decideLoan(e) {
-  if (!e) e = window.event;
-  if (e.cancelBubble != null) e.cancelBubble = true;
-  if (e.stopPropagation) e.stopPropagation(); //e.stopPropagation works in Firefox.
-  if (e.preventDefault) e.preventDefault();
-  if (e.returnValue != null) e.returnValue = false; // http://blog.patricktresp.de/2012/02/
+  preventEvevntFunc(e);
 
   $('#request_modal').modal('hide');
   var $request_form = $('#request_loan_form');
   var pro_id = $request_form.find('#pro_id').val();
   var money = $request_form.find('#money').val();
   var time = $request_form.find('#time').val();
+  var usage = $request_form.find('#card').val();
+  var source = $request_form.find('#number').val();
   
   var picIdList = '';
   var boolPic = false;
@@ -318,13 +320,15 @@ function decideLoan(e) {
       },
       success: {
         label: "确定",
-        callback: function(e) {          
-          var postdata = {'uId': $('#uid').val(), 
+        callback: function(e) {  
+          var postdata = {'uId': $('#uid').val(),                         
                         'page': 'request_loan_page',
                         'lnProdId': pro_id,
                         'money': money,
                         'day': day,
-                        'month': month};
+                        'month': month,
+                        'source': source,
+                        'usage': usage};
           if(boolPic) {
             postdata.conPics = picIdList;
           }
@@ -346,6 +350,9 @@ function decideLoan(e) {
       }
     }
   });
+
+  modalBoxInit();
+
   return false;
 }
 
@@ -485,9 +492,17 @@ var updateSize = function() {
   $('.form-element.width-45pc .select-block .input-holder').css('width', select_width + 'px');
 };
 
+// set modal box top
+var modalBoxInit = function() {
+  var $bootbox_instance= $('.bootbox.custom-dialog .modal-dialog');
+  var bootbox_height = $bootbox_instance.css('height');
+  $bootbox_instance.css('top', ( parseInt($(window).height()/2) - parseInt(bootbox_height)/2 ) )
+}
+
 $(window).resize(function() {
   setMainDocumentHeight();
   updateSize();
+  modalBoxInit();
 });
 
 $(window).load(function() {
@@ -555,11 +570,15 @@ $(document).ready(function() {
                       }
                     }
                   });
+
+                  modalBoxInit();
                 }
               }
             }
           }
         });
+
+        modalBoxInit();
       } else if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog')) {
         if(Cookies.get('location') === undefined) {
           bootbox.dialog({
@@ -596,6 +615,8 @@ $(document).ready(function() {
               }
             }
           });
+
+          modalBoxInit();
         }
       }
     }
@@ -951,15 +972,6 @@ $(document).ready(function() {
   // calculator page 
   if($('body').hasClass('calculator-page')) {
     Hammer.plugins.fakeMultitouch();
-    // get web browser type
-    var prefixes = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' ');
-    var transformProp = '';
-    for(var i = 0; i < prefixes.length; i++) {
-      if(document.createElement('div').style[prefixes[i]] !== undefined) {
-        transformProp = prefixes[i];
-      }
-    }
-
     // watch loan selectbox change event in loan and calc page
     function watchLoanSeletor(elem) {
       var rate = $(elem).attr('rate');
@@ -973,14 +985,18 @@ $(document).ready(function() {
       }
     }
     
-    if(transformProp == '') {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    
+    // check if current browser is IE
+    if(msie > 0) {
       $('select.loan-selector').on('change', function() {
         watchLoanSeletor(this);
       });
     } else {
       $("select.loan-selector").drum({
         onChange : function (elem) {
-         watchLoanSeletor(elem); 
+          watchLoanSeletor(elem); 
         },
         interactive: false
       });
@@ -1423,6 +1439,8 @@ $(document).on('click', '#bind_unbank_submit', function(e) {
       }
     }
   });
+
+  modalBoxInit();
 });
 
 /* user logout */
@@ -1454,6 +1472,8 @@ $(document).ready(function() {
         }
       }
     });
+
+    modalBoxInit();
   });
 });
 
