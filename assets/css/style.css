@@ -896,6 +896,8 @@ body {
 
 .loan-kind .kind-body {
   position: relative;
+  display: inline-block;
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -1090,6 +1092,7 @@ form#request_loan_form {
 }
 
 #request_loan_form .checkbox-label {
+  display: inline;
   font-size: 12px;
   color: #ccc;
 }
@@ -1108,11 +1111,8 @@ form#request_loan_form {
 }
 
 .loan-detail .detail-row {
-  display: flex;
-  align-items: center;
   margin: 0 10px;
   padding: 10px 0;
-  justify-content: space-between;
   border-bottom: 1px solid #aaa;
 }
 
@@ -3065,4 +3065,12 @@ form#request_loan_form {
   .file-block .input-holder .file-input {
     height: 70px;
   }
+}
+
+.tab-content .tab-pane {
+  display: none;
+}
+
+.tab-content .tab-pane.active.in {
+  display: block;
 }

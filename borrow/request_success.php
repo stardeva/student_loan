@@ -25,9 +25,9 @@
 
     <header class="header">
       <nav class="topnav">
-        <a href="../borrow" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../borrow" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">申请成功</span>
-        <a href="../personal/personal_my_messages.php" class="nav link notification text-right">
+        <a href="../personal/personal_my_messages.php" class="nav link notification text-right right">
           <i class="fa fa-envelope"></i>
           <div class="unread-icon"></div>
         </a>

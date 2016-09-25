@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require_once('../api/curl.php');
 require_once('../api/functions.php');
@@ -22,7 +23,6 @@ if(isset($_SESSION['ln_calculator'])) {
 }
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -38,30 +38,29 @@ if(isset($_SESSION['ln_calculator'])) {
     <link href="../assets/css/drum.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
   <body class="personal-page calculator-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">费率计算</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <section class="process">
-      <ul class="nav nav-tabs">
+      <ul class="row nav nav-tabs" id="calc_tab">
         <?php if($caculator_data->lnProdList->prod[0]->lnProdId == 1): ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
-          <li class="flex-wrap-space"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-4 text-center active"><a data-toggle="tab" href="#fuli">福利贷</a></li>
+          <li class="col-xs-4 text-center"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-4 text-center"><a data-toggle="tab" href="#yueli">月利贷</a></li>
         <?php else: ?>
-          <li class="flex-wrap-space active"><a data-toggle="tab" href="#huoli">活利贷</a></li>
-        <?php endif; ?>        
-        <li class="flex-wrap-space"><a data-toggle="tab" href="#yueli">月利贷</a></li>
+          <li class="col-xs-6 table-cell active text-center"><a data-toggle="tab" href="#huoli">活利贷</a></li>
+          <li class="col-xs-6 table-cell text-center"><a data-toggle="tab" href="#yueli">月利贷</a></li>
+        <?php endif; ?>                
       </ul>
 
       <div class="tab-content">
@@ -78,13 +77,13 @@ if(isset($_SESSION['ln_calculator'])) {
             <?php endif; ?>            
           
             <div class="loan-kind image">
-              <div class="kind-head flex-wrap">
-                <span class="flex1 title">借款金额(元)</span>
-                <span class="flex1 title">借款期限(<?= $array_time[$item->lnProdId-1] ?>)</span>
+              <div class="kind-head">
+                <span class="col-xs-6 text-center title">借款金额(元)</span>
+                <span class="col-xs-6 text-center title">借款期限(<?= $array_time[$item->lnProdId-1] ?>)</span>
               </div>
               
-              <div class="kind-body flex-wrap">
-                <div class="flex1">
+              <div class="kind-body">
+                <div class="col-xs-6">
                   <select class="cost-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php
                       setOption($item->minMoney, $item->maxMoney, 50);
@@ -92,7 +91,7 @@ if(isset($_SESSION['ln_calculator'])) {
                   </select>
                 </div>
 
-                <div class="flex1">
+                <div class="col-xs-6">
                   <select class="during-selector form-control loan-selector" proId="<?= $item->lnProdId ?>" rate="<?= $item->rateFlt ?>">
                     <?php 
                       if($item->lnProdId == 3) {

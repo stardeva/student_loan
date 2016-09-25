@@ -14,6 +14,26 @@ function notificationPopup(ele, msg) {
   });
 }
 
+function preventEvevntFunc(e) {
+  if (!e) e = window.event;
+  if (e.cancelBubble != null) e.cancelBubble = true;
+  if (e.stopPropagation) e.stopPropagation(); //e.stopPropagation works in Firefox.
+  if (e.preventDefault) e.preventDefault();
+  if (e.returnValue != null) e.returnValue = false; // http://blog.patricktresp.de/2012/02/
+}
+
+$("#calc_tab a").click(function(event) {
+  preventEvevntFunc(event);
+  $(this).parent().addClass("active");
+  $(this).parent().siblings().removeClass("active");
+  var tab = $(this).attr("href");
+  $(".tab-content").find('.tab-pane').each(function(){
+    $(this).removeClass("in active");
+  })
+  $(".tab-content").find(tab).addClass("in active");
+  $(tab).fadeIn();
+});
+
 // make notifcation message icon
 function makeNotificationIcon() {
   if( !$('.header .topnav .nav.notification').hasClass( 'unread' ) ) {
@@ -240,7 +260,11 @@ function completeCard() {
 
 // decide to send loan request in request page
 function decideLoan(e) {
-  e.preventDefault();
+  if (!e) e = window.event;
+  if (e.cancelBubble != null) e.cancelBubble = true;
+  if (e.stopPropagation) e.stopPropagation(); //e.stopPropagation works in Firefox.
+  if (e.preventDefault) e.preventDefault();
+  if (e.returnValue != null) e.returnValue = false; // http://blog.patricktresp.de/2012/02/
 
   $('#request_modal').modal('hide');
   var $request_form = $('#request_loan_form');
@@ -317,6 +341,7 @@ function decideLoan(e) {
       }
     }
   });
+  return false;
 }
 
 // receive feedback in estimate/feedback.php
@@ -859,21 +884,42 @@ $(document).ready(function() {
   // calculator page 
   if($('body').hasClass('calculator-page')) {
     Hammer.plugins.fakeMultitouch();
+    // get web browser type
+    var prefixes = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' ');
+    var transformProp = '';
+    for(var i = 0; i < prefixes.length; i++) {
+      if(document.createElement('div').style[prefixes[i]] !== undefined) {
+        transformProp = prefixes[i];
+      }
+    }
 
-    $("select.loan-selector").drum({
-      onChange : function (elem) {
-        var rate = $(elem).attr('rate');
-        var pro_id = $(elem).attr('proId');
-        var element_id = g_page_element + ' ';
-        var array_tab = ['#fuli', '#huoli', '#yueli'];
+    // watch loan selectbox change event in loan and calc page
+    function watchLoanSeletor(elem) {
+      var rate = $(elem).attr('rate');
+      var pro_id = $(elem).attr('proId');
+      var element_id = g_page_element + ' ';
+      var array_tab = ['#fuli', '#huoli', '#yueli'];
 
-        if(rate && pro_id) {
-          element_id += array_tab[parseInt(pro_id)-1];
-          setCalculatedValue(element_id);
-        }
-      },
-      interactive: false
-    });
+      if(rate && pro_id) {
+        element_id += array_tab[parseInt(pro_id)-1];
+        setCalculatedValue(element_id);
+      }
+    }
+    
+    if(transformProp == '') {
+      $('select.loan-selector').on('change', function() {
+        watchLoanSeletor(this);
+      });
+    } else {
+      $("select.loan-selector").drum({
+        onChange : function (elem) {
+         watchLoanSeletor(elem); 
+        },
+        interactive: false
+      });
+    }
+
+    
   }
 
   // feedback page form validation in more/feedback.php

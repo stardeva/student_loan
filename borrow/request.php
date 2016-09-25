@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require_once('../api/curl.php');
 require_once('../api/functions.php');
@@ -28,7 +29,6 @@ if(checkUserLogin()) {
 }
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -51,12 +51,12 @@ if(checkUserLogin()) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="request-loan-page">
+  <body class="request-loan-page personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="index.php" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="index.php" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">贷款申请</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
 
@@ -64,17 +64,17 @@ if(checkUserLogin()) {
       <div class="main-wrap">
         <div class="loan-detail image">
           <div class="loan-wrap">
-            <div class="detail-row">
-              <div class="detail-label">借款金额</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">借款金额</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $originPrice ?></label>
                 <label class="detail-unit">元</label>
               </div>
             </div>
 
-            <div class="detail-row">
-              <div class="detail-label">借款时间</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">借款时间</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $_POST['time'] ?></label>
                 <?php if($_POST['pro_id'] == 3): ?>
                   <label class="detail-unit">月</label>
@@ -84,33 +84,33 @@ if(checkUserLogin()) {
               </div>
             </div>  
 
-            <div class="detail-row">
-              <div class="detail-label">咨询服务费</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">咨询服务费</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $consultPrice ?></label>
                 <label class="detail-unit">元</label>
               </div>
             </div>
 
-            <div class="detail-row">
-              <div class="detail-label">无逾期保证金</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">无逾期保证金</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $boundPrice ?></label>
                 <label class="detail-unit">元</label>
               </div>
             </div>
 
-            <div class="detail-row">
-              <div class="detail-label">到账金额</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">到账金额</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $remainPrice ?></label>
                 <label class="detail-unit">元</label>
               </div>
             </div>
 
-            <div class="detail-row">
-              <div class="detail-label">还款金额</div>
-              <div class="detail-content">
+            <div class="row detail-row">
+              <div class="col-xs-6 no-padding text-left detail-label">还款金额</div>
+              <div class="col-xs-6 no-padding text-right detail-content">
                 <label class="detail-value highlight-text"><?= $_POST['sum_price'] ?></label>
                 <?php if($_POST['pro_id'] == 3): ?>
                   <label class="detail-unit">元/月</label>
