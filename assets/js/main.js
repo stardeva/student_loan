@@ -476,8 +476,11 @@ var updateSize = function() {
   var personal_box_body_width = $('.personal-box').width() - 75;
   $('.personal-box .user-body').css('width', personal_box_body_width + 'px');
 
-  var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 130;
+  var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 135;
   $('.mall-item-list .mall-item .item-detail').css('width', mail_item_detail_width + 'px');
+
+  var select_width = $('.form-element.width-45pc .select-block').width() -65;
+  $('.form-element.width-45pc .select-block .input-holder').css('width', select_width + 'px');
 };
 
 $(window).resize(function() {
@@ -493,8 +496,8 @@ $(document).ready(function() {
   updateSize();
   /* show modal when page load */
   if($('body').hasClass('home-index-page')) {
-    if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
-      if(typeof bootbox !== 'undefined') {
+    if(typeof bootbox !== 'undefined') {
+      if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog') === undefined) {
         bootbox.dialog({
           className: 'custom-dialog dialog-alert',
           closeButton: false,
@@ -512,30 +515,54 @@ $(document).ready(function() {
                 else {
                   window.close();
                 }
-                // Cookies.set('intro_dialog', true);
-                bootbox.dialog({
-                  className: 'custom-dialog dialog-confirm',
-                  closeButton: false,
-                  message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
-                  buttons: {
-                    danger: {
-                      label: "不允许",
-                      callback: function() {
-
-                      }
-                    },
-                    success: {
-                      label: "允许",
-                      callback: function() {
-                        
+                Cookies.set('intro_dialog', true, {expires: 1});
+                if(Cookies.get('location') === undefined) {
+                  bootbox.dialog({
+                    className: 'custom-dialog dialog-confirm',
+                    closeButton: false,
+                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+                    buttons: {
+                      danger: {
+                        label: "不允许",
+                        callback: function() {
+                          Cookies.remove('location');
+                        }
+                      },
+                      success: {
+                        label: "允许",
+                        callback: function() {
+                          Cookies.set('location', 'shenyang', {expires: 1});
+                        }
                       }
                     }
-                  }
-                });
+                  });
+                }
               }
             }
           }
         });
+      } else if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog')) {
+        if(Cookies.get('location') === undefined) {
+          bootbox.dialog({
+            className: 'custom-dialog dialog-confirm',
+            closeButton: false,
+            message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+            buttons: {
+              danger: {
+                label: "不允许",
+                callback: function() {
+                  Cookies.remove('location');
+                }
+              },
+              success: {
+                label: "允许",
+                callback: function() {
+                  Cookies.set('location', 'shenyang', {expires: 1});
+                }
+              }
+            }
+          });
+        }
       }
     }
   }
@@ -1451,4 +1478,21 @@ $(document).ready(function() {
       $('#personal_coin_buy').submit();
     });
   }
+});
+
+/* Input number only */
+$(document).on('keydown', '.number-input', function(e) {
+  var key = e.which || e.keyCode;
+
+  if (!e.shiftKey && !e.altKey && !e.ctrlKey &&
+      key >= 48 && key <= 57 ||
+      key >= 96 && key <= 105 ||
+      key == 190 || key == 188 || key == 109 || key == 110 ||
+      key == 8 || key == 9 || key == 13 ||
+      key == 35 || key == 36 ||
+      key == 37 || key == 39 ||
+      key == 46 || key == 45)
+    return true;
+
+  return false;
 });
