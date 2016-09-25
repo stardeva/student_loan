@@ -450,7 +450,10 @@ function setMainDocumentHeight() {
     main_height = 0,
     window_height = $(window).height(),
     wrap_height = parseInt( $('.main-loan-area .main-wrap').height() ),
-    header_height = 60;
+    header_height = 60,
+    $success_page = $('body.single-page');
+
+  $success_page.find('.main-section').height( window_height - parseInt($success_page.find('header').css('height')) );
 
   $('body.one-loan-page').height(window_height);
 
@@ -459,7 +462,6 @@ function setMainDocumentHeight() {
   }
 
   var main_height = wrap_height + header_height + footer_height + 40;
-
 
   if(window_height >= main_height ) {
     $('.main-loan-area').height(window_height - header_height);

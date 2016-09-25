@@ -204,7 +204,7 @@ if(checkUserLogin()) {
             </div>
           <?php endif; ?>
 
-          <div class="form-group checkbox-form-group">
+          <div class="form-group has-success checkbox-form-group">
             <div class="agree-checkbox">
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
