@@ -35,24 +35,24 @@ if($result->error->errno == 200) {
   <body class="evaluate-page evaluate-view-page personal-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">用户评价</span>
-        <div class="nav"></div>
+        <div class="nav back right"></div>
       </nav>
     </header>
 
     <?php if(isset($evaluateList) && count($evaluateList) > 0): ?>
-    <section class="loan-data-area main-loan-area">
+    <section class="loan-data-area">
       <div class="main-wrap user-estimate-area">
         
           <?php 
             foreach ($evaluateList as $item) {
           ?>
-            <div class="estimate-group flex-wrap-space">
+            <div class="estimate-group">
               <div class="content">
-                <div class="user-name flex-wrap-space">
+                <div class="user-name">
                   <div class="user-head emoticon">
-                    <div class="user-head-image image"></div>
+                    <img src="../assets/images/user_head.png" class="img-responsive" />
                   </div>
                   <div class="name title">
                     <?php echo $item->name ?>                    
@@ -66,7 +66,7 @@ if($result->error->errno == 200) {
                 </div>
               </div>
 
-              <div class="user-mark flex-wrap-space">
+              <div class="user-mark">
                 <div class="date"><?php echo date('Y-m-d', $item->time); ?></div>
                 <div class="mark-wrap">
                   <?php 
@@ -76,7 +76,8 @@ if($result->error->errno == 200) {
                   ?>
                 </div>
               </div>
-            </div>            
+              <div class="clearfix"></div>
+            </div>
           <?php
             }
           ?>

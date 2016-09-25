@@ -1045,6 +1045,10 @@ form .reqire-icon {
     background-image: url('../images/reg_hook_blank.png');
 }
 
+.has-success .agree-checkbox {
+  margin-top: 8px;
+}
+
 #bank_card_form .form-group {  
   margin-left: 10px;
   margin-right: 10px;
@@ -2200,6 +2204,26 @@ form#request_loan_form {
   border-bottom: 1px solid #ccc;
 }
 
+.user-estimate-area {
+  display: block;
+  position: relative;
+}
+
+.user-estimate-area .estimate-group {
+  display: block;
+  position: relative;
+}
+
+.user-estimate-area .estimate-group .content {
+  float: left;
+}
+
+.user-estimate-area .estimate-group .user-mark {
+  float: right;
+  text-align: right;
+  margin-top: 15px;
+}
+
 .user-estimate-area .estimate-group {
   margin-top: 20px;
 }
@@ -2207,12 +2231,6 @@ form#request_loan_form {
 .loan-data-area .estimate-group .user-name,
 .loan-data-area .estimate-group .active-money {
   margin-bottom: 10px;
-}
-
-.user-estimate-area .estimate-group .user-mark {
-  flex-flow: column;
-  align-items: flex-end;
-  height: 55px;
 }
 
 .user-estimate-area .estimate-group .user-mark .date {
@@ -2233,6 +2251,8 @@ form#request_loan_form {
   width: 48px;
   height: 48px;
   font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .loan-data-area .estimate-group .power {
@@ -2241,6 +2261,7 @@ form#request_loan_form {
 
 .user-estimate-area .estimate-group .name {
   margin: 0 auto;
+  display: inline-block;
 }
 
 .estimate-mark .star-image {
@@ -2289,9 +2310,9 @@ form#request_loan_form {
   color: #000;
 }
 
-.rating > input,
-.rating > input:checked,
-.rating > input:hover {
+.rating input,
+.rating input:checked,
+.rating input:hover {
   border: none;
   border-radius: 0;
   width: 16px;
@@ -2309,8 +2330,11 @@ form#request_loan_form {
   background-image: url('../images/evaluate_star.png'); 
 }
 
-.space {
-  align-items: initial;
+.rating input.radio-btn {
+  position: absolute;
+  overflow: hidden;
+  left: -9999px;
+  top: -9999px;
 }
 
 /*.estimate-mark .star-image:hover,

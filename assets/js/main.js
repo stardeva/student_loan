@@ -319,8 +319,8 @@ function decideLoan(e) {
   });
 }
 
-// receive feedback in estimate/feedback.php
-function giveUserFeedback(e) {
+// submit feedback in estimate/feedback.php
+$(document).on('click', '#feedback_submit', function(e) {
   e.preventDefault();
   
   var $request_form = $('.set-estimate-page .estimate-form');
@@ -335,12 +335,7 @@ function giveUserFeedback(e) {
      postdata.star = 0;
   }
 
-  if(postdata.agree == 'on') {
-    postdata.hide = 1;
-  } else {
-    postdata.hide = 0;
-  }
-  delete postdata["agree"];
+  postdata.hide = postdata.hide | 0;
 
   $.ajax({
     url: '../api/actions.php',
@@ -355,7 +350,19 @@ function giveUserFeedback(e) {
       }
     }
   });
-}
+});
+
+$(document).on('click', '.estimate-mark .rating label', function() {
+  var star = $(this).attr('data-star');
+
+  for(i = 1; i <= 5; i++) {
+    $('.estimate-mark .rating .star-' + i + ' .star-image').css('background-image', "url('../assets/images/evaluate_star_empty.png')");
+  }
+
+  for(i = 1; i <= star; i++) {
+    $('.estimate-mark .rating .star-' + i + ' .star-image').css('background-image', "url('../assets/images/evaluate_star.png')");
+  }
+});
 
 // get pdf Document
 function callGetPDFDocment (response, canvasContainer) {

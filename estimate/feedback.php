@@ -14,7 +14,7 @@ if(checkUserLogin()) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
@@ -26,21 +26,28 @@ if(checkUserLogin()) {
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body class="set-estimate-page personal-page">
   <header class="header">
-	<nav class="topnav">
-	  <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
-	  <span class="nav text title">发布评价</span>
-	  <div class="nav"></div>
-	</nav>
+    <nav class="topnav">
+      <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+      <span class="nav text title">发布评价</span>
+      <div class="nav back right"></div>
+    </nav>
   </header>
 
-  <section class="main-section flex-wrap-column">
-  	<form method="post" class="estimate-form loan-form">
+  <section class="main-section">
+    <form method="post" class="estimate-form loan-form">
       <input type="hidden" name="uId" value="<?= $uId ?>">
-  	  <input type="hidden" name="lnId" value="<?= $lnId ?>">
-  	  <input type="hidden" name="page" value="set_estimate_page">
+      <input type="hidden" name="lnId" value="<?= $lnId ?>">
+      <input type="hidden" name="page" value="set_estimate_page">
       <div class="form-group form-row">
         <div class="form-element width-100pc">
           <div class="textarea-holder">
@@ -50,41 +57,37 @@ if(checkUserLogin()) {
       </div>
 
       <div class="form-group has-success">
-        <div class="flex-wrap-space space estimate-mark"">
-          <div class="title">
-	      	<b>评分</b>
-	      </div>
-
-      	  <div class="rating">
+        <div class="estimate-mark">
+          <div class="title pull-left">评分</div>
+          <div class="rating pull-right">
             <input id="star5" name="star" type="radio" value="5" class="radio-btn " />
-            <label for="star5"><div class="star-image image"></div></label>
+            <label for="star5" data-star="5" class="star-5"><div class="star-image image"></div></label>
             <input id="star4" name="star" type="radio" value="4" class="radio-btn " />
-            <label for="star4"><div class="star-image image"></div></label>
+            <label for="star4" data-star="4" class="star-4"><div class="star-image image"></div></label>
             <input id="star3" name="star" type="radio" value="3" class="radio-btn " />
-            <label for="star3"><div class="star-image image"></div></label>
+            <label for="star3" data-star="3" class="star-3"><div class="star-image image"></div></label>
             <input id="star2" name="star" type="radio" value="2" class="radio-btn " />
-            <label for="star2"><div class="star-image image"></div></label>
+            <label for="star2" data-star="2" class="star-2"><div class="star-image image"></div></label>
             <input id="star1" name="star" type="radio" value="1" class="radio-btn " />
-            <label for="star1"><div class="star-image image"></div></label>
+            <label for="star1" data-star="1" class="star-1"><div class="star-image image"></div></label>
             <div class="clearfix"></div>
           </div>
+          <div class="clearfix"></div>
         </div>
-      	
       </div>
 
-      <div class="form-group has-success flex-wrap-space submit-group">
-      	<div>
-      		<div class="agree-checkbox">
-              <input type="checkbox" name="agree" id="agree" checked="true" />
-              <label class="checkbox-label" for="agree">
-                <b class="title">匿名评论</b>
-              </label>
+      <div class="form-group has-success submit-group">
+        <div class="pull-left">
+          <div class="agree-checkbox">
+              <input type="checkbox" name="hide" id="agree" checked="true" value="1" />
+              <label class="checkbox-label" for="agree" style="color: #000;">匿名评论</label>
             </div>  
-      	</div>
+        </div>
 
-      	<div>
-      	  <input type="submit" class="btn submit-btn has-success" value="发布评价" id="feedback_submit" disabled="disabled" onclick="giveUserFeedback(event)"  />	
-      	</div>
+        <div class="pull-right">
+          <input type="button" class="btn submit-btn has-success" value="发布评价" id="feedback_submit" disabled="disabled"  /> 
+        </div>
+        <div class="clearfix"></div>
       </div>
     </form>
   </section>
