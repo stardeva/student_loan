@@ -1879,9 +1879,7 @@ form#request_loan_form {
 
 /* custom dialog */
 .custom-dialog {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   padding: 0 !important;
 }
 
