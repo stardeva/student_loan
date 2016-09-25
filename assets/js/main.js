@@ -443,7 +443,7 @@ var updateSize = function() {
   if($(window).width() > 1024) credit_number_font_size = '120';
   $('.credit .credit-number').css('font-size', credit_number_font_size + 'px');
 
-  var personal_box_body_width = $('.personal-box').width() - 70;
+  var personal_box_body_width = $('.personal-box').width() - 75;
   $('.personal-box .user-body').css('width', personal_box_body_width + 'px');
 
   var mail_item_detail_width = $('.mall-item-list .mall-item').width() - 130;

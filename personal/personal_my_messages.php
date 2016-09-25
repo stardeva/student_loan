@@ -75,7 +75,7 @@ if(checkUserLogin()) {
           if($msg->mType == 1 && strtotime($msg->time) < strtotime(date("Y-m-d"))) continue;
           $msg_url = '';
           switch($msg->mType) {
-          case 2:
+          case 2: case 5:
             $msg_url = '../refund';
             break;
           case 3:

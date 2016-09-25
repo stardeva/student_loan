@@ -74,23 +74,28 @@ if($is_logged_in) {
           <div class="item-title">我的银行卡</div>
           <div class="item-desc"><?php if($is_logged_in) echo isset($userAllData->user->bank) && $userAllData->user->bank != '' ? $userAllData->user->bank.' (尾号'.substr($userAllData->user->bankCard, -4).')' : '绑定银行卡'; ?></div>
           <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
         <a href="personal_coin_mall.php" class="info-item">
           <div class="item-icon"><img src="../assets/images/user_coin.png" /></div>
           <div class="item-title">我的金币</div>
           <div class="item-desc"><?php if($is_logged_in) echo $userAllData->user->coins.'个'; ?></div>
           <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
         <a href="personal_my_messages.php" class="info-item">
           <div class="item-icon"><img src="../assets/images/user_msg.png" /></div>
           <div class="item-title">我的消息</div>
           <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
         <a href="personal_my_history.php" class="info-item">
           <div class="item-icon"><img src="../assets/images/user_history.png" /></div>
           <div class="item-title">历史记录</div>
           <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
+        <div class="clearfix"></div>
       </div>
     </section>
     <footer class="footer">

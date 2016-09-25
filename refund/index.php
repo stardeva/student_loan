@@ -160,11 +160,11 @@ if(checkUserLogin()) {
                 <?php
                   $percent = 0; $percent_label = '%'; $full_label = '100';
                   if($loan->lnProdId == 3) {
-                    $percent = $loan->returnMonth / $loan->month * 100.0;
+                    $percent = round($loan->returnMonth / $loan->month * 100.0);
                     $percent_label = '期';
                     $full_label = $loan->month;
                   } else {
-                    $percent = $loan->returnMoney / ($loan->returnTotal + $loan->returnMoney) * 100.0;
+                    $percent = round($loan->returnMoney / ($loan->returnTotal + $loan->returnMoney) * 100.0);
                   }
                 ?>
                 <div class="tick value-tick" style="left: <?= $percent ?>%;"></div>
@@ -172,6 +172,9 @@ if(checkUserLogin()) {
               <div class="percent-wrapper">
                 <div class="percent zero-percent">0<?= $percent_label ?></div>
                 <div class="percent full-percent"><?= $full_label.$percent_label ?></div>
+                <?php if($percent != 0) : ?>
+                  <div class="percent value-percent" style="left: <?= $percent ?>%;"><?= ($loan->lnProdId == 3 ? $loan->returnMonth : $percent).$percent_label ?></div>
+                <?php endif; ?>
               </div>
             </div>
 
