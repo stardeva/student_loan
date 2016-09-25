@@ -925,15 +925,6 @@ $(document).ready(function() {
   // calculator page 
   if($('body').hasClass('calculator-page')) {
     Hammer.plugins.fakeMultitouch();
-    // get web browser type
-    var prefixes = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' ');
-    var transformProp = '';
-    for(var i = 0; i < prefixes.length; i++) {
-      if(document.createElement('div').style[prefixes[i]] !== undefined) {
-        transformProp = prefixes[i];
-      }
-    }
-
     // watch loan selectbox change event in loan and calc page
     function watchLoanSeletor(elem) {
       var rate = $(elem).attr('rate');
@@ -947,7 +938,11 @@ $(document).ready(function() {
       }
     }
     
-    if(transformProp == '') {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    
+    // check if current browser is IE
+    if(msie > 0) {
       $('select.loan-selector').on('change', function() {
         watchLoanSeletor(this);
       });
