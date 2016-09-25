@@ -276,6 +276,8 @@ function decideLoan(e) {
   var pro_id = $request_form.find('#pro_id').val();
   var money = $request_form.find('#money').val();
   var time = $request_form.find('#time').val();
+  var usage = $request_form.find('#card').val();
+  var source = $request_form.find('#number').val();
   
   var picIdList = '';
   var boolPic = false;
@@ -318,13 +320,15 @@ function decideLoan(e) {
       },
       success: {
         label: "确定",
-        callback: function(e) {          
-          var postdata = {'uId': $('#uid').val(), 
+        callback: function(e) {  
+          var postdata = {'uId': $('#uid').val(),                         
                         'page': 'request_loan_page',
                         'lnProdId': pro_id,
                         'money': money,
                         'day': day,
-                        'month': month};
+                        'month': month,
+                        'source': source,
+                        'usage': usage};
           if(boolPic) {
             postdata.conPics = picIdList;
           }
@@ -960,7 +964,7 @@ $(document).ready(function() {
     } else {
       $("select.loan-selector").drum({
         onChange : function (elem) {
-         watchLoanSeletor(elem); 
+          watchLoanSeletor(elem); 
         },
         interactive: false
       });
