@@ -21,7 +21,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="one-loan-page">
 
     <header class="header">
       <nav class="topnav">
@@ -34,7 +34,7 @@
       </nav>
     </header>
 
-    <section class="main-loan-area request-success image">
+    <section class="request-success image">
       <div class="main-wrap">学融宝会尽快完成审核</div>
     </section>
 

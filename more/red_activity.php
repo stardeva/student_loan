@@ -44,16 +44,16 @@ if(checkUserLogin()) {
   <body class="one-loan-page red-activity-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">红包</span>
-        <div class="nav"></div>
+        <div class="nav right"></div>
       </nav>
     </header>
     <input type="hidden" name="uid" id="uid" value="<?= $uId ?>" />
 
     <section class="main-loan-area">
-      <div class="wrap image flex-wrap-column red-process">
-        <div class="flex-wrap-column">
+      <div class="wrap image red-process">
+        <div class="">
           <div class="grab-amount"></div>
 
           <div class="free-money-content">
@@ -68,20 +68,22 @@ if(checkUserLogin()) {
         <div class="red-btn-area">
           <a href="../" class="red-active-btn image btn"></a>
           <div class="red-unactive-btn">
-            <a class="btn" href="../"><span class="flex-wrap-column">已兑换</span></a>
+            <a class="btn" href="../"><span class="">已兑换</span></a>
           </div>
         </div>
       </div>
 
-      <div class="wrap flex-wrap-column image red-check" style="background-color: #cf4541;">
-        <div class="flex-wrap-column flex-block">
+      <div class="wrap image red-check" style="background-color: #cf4541;">
+        <div class="">
           <div class="user-image"><img src="../assets/images/user_head.png"></div>
           <div class="user-name"><b><?= $user->name ?></b> </div>
           <div class="red-remind-content">学融宝抢红包活动限时开始<br />赶快试试你的手气</div>
           <div></div>
         </div>        
 
-        <div class="red-open-btn image" onclick="redClick()"></div>
+        <div class="red-open-btn image" onclick="redClick()">
+          <img src="../assets/images/red_open.png">
+        </div>
         
       </div>    
 
@@ -90,7 +92,7 @@ if(checkUserLogin()) {
     <div class="error-section">
       <?php 
         $title = '期待下次参加哦!';
-        $error_type = '';
+        $error_type = 'tip';
         include '../templates/error_tpl.php';
       ?>
     </div>

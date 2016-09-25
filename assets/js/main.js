@@ -132,13 +132,17 @@ function initialRedActivity() {
   var $red_handler = $('.red-activity-page');
   var postdata = {'uId': $red_handler.find('#uid').val(), 
                 'page': 'red_activity_page'};
+  // hide the main and error page first
+  $red_handler.find('.main-loan-area').hide();  
+  $red_handler.find('.error-section').hide();
+
   $.ajax({
     url: '../api/actions.php',
     type: 'post',
     data: postdata,
     success: function(res) {
       res = JSON.parse(res);
-      if(res.error.errno == 200) {
+      if(res.error.errno == 200) {console.log(res)
         if(res.grabed == 1) {
           $red_handler.find('.main-loan-area').show();  
           $red_handler.find('.error-section').hide();  
@@ -147,6 +151,7 @@ function initialRedActivity() {
           $red_handler.find('.grab-amount').html(res.grabMoney + '元');
           $red_handler.find('.red-section').hide();          
         } else {
+          $red_handler.find('.main-loan-area').show(); 
           $red_handler.find('.red-process').hide();
           $red_handler.find('.red-check').show();
           $red_handler.find('.red-section').show();
