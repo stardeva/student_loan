@@ -512,6 +512,8 @@ $(document).ready(function() {
                 if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition(function(position) {
                     console.log(position);
+                    Cookies.set('latitude', position.coords.latitude);
+                    Cookies.set('longitude', position.coords.longitude);
                   });
                 }
                 else {
@@ -533,7 +535,22 @@ $(document).ready(function() {
                       success: {
                         label: "允许",
                         callback: function() {
-                          Cookies.set('location', 'shenyang', {expires: 1});
+                          Cookies.set('location', {expires: 1});
+                          var postdata = {
+                            latitude: Cookies.get('latitude'),
+                            longitude: Cookies.get('longitude'),
+                            uId: Cookies.get('uId'),
+                            page: 'position'
+                          };
+                          console.log(postdata);
+                          $.ajax({
+                            url: 'api/actions.php',
+                            type: 'post',
+                            data: postdata,
+                            success: function(res) {
+                              consol.log('ok');
+                            }
+                          });
                         }
                       }
                     }
@@ -559,7 +576,22 @@ $(document).ready(function() {
               success: {
                 label: "允许",
                 callback: function() {
-                  Cookies.set('location', 'shenyang', {expires: 1});
+                  Cookies.set('location', {expires: 1});
+                  var postdata = {
+                    latitude: Cookies.get('latitude'),
+                    longitude: Cookies.get('longitude'),
+                    uId: Cookies.get('userID'),
+                    page: 'position'
+                  };
+                  $.ajax({
+                    url: '../api/actions.php',
+                    type: 'post',
+                    data: postdata,
+                    success: function(res1) {
+                      consol.log('ok');
+                    }
+                  });
+
                 }
               }
             }
