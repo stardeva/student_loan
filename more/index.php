@@ -49,26 +49,36 @@ if($result->error->errno == '200') {
     <section class="main no-padding">
       <br />
       <div class="personal-info-list">
-        <a href="about_us.php" class="info-item right-arrow">
+        <a href="about_us.php" class="info-item">
           <div class="item-title">关于我们</div>
+          <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
-        <a href="feedback.php" class="info-item right-arrow">
+        <a href="feedback.php" class="info-item">
           <div class="item-title">意见反馈</div>
+          <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
-        <a href="contact_us.php" class="info-item right-arrow">
+        <a href="contact_us.php" class="info-item">
           <div class="item-title">联系客服</div>
+          <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
+        <div class="clearfix"></div>
       </div>
 
-      <br />
-
       <div class="personal-info-list">
-        <a href="contract.php" class="info-item right-arrow">
+        <a href="contract.php" class="info-item">
           <div class="item-title">新手指南</div>
+          <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
-        <a href="../file_view.php?fileurl=<?= $contract->help ?>&title=使用帮助" class="info-item right-arrow">
+        <a href="../file_view.php?fileurl=<?= $contract->help ?>&title=使用帮助" class="info-item">
           <div class="item-title">使用帮助</div>
+          <img src="../assets/images/right_arrow.png" />
+          <div class="clearfix"></div>
         </a>
+        <div class="clearfix"></div>
       </div>
     </section>
 

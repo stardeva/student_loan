@@ -1045,6 +1045,10 @@ form .reqire-icon {
     background-image: url('../images/reg_hook_blank.png');
 }
 
+.has-success .agree-checkbox {
+  margin-top: 8px;
+}
+
 #bank_card_form .form-group {  
   margin-left: 10px;
   margin-right: 10px;
@@ -1282,6 +1286,7 @@ form#request_loan_form {
   width: 31px;
   text-align: center;
   margin-left: -15px;
+  font-size: 10px;
 }
 
 .my-credits-bar .pin-bar .pin:before {
@@ -1334,6 +1339,7 @@ form#request_loan_form {
   font-weight: 900;
   width: 40px;
   line-height: 1;
+  font-size: 10px;
 }
 
 /* credit main info page */
@@ -1445,6 +1451,7 @@ form#request_loan_form {
 .personal-info-list {
   display: block;
   font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .personal-info-list .info-item {
@@ -1455,17 +1462,17 @@ form#request_loan_form {
   height: 60px;
   background-color: #fff;
   padding: 0 10px;
-  float: left;
   width: 100%;
   box-sizing: border-box;
   position: relative;
+  float: left;
 }
 
 .personal-info-list .info-item > img {
   position: absolute;
   right: 10px;
   top: 50%;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 .personal-info-list .info-item:after {
@@ -1511,6 +1518,7 @@ form#request_loan_form {
   height: 60px;
   vertical-align: middle;
   line-height: 40px;
+  float: left;
 }
 
 .personal-info-list .info-item .item-icon img {
@@ -1522,12 +1530,15 @@ form#request_loan_form {
   font-size: 14px;
   display: inline-block;
   line-height: 60px;
+  float: left;
 }
 
 .personal-info-list .info-item .item-desc {
   float: right;
   line-height: 60px;
   margin-right: 10px;
+  font-size: 10px;
+  color: #999;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
@@ -1866,6 +1877,8 @@ form#request_loan_form {
   width: 80%;
   max-width: 600px;
   font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .custom-dialog .modal-dialog .modal-body {
@@ -1919,7 +1932,7 @@ form#request_loan_form {
   background-color: #fff;
 }
 
-.refund-nav .nav-area .bank .nav-image-wrap .image {
+/*.refund-nav .nav-area .bank .nav-image-wrap .image {
   background-image: url('../images/return_bank.png'); 
 }
 
@@ -1929,7 +1942,7 @@ form#request_loan_form {
 
 .refund-nav .nav-area .chat .nav-image-wrap .image {
   background-image: url('../images/return_weixin.png'); 
-}
+}*/
 
 .refund-nav .nav-area .nav-detail .content {
   font-size: 14px;
@@ -1938,21 +1951,29 @@ form#request_loan_form {
 }
 
 .refund-nav .nav-area .nav-group {
-  display: flex;
-  justify-content: space-around;
+  display: block;
   padding: 20px 20px 0;
 }
 
 .refund-nav .nav-area .nav-image-wrap {
-  flex: 1;
+  float: left;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
 }
 
 .refund-nav .nav-area .nav-detail {
-  flex: 3;
+  float: left;
 }
 
-.refund-detail .detail-header > div > b {
-  font-size: 20px;
+.refund-nav .nav-area .nav-detail .title {
+  line-height: 1;
+  margin-bottom: 10px;
+  padding-top: 5px;
+}
+
+.refund-nav .nav-area .nav-detail .content {
+  line-height: 1;
 }
 
 .refund-nav .nav-area .nav-image-wrap .image {
@@ -1965,13 +1986,14 @@ form#request_loan_form {
 }
 
 .refund-nav .nav-description p {
+  background-color: #fff;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   padding: 1em;
 }
 
 .refund-page .refund-detail .detail-wrap {
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: #fff;
 }
 
@@ -1984,6 +2006,7 @@ form#request_loan_form {
 
 .refund-detail .detail-header .title {
   font-size: 20px;
+  display: inline-block;
 }
 
 .refund-detail .detail-body {
@@ -1996,19 +2019,21 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-body .detail-group .title {
-  flex: 1;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 .refund-detail .detail-body .detail-group .content {
-  flex: 2;
+  display: inline-block;
 }
 
 .refund-detail .slider-wrap {
   padding: 20px 30px;
   border-bottom: 1px solid #ccc;
+  height: 60px;
 }
 
-.refund-detail .slider-wrap .slider-value {
+/*.refund-detail .slider-wrap .slider-value {
   margin-top: 10px;
   font-size: 10px;
 }
@@ -2062,6 +2087,67 @@ form#request_loan_form {
 
 .refund-detail .slider-wrap .slider-label-container .end-label {
   right: 0;
+}*/
+
+.refund-detail .slider-wrap .slider-bar-wrapper {
+  display: block;
+  position: relative;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .bar {
+  height: 3px;
+  border-bottom: 2px solid #999;
+  margin-top: 1px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #ff4800;
+  top: 0;
+  border-radius: 50%;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.left-tick {
+  left: 0;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.right-tick {
+  right: 0;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.value-tick {
+  width: 10px;
+  height: 10px;
+  top: -3px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper {
+  display: block;
+  position: relative;
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent.zero-percent {
+  left: -5px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent.full-percent {
+  right: -10px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent.value-percent {
+  margin-left: -3px;
 }
 
 /*more*/
@@ -2200,6 +2286,26 @@ form#request_loan_form {
   border-bottom: 1px solid #ccc;
 }
 
+.user-estimate-area {
+  display: block;
+  position: relative;
+}
+
+.user-estimate-area .estimate-group {
+  display: block;
+  position: relative;
+}
+
+.user-estimate-area .estimate-group .content {
+  float: left;
+}
+
+.user-estimate-area .estimate-group .user-mark {
+  float: right;
+  text-align: right;
+  margin-top: 15px;
+}
+
 .user-estimate-area .estimate-group {
   margin-top: 20px;
 }
@@ -2207,12 +2313,6 @@ form#request_loan_form {
 .loan-data-area .estimate-group .user-name,
 .loan-data-area .estimate-group .active-money {
   margin-bottom: 10px;
-}
-
-.user-estimate-area .estimate-group .user-mark {
-  flex-flow: column;
-  align-items: flex-end;
-  height: 55px;
 }
 
 .user-estimate-area .estimate-group .user-mark .date {
@@ -2233,6 +2333,8 @@ form#request_loan_form {
   width: 48px;
   height: 48px;
   font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .loan-data-area .estimate-group .power {
@@ -2241,6 +2343,7 @@ form#request_loan_form {
 
 .user-estimate-area .estimate-group .name {
   margin: 0 auto;
+  display: inline-block;
 }
 
 .estimate-mark .star-image {
@@ -2289,9 +2392,9 @@ form#request_loan_form {
   color: #000;
 }
 
-.rating > input,
-.rating > input:checked,
-.rating > input:hover {
+.rating input,
+.rating input:checked,
+.rating input:hover {
   border: none;
   border-radius: 0;
   width: 16px;
@@ -2309,8 +2412,11 @@ form#request_loan_form {
   background-image: url('../images/evaluate_star.png'); 
 }
 
-.space {
-  align-items: initial;
+.rating input.radio-btn {
+  position: absolute;
+  overflow: hidden;
+  left: -9999px;
+  top: -9999px;
 }
 
 /*.estimate-mark .star-image:hover,
@@ -2460,10 +2566,7 @@ form#request_loan_form {
 
 .error-message-area {
   background-color: #fff;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -2472,17 +2575,14 @@ form#request_loan_form {
 }
 
 .error-message-area .image {
-  width: 250px;
-  height: 250px;
-  background-image: url('../images/error_tip.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  margin-top: 100px;
 }
 
 .error-message-area .content {
   margin-top: 20px;
   font-size: 20px;
   color: #cdc9c9;
+  text-align: center;
 }
 
 .error-message-area .image.loan {

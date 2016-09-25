@@ -13,8 +13,6 @@ if(checkUserLogin()) {
     $returnList = $result->lnList->loan;
   }
 
-  $output = '<script>console.log('.json_encode($returnList).')</script>';
-  echo $output;
 } else {
   header("Location: ../signup.php");
 }
@@ -34,7 +32,6 @@ if(checkUserLogin()) {
     <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-slider.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,9 +43,9 @@ if(checkUserLogin()) {
   <body class="personal-page main-loan-area refund-page">
     <header class="header">
       <nav class="topnav">
-        <a href="../" class="nav text back"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
+        <a href="../" class="nav text back left"><img src="../assets/images/reg_black_left_arrow.png" alt="" /></a>
         <span class="nav text title">还款</span>
-        <div class="nav"></div>
+        <div class="nav back right"></div>
       </nav>
     </header>
     
@@ -58,7 +55,7 @@ if(checkUserLogin()) {
         <div class="nav-area">
           <div class="nav-group bank">
             <div class="nav-image-wrap">
-              <div class="image"></div>
+              <img src="../assets/images/return_bank.png" class="img-responsive" />
             </div>
             <div class="nav-detail">
               <div class="title">
@@ -71,12 +68,13 @@ if(checkUserLogin()) {
                   <?= $initData->returnWay->bankCard ?>&nbsp;<?= $initData->returnWay->bankUser ?>
                 <?php endif; ?>
               </div>
-            </div>  
+            </div>
+            <div class="clearfix"></div>
           </div>
 
           <div class="nav-group pay">
             <div class="nav-image-wrap">
-              <div class="image"></div>
+              <img src="../assets/images/return_alipay.png" class="img-responsive" />
             </div>
             <div class="nav-detail">
               <div class="title">支付宝</div>
@@ -85,12 +83,13 @@ if(checkUserLogin()) {
                   <?= $initData->returnWay->aliPay ?>
                 <?php endif; ?>
               </div>
-            </div>  
+            </div>
+            <div class="clearfix"></div>
           </div>
 
           <div class="nav-group chat">
             <div class="nav-image-wrap">
-              <div class="image"></div>
+              <img src="../assets/images/return_weixin.png" class="img-responsive" />
             </div>
             <div class="nav-detail">
               <div class="title">微信</div>
@@ -99,7 +98,8 @@ if(checkUserLogin()) {
                   <?= $initData->returnWay->weixinPay ?>
                 <?php endif; ?>
               </div>
-            </div>  
+            </div>
+            <div class="clearfix"></div>
           </div>        
         </div>
 
@@ -111,16 +111,17 @@ if(checkUserLogin()) {
       <div class="refund-detail">
         <?php foreach($returnList as $loan): ?>
           <div class="detail-wrap">
-            <div class="detail-header flex-wrap-space">
-              <div class="title"><?= $loan->name ?></div>
-              <div class="">
+            <div class="detail-header">
+              <div class="title pull-left"><?= $loan->name ?></div>
+              <div class="pull-right">
                 <span>计划还款</span>
-                <span class="highlight-text"><b>&nbsp;￥ <?= $loan->returnTotal ?></b></span>
+                <span class="highlight-text" style="line-height: 28px;"><b>&nbsp;￥ <?= $loan->returnTotal ?></b></span>
               </div>
+              <div class="clearfix"></div>
             </div>
 
             <div class="slider-wrap">
-              <?php if($loan->lnProdId == 3): ?>
+              <?php  /* if($loan->lnProdId == 3): ?>
                 <?php if($loan->returnMonth != 0): ?>
                   <input id="detail_slider" data-slider-id='exSlider' data-slider-value="<?= $loan->returnMonth ?>" type="text" data-slider-ticks="[0, <?= $loan->returnMonth ?>, <?= $loan->month ?>]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["0期", "<?= $loan->returnMonth ?>期", "<?= $loan->month ?>期"]'  data-slider-enabled = "false"/>
                   <div class="slider-label-container">
@@ -151,31 +152,54 @@ if(checkUserLogin()) {
                     <div class="end-label">100%</div>
                   </div>
                 <?php endif; ?>                
-              <?php endif; ?>  
+              <?php endif; */?>
+              <div class="slider-bar-wrapper">
+                <div class="bar"></div>
+                <div class="tick left-tick"></div>
+                <div class="tick right-tick"></div>
+                <?php
+                  $percent = 0; $percent_label = '%'; $full_label = '100';
+                  if($loan->lnProdId == 3) {
+                    $percent = round($loan->returnMonth / $loan->month * 100.0);
+                    $percent_label = '期';
+                    $full_label = $loan->month;
+                  } else {
+                    $percent = round($loan->returnMoney / ($loan->returnTotal + $loan->returnMoney) * 100.0);
+                  }
+                ?>
+                <div class="tick value-tick" style="left: <?= $percent ?>%;"></div>
+              </div>
+              <div class="percent-wrapper">
+                <div class="percent zero-percent">0<?= $percent_label ?></div>
+                <div class="percent full-percent"><?= $full_label.$percent_label ?></div>
+                <?php if($percent != 0) : ?>
+                  <div class="percent value-percent" style="left: <?= $percent ?>%;"><?= ($loan->lnProdId == 3 ? $loan->returnMonth : $percent).$percent_label ?></div>
+                <?php endif; ?>
+              </div>
             </div>
 
             <div class="detail-body">
-              <div class="detail-group flex-wrap">
+              <div class="detail-group">
                 <div class="title">申请时间</div>
                 <div class="content"><?php echo date('Y-m-d', $loan->lnTime); ?></div>
               </div>
 
-              <div class="detail-group flex-wrap">
+              <div class="detail-group">
                 <div class="title">申请金额</div>
                 <div class="content">￥ <?= $loan->money ?></div>
               </div>
 
-              <div class="detail-group flex-wrap">
+              <div class="detail-group">
                 <div class="title">应还款日</div>
                 <div class="content"><?php echo date('Y-m-d', $loan->returnTime); ?></div>
               </div>
 
-              <div class="detail-group flex-wrap">
+              <div class="detail-group">
                 <div class="title">剩余应还</div>
                 <div class="content">￥ <?= $loan->returnTotal ?></div>
               </div>
               <?php if($loan->lnProdId == 3): ?>
-                <div class="detail-group flex-wrap">
+                <div class="detail-group">
                   <div class="title">每期应还</div>
                   <div class="content">￥ <?= $loan->returnAver ?>/期</div>
                 </div>
@@ -195,7 +219,6 @@ if(checkUserLogin()) {
 
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bootstrap-slider.min.js"></script>
 
     <script src="../assets/js/main.js"></script>
   </body>
