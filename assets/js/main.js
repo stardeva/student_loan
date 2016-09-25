@@ -793,7 +793,7 @@ $(document).ready(function() {
     });
   }
 
-  if($(".refund-page").length) {
+  /*if($(".refund-page").length) {
     var slider = $(".slider-wrap #detail_slider").slider();
 
     // set slider value label in refund page
@@ -802,7 +802,7 @@ $(document).ready(function() {
       $( this ).css( "left",  slider_value);
     });
 
-  }  
+  }*/
 
   // card page form validation
   if($('#bank_card_form').length) {

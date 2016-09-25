@@ -1923,7 +1923,7 @@ form#request_loan_form {
   background-color: #fff;
 }
 
-.refund-nav .nav-area .bank .nav-image-wrap .image {
+/*.refund-nav .nav-area .bank .nav-image-wrap .image {
   background-image: url('../images/return_bank.png'); 
 }
 
@@ -1933,7 +1933,7 @@ form#request_loan_form {
 
 .refund-nav .nav-area .chat .nav-image-wrap .image {
   background-image: url('../images/return_weixin.png'); 
-}
+}*/
 
 .refund-nav .nav-area .nav-detail .content {
   font-size: 14px;
@@ -1942,21 +1942,29 @@ form#request_loan_form {
 }
 
 .refund-nav .nav-area .nav-group {
-  display: flex;
-  justify-content: space-around;
+  display: block;
   padding: 20px 20px 0;
 }
 
 .refund-nav .nav-area .nav-image-wrap {
-  flex: 1;
+  float: left;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
 }
 
 .refund-nav .nav-area .nav-detail {
-  flex: 3;
+  float: left;
 }
 
-.refund-detail .detail-header > div > b {
-  font-size: 20px;
+.refund-nav .nav-area .nav-detail .title {
+  line-height: 1;
+  margin-bottom: 10px;
+  padding-top: 5px;
+}
+
+.refund-nav .nav-area .nav-detail .content {
+  line-height: 1;
 }
 
 .refund-nav .nav-area .nav-image-wrap .image {
@@ -1969,6 +1977,7 @@ form#request_loan_form {
 }
 
 .refund-nav .nav-description p {
+  background-color: #fff;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   padding: 1em;
@@ -1988,6 +1997,7 @@ form#request_loan_form {
 
 .refund-detail .detail-header .title {
   font-size: 20px;
+  display: inline-block;
 }
 
 .refund-detail .detail-body {
@@ -2000,11 +2010,12 @@ form#request_loan_form {
 }
 
 .refund-detail .detail-body .detail-group .title {
-  flex: 1;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 .refund-detail .detail-body .detail-group .content {
-  flex: 2;
+  display: inline-block;
 }
 
 .refund-detail .slider-wrap {
@@ -2012,7 +2023,7 @@ form#request_loan_form {
   border-bottom: 1px solid #ccc;
 }
 
-.refund-detail .slider-wrap .slider-value {
+/*.refund-detail .slider-wrap .slider-value {
   margin-top: 10px;
   font-size: 10px;
 }
@@ -2066,6 +2077,63 @@ form#request_loan_form {
 
 .refund-detail .slider-wrap .slider-label-container .end-label {
   right: 0;
+}*/
+
+.refund-detail .slider-wrap .slider-bar-wrapper {
+  display: block;
+  position: relative;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .bar {
+  height: 3px;
+  border-bottom: 2px solid #999;
+  margin-top: 1px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #ff4800;
+  top: 0;
+  border-radius: 50%;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.left-tick {
+  left: 0;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.right-tick {
+  right: 0;
+}
+
+.refund-detail .slider-wrap .slider-bar-wrapper .tick.value-tick {
+  width: 10px;
+  height: 10px;
+  top: -3px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper {
+  display: block;
+  position: relative;
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent.zero-percent {
+  left: -5px;
+}
+
+.refund-detail .slider-wrap .percent-wrapper .percent.full-percent {
+  right: -10px;
 }
 
 /*more*/
@@ -2484,10 +2552,7 @@ form#request_loan_form {
 
 .error-message-area {
   background-color: #fff;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -2496,17 +2561,14 @@ form#request_loan_form {
 }
 
 .error-message-area .image {
-  width: 250px;
-  height: 250px;
-  background-image: url('../images/error_tip.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  margin-top: 100px;
 }
 
 .error-message-area .content {
   margin-top: 20px;
   font-size: 20px;
   color: #cdc9c9;
+  text-align: center;
 }
 
 .error-message-area .image.loan {
