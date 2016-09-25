@@ -328,6 +328,7 @@
 					transformProp = prefixes[i];
 				}
 			}
+			
 			if (transformProp) {
 				var element = $(this);
 				if (!element.data('drum')) {
