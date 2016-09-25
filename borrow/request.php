@@ -49,6 +49,7 @@ if(checkUserLogin()) {
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.4.1/ie8.js"></script>
     <![endif]-->
   </head>
   <body class="request-loan-page personal-page">
@@ -122,7 +123,7 @@ if(checkUserLogin()) {
           </div> 
         </div>      
 
-        <form id="request_loan_form" class="form-horizontal loan-form" onsubmit="return decideLoan(event)">
+        <form id="request_loan_form" class="form-horizontal loan-form">
           <input type="hidden" name="uid" id="uid" value="<?= $uId ?>">
           <input type="hidden" name="time" id="time" value="<?= $_POST['time'] ?>">
           <input type="hidden" name="pro_id" id="pro_id" value="<?= $_POST['pro_id'] ?>">
@@ -219,7 +220,7 @@ if(checkUserLogin()) {
             <label class="highlight-text">资料审核过程中， 学融宝客服人员会通过微信或QQ与您取得联系， 并完成视频认证。</label>
           </div>
 
-          <input class="btn btn-lg btn-default submit-btn" type="submit" disabled value="确定">
+          <input class="btn btn-lg btn-default submit-btn" type="submit" onclick="decideLoan(event)" disabled value="确定">
         </form>
       </div>      
     </section>

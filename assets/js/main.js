@@ -228,6 +228,8 @@ function goCardPage(id, data, pro_id) {
         }
       }
     });
+
+    modalBoxInit();
     return;
   } else {
     var $borrow_form = $('#borrow_hidden_form');
@@ -261,15 +263,13 @@ function completeCard() {
       }
     }
   });
+
+  modalBoxInit();
 }
 
 // decide to send loan request in request page
 function decideLoan(e) {
-  if (!e) e = window.event;
-  if (e.cancelBubble != null) e.cancelBubble = true;
-  if (e.stopPropagation) e.stopPropagation(); //e.stopPropagation works in Firefox.
-  if (e.preventDefault) e.preventDefault();
-  if (e.returnValue != null) e.returnValue = false; // http://blog.patricktresp.de/2012/02/
+  preventEvevntFunc(e);
 
   $('#request_modal').modal('hide');
   var $request_form = $('#request_loan_form');
@@ -346,6 +346,9 @@ function decideLoan(e) {
       }
     }
   });
+
+  modalBoxInit();
+
   return false;
 }
 
@@ -485,9 +488,17 @@ var updateSize = function() {
   $('.form-element.width-45pc .select-block .input-holder').css('width', select_width + 'px');
 };
 
+// set modal box top
+var modalBoxInit = function() {
+  var $bootbox_instance= $('.bootbox.custom-dialog .modal-dialog');
+  var bootbox_height = $bootbox_instance.css('height');
+  $bootbox_instance.css('top', ( parseInt($(window).height()/2) - parseInt(bootbox_height)/2 ) )
+}
+
 $(window).resize(function() {
   setMainDocumentHeight();
   updateSize();
+  modalBoxInit();
 });
 
 $(window).load(function() {
@@ -538,11 +549,15 @@ $(document).ready(function() {
                       }
                     }
                   });
+
+                  modalBoxInit();
                 }
               }
             }
           }
         });
+
+        modalBoxInit();
       } else if(typeof Cookies !== 'undefined' && Cookies.get('intro_dialog')) {
         if(Cookies.get('location') === undefined) {
           bootbox.dialog({
@@ -564,6 +579,8 @@ $(document).ready(function() {
               }
             }
           });
+
+          modalBoxInit();
         }
       }
     }
@@ -1386,6 +1403,8 @@ $(document).on('click', '#bind_unbank_submit', function(e) {
       }
     }
   });
+
+  modalBoxInit();
 });
 
 /* user logout */
@@ -1417,6 +1436,8 @@ $(document).ready(function() {
         }
       }
     });
+
+    modalBoxInit();
   });
 });
 
