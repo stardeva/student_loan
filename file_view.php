@@ -5,7 +5,6 @@ require_once('api/functions.php');
 $previous = "javascript:history.go(-1)";
 if(isset($_SERVER['HTTP_REFERER'])) {
   $previous = $_SERVER['HTTP_REFERER'];
-  if(strpos($previous, 'credit_base.php') !== false) setcookie('back', true, time() + 5);
 }
 if(isset($_GET['fileurl']) && $_GET['fileurl'] != '') {
   $fileurl = $_GET['fileurl'];
