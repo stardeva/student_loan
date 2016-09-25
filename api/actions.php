@@ -183,6 +183,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
   if($result->error->errno == '200') {
     $uId = $result->uId;
     $_SESSION['uid'] = $uId;
+    setcookie("userID", $uId, time() + 3600);
 
     $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
     $result = json_decode($result);
@@ -197,6 +198,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
     if($result->error->errno == '200') {
       unset($result->error);
       $_SESSION['ln_calculator'] = $result;
+
     }
 
     $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_CD_INFO'], array('uId' => $uId));
@@ -214,6 +216,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
     $_SESSION['flash'] = $result->error->usermsg;
     header("Location: ../signup.php");
   }
+  
 }
 
 // Request Loan Page
@@ -259,6 +262,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'red_activity_page') {
 // Log out page
 if(isset($_POST['page']) && $_POST['page'] == 'logout') {
   session_destroy();
+  echo "ok";
 }
 
 // Check in Page
@@ -284,6 +288,14 @@ if(isset($_POST['page']) && $_POST['page'] == 'personal_coin_buy') {
     $_SESSION['flash'] = $result->error->usermsg;
     header("Location: ../personal/personal_coin_buy.php?itemId=".$postdata['itemId']);
   }
+}
+
+// Location & Position
+if(isset($_POST['page']) && $_POST['page'] == 'position') {
+  $postdata = $_POST;
+  unset($postdata['page']);
+  $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_U_POSITION'], $postdata);
+  echo $result;
 }
 
 ?>

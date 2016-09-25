@@ -18,6 +18,7 @@ $API_ENDPOINTS = array(
   'ADDRESS_U_UPPORTRAIT' => 'u/upportrait',
   'ADDRESS_U_GESTURE' =>    'u/gesture',
   'ADDRESS_U_BOOK' =>       'u/book',
+  'ADDRESS_U_POSITION' =>       'u/position',
 
   'ADDRESS_LN_CALCULATOR' => 'ln/calculator',
   'ADDRESS_LN_APPLY' =>      'ln/apply',
