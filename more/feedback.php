@@ -3,11 +3,11 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
+$uId = '';
+
 if(checkUserLogin()) {
   $uId = $_SESSION['uid'];
-} else {
-  header("Location: ../signup.php");
-}
+} 
 
 ?>
 

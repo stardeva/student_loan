@@ -357,7 +357,7 @@ function decideLoan(e) {
 }
 
 // submit feedback in estimate/feedback.php
-$(document).on('click', '#feedback_submit', function(e) {
+$(document).on('click', '.set-estimate-page #feedback_submit', function(e) {
   e.preventDefault();
   
   var $request_form = $('.set-estimate-page .estimate-form');
@@ -373,7 +373,6 @@ $(document).on('click', '#feedback_submit', function(e) {
   }
 
   postdata.hide = postdata.hide | 0;
-
   $.ajax({
     url: '../api/actions.php',
     type: 'post',
