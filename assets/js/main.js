@@ -356,6 +356,38 @@ function decideLoan(e) {
   return false;
 }
 
+// submit feedback in estimate/feedback.php
+$('.set-estimate-page').on('click', '#feedback_submit', function(e) {
+  e.preventDefault();
+  
+  var $request_form = $('.set-estimate-page .estimate-form');
+  var form_data = $request_form.serializeArray();
+  var postdata = {};
+
+  $.map(form_data, function(item, index){
+      postdata[item.name] = item.value;   
+  });
+
+  if (!postdata.star || postdata.star == '') {
+     postdata.star = 0;
+  }
+
+  postdata.hide = postdata.hide | 0;
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);
+      if(res.error.errno == 200) {
+        window.location ="../estimate";
+      } else {
+        notificationPopup($('.set-estimate-page .notification-popup'), res.error.errmsg);
+      }
+    }
+  });
+});
+
 $(document).on('click', '.estimate-mark .rating label', function() {
   var star = $(this).attr('data-star');
 
