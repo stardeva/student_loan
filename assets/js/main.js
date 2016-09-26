@@ -1065,7 +1065,7 @@ $(document).ready(function() {
 
       $('.more-feedback #feedback_submit').on('click', function(e) {
         e.preventDefault();
-        var postdata = {'uId': $('#uid').val(), 'page': 'more_feedback', 'feedback': $('.more-feedback #feedback').val()};
+        var postdata = {'page': 'more_feedback', 'feedback': $('.more-feedback #feedback').val()};
         $.ajax({
           url: '../api/actions.php',
           type: 'post',

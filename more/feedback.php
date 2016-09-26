@@ -38,7 +38,6 @@ require_once('../api/functions.php');
 
     <section class="main no-padding">
       <form method="post" class="more-feedback">
-        <input type="hidden" name="uId" id="uid" value="<?= $uId ?>" />
         <input type="hidden" name="page" value="more_feedback" />
         <input type="hidden" name="backurl" id="backurl" value="../more" />
         <div class="form-row">
