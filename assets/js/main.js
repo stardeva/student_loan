@@ -357,7 +357,7 @@ function decideLoan(e) {
 }
 
 // submit feedback in estimate/feedback.php
-$('.set-estimate-page').on('click', '#feedback_submit', function(e) {
+$(document).on('click', '.set-estimate-page #feedback_submit', function(e) {
   e.preventDefault();
   
   var $request_form = $('.set-estimate-page .estimate-form');
