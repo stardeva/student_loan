@@ -17,12 +17,9 @@ if(checkUserLogin()) {
   $userAllData = $_SESSION['user_all_data'];
   
   $creditPercent = min($userAllData->user->quota, 5000) * 100 / 5000.0;
-  // $is_step2 = $userAllData->cdBase->audit == 1;
-  // $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
-  // $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
-  $is_step2 = true;
-  $is_step3 = true;
-  $is_step4 = true;
+  $is_step2 = $userAllData->cdBase->audit == 1;
+  $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
+  $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
 } else {
   header("Location: ../signup.php");
 }
