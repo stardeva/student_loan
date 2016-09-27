@@ -2,12 +2,12 @@
 require_once('../api/curl.php');
 require_once('../api/functions.php');
 
-// if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
-//   $uId = $_SESSION['uid'];
-//   $itemId = $_GET['itemId'];
-// } else {
-//   header("Location: ../signup.php");
-// }
+if(checkUserLogin() && (isset($_GET['itemId']) && $_GET['itemId'] != '')) {
+  $uId = $_SESSION['uid'];
+  $itemId = $_GET['itemId'];
+} else {
+  header("Location: ../signup.php");
+}
 
 ?>
 <!DOCTYPE html>

@@ -67,7 +67,7 @@ if(checkUserLogin()) {
     </header>
     <section class="main">
       <div class="info-box">
-        注: 填写全都必填信才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
+        注: 填写全都必填信息才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
       </div>
       <form action="../api/actions.php" id="credit_base" name="credit_base" method="post">
         <input type="hidden" name="uId" value="<?= $uId ?>" />
@@ -113,7 +113,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_birthday" class="required">生日</label>
                     <div class="input-holder">
-                      <input type="text" name="birthday" id="credit_base1_birthday" required="true" class="date datepicker" readonly="true" value="<?= $userAllData->cdBase->birthday ?>" placeholder="请输入出生日期" />
+                      <input type="text" name="birthday" id="credit_base1_birthday" required="true" class="date" readonly="true" value="<?= $userAllData->cdBase->birthday ?>" placeholder="请输入出生日期" />
                     </div>
                   </div>
                 </div>

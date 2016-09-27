@@ -102,31 +102,31 @@ if(checkUserLogin()) {
                   <input type="hidden" name="bankPics[]" class="file-key" />
                 </div>
                 <div class="file-input" style="<?php echo isset($bankPics[1]) && $bankPics[1] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[1]) && $bankPics[1] !='' ? 'hidden' : ''; ?>">上传照片</label>
+                  <label class="<?php echo isset($bankPics[1]) && $bankPics[1] !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
                   <img class="image-preview <?php echo isset($bankPics[1]) && $bankPics[1] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[1]) && $bankPics[1] !='') echo $bankPics[1]; ?>" />
                   <input type="hidden" name="bankPics[]" class="file-key" />
                 </div>
                 <div class="file-input" style="<?php echo isset($bankPics[2]) && $bankPics[2] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[2]) && $bankPics[2] !='' ? 'hidden' : ''; ?>">上传照片</label>
+                  <label class="<?php echo isset($bankPics[2]) && $bankPics[2] !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
                   <img class="image-preview <?php echo isset($bankPics[2]) && $bankPics[2] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[2]) && $bankPics[2] !='') echo $bankPics[2]; ?>" />
                   <input type="hidden" name="bankPics[]" class="file-key" />
                 </div>
                 <div class="file-input" style="<?php echo isset($bankPics[3]) && $bankPics[3] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[3]) && $bankPics[3] !='' ? 'hidden' : ''; ?>">上传照片</label>
+                  <label class="<?php echo isset($bankPics[3]) && $bankPics[3] !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
                   <img class="image-preview <?php echo isset($bankPics[3]) && $bankPics[3] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[3]) && $bankPics[3] !='') echo $bankPics[3]; ?>" />
                   <input type="hidden" name="bankPics[]" class="file-key" />
                 </div>
                 <div class="file-input" style="<?php echo isset($bankPics[4]) && $bankPics[4] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[4]) && $bankPics[4] !='' ? 'hidden' : ''; ?>">上传照片</label>
+                  <label class="<?php echo isset($bankPics[4]) && $bankPics[4] !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
                   <img class="image-preview <?php echo isset($bankPics[4]) && $bankPics[4] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[4]) && $bankPics[4] !='') echo $bankPics[4]; ?>" />
                   <input type="hidden" name="bankPics[]" class="file-key" />
                 </div>
                 <div class="file-input" style="<?php echo isset($bankPics[5]) && $bankPics[5] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[5]) && $bankPics[5] !='' ? 'hidden' : ''; ?>">上传照片</label>
+                  <label class="<?php echo isset($bankPics[5]) && $bankPics[5] !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
                   <img class="image-preview <?php echo isset($bankPics[5]) && $bankPics[5] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[5]) && $bankPics[5] !='') echo $bankPics[5]; ?>" />
                   <input type="hidden" name="bankPics[]" class="file-key" />

@@ -1540,7 +1540,7 @@ form#request_loan_form {
 }
 
 .personal-info-list .info-item .item-title {
-  color: #999;
+  color: #000;
   font-size: 14px;
   display: inline-block;
   line-height: 60px;
@@ -1553,6 +1553,11 @@ form#request_loan_form {
   margin-right: 10px;
   font-size: 10px;
   color: #999;
+  pointer-events: none;
+}
+
+.personal-info-list .info-item .item-desc a {
+  color: #999;
 }
 
 .personal-info-list .info-item.right-arrow .item-title {
@@ -1560,7 +1565,7 @@ form#request_loan_form {
 }
 
 .personal-info-list .info-item.user-photo .item-title {
-  color: #999;
+  color: #000;
   line-height: 100px;
 }
 

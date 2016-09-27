@@ -538,7 +538,7 @@ $(document).ready(function() {
                   bootbox.dialog({
                     className: 'custom-dialog dialog-confirm',
                     closeButton: false,
-                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的登录</div>",
                     buttons: {
                       danger: {
                         label: "不允许",
@@ -562,7 +562,7 @@ $(document).ready(function() {
                             type: 'post',
                             data: postdata,
                             success: function(res) {
-                              consol.log('ok');
+                              
                             }
                           });
                         }
@@ -794,11 +794,11 @@ $(document).ready(function() {
     $('.medal.disabled').on('click', function(e) {
       e.preventDefault();
       if($(this).hasClass('home'))
-        notificationPopup('.notification-popup', 'You need to fill the base information.')
+        notificationPopup('.notification-popup', '请完善基本信息。')
       else if($(this).hasClass('contacts'))
-        notificationPopup('.notification-popup', 'You need to fill the base and home information.')
+        notificationPopup('.notification-popup', '请完善家庭资料。')
       else if($(this).hasClass('other'))
-        notificationPopup('.notification-popup', 'You need to fill the base, home and school information.')
+        notificationPopup('.notification-popup', '请完善联系资料。')
     });
   }
 
@@ -1448,7 +1448,7 @@ $(document).ready(function() {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
-      message: "<h3>确认退出当前账吗?</h3>",
+      message: "<h3>确认退出当前账号吗?</h3>",
       buttons: {
         danger: {
           label: "取消",
@@ -1542,4 +1542,12 @@ $(document).on('keydown', '.number-input', function(e) {
     return true;
 
   return false;
+});
+
+// Credit base birthday auto-generation
+$(document).on('keyup', '#credit_base1_pid', function(e) {
+  if($(this).val() !== undefined && $(this).val().length >= 18) {
+    var pID = $(this).val();
+    $('#credit_base1_birthday').val(pID.substr(6,4) + '-' + pID.substr(10,2) + '-' + pID.substr(12,2));
+  }
 });

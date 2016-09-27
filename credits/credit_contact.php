@@ -85,7 +85,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_father_company_address" class="required">单位地址</label>
               <div class="input-holder">
-                <input type="text" name="faCompanyAddr" id="credit_contact_father_company_address" required="true" value="<?= $userAllData->cdSchool->faCompanyAddr ?>" placeholder="请输入单位地址" />
+                <input type="text" name="faCompanyAddr" id="credit_contact_father_company_address" required="true" value="<?= $userAllData->cdSchool->faCompanyAddr ?>" placeholder="请具体到X路X街X号" />
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_mother_company_address" class="required">单位地址</label>
               <div class="input-holder">
-                <input type="text" name="moCompanyAddr" id="credit_contact_mother_company_address" required="true" value="<?= $userAllData->cdSchool->moCompanyAddr ?>" placeholder="请输入单位地址" />
+                <input type="text" name="moCompanyAddr" id="credit_contact_mother_company_address" required="true" value="<?= $userAllData->cdSchool->moCompanyAddr ?>" placeholder="请具体到X路X街X号" />
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_classmate1_address" class="required">寝室地址</label>
               <div class="input-holder">
-                <input type="text" name="caDormAddr" id="credit_contact_classmate1_address" required="true" value="<?= $userAllData->cdSchool->caDormAddr ?>" placeholder="请输入寝室地址" />
+                <input type="text" name="caDormAddr" id="credit_contact_classmate1_address" required="true" value="<?= $userAllData->cdSchool->caDormAddr ?>" placeholder="请具体到X栋X号房间" />
               </div>
             </div>
           </div>
@@ -221,7 +221,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_classmate2_address" class="required">寝室地址</label>
               <div class="input-holder">
-                <input type="text" name="cbDormAddr" id="credit_contact_classmate2_address" required="true" value="<?= $userAllData->cdSchool->cbDormAddr ?>" />
+                <input type="text" name="cbDormAddr" id="credit_contact_classmate2_address" required="true" value="<?= $userAllData->cdSchool->cbDormAddr ?>" placeholder="请具体到X栋X号房间" />
               </div>
             </div>
           </div>
