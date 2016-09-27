@@ -101,6 +101,7 @@ if(!isset($_SESSION['login_url'])) {
           <img src="assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
         </a>
+        <div class="clearfix"></div>
       </nav>
     </footer>
 

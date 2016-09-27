@@ -489,6 +489,9 @@ var updateSize = function() {
 
   var select_width = $('.form-element.width-45pc .select-block').width() -65;
   $('.form-element.width-45pc .select-block .input-holder').css('width', select_width + 'px');
+
+  var footer_height = $('footer.footer .bottomnav').height() + 20;
+  $('footer.footer').css('padding-top', footer_height + 'px');
 };
 
 // set modal box top

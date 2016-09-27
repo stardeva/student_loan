@@ -760,7 +760,7 @@ body {
 .credit {
   position: relative;
   text-align: center;
-  margin: 0 0 32px;
+  margin: 7% 0 0;
   display: block;
 }
 
@@ -780,10 +780,6 @@ body {
   font-family: 'FZKaTong';
   letter-spacing: 1px;
   text-align: left;
-}
-
-.footer {
-  padding-bottom: 100px;
 }
 
 /*borrow index*/
@@ -1893,7 +1889,7 @@ form#request_loan_form {
 .custom-dialog .modal-dialog {
   width: 80%;
   max-width: 600px;
-  font-size: 18px;
+  font-size: 12px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1905,10 +1901,12 @@ form#request_loan_form {
 
 .custom-dialog .modal-dialog .modal-body h3 {
   color: #000;
+  font-size: 16px;
 }
 
 .custom-dialog .modal-dialog .modal-body div {
   color: #999;
+  font-size: 12px;
 }
 
 .custom-dialog .modal-dialog .modal-footer {
@@ -3093,7 +3091,7 @@ form#request_loan_form {
   }
 
   .footer {
-    padding-bottom: 120px;
+
   }
 
   .footer .bottomnav {
