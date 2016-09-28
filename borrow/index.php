@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 require_once('../api/curl.php');
 require_once('../api/functions.php');
@@ -37,6 +36,7 @@ if(checkUserLogin()) {
 }
 
 ?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

@@ -565,7 +565,7 @@ $(document).ready(function() {
                             type: 'post',
                             data: postdata,
                             success: function(res) {
-                              
+
                             }
                           });
                         }
