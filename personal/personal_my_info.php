@@ -26,6 +26,7 @@ if(checkUserLogin()) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name = "format-detection" content = "telephone=no">
 
     <title>学融宝 - 个人中心 - 个人资料</title>
 
@@ -67,7 +68,7 @@ if(checkUserLogin()) {
         </div>
         <div class="info-item">
           <div class="item-title">学号</div>
-          <div class="item-desc">18640329750</div>
+          <div class="item-desc"><a style="color: #999;" href="javascript: void(0);">18640329750</a></div>
         </div>
         <div class="info-item">
           <div class="item-title">额度</div>

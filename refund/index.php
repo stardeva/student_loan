@@ -24,6 +24,7 @@ if(checkUserLogin()) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name = "format-detection" content = "telephone=no">
 
     <title>学融宝</title>
 
@@ -65,7 +66,7 @@ if(checkUserLogin()) {
               </div>
               <div class="content">
                 <?php if(isset($initData)): ?>
-                  <?= $initData->returnWay->bankCard ?>&nbsp;<?= $initData->returnWay->bankUser ?>
+                  <a style="color: #999;" href="javascript: void(0);"><?= $initData->returnWay->bankCard ?></a>&nbsp;<?= $initData->returnWay->bankUser ?>
                 <?php endif; ?>
               </div>
             </div>

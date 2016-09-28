@@ -184,6 +184,7 @@ if(isset($_POST['page']) && $_POST['page'] == 'signup_page') {
     $uId = $result->uId;
     $_SESSION['uid'] = $uId;
     setcookie("userID", $uId, time() + 3600);
+    $USER_TEMP['uId'] = $uId;
 
     $result = httpPost($API_HOST.$API_ENDPOINTS['ADDRESS_SYS_INIT'], $USER_TEMP);
     $result = json_decode($result);

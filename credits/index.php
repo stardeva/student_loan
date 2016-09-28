@@ -16,10 +16,14 @@ if(checkUserLogin()) {
 
   $userAllData = $_SESSION['user_all_data'];
   
-  $creditPercent = min($userAllData->user->quotaTotal, 5000) * 100 / 5000.0;
+  $creditPercent = min($userAllData->user->quota, 5000) * 100 / 5000.0;
   $is_step2 = $userAllData->cdBase->audit == 1;
   $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
   $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
+
+  if(isset($_SESSION['temp'])) {
+    unset($_SESSION['temp']);
+  }
 } else {
   header("Location: ../signup.php");
 }
@@ -61,10 +65,10 @@ if(checkUserLogin()) {
         <div class="my-credits-bar">
           <div class="tooltip top credits-tooltip" role="tooltip" style="left: <?= $creditPercent ?>%;">
             <div class="tooltip-arrow"></div>
-            <div class="tooltip-inner"><?= min($userAllData->user->quotaTotal, 5000) ?></div>
+            <div class="tooltip-inner"><?= min($userAllData->user->quota, 5000) ?></div>
           </div>
           <div class="progress credits-progress">
-            <div class="progress-bar progress-bar-credit" role="progressbar" aria-valuenow="<?= min($userAllData->user->quotaTotal, 5000) ?>" aria-valuemin="0" aria-valuemax="5000" style="width: <?= $creditPercent ?>%">
+            <div class="progress-bar progress-bar-credit" role="progressbar" aria-valuenow="<?= min($userAllData->user->quota, 5000) ?>" aria-valuemin="0" aria-valuemax="5000" style="width: <?= $creditPercent ?>%">
             </div>
           </div>
           <div class="pin-bar">
@@ -129,6 +133,7 @@ if(checkUserLogin()) {
           <img src="../assets/images/footer_icon_activity.png" alt="活动" />
           <span>活动</span>
         </a>
+        <div class="clearfix"></div>
       </nav>
     </footer>
 
