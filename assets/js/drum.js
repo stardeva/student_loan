@@ -252,8 +252,9 @@
 
 			for(var i=0; i < mapping.length; i ++) {
 				if( mapping[i].dataModel.index > (current_elem_index+2) ||
-				    ( parseInt(mapping[i].dataModel.getText()) < parseInt(selected.dataModel.getText()) &&
-				      mapping[i].index > selected.index
+				    ( (parseInt(mapping[i].dataModel.getText()) < parseInt(selected.dataModel.getText())) &&
+				      (mapping[i].dataModel.index < current_elem_index) &&
+				      (Math.abs(mapping[i].dataModel.index - current_elem_index) > 2)
 				    ) 
 				  )  {
 					if(!$(mapping[i].elem).hasClass('hide'))
@@ -317,8 +318,12 @@
 				var evt = ["up", "down"];
 				if (evt.indexOf(e.gesture.direction)>=0) {
 					var selected = getSelected();
-					var elem_index = getSelected().index;
+					var elem_index = getSelected().dataModel.index;
 					if(elem_index == 0 && evt.indexOf(e.gesture.direction) == 1 ) return;
+					if( (settings.mapping[getSelected().index+1] &&
+						 settings.mapping[getSelected().index+1].dataModel.index == 0
+						) && 
+					    evt.indexOf(e.gesture.direction) == 0 ) return;
 					settings.rotation += Math.round(e.gesture.deltaY - settings.distance) * -1;
 					transform();
 					settings.distance = e.gesture.deltaY;
