@@ -1554,3 +1554,29 @@ $(document).on('keyup', '#credit_base1_pid', function(e) {
     $('#credit_base1_birthday').val(pID.substr(6,4) + '-' + pID.substr(10,2) + '-' + pID.substr(12,2));
   }
 });
+
+// Remind link click
+$(document).on('click', '.remind-link', function(e) {
+  var fileurl = $(this).attr('data-file-url');
+  var form_data = $('form').serializeArray();
+  var form_name = $('form').attr('name');
+  var postdata = {'temp': {}};
+  postdata['temp'][form_name] = {};
+
+  $.map(form_data, function(item, index){
+    postdata['temp'][form_name][item.name] = item.value;   
+  });
+
+  if(form_name == 'credit_other') {
+    delete postdata['temp']['credit_other']['bankPics[]'];
+    var bankPics = document.getElementById('credit_other').elements['bankPics[]'];
+    var bankPicIds = [];
+    for (i = 0; i < bankPics.length; i++) {
+      if(!!bankPics[i].value)
+        bankPicIds.push(bankPics[i].value);
+    }
+    postdata['temp']['credit_other']['bankPics'] = bankPicIds.join(',');
+  }
+
+  location.href = '../file_view.php?fileurl=' + fileurl + '&' + $.param(postdata);
+});

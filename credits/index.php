@@ -20,6 +20,10 @@ if(checkUserLogin()) {
   $is_step2 = $userAllData->cdBase->audit == 1;
   $is_step3 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1;
   $is_step4 = $userAllData->cdBase->audit == 1 && $userAllData->cdHome->audit == 1 && $userAllData->cdSchool->audit == 1;
+
+  if(isset($_SESSION['temp'])) {
+    unset($_SESSION['temp']);
+  }
 } else {
   header("Location: ../signup.php");
 }

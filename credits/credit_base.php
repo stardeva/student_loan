@@ -26,6 +26,10 @@ if(checkUserLogin()) {
 
   $contract = $_SESSION['sys_info']->contract;
 
+  if(isset($_SESSION['temp']) && isset($_SESSION['temp']['credit_base'])) {
+    $temp = $_SESSION['temp']['credit_base'];
+    unset($_SESSION['temp']);
+  }
 } else {
   header("Location: ../signup.php");
 }
@@ -82,7 +86,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_name" class="required">姓名</label>
                     <div class="input-holder">
-                      <input type="text" name="name" id="credit_base1_name" required="true" value="<?= $userAllData->cdBase->name ?>" placeholder="请输入姓名" />
+                      <input type="text" name="name" id="credit_base1_name" required="true" value="<?= isset($temp['name']) ? $temp['name'] : $userAllData->cdBase->name ?>" placeholder="请输入姓名" />
                     </div>
                   </div>
                 </div>
@@ -91,8 +95,8 @@ if(checkUserLogin()) {
                     <label for="credit_base1_sex" class="required" placeholder="请输入性别" style="width: 60px;">性别</label>
                     <div class="input-holder">
                       <select name="sex" id="credit_base1_sex" required="true">
-                        <option <?php echo $userAllData->cdBase->sex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
-                        <option <?php echo $userAllData->cdBase->sex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
+                        <option <?php echo (isset($temp['sex']) ? $temp['sex'] : $userAllData->cdBase->sex) == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
+                        <option <?php echo (isset($temp['sex']) ? $temp['sex'] : $userAllData->cdBase->sex) == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
                       </select>
                     </div>
                   </div>
@@ -103,7 +107,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_pid" class="required">身份证号</label>
                     <div class="input-holder">
-                      <input type="text" name="pID" id="credit_base1_pid" required="true" value="<?= $userAllData->cdBase->pID ?>" placeholder="请输入身份证号" class="number-input" />
+                      <input type="text" name="pID" id="credit_base1_pid" required="true" value="<?= isset($temp['pID']) ? $temp['pID'] : $userAllData->cdBase->pID ?>" placeholder="请输入身份证号" class="number-input" />
                     </div>
                   </div>
                 </div>
@@ -113,7 +117,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_birthday" class="required">生日</label>
                     <div class="input-holder">
-                      <input type="text" name="birthday" id="credit_base1_birthday" required="true" class="date" readonly="true" value="<?= $userAllData->cdBase->birthday ?>" placeholder="请输入出生日期" />
+                      <input type="text" name="birthday" id="credit_base1_birthday" required="true" class="date" readonly="true" value="<?= isset($temp['birthday']) ? $temp['birthday'] : $userAllData->cdBase->birthday ?>" placeholder="请输入出生日期" />
                     </div>
                   </div>
                 </div>
@@ -125,17 +129,23 @@ if(checkUserLogin()) {
                       <label for="credit_base1_id_card_photo" class="required">身份证照片</label>
                     </div>
                     <div class="input-holder">
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->pIDFPic) && $userAllData->cdBase->pIDFPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->pIDFPic) && $userAllData->cdBase->pIDFPic !='' ? 'hidden' : ''; ?>">正面照片上传</label>
+                      <?php
+                        $pIDFPic = isset($temp['pIDFPic']) ? $temp['pIDFPic'] : (isset($userAllData->cdBase->pIDFPic) ? basename($userAllData->cdBase->pIDFPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $pIDFPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $pIDFPic !='' ? 'hidden' : ''; ?>">正面照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->pIDFPic) && $userAllData->cdBase->pIDFPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->pIDFPic) && $userAllData->cdBase->pIDFPic != '') echo $userAllData->cdBase->pIDFPic; ?>" />
-                        <input type="hidden" name="pIDFPic" class="file-key" />
+                        <img class="image-preview <?php echo $pIDFPic !='' ? '' : 'hidden'; ?>" src="<?php if($pIDFPic != '') echo $FILE_UPLOAD_URL.$pIDFPic; ?>" />
+                        <input type="hidden" name="pIDFPic" class="file-key" <?php if($pIDFPic != '') echo ' value="'.$pIDFPic.'" '; ?> />
                       </div>
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->pIDBPic) && $userAllData->cdBase->pIDBPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->pIDBPic) && $userAllData->cdBase->pIDBPic !='' ? 'hidden' : ''; ?>">反面照片上传</label>
+                      <?php
+                        $pIDBPic = isset($temp['pIDBPic']) ? $temp['pIDBPic'] : (isset($userAllData->cdBase->pIDBPic) ? basename($userAllData->cdBase->pIDBPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $pIDBPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $pIDBPic !='' ? 'hidden' : ''; ?>">反面照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->pIDBPic) && $userAllData->cdBase->pIDBPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->pIDBPic) && $userAllData->cdBase->pIDBPic != '') echo $userAllData->cdBase->pIDBPic; ?>" />
-                        <input type="hidden" name="pIDBPic" class="file-key" />
+                        <img class="image-preview <?php echo $pIDBPic !='' ? '' : 'hidden'; ?>" src="<?php if($pIDBPic != '') echo $FILE_UPLOAD_URL.$pIDBPic; ?>" />
+                        <input type="hidden" name="pIDBPic" class="file-key" <?php if($pIDBPic != '') echo ' value="'.$pIDBPic.'" '; ?> />
                       </div>
                     </div>
                   </div>
@@ -146,7 +156,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base1_place" class="required">户口所在地</label>
                     <div class="input-holder">
-                      <input type="text" name="place" id="credit_base1_place" required="true" value="<?= $userAllData->cdBase->place ?>" placeholder="x省x市(县)x区x乡(镇)" />
+                      <input type="text" name="place" id="credit_base1_place" required="true" value="<?= isset($temp['place']) ? $temp['place'] : $userAllData->cdBase->place ?>" placeholder="x省x市(县)x区x乡(镇)" />
                     </div>
                   </div>
                 </div>
@@ -161,8 +171,11 @@ if(checkUserLogin()) {
                     <label for="credit_base2_university" class="required">学校</label>
                     <div class="input-holder">
                       <select name="university" id="credit_base2_university" required="true">
-                        <?php if($userAllData->cdBase->university == ''): ?>
-                          <option selected="selected" value="<?= $userAllData->cdBase->university ?>"><?= $userAllData->cdBase->university ?></option>
+                        <?php
+                          $university = isset($temp['university']) ? $temp['university'] : $userAllData->cdBase->university;
+                        ?>
+                        <?php if($university != ''): ?>
+                          <option selected="selected" value="<?= $university ?>"><?= $university ?></option>
                         <?php endif; ?>
                       </select>
                     </div>
@@ -174,7 +187,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base2_college" class="required">学院</label>
                     <div class="input-holder">
-                      <input type="text" name="college" id="credit_base2_college" required="true" value="<?= $userAllData->cdBase->college ?>" placeholder="请输入学院名称" />
+                      <input type="text" name="college" id="credit_base2_college" required="true" value="<?= isset($temp['college']) ? $temp['college'] : $userAllData->cdBase->college ?>" placeholder="请输入学院名称" />
                     </div>
                   </div>
                 </div>
@@ -184,7 +197,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base2_major" class="required">专业</label>
                     <div class="input-holder">
-                      <input type="text" name="major" id="credit_base2_major" required="true" value="<?= $userAllData->cdBase->major ?>" placeholder="请输入专业名称" />
+                      <input type="text" name="major" id="credit_base2_major" required="true" value="<?= isset($temp['major']) ? $temp['major'] : $userAllData->cdBase->major ?>" placeholder="请输入专业名称" />
                     </div>
                   </div>
                 </div>
@@ -196,7 +209,7 @@ if(checkUserLogin()) {
                     <div class="input-holder">
                       <select name="education" id="credit_base2_education" required="true" placeholder="请输入学历信息">
                         <?php foreach($DEGREE_LIST as $degree): ?>
-                          <option <?php if(intval($userAllData->cdBase->education) == $degree) echo 'selected="selected"' ?> value="<?=$degree ?>"><?=$degree ?></option>
+                          <option <?php if(intval(isset($temp['education']) ? $temp['education'] : $userAllData->cdBase->education) == $degree) echo 'selected="selected"' ?> value="<?=$degree ?>"><?=$degree ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -210,7 +223,7 @@ if(checkUserLogin()) {
                     <div class="input-holder">
                       <select name="enrollment" id="credit_base2_enrollment" required="true" placeholder="请输入入学时间">
                         <?php for($enrollment_year = 2000; $enrollment_year <= intval(date('Y')); $enrollment_year++): ?>
-                          <option <?php if(intval($userAllData->cdBase->enrollment) == $enrollment_year) echo 'selected="selected"' ?> value="<?=$enrollment_year ?>年"><?=$enrollment_year ?>年</option>
+                          <option <?php if(intval(isset($temp['enrollment']) ? $temp['enrollment'] : $userAllData->cdBase->enrollment) == $enrollment_year) echo 'selected="selected"' ?> value="<?=$enrollment_year ?>年"><?=$enrollment_year ?>年</option>
                         <?php endfor; ?>
                       </select>
                     </div>
@@ -222,7 +235,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base2_student_id" class="required">学号</label>
                     <div class="input-holder">
-                      <input type="text" name="sID" id="credit_base2_student_id" required="true" value="<?= $userAllData->cdBase->sID ?>" placeholder="请输入学号信息" />
+                      <input type="text" name="sID" id="credit_base2_student_id" required="true" value="<?= isset($temp['sID']) ? $temp['sID'] : $userAllData->cdBase->sID ?>" placeholder="请输入学号信息" />
                     </div>
                   </div>
                 </div>
@@ -232,7 +245,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base2_grade" class="required">班级</label>
                     <div class="input-holder">
-                      <input type="text" name="grade" id="credit_base2_grade" required="true" value="<?= $userAllData->cdBase->grade ?>" placeholder="请输入班级" />
+                      <input type="text" name="grade" id="credit_base2_grade" required="true" value="<?= isset($temp['grade']) ? $temp['grade'] : $userAllData->cdBase->grade ?>" placeholder="请输入班级" />
                     </div>
                   </div>
                 </div>
@@ -242,7 +255,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base2_dorm" class="required">寝室地址</label>
                     <div class="input-holder">
-                      <input type="text" name="dorm" id="credit_base2_dorm" required="true" value="<?= $userAllData->cdBase->dorm ?>" placeholder="请具体到x栋x号房间" />
+                      <input type="text" name="dorm" id="credit_base2_dorm" required="true" value="<?= isset($temp['dorm']) ? $temp['dorm'] : $userAllData->cdBase->dorm ?>" placeholder="请具体到x栋x号房间" />
                     </div>
                   </div>
                 </div>
@@ -254,17 +267,23 @@ if(checkUserLogin()) {
                       <label for="credit_base2_student_id_photo" class="required">学生证照片</label>
                     </div>
                     <div class="input-holder">
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->sIDAPic) && $userAllData->cdBase->sIDAPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->sIDAPic) && $userAllData->cdBase->sIDAPic !='' ? 'hidden' : ''; ?>">封面照片上传</label>
+                      <?php
+                        $sIDAPic = isset($temp['sIDAPic']) ? $temp['sIDAPic'] : (isset($userAllData->cdBase->sIDAPic) ? basename($userAllData->cdBase->sIDAPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $sIDAPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $sIDAPic !='' ? 'hidden' : ''; ?>">封面照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->sIDAPic) && $userAllData->cdBase->sIDAPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->sIDAPic) && $userAllData->cdBase->sIDAPic != '') echo $userAllData->cdBase->sIDAPic; ?>" />
-                        <input type="hidden" name="sIDAPic" class="file-key" />
+                        <img class="image-preview <?php echo $sIDAPic !='' ? '' : 'hidden'; ?>" src="<?php if($sIDAPic != '') echo $FILE_UPLOAD_URL.$sIDAPic; ?>" />
+                        <input type="hidden" name="sIDAPic" class="file-key" <?php if($sIDAPic != '') echo ' value="'.$sIDAPic.'" '; ?> />
                       </div>
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->sIDBPic) && $userAllData->cdBase->sIDBPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->sIDBPic) && $userAllData->cdBase->sIDBPic !='' ? 'hidden' : ''; ?>">内容照片上传</label>
+                      <?php
+                        $sIDBPic = isset($temp['sIDBPic']) ? $temp['sIDBPic'] : (isset($userAllData->cdBase->sIDBPic) ? basename($userAllData->cdBase->sIDBPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $sIDBPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $sIDBPic !='' ? 'hidden' : ''; ?>">内容照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->sIDBPic) && $userAllData->cdBase->sIDBPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->sIDBPic) && $userAllData->cdBase->sIDBPic != '') echo $userAllData->cdBase->sIDBPic; ?>" />
-                        <input type="hidden" name="sIDBPic" class="file-key" />
+                        <img class="image-preview <?php echo $sIDBPic !='' ? '' : 'hidden'; ?>" src="<?php if($sIDBPic != '') echo $FILE_UPLOAD_URL.$sIDBPic; ?>" />
+                        <input type="hidden" name="sIDBPic" class="file-key" <?php if($sIDBPic != '') echo ' value="'.$sIDBPic.'" '; ?> />
                       </div>
                     </div>
                   </div>
@@ -277,17 +296,23 @@ if(checkUserLogin()) {
                       <label for="credit_base2_card_photo" class="required">一卡通照片</label>
                     </div>
                     <div class="input-holder">
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->sCardFPic) && $userAllData->cdBase->sCardFPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->sCardFPic) && $userAllData->cdBase->sCardFPic !='' ? 'hidden' : ''; ?>">正面照片上传</label>
+                      <?php
+                        $sCardFPic = isset($temp['sCardFPic']) ? $temp['sCardFPic'] : (isset($userAllData->cdBase->sCardFPic) ? basename($userAllData->cdBase->sCardFPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $sCardFPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $sCardFPic !='' ? 'hidden' : ''; ?>">正面照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->sCardFPic) && $userAllData->cdBase->sCardFPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->sCardFPic) && $userAllData->cdBase->sCardFPic != '') echo $userAllData->cdBase->sCardFPic; ?>" />
-                        <input type="hidden" name="sCardFPic" class="file-key" />
+                        <img class="image-preview <?php echo $sCardFPic !='' ? '' : 'hidden'; ?>" src="<?php if($sCardFPic != '') echo $FILE_UPLOAD_URL.$sCardFPic; ?>" />
+                        <input type="hidden" name="sCardFPic" class="file-key" <?php if($sCardFPic != '') echo ' value="'.$sCardFPic.'" '; ?> />
                       </div>
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->sCardBPic) && $userAllData->cdBase->sCardBPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->sCardBPic) && $userAllData->cdBase->sCardBPic !='' ? 'hidden' : ''; ?>">背面照片上传</label>
+                      <?php
+                        $sCardBPic = isset($temp['sCardBPic']) ? $temp['sCardBPic'] : (isset($userAllData->cdBase->sCardBPic) ? basename($userAllData->cdBase->sCardBPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $sCardBPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $sCardBPic !='' ? 'hidden' : ''; ?>">背面照片上传</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->sCardBPic) && $userAllData->cdBase->sCardBPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->sCardBPic) && $userAllData->cdBase->sCardBPic != '') echo $userAllData->cdBase->sCardBPic; ?>" />
-                        <input type="hidden" name="sCardBPic" class="file-key" />
+                        <img class="image-preview <?php echo $sCardBPic !='' ? '' : 'hidden'; ?>" src="<?php if($sCardBPic != '') echo $FILE_UPLOAD_URL.$sCardBPic; ?>" />
+                        <input type="hidden" name="sCardBPic" class="file-key" <?php if($sCardBPic != '') echo ' value="'.$sCardBPic.'" '; ?> />
                       </div>
                     </div>
                   </div>
@@ -298,14 +323,17 @@ if(checkUserLogin()) {
                   <div class="file-block">
                     <div class="input-label">
                       <label for="credit_base2_xxw_photo" class="required">学信网</label>
-                      <a href="../file_view.php?fileurl=<?= $contract->xuexin ?>" class="remind-link">点击查看上传方法</a>
+                      <a href="javascript:void(0);" class="remind-link" data-file-url="<?= $contract->xuexin ?>">点击查看上传方法</a>
                     </div>
                     <div class="input-holder">
-                      <div class="file-input" style="<?php echo isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                        <label class="required <?php echo isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic !='' ? 'hidden' : ''; ?>">学籍截图</label>
+                      <?php
+                        $authenPic = isset($temp['authenPic']) ? $temp['authenPic'] : (isset($userAllData->cdBase->authenPic) ? basename($userAllData->cdBase->authenPic) : '');
+                      ?>
+                      <div class="file-input" style="<?php echo $authenPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="required <?php echo $authenPic !='' ? 'hidden' : ''; ?>">学籍截图</label>
                         <input type="file" required="true" accept='image/*' class="file-upload" />
-                        <img class="image-preview <?php echo isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdBase->authenPic) && $userAllData->cdBase->authenPic != '') echo $userAllData->cdBase->authenPic; ?>" />
-                        <input type="hidden" name="authenPic" class="file-key" />
+                        <img class="image-preview <?php echo $authenPic !='' ? '' : 'hidden'; ?>" src="<?php if($authenPic != '') echo $FILE_UPLOAD_URL.$authenPic; ?>" />
+                        <input type="hidden" name="authenPic" class="file-key" <?php if($authenPic != '') echo ' value="'.$authenPic.'" '; ?> />
                       </div>
                     </div>
                   </div>
@@ -320,7 +348,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base3_mail" class="required">邮箱</label>
                     <div class="input-holder">
-                      <input type="text" name="mail" id="credit_base3_mail" required="true" class="email" value="<?= $userAllData->cdBase->mail ?>" placeholder="请输入邮箱" />
+                      <input type="text" name="mail" id="credit_base3_mail" required="true" class="email" value="<?= isset($temp['mail']) ? $temp['mail'] : $userAllData->cdBase->mail ?>" placeholder="请输入邮箱" />
                     </div>
                   </div>
                 </div>
@@ -330,7 +358,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base3_weixin" class="required">微信</label>
                     <div class="input-holder">
-                      <input type="text" name="weixin" id="credit_base3_weixin" required="true" class="weixin" value="<?= $userAllData->cdBase->weixin ?>" placeholder="请写微信账号" />
+                      <input type="text" name="weixin" id="credit_base3_weixin" required="true" class="weixin" value="<?= isset($temp['weixin']) ? $temp['weixin'] : $userAllData->cdBase->weixin ?>" placeholder="请写微信账号" />
                     </div>
                   </div>
                 </div>
@@ -340,7 +368,7 @@ if(checkUserLogin()) {
                   <div class="input-block">
                     <label for="credit_base3_qq" class="required">QQ</label>
                     <div class="input-holder">
-                      <input type="text" name="qq" id="credit_base3_qq" required="true" class="qq" value="<?= $userAllData->cdBase->qq ?>" placeholder="请写QQ账号" />
+                      <input type="text" name="qq" id="credit_base3_qq" required="true" class="qq" value="<?= isset($temp['qq']) ? $temp['qq'] : $userAllData->cdBase->qq ?>" placeholder="请写QQ账号" />
                     </div>
                   </div>
                 </div>

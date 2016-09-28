@@ -128,4 +128,6 @@ $USER_TEMP = array(
   'deviceToken' => ''
 );
 
+$FILE_UPLOAD_URL = 'http://zxb-pic.img-cn-beijing.aliyuncs.com/';
+
 ?>
