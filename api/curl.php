@@ -119,7 +119,7 @@ $DEGREE_LIST = array(
   );
 
 $USER_TEMP = array(
-  'uid' => '',
+  'uId' => '',
   'deviceId' => '00000000000000008:00:27:44:04:bb323ec7466101f399',
   'deviceOs' => 'Android',
   'deviceType' => 'Google Nexus S - 4.1.1 - API 16 - 480x800',
