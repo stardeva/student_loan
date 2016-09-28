@@ -16,6 +16,9 @@ if(isset($_GET['title']) && $_GET['title'] != '') {
   $title = '上传方法';
 }
 
+if(isset($_GET['temp'])) {
+  $_SESSION['temp'] = $_GET['temp'];
+}
 
 ?>
 <!DOCTYPE html>

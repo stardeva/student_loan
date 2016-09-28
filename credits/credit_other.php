@@ -26,6 +26,12 @@ if(checkUserLogin()) {
 
   $contract = $_SESSION['sys_info']->contract;
 
+  if(isset($_SESSION['temp']) && isset($_SESSION['temp']['credit_other'])) {
+    $temp = $_SESSION['temp']['credit_other'];
+    $tempBankPics = explode(',', $temp['bankPics']);
+    unset($_SESSION['temp']);
+  }
+
 } else {
   header("Location: ../signup.php");
 }
@@ -74,14 +80,17 @@ if(checkUserLogin()) {
             <div class="file-block">
               <div class="input-label">
                 <label for="credit_other_website_screenshot" class="required">手机信息运营商网站截图</label>
-                <a href="../file_view.php?fileurl=<?= $contract->mobile ?>" class="remind-link">点击查看上传方法</a>
+                <a href="javascript:void(0);" class="remind-link" data-file-url="<?= $contract->mobile ?>">点击查看上传方法</a>
               </div>
               <div class="input-holder">
-                <div class="file-input" style="<?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? 'hidden' : ''; ?>">上传照片</label>
+                <?php
+                  $phInfoPic = isset($temp['phInfoPic']) ? $temp['phInfoPic'] : (isset($userAllData->cdBase->phInfoPic) ? basename($userAllData->cdBase->phInfoPic) : '');
+                ?>
+                <div class="file-input" style="<?php echo $phInfoPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                  <label class="required <?php echo $phInfoPic !='' ? 'hidden' : ''; ?>">上传照片</label>
                   <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic !='' ? '' : 'hidden'; ?>" src="<?php if(isset($userAllData->cdLife->phInfoPic) && $userAllData->cdLife->phInfoPic != '') echo $userAllData->cdLife->phInfoPic; ?>" />
-                  <input type="hidden" name="phInfoPic" class="file-key" />
+                  <img class="image-preview <?php echo $phInfoPic !='' ? '' : 'hidden'; ?>" src="<?php if($phInfoPic != '') echo $FILE_UPLOAD_URL.$phInfoPic; ?>" />
+                  <input type="hidden" name="phInfoPic" class="file-key" <?php if($phInfoPic != '') echo ' value="'.$phInfoPic.'" '; ?> />
                 </div>
               </div>
             </div>
@@ -95,42 +104,19 @@ if(checkUserLogin()) {
                 <label for="credit_other_banks" class="required">近6个月银行流水</label>
               </div>
               <div class="input-holder">
-                <div class="file-input" style="<?php echo isset($bankPics[0]) && $bankPics[0] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[0]) && $bankPics[0] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[0]) && $bankPics[0] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[0]) && $bankPics[0] !='') echo $bankPics[0]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
-                <div class="file-input" style="<?php echo isset($bankPics[1]) && $bankPics[1] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[1]) && $bankPics[1] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[1]) && $bankPics[1] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[1]) && $bankPics[1] !='') echo $bankPics[1]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
-                <div class="file-input" style="<?php echo isset($bankPics[2]) && $bankPics[2] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[2]) && $bankPics[2] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[2]) && $bankPics[2] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[2]) && $bankPics[2] !='') echo $bankPics[2]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
-                <div class="file-input" style="<?php echo isset($bankPics[3]) && $bankPics[3] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[3]) && $bankPics[3] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[3]) && $bankPics[3] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[3]) && $bankPics[3] !='') echo $bankPics[3]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
-                <div class="file-input" style="<?php echo isset($bankPics[4]) && $bankPics[4] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[4]) && $bankPics[4] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[4]) && $bankPics[4] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[4]) && $bankPics[4] !='') echo $bankPics[4]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
-                <div class="file-input" style="<?php echo isset($bankPics[5]) && $bankPics[5] !='' ? 'background-position: -9999px;' : ''; ?>">
-                  <label class="required <?php echo isset($bankPics[5]) && $bankPics[5] !='' ? 'hidden' : ''; ?>">上传照片</label>
-                  <input type="file" required="true" accept='image/*' class="file-upload" />
-                  <img class="image-preview <?php echo isset($bankPics[5]) && $bankPics[5] !='' ? '' : 'hidden'; ?>" src="<?php if(isset($bankPics[5]) && $bankPics[5] !='') echo $bankPics[5]; ?>" />
-                  <input type="hidden" name="bankPics[]" class="file-key" />
-                </div>
+                <?php
+                  for($i = 0; $i < 6; $i++) {
+                    $bankPic = isset($tempBankPics[$i]) ? $tempBankPics[$i] : (isset($bankPics[$i]) ? basename($bankPics[$i]) : '');
+                    ?>
+                      <div class="file-input" style="<?php echo $bankPic !='' ? 'background-position: -9999px;' : ''; ?>">
+                        <label class="<?php if($i == 0) echo ' required '; echo $bankPic !='' ? 'hidden' : ''; ?>">上传照片</label>
+                        <input type="file" required="true" accept='image/*' class="file-upload" />
+                        <img class="image-preview <?php echo $bankPic !='' ? '' : 'hidden'; ?>" src="<?php if($bankPic !='') echo $FILE_UPLOAD_URL.$bankPic; ?>" />
+                        <input type="hidden" name="bankPics[]" class="file-key" <?php if($bankPic != '') echo ' value="'.$bankPic.'" '; ?> />
+                      </div>
+                    <?php
+                  }
+                ?>
               </div>
             </div>
           </div>
@@ -141,7 +127,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_other_teacher1_fullname" class="required">姓名</label>
               <div class="input-holder">
-                <input type="text" name="taName" id="credit_other_teacher1_fullname" required="true" value="<?= $userAllData->cdLife->taName ?>" placeholder="请输入姓名" />
+                <input type="text" name="taName" id="credit_other_teacher1_fullname" required="true" value="<?= isset($temp['taName']) ? $temp['taName'] : $userAllData->cdLife->taName ?>" placeholder="请输入姓名" />
               </div>
             </div>
           </div>
@@ -150,8 +136,8 @@ if(checkUserLogin()) {
               <label for="credit_other_teacher1_sex" class="required" style="width: 60px;">性别</label>
               <div class="input-holder">
                 <select name="taSex" id="credit_other_teacher1_sex" required="true">
-                  <option <?php echo $userAllData->cdLife->taSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
-                  <option <?php echo $userAllData->cdLife->taSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
+                  <option <?php echo (isset($temp['taSex']) ? $temp['taSex'] : $userAllData->cdLife->taSex) == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
+                  <option <?php echo (isset($temp['taSex']) ? $temp['taSex'] : $userAllData->cdLife->taSex) == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
                 </select>
               </div>
             </div>
@@ -161,7 +147,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher1_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="tel" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="" value="<?= $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="taPhone" id="credit_other_teacher1_mobile" required="true" class="" value="<?= isset($temp['taPhone']) ? $temp['taPhone'] : $userAllData->cdLife->taPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -172,7 +158,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_other_teacher1_job" class="required">职务</label>
               <div class="input-holder">
-                <input type="text" name="taDuty" id="credit_other_teacher1_job" required="true" value="<?= $userAllData->cdLife->taDuty ?>" placeholder="请输入职务" />
+                <input type="text" name="taDuty" id="credit_other_teacher1_job" required="true" value="<?= isset($temp['taDuty']) ? $temp['taDuty'] : $userAllData->cdLife->taDuty ?>" placeholder="请输入职务" />
               </div>
             </div>
           </div>
@@ -183,7 +169,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_other_teacher2_fullname" class="required">姓名</label>
               <div class="input-holder">
-                <input type="text" name="tbName" id="credit_other_teacher2_fullname" required="true" value="<?= $userAllData->cdLife->tbName ?>" placeholder="请输入姓名" />
+                <input type="text" name="tbName" id="credit_other_teacher2_fullname" required="true" value="<?= isset($temp['tbName']) ? $temp['tbName'] : $userAllData->cdLife->tbName ?>" placeholder="请输入姓名" />
               </div>
             </div>
           </div>
@@ -192,8 +178,8 @@ if(checkUserLogin()) {
               <label for="credit_other_teacher2_sex" class="required" style="width: 60px;">性别</label>
               <div class="input-holder">
                 <select name="tbSex" id="credit_other_teacher2_sex" required="true">
-                  <option <?php echo $userAllData->cdLife->tbSex == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
-                  <option <?php echo $userAllData->cdLife->tbSex == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
+                  <option <?php echo (isset($temp['tbSex']) ? $temp['tbSex'] : $userAllData->cdLife->tbSex) == 1 ? 'selected="selected"' : '' ?> value="1">男</option>
+                  <option <?php echo (isset($temp['tbSex']) ? $temp['tbSex'] : $userAllData->cdLife->tbSex) == 2 ? 'selected="selected"' : '' ?> value="2">女</option>
                 </select>
               </div>
             </div>
@@ -203,7 +189,7 @@ if(checkUserLogin()) {
               <div class="input-block">
                 <label for="credit_other_teacher2_mobile" class="required">手机</label>
                 <div class="input-holder">
-                  <input type="tel" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="" value="<?= $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
+                  <input type="tel" name="tbPhone" id="credit_other_teacher2_mobile" required="true" class="" value="<?= isset($temp['tbPhone']) ? $temp['tbPhone'] : $userAllData->cdLife->tbPhone ?>" placeholder="请输入手机号" />
                 </div>
               </div>
             </div>
@@ -214,7 +200,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_other_teacher2_job" class="required">职务</label>
               <div class="input-holder">
-                <input type="text" name="tbDuty" id="credit_other_teacher2_job" required="true" value="<?= $userAllData->cdLife->tbDuty ?>" placeholder="请输入职务" />
+                <input type="text" name="tbDuty" id="credit_other_teacher2_job" required="true" value="<?= isset($temp['tbDuty']) ? $temp['tbDuty'] : $userAllData->cdLife->tbDuty ?>" placeholder="请输入职务" />
               </div>
             </div>
           </div>
