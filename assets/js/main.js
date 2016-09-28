@@ -586,7 +586,7 @@ $(document).ready(function() {
           bootbox.dialog({
             className: 'custom-dialog dialog-confirm',
             closeButton: false,
-            message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+            message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的登录</div>",
             buttons: {
               danger: {
                 label: "不允许",
