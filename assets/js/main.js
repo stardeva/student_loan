@@ -489,6 +489,9 @@ var updateSize = function() {
 
   var select_width = $('.form-element.width-45pc .select-block').width() -65;
   $('.form-element.width-45pc .select-block .input-holder').css('width', select_width + 'px');
+
+  var footer_height = $('footer.footer .bottomnav').height() + 20;
+  $('footer.footer').css('padding-top', footer_height + 'px');
 };
 
 // set modal box top
@@ -538,7 +541,7 @@ $(document).ready(function() {
                   bootbox.dialog({
                     className: 'custom-dialog dialog-confirm',
                     closeButton: false,
-                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的注册</div>",
+                    message: "<h3>允许“学融宝”在您使用该应用程序时访问您的位置吗?</h3><div>请选择允许以完成您在学融宝的登录</div>",
                     buttons: {
                       danger: {
                         label: "不允许",
@@ -562,7 +565,7 @@ $(document).ready(function() {
                             type: 'post',
                             data: postdata,
                             success: function(res) {
-                              console.log('ok');
+
                             }
                           });
                         }
@@ -794,11 +797,11 @@ $(document).ready(function() {
     $('.medal.disabled').on('click', function(e) {
       e.preventDefault();
       if($(this).hasClass('home'))
-        notificationPopup('.notification-popup', 'You need to fill the base information.')
+        notificationPopup('.notification-popup', '请完善基本信息。')
       else if($(this).hasClass('contacts'))
-        notificationPopup('.notification-popup', 'You need to fill the base and home information.')
+        notificationPopup('.notification-popup', '请完善家庭资料。')
       else if($(this).hasClass('other'))
-        notificationPopup('.notification-popup', 'You need to fill the base, home and school information.')
+        notificationPopup('.notification-popup', '请完善联系资料。')
     });
   }
 
@@ -1448,7 +1451,7 @@ $(document).ready(function() {
     bootbox.dialog({
       className: 'custom-dialog dialog-confirm',
       closeButton: false,
-      message: "<h3>确认退出当前账吗?</h3>",
+      message: "<h3>确认退出当前账号吗?</h3>",
       buttons: {
         danger: {
           label: "取消",
@@ -1542,4 +1545,38 @@ $(document).on('keydown', '.number-input', function(e) {
     return true;
 
   return false;
+});
+
+// Credit base birthday auto-generation
+$(document).on('keyup', '#credit_base1_pid', function(e) {
+  if($(this).val() !== undefined && $(this).val().length >= 18) {
+    var pID = $(this).val();
+    $('#credit_base1_birthday').val(pID.substr(6,4) + '-' + pID.substr(10,2) + '-' + pID.substr(12,2));
+  }
+});
+
+// Remind link click
+$(document).on('click', '.remind-link', function(e) {
+  var fileurl = $(this).attr('data-file-url');
+  var form_data = $('form').serializeArray();
+  var form_name = $('form').attr('name');
+  var postdata = {'temp': {}};
+  postdata['temp'][form_name] = {};
+
+  $.map(form_data, function(item, index){
+    postdata['temp'][form_name][item.name] = item.value;   
+  });
+
+  if(form_name == 'credit_other') {
+    delete postdata['temp']['credit_other']['bankPics[]'];
+    var bankPics = document.getElementById('credit_other').elements['bankPics[]'];
+    var bankPicIds = [];
+    for (i = 0; i < bankPics.length; i++) {
+      if(!!bankPics[i].value)
+        bankPicIds.push(bankPics[i].value);
+    }
+    postdata['temp']['credit_other']['bankPics'] = bankPicIds.join(',');
+  }
+
+  location.href = '../file_view.php?fileurl=' + fileurl + '&' + $.param(postdata);
 });

@@ -30,6 +30,7 @@ if(checkUserLogin()) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name = "format-detection" content = "telephone=no">
 
     <title>学融宝 - 个人中心 - 历史记录</title>
 
@@ -65,9 +66,9 @@ if(checkUserLogin()) {
                 <div class="clearfix"></div>
               </div>
               <?php foreach($loan->hisList->loanHis as $his) : ?>
-                <div class="history" style="color: #<?php echo isset($his->color) && $his->color != '' ? dechex($his->color) : '000'; ?>;">
+                <div class="history" style="color: #<?php echo isset($his->color) && $his->color == 16730112 ? 'f00' : '999'; ?>;">
                   <div class="history-body"><?= $his->his ?></div>
-                  <div class="history-date"><?= date('Y-m-d', $his->hisTime) ?></div>
+                  <div class="history-date"><a href="javascript: void(0);" style="color: #<?php echo isset($his->color) && $his->color == 16730112 ? 'f00' : '999'; ?>;"><?= date('Y-m-d', $his->hisTime) ?></a></div>
                   <div class="clearfix"></div>
                 </div>
               <?php endforeach; ?>
