@@ -182,6 +182,7 @@
 		settings.radius = Math.round( ( $(drum).height() / 2 ) / Math.tan( Math.PI / settings.panelCount ) );
 		settings.mapping = [];
 		var c = 0;
+		var first_element_value;
 		for (var i=0; i < settings.panelCount; i++) {
 			if (settings.data.length == i) break;
 			var j = c;
@@ -192,8 +193,18 @@
 
 			var panel = new PanelModel(i, j, settings);
 			panel.init();
-			settings.mapping.push(panel);
+			if( i == 0 ) { // this panel is first element
+              first_element_value = panel.dataModel.getText();
+			}
 
+			settings.mapping.push(panel);
+			if( parseInt(panel.angle) > 180 ) {
+				if(  parseInt(panel.dataModel.getText()) > parseInt(first_element_value )) {
+					if(!$(panel.elem).hasClass('hide'))
+					  $(panel.elem).addClass('hide');
+				}
+			}
+			
 			$(drum).append(panel.elem);
 		}
 
@@ -235,12 +246,33 @@
 				settings.mapping[i].update(list[i]);
 			}
 		};
+
+		var updateMapping = function(mapping, selected) {
+			var current_elem_index = selected.dataModel.index;
+
+			for(var i=0; i < mapping.length; i ++) {
+				if( mapping[i].dataModel.index > (current_elem_index+2) ||
+				    ( parseInt(mapping[i].dataModel.getText()) < parseInt(selected.dataModel.getText()) &&
+				      mapping[i].index > selected.index
+				    ) 
+				  )  {
+					if(!$(mapping[i].elem).hasClass('hide'))
+					  $(mapping[i].elem).addClass('hide');
+				} else {
+					if($(mapping[i].elem).hasClass('hide')){
+						$(mapping[i].elem).removeClass('hide');
+					}
+				}
+			}
+		}
+
 		var transform = function() {
 			$(drum).css(settings.transformProp, 'translateZ(-' + settings.radius + 'px) ' + settings.rotateFn + '(' + settings.rotation + 'deg)');
 
 			var selected = getSelected();
 			if (selected) {
 				var data = selected.dataModel;
+				updateMapping(settings.mapping, selected);
 				
 				var last_index = HTMLselect.selectedIndex;
 				HTMLselect.selectedIndex = data.index;
@@ -277,13 +309,16 @@
 				no_mouseevents: true
 			});
 			
-			settings.touch.on("dragstart", function (e) { 
+			settings.touch.on("dragstart", function (e) {
 				settings.distance = 0;
 			});
 
 			settings.touch.on("drag", function (e) {
 				var evt = ["up", "down"];
 				if (evt.indexOf(e.gesture.direction)>=0) {
+					var selected = getSelected();
+					var elem_index = getSelected().index;
+					if(elem_index == 0 && evt.indexOf(e.gesture.direction) == 1 ) return;
 					settings.rotation += Math.round(e.gesture.deltaY - settings.distance) * -1;
 					transform();
 					settings.distance = e.gesture.deltaY;

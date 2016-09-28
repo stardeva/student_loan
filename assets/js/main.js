@@ -562,7 +562,7 @@ $(document).ready(function() {
                             type: 'post',
                             data: postdata,
                             success: function(res) {
-                              consol.log('ok');
+                              console.log('ok');
                             }
                           });
                         }

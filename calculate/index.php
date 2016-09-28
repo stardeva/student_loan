@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 require_once('../api/curl.php');
 require_once('../api/functions.php');
@@ -23,6 +22,7 @@ if(isset($_SESSION['ln_calculator'])) {
 }
 
 ?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
