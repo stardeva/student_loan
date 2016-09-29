@@ -52,7 +52,7 @@ if(checkUserLogin()) {
     </header>
     <section class="main">
       <div class="info-box">
-        注: 填写全都必填信才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
+        注: 填写全部必填信才能点亮图标<br />手机号码我们不会主动拨打， 仅作为紧急联系使用
       </div>
       <form action="../api/actions.php" id="credit_family" name="credit_family" method="post">
         <input type="hidden" name="uId" value="<?= $uId ?>" />
