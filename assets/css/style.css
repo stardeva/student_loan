@@ -3217,3 +3217,7 @@ form#request_loan_form {
 .tab-content .tab-pane.active.in {
   display: block;
 }
+
+.container .drum figure {
+  color: #000;
+}
