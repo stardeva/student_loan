@@ -90,7 +90,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_father_company_address" class="required">单位地址</label>
               <div class="input-holder">
-                <input type="text" name="faCompanyAddr" id="credit_contact_father_company_address" required="true" value="<?= isset($temp['faCompanyAddr']) ? $temp['faCompanyAddr'] : $userAllData->cdSchool->faCompanyAddr ?>" placeholder="请具体到X路X街X号" />
+                <input type="text" name="faCompanyAddr" id="credit_contact_father_company_address" required="true" value="<?= isset($temp['faCompanyAddr']) ? $temp['faCompanyAddr'] : $userAllData->cdSchool->faCompanyAddr ?>" placeholder="请具体到x路x街x号" />
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_mother_company_address" class="required">单位地址</label>
               <div class="input-holder">
-                <input type="text" name="moCompanyAddr" id="credit_contact_mother_company_address" required="true" value="<?= isset($temp['moCompanyAddr']) ? $temp['moCompanyAddr'] : $userAllData->cdSchool->moCompanyAddr ?>" placeholder="请具体到X路X街X号" />
+                <input type="text" name="moCompanyAddr" id="credit_contact_mother_company_address" required="true" value="<?= isset($temp['moCompanyAddr']) ? $temp['moCompanyAddr'] : $userAllData->cdSchool->moCompanyAddr ?>" placeholder="请具体到x路x街x号" />
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_classmate1_address" class="required">寝室地址</label>
               <div class="input-holder">
-                <input type="text" name="caDormAddr" id="credit_contact_classmate1_address" required="true" value="<?= isset($temp['caDormAddr']) ? $temp['caDormAddr'] : $userAllData->cdSchool->caDormAddr ?>" placeholder="请具体到X栋X号房间" />
+                <input type="text" name="caDormAddr" id="credit_contact_classmate1_address" required="true" value="<?= isset($temp['caDormAddr']) ? $temp['caDormAddr'] : $userAllData->cdSchool->caDormAddr ?>" placeholder="请具体到x栋x号房间" />
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@ if(checkUserLogin()) {
             <div class="input-block">
               <label for="credit_contact_classmate2_address" class="required">寝室地址</label>
               <div class="input-holder">
-                <input type="text" name="cbDormAddr" id="credit_contact_classmate2_address" required="true" value="<?= isset($temp['cbDormAddr']) ? $temp['cbDormAddr'] : $userAllData->cdSchool->cbDormAddr ?>" placeholder="请具体到X栋X号房间" />
+                <input type="text" name="cbDormAddr" id="credit_contact_classmate2_address" required="true" value="<?= isset($temp['cbDormAddr']) ? $temp['cbDormAddr'] : $userAllData->cdSchool->cbDormAddr ?>" placeholder="请具体到x栋x号房间" />
               </div>
             </div>
           </div>
