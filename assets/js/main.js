@@ -992,6 +992,8 @@ $(document).ready(function() {
     
     // check if current browser is IE
     if(msie > 0) {
+      $('.calculator-page .sel-btm').css('display', 'none');
+      $('.calculator-page .sel-top').css('display', 'none');
       $('select.loan-selector').on('change', function() {
         watchLoanSeletor(this);
       });
