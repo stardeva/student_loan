@@ -8,7 +8,8 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 }
 if(isset($_GET['fileurl']) && $_GET['fileurl'] != '') {
   $fileurl = $_GET['fileurl'];
-  $file_extension = pathinfo($fileurl)['extension'];
+  $file_extension = pathinfo($fileurl);
+  $file_extension = $file_extension['extension'];
 }
 if(isset($_GET['title']) && $_GET['title'] != '') {
   $title = $_GET['title'];
