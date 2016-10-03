@@ -62,7 +62,7 @@ if(checkUserLogin()) {
             <div class="history-block">
               <div class="history head">
                 <div class="history-body"><?= $loan->name ?> 申请额度 ￥ <?= $loan->money ?></div>
-                <div class="history-date"><?= getLoanStatus($loan->status) ?></div>
+                <div class="history-date" style="color: #<?php echo $loan->status == 4 ? 'f00' : '999'; ?>;"><?= getLoanStatus($loan->status) ?></div>
                 <div class="clearfix"></div>
               </div>
               <?php foreach($loan->hisList->loanHis as $his) : ?>
