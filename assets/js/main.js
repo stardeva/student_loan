@@ -1582,3 +1582,19 @@ $(document).on('click', '.remind-link', function(e) {
 
   location.href = '../file_view.php?fileurl=' + fileurl + '&' + $.param(postdata);
 });
+
+// message read
+$(document).on('click', '.messages-list .message', function(e) {
+  var postdata = {'uId': $('#uid').val(), 'page': 'personal_my_message', 'mId': $(this).attr('data-msg-id')};
+  var url = $(this).attr('data-msg-url');
+  $.ajax({
+    url: '../api/actions.php',
+    type: 'post',
+    data: postdata,
+    success: function(res) {
+      res = JSON.parse(res);
+      if(res.error.errno == 200)
+        location.href = url;
+    }
+  });
+});

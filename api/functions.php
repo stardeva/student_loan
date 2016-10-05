@@ -69,4 +69,37 @@ function checkString($string) {
 
   return true;
 }
+
+// Get Message IDs from File
+function getMessageIds($userID) {
+  $filename = "../messages/".$userID.".csv";
+  $data = array();
+  if(file_exists($filename)) {
+    $handle = fopen($filename, "r+");
+    if ($handle) {
+      while (($line = fgets($handle)) !== false) {
+        array_push($data, $line);
+      }
+      fclose($handle);
+    }
+  }
+  return $data;
+}
+
+// Put Message ID into File
+function putMessageId($userID, $mID) {
+  $filename = "../messages/".$userID.".csv";
+  $data = getMessageIds($userID);
+  array_push($data, $mID);
+  array_unique($data);
+  $handle = fopen($filename, "w+");
+  if ($handle) {
+    foreach($data as $id) {
+      fwrite($handle, $id."\n");
+    }
+    fclose($handle);
+    return true;
+  }
+  return false;
+}
 ?>

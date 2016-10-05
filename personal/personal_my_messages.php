@@ -32,6 +32,8 @@ if(checkUserLogin()) {
     $_SESSION['personal_msgs'] = $messages;
   }
 
+  $message_ids = getMessageIds($uId);
+
 } else {
   header("Location: ../signup.php");
 }
@@ -67,6 +69,7 @@ if(checkUserLogin()) {
         <div class="nav right"></div>
       </nav>
     </header>
+    <input type="hidden" id="uid" name="uID" value="<?= $uId ?>" />
     <?php if(isset($messages) && count($messages) > 0): ?>
     <section class="main no-padding">
       <div class="messages-list">
@@ -94,13 +97,13 @@ if(checkUserLogin()) {
             $msg_url = '../templates/message_tpl.php?msg_id='.$msg->mId;
           }
         ?>
-        <a href="<?= $msg_url ?>" class="message <?= messageIcon($msg->mType) ?> unread">
+        <div data-msg-id="<?= $msg->mId ?>" data-msg-url="<?= $msg_url ?>" class="message <?= messageIcon($msg->mType) ?> <?php if(!in_array($msg->mId, $message_ids)) echo ' unread '; ?>">
           <div class="message-body">
             <div class="message-title"><?= $msg->title ?></div>
             <div class="message-date"><?php echo date('Y-m-d', $msg->time); ?></div>
           </div>
           <div class="message-content"><?= mb_strcut($msg->content, 0, 200, 'UTF-8').(mb_strlen($msg->content, 'UTF-8') > 200 ? '...' : '') ?></div>
-        </a>
+        </div>
         <?php endforeach; ?>
       </div>
     </section>
