@@ -400,56 +400,6 @@ $(document).on('click', '.estimate-mark .rating label', function() {
   }
 });
 
-// get pdf Document
-function callGetPDFDocment (response, canvasContainer) {
-  var scale = 1;
-        
-  function renderPage(page) {
-      var viewport = page.getViewport($(window).width() / page.getViewport(1.0).width);
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
-      var renderContext = {
-        canvasContext: ctx,
-        viewport: viewport
-      };      
-      
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;      
-      canvasContainer.appendChild(canvas);
-      
-      page.render(renderContext);
-  }
-
-  function renderPages(pdfDoc) {
-      for(var num = 1; num <= pdfDoc.numPages; num++)
-          pdfDoc.getPage(num).then(renderPage);
-  }
-  PDFJS.disableWorker = true;
-  PDFJS.getDocument(response).then(renderPages);
-}
-
-// display pdf to the canvas in more/help.php
-function displayPDF (url, canvasContainer) {
-  PDFJS.workerSrc = './assets/js/pdf.worker.js';
-  var params = 'page=help_page&url=';
-  params += url;
-  var get_url = './api/actions.php';
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', get_url + '?' + params, true);
-  xhr.responseType = 'arraybuffer';
-  xhr.onload = function(e) {
-    //binary form of ajax response,
-    callGetPDFDocment(e.currentTarget.response, canvasContainer);
-  };
-
-  xhr.onerror = function  () {
-      // body...
-      alert("xhr error");
-  }
-
-  xhr.send();
-}
-
 // set main form width as windows one in back card page
 function setMainDocumentHeight() {
   var footer_height = 0, 

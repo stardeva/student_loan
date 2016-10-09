@@ -55,10 +55,9 @@ if(isset($_GET['temp'])) {
     <section class="main no-padding" style="position: absolute;left: 0; top: 50px; bottom: 0; right: 0;">
       <?php if(isset($fileurl) && $fileurl != '') : ?>
         <?php if($file_extension == 'pdf'): ?>
-          <iframe src='pdf_viewer.php?file=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;"></iframe>
+          <iframe src='pdf_viewer.php?url=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;"></iframe>
         <?php elseif($file_extension == 'doc' || $file_extension == 'docx'): ?>
-          <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;">This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe> -->
-          <iframe src='pdf_viewer.php' frameborder='0' style="width: 100%;height: 100%;"></iframe>
+          <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;">This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe>
         <?php else: ?>
           <img src="<?= $fileurl ?>" class="img-responsive" />
         <?php endif; ?>
@@ -67,14 +66,5 @@ if(isset($_GET['temp'])) {
 
     <script type="text/javascript" src="./assets/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./assets/js/pdf.js"></script>
-    <script src="./assets/js/compatibility.js"></script>
-
-    <script type="text/javascript" src="./assets/js/main.js"></script>
-    <?php if($file_extension == 'pdf'): ?>
-      <script type="text/javascript">
-        displayPDF("<?= $fileurl ?>", document.getElementById('pdf_view'));
-      </script>
-    <?php endif; ?>
   </body>
 </html>

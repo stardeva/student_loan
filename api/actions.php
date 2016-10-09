@@ -231,9 +231,10 @@ if(isset($_POST['page']) && $_POST['page'] == 'request_loan_page') {
 // Help page
 if(isset($_GET['page']) && $_GET['page'] == 'help_page') {
   $postdata = $_GET;
-  $url = $_GET['url'];
-  $result = httpGet($url);
-  echo $result;
+  $file = $_GET['url'];
+  header("Content-type: application/pdf");
+  header("Content-Disposition: inline; filename=".basename($file));
+  @readfile($file);
 }
 
 // Receive feedback

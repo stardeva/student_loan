@@ -23,7 +23,7 @@ if(checkUserLogin()) {
   $boundPrice = round($caculator_data->bondRateFlt * $originPrice, 2);
   $remainPrice = $originPrice - $consultPrice - $boundPrice;
 
-  $docx = 'http://www.waxrb.com/xrb/documents/%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE.docx';
+  $docx = 'http://www.waxrb.com/xrb/documents/%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE.pdf';
  
 } else {
   header("Location: ../signup.php");
