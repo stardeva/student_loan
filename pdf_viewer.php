@@ -52,7 +52,15 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 
     <script src="./assets/js/jquery-1.12.4.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #mainContainer .toolbar {
+            display: none;
+        }
 
+        #mainContainer #viewerContainer {
+          top: 0;
+        }
+    </style>
 
 </head>
 
