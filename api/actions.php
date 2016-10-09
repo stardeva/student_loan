@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once('curl.php');
+require_once('functions.php');
 
 // Credit Base Page Submit
 if(isset($_POST['page']) && $_POST['page'] == 'credit_base') {
@@ -299,4 +299,13 @@ if(isset($_POST['page']) && $_POST['page'] == 'position') {
   echo $result;
 }
 
+// Message read
+if(isset($_POST['page']) && $_POST['page'] == 'personal_my_message') {
+  $postdata = $_POST;
+  unset($postdata['page']);
+  if(putMessageId($postdata['uId'], $postdata['mId']))
+    echo json_encode(array('error' => array('errno' => 200)));
+  else
+    echo json_encode(array('error' => array('errno' => 400)));
+}
 ?>

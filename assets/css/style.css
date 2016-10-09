@@ -936,6 +936,10 @@ body {
   margin: 0.5em 10px;
 }
 
+.loan-kind .kind-body .sel-top, .loan-kind .kind-body .sel-btm {
+  /*display: none;*/
+}
+
 .loan-kind .kind-body .drum-wrapper .drum {
   height: 30px;
 }

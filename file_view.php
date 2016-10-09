@@ -8,7 +8,8 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 }
 if(isset($_GET['fileurl']) && $_GET['fileurl'] != '') {
   $fileurl = $_GET['fileurl'];
-  $file_extension = pathinfo($fileurl)['extension'];
+  $file_extension = pathinfo($fileurl);
+  $file_extension = $file_extension['extension'];
 }
 if(isset($_GET['title']) && $_GET['title'] != '') {
   $title = $_GET['title'];
@@ -51,10 +52,12 @@ if(isset($_GET['temp'])) {
         <div class="nav right"></div>
       </nav>
     </header>
-    <section class="main no-padding">
+    <section class="main no-padding" style="position: absolute;left: 0; top: 50px; bottom: 0; right: 0;">
       <?php if(isset($fileurl) && $fileurl != '') : ?>
         <?php if($file_extension == 'pdf'): ?>
           <div id="pdf_view"></div>
+        <?php elseif($file_extension == 'doc' || $file_extension == 'docx'): ?>
+          <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;">This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe>
         <?php else: ?>
           <img src="<?= $fileurl ?>" class="img-responsive" />
         <?php endif; ?>
