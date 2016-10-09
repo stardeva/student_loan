@@ -23,7 +23,7 @@ if(checkUserLogin()) {
   $boundPrice = round($caculator_data->bondRateFlt * $originPrice, 2);
   $remainPrice = $originPrice - $consultPrice - $boundPrice;
 
-  $docx = 'http://www.waxrb.com/xrb/documents/%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE.pdf';
+  // $docx = 'http://www.waxrb.com/xrb/documents/%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE.pdf';
  
 } else {
   header("Location: ../signup.php");
@@ -212,7 +212,7 @@ if(checkUserLogin()) {
               <input type="checkbox" name="agree" id="agree" checked="true" />
               <label class="checkbox-label" for="agree">
                 <span>&nbsp;同意</span>
-                <span class="highlight-text">&nbsp;《<a href="../file_view.php?fileurl=<?= $docx ?>&title=借款合同">借款合同</a>》</span>
+                <span class="highlight-text">&nbsp;《<a href="../file_view.php?fileurl=<?= $_SESSION['sys_info']->contract->loan ?>&title=借款合同">借款合同</a>》</span>
                 <span>&nbsp; 条款，电子邮箱接收 《借款合同》 回执</span>
               </label>
             </div>  

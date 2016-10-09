@@ -59,7 +59,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
         }
 
         #mainContainer #viewerContainer {
-          top: 0;
+          top: 10px;
         }
     </style>
 
