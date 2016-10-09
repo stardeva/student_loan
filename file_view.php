@@ -57,7 +57,8 @@ if(isset($_GET['temp'])) {
         <?php if($file_extension == 'pdf'): ?>
           <div id="pdf_view"></div>
         <?php elseif($file_extension == 'doc' || $file_extension == 'docx'): ?>
-          <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;">This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe>
+          <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?= $fileurl ?>' frameborder='0' style="width: 100%;height: 100%;">This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe> -->
+          <iframe src='pdf_viewer.php' frameborder='0' style="width: 100%;height: 100%;"></iframe>
         <?php else: ?>
           <img src="<?= $fileurl ?>" class="img-responsive" />
         <?php endif; ?>
