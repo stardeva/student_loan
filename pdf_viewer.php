@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <!--
 
 *************PDF JS version is pdfjs 1.0.907. but pdf.js script have version 1.0.907****************
@@ -42,7 +43,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 
     <script src="./assets/js/pdf/web/debugger.js"></script>
     <script type="text/javascript" language="JavaScript">
-        var DEFAULT_URL = './documents/%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE.pdf';
+        var DEFAULT_URL = './api/actions.php?page=help_page&url=<?= $_GET['url']?>';
         PDFJS.imageResourcesPath = './assets/js/pdf/web/images/';
         PDFJS.workerSrc = './assets/js/pdf/build/pdf.worker.js';
         PDFJS.cMapUrl = './assets/js/pdf/web/cmaps/';
