@@ -45,6 +45,7 @@ if(checkUserLogin()) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name = "format-detection" content = "telephone=no">
 
     <title>学融宝 - 个人中心 - 消息</title>
 
@@ -75,7 +76,7 @@ if(checkUserLogin()) {
       <div class="messages-list">
         <?php foreach($messages as $msg): ?>
         <?php
-          if($msg->mType == 1 && strtotime($msg->time) < strtotime(date("Y-m-d"))) continue;
+          if($msg->mType == 1 && $msg->time <= strtotime(date('Y-m-d') .' -1 day')) continue;
           $msg_url = '';
           switch($msg->mType) {
           case 2: case 5:
@@ -100,7 +101,7 @@ if(checkUserLogin()) {
         <div data-msg-id="<?= $msg->mId ?>" data-msg-url="<?= $msg_url ?>" class="message <?= messageIcon($msg->mType) ?> <?php if(!in_array($msg->mId, $message_ids)) echo ' unread '; ?>">
           <div class="message-body">
             <div class="message-title"><?= $msg->title ?></div>
-            <div class="message-date"><?php echo date('Y-m-d', $msg->time); ?></div>
+            <div class="message-date"><a href="javascript: void(0);" style="color: #999;"><?php echo date('Y-m-d', $msg->time); ?></a></div>
           </div>
           <div class="message-content"><?= mb_strcut($msg->content, 0, 200, 'UTF-8').(mb_strlen($msg->content, 'UTF-8') > 200 ? '...' : '') ?></div>
         </div>
